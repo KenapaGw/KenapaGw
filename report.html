@@ -288,6 +288,7 @@ const T = {
     errOtp: 'Kode salah. Coba lagi.',
     successEmailVerify: '✓ Email berhasil diverifikasi.',
     namePlaceholder: 'Nama kamu',
+    emailPlaceholder: 'email@kamu.com',
     msgPlaceholder: 'Tulis detail di sini...',
     otpPlaceholder: '000000',
   },
@@ -318,6 +319,7 @@ const T = {
     errOtp: 'Wrong code. Try again.',
     successEmailVerify: '✓ Email successfully verified.',
     namePlaceholder: 'Your name',
+    emailPlaceholder: 'email@you.com',
     msgPlaceholder: 'Write details here...',
     otpPlaceholder: '000000',
   }
@@ -348,6 +350,7 @@ function setLang(l) {
   document.getElementById('lbl-success-desc').textContent = t.successDesc;
   document.getElementById('lbl-back-home').textContent = t.backHome;
   document.getElementById('inputName').placeholder = t.namePlaceholder;
+  document.getElementById('inputEmail').placeholder = t.emailPlaceholder;
   document.getElementById('inputMsg').placeholder = t.msgPlaceholder;
 }
 
