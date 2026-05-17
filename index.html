@@ -92,28 +92,45 @@ section { padding: 5rem 2rem; }
 .berita-grid {
   display: flex;
   gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 12px;
+  overflow-x: hidden;
   scroll-behavior: smooth;
-  scrollbar-width: thin;
-}
-
-.berita-grid::-webkit-scrollbar {
-  height: 8px;
-}
-
-.berita-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.berita-grid::-webkit-scrollbar-thumb {
-  background: rgba(193,125,74,0.45);
-  border-radius: 20px;
 }
 
 .berita-grid .berita-card {
   min-width: 280px;
   flex-shrink: 0;
+}
+.berita-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-btn {
+  position: absolute;
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(255,255,255,0.12);
+  background: rgba(35,31,27,0.95);
+  color: #F0EBE4;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.carousel-btn:hover {
+  border-color: #C17D4A;
+  color: #C17D4A;
+}
+
+.carousel-btn.left {
+  left: -24px;
+}
+
+.carousel-btn.right {
+  right: -24px;
 }
 .berita-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.25s; }
 .berita-card:hover { border-color: var(--accent); transform: translateY(-3px); }
@@ -324,7 +341,10 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
     <p class="section-label" data-i18n="beritaLabel">Berita Unik</p>
     <h2 class="section-title" data-i18n="beritaTitle">Yang aneh, yang nyata.</h2>
     <p class="section-desc" data-i18n="beritaDesc">Fakta dan berita unik yang bikin kamu bilang "hah, serius?"</p>
-<div class="berita-grid">
+<div class="berita-carousel">
+  <button class="carousel-btn left" onclick="scrollBerita(-1)">❮</button>
+
+  <div class="berita-grid">
   <a class="berita-card" href="sains.html" style="text-decoration:none; color:inherit;">
     <div class="berita-img">🧪</div>
     <div class="berita-body">
@@ -352,6 +372,9 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
       <h4>Fauna</h4>
     </div>
   </a>
+</div>
+
+<button class="carousel-btn right" onclick="scrollBerita(1)">❯</button>
 </div>
   </div>
 </section>
@@ -499,6 +522,15 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (T[key] !== undefined) el.textContent = T[key];
+  });
+}
+
+function scrollBerita(direction) {
+  const container = document.querySelector('.berita-grid');
+
+  container.scrollBy({
+    left: direction * 340,
+    behavior: 'smooth'
   });
 }
 </script>
