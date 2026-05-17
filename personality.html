@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun Personality Quiz — KenapaGw</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0E0C0A; --bg2: #161310; --bg3: #1E1A16; --surface: #231F1B;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+  --text: #F0EBE4; --muted: #B8AFA7; --accent: #C17D4A;
+  --accent-light: rgba(193,125,74,0.15);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.7; min-height: 100vh; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem; background: rgba(14,12,10,0.92);
+  backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border);
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; }
+.nav-logo span { color: var(--accent); font-style: italic; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-back { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--accent); }
+.lang-toggle { display: flex; gap: 4px; background: var(--surface); border-radius: 100px; padding: 4px; border: 0.5px solid var(--border); }
+.lang-btn {
+  padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500;
+  cursor: pointer; border: none; background: transparent; color: var(--muted);
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.lang-btn.active { background: var(--accent); color: white; }
+
+/* LAYERS */
+.layer { display: none; padding: 7rem 2rem 4rem; max-width: 1000px; margin: 0 auto; }
+.layer.active { display: block; animation: fadeUp 0.4s ease; }
+
+.section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.75rem; }
+.section-desc { font-size: 16px; color: var(--muted); max-width: 500px; margin-bottom: 3rem; }
+
+.back-btn {
+  background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif;
+  font-size: 14px; cursor: pointer; padding: 0; margin-bottom: 1.5rem;
+  display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+}
+.back-btn:hover { color: var(--accent); }
+
+/* GRID */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+
+/* CATEGORY CARD */
+.cat-card {
+  background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px;
+  padding: 1.75rem; cursor: pointer; transition: all 0.25s;
+}
+.cat-card:hover { border-color: var(--accent); transform: translateY(-3px); background: var(--bg3); }
+.cat-icon { font-size: 32px; margin-bottom: 0.75rem; display: block; }
+.cat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.4rem; }
+.cat-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.cat-count { font-size: 13px; color: var(--muted); }
+
+/* QUIZ LIST CARD */
+.quiz-list-card {
+  background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px;
+  padding: 1.5rem; cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 16px;
+}
+.quiz-list-card:hover { border-color: var(--accent); transform: translateX(4px); background: var(--bg3); }
+.qlc-icon { font-size: 28px; flex-shrink: 0; }
+.qlc-body { flex: 1; }
+.qlc-type { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 3px; }
+.qlc-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.qlc-desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.qlc-arrow { color: var(--accent); font-size: 18px; flex-shrink: 0; }
+
+/* QUIZ AREA */
+.quiz-wrap { max-width: 680px; margin: 0 auto; }
+.quiz-header { margin-bottom: 2rem; }
+.quiz-topic-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+.quiz-topic-title { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; color: var(--text); line-height: 1.2; }
+
+.progress-wrap { margin-bottom: 2.5rem; }
+.progress-bar { height: 2px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+.progress-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+/* TEXT QUIZ */
+.q-block { display: none; }
+.q-block.active { display: block; animation: fadeUp 0.35s ease; }
+.q-text { font-family: 'Playfair Display', serif; font-size: clamp(1.05rem, 3vw, 1.3rem); color: var(--text); margin-bottom: 1.5rem; line-height: 1.4; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 18px; border: 0.5px solid var(--border); border-radius: 12px;
+  cursor: pointer; transition: all 0.2s; background: var(--surface);
+}
+.opt:hover { border-color: var(--accent); background: var(--bg3); transform: translateX(4px); }
+.opt.selected { border-color: var(--accent); background: var(--accent-light); }
+.opt.selected .dot { background: var(--accent); border-color: var(--accent); }
+.dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border2); flex-shrink: 0; margin-top: 2px; transition: all 0.2s; }
+.opt-text { font-size: 15px; color: var(--text); line-height: 1.5; }
+
+/* IMAGE PICKER */
+.img-picker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+.img-opt {
+  border: 2px solid var(--border); border-radius: 12px; overflow: hidden;
+  cursor: pointer; transition: all 0.2s; position: relative;
+}
+.img-opt:hover { border-color: var(--accent); transform: scale(1.02); }
+.img-opt.selected { border-color: var(--accent); }
+.img-opt.selected::after {
+  content: '✓'; position: absolute; top: 10px; right: 10px;
+  width: 28px; height: 28px; background: var(--accent); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: white; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.img-opt img { width: 100%; height: 160px; object-fit: cover; display: block; }
+.img-opt-label {
+  padding: 10px 12px; font-size: 13px; color: var(--muted);
+  background: var(--surface); text-align: center; line-height: 1.3;
+}
+.img-opt.selected .img-opt-label { color: var(--accent); }
+
+/* NAV BUTTONS */
+.q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 12px; }
+.btn-prev {
+  padding: 12px 24px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500; cursor: pointer; background: transparent;
+  color: var(--muted); border: 0.5px solid var(--border2); transition: all 0.2s;
+}
+.btn-prev:hover { color: var(--text); border-color: var(--text); }
+.btn-next, .btn-result {
+  padding: 12px 28px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500; cursor: pointer;
+  background: var(--accent); color: white; border: none; transition: all 0.2s; margin-left: auto;
+}
+.btn-next:hover, .btn-result:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-next:disabled, .btn-result:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+.err-msg { font-size: 13px; color: #e07070; margin-top: 8px; display: none; }
+
+/* RESULT */
+.result-block { display: none; animation: fadeUp 0.5s ease; }
+.result-block.show { display: block; }
+.result-emoji { font-size: 52px; margin-bottom: 1rem; display: block; }
+.result-type { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+.result-name { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; color: var(--text); margin-bottom: 1rem; line-height: 1.2; }
+.result-story { font-size: 16px; color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
+.result-story p { margin-bottom: 0.75rem; }
+.result-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; }
+.pill { padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; }
+.pill-s { background: rgba(80,180,100,0.15); color: #6dd08a; }
+.pill-w { background: rgba(220,120,60,0.15); color: #e0906a; }
+.result-divider { border: none; border-top: 0.5px solid var(--border); margin: 2rem 0; }
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-retake {
+  padding: 12px 24px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500; cursor: pointer; background: transparent;
+  color: var(--muted); border: 0.5px solid var(--border2); transition: all 0.2s;
+}
+.btn-retake:hover { color: var(--text); border-color: var(--text); }
+.btn-try-more {
+  padding: 12px 24px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500; cursor: pointer; background: var(--accent);
+  color: white; border: none; transition: all 0.2s;
+}
+.btn-try-more:hover { opacity: 0.85; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .layer { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .img-picker-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')">ID</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="nav-back" href="index.html" id="navBack">← Kembali</a>
+  </div>
+</nav>
+
+<!-- LAYER 1: CATEGORIES -->
+<div class="layer active" id="layer1">
+  <p class="section-label" id="l1-label">Fun Personality</p>
+  <h1 class="section-title" id="l1-title">Pilih kategori</h1>
+  <p class="section-desc" id="l1-desc">Mulai dari yang paling bikin kamu penasaran.</p>
+  <div class="card-grid" id="catGrid"></div>
+</div>
+
+<!-- LAYER 2: QUIZ LIST -->
+<div class="layer" id="layer2">
+  <button class="back-btn" onclick="goToLayer(1)" id="l2-back">← Semua Kategori</button>
+  <p class="section-label" id="l2-label"></p>
+  <h2 class="section-title" id="l2-title"></h2>
+  <p class="section-desc" id="l2-desc"></p>
+  <div class="card-grid" id="quizListGrid"></div>
+</div>
+
+<!-- LAYER 3: QUIZ -->
+<div class="layer" id="layer3">
+  <div class="quiz-wrap">
+    <button class="back-btn" onclick="goToLayer(2)" id="l3-back">← Pilih Quiz Lain</button>
+    <div class="quiz-header">
+      <p class="quiz-topic-label" id="quizCatLabel"></p>
+      <h2 class="quiz-topic-title" id="quizTitle"></h2>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="progress-label" id="progressLabel"></p>
+    </div>
+    <div id="quizContainer"></div>
+    <div class="result-block" id="resultBlock">
+      <span class="result-emoji" id="resEmoji"></span>
+      <p class="result-type" id="resType">Tipe kamu</p>
+      <h3 class="result-name" id="resName"></h3>
+      <div class="result-story" id="resStory"></div>
+      <div class="result-pills" id="resPills"></div>
+      <hr class="result-divider">
+      <div class="result-actions">
+        <button class="btn-retake" id="btnRetake" onclick="retakeQuiz()">← Ulangi</button>
+        <button class="btn-try-more" id="btnTryMore" onclick="goToLayer(2)">Coba Quiz Lain</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let lang = 'id';
+let currentCat = null;
+let currentQuiz = null;
+let currentQ = 0;
+let answers = [];
+
+const t = {
+  id: {
+    navBack: '← Kembali',
+    l1Label: 'Fun Personality',
+    l1Title: 'Pilih kategori',
+    l1Desc: 'Mulai dari yang paling bikin kamu penasaran.',
+    l2Back: '← Semua Kategori',
+    l3Back: '← Pilih Quiz Lain',
+    quizCount: quiz => `${quiz} quiz`,
+    progressLabel: (cur, total) => `${cur} dari ${total}`,
+    resType: 'Tipe kamu',
+    btnRetake: '← Ulangi',
+    btnTryMore: 'Coba Quiz Lain',
+    btnNext: 'Lanjut →',
+    btnResult: 'Lihat Hasil →',
+    btnPrev: '← Kembali',
+    errMsg: 'Pilih jawaban dulu ya!',
+    pickOne: 'Pilih salah satu gambar',
+  },
+  en: {
+    navBack: '← Back',
+    l1Label: 'Fun Personality',
+    l1Title: 'Choose a category',
+    l1Desc: 'Start with whatever makes you most curious.',
+    l2Back: '← All Categories',
+    l3Back: '← Other Quizzes',
+    quizCount: quiz => `${quiz} quizzes`,
+    progressLabel: (cur, total) => `${cur} of ${total}`,
+    resType: 'Your type',
+    btnRetake: '← Retake',
+    btnTryMore: 'Try Another Quiz',
+    btnNext: 'Next →',
+    btnResult: 'See My Result →',
+    btnPrev: '← Back',
+    errMsg: 'Pick an answer first!',
+    pickOne: 'Pick one image',
+  }
+};
+
+const categories = [
+  {
+    id: 'self',
+    icon: '🪞',
+    title: { id: 'Self-Awareness', en: 'Self-Awareness' },
+    desc: { id: 'Seberapa dalam kamu kenal diri sendiri?', en: 'How well do you really know yourself?' },
+    quizzes: [
+      {
+        id: 'drives', icon: '🚀', type: 'text',
+        title: { id: 'What Secretly Drives You?', en: 'What Secretly Drives You?' },
+        desc: { id: 'Motivasi tersembunyi kamu ngomong lebih banyak dari yang kamu sadari.', en: 'Your hidden motivation says more than you think.' },
+        questions: [
+          {
+            text: { id: 'Kalau kamu berhasil sesuatu, hal pertama yang kamu rasain adalah...', en: 'When you achieve something, the first thing you feel is...' },
+            options: [
+              { label: { id: 'Lega. Akhirnya selesai juga.', en: 'Relief. Finally done.' }, points: 1 },
+              { label: { id: 'Pengen langsung kasih tau orang.', en: 'I want to tell people immediately.' }, points: 2 },
+              { label: { id: 'Langsung mikir next challenge.', en: 'Already thinking about the next challenge.' }, points: 4 },
+              { label: { id: 'Pengen validasi bahwa itu cukup bagus.', en: 'I want validation that it was good enough.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Kamu paling semangat kerja kalau...', en: 'You work best when...' },
+            options: [
+              { label: { id: 'Ada deadline yang mepet.', en: 'There\'s a tight deadline.' }, points: 4 },
+              { label: { id: 'Ada orang yang appreciate usaha gw.', en: 'Someone appreciates your effort.' }, points: 2 },
+              { label: { id: 'Gw bisa kontrol prosesnya sendiri.', en: 'You can control the process yourself.' }, points: 3 },
+              { label: { id: 'Hasilnya keliatan nyata dan berguna.', en: 'The result is tangible and useful.' }, points: 1 }
+            ]
+          },
+          {
+            text: { id: 'Kalau nggak ada yang nganggep kerja keras kamu, kamu...', en: 'When nobody notices your hard work, you...' },
+            options: [
+              { label: { id: 'Gapapa, gw tau sendiri udah berusaha.', en: 'It\'s fine, I know I tried my best.' }, points: 3 },
+              { label: { id: 'Agak kesel sih, effort gw nggak keliatan.', en: 'A bit frustrated, my effort is invisible.' }, points: 2 },
+              { label: { id: 'Biasa aja, yang penting hasilnya.', en: 'Indifferent, results are what matter.' }, points: 1 },
+              { label: { id: 'Mulai questioning apakah ini worth it.', en: 'Start questioning if this is worth it.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Tujuan jangka panjang kamu lebih ke...', en: 'Your long-term goal leans toward...' },
+            options: [
+              { label: { id: 'Punya impact yang gw banggain.', en: 'Having an impact I\'m proud of.' }, points: 1 },
+              { label: { id: 'Dikenal dan dihormati orang.', en: 'Being known and respected.' }, points: 2 },
+              { label: { id: 'Bebas finansial dan waktu.', en: 'Financial and time freedom.' }, points: 3 },
+              { label: { id: 'Terus berkembang dan belajar hal baru.', en: 'Continuously growing and learning.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kamu paling takut kalau...', en: 'Your biggest fear is...' },
+            options: [
+              { label: { id: 'Hidup gw nggak punya makna.', en: 'My life has no meaning.' }, points: 1 },
+              { label: { id: 'Orang lain nggak respect gw.', en: 'Others don\'t respect me.' }, points: 2 },
+              { label: { id: 'Kehilangan kendali atas hidup gw.', en: 'Losing control of my life.' }, points: 3 },
+              { label: { id: 'Stuck di tempat yang sama terlalu lama.', en: 'Being stuck in the same place too long.' }, points: 4 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 5, max: 9, emoji: '🌱',
+            name: { id: 'The Impact Seeker', en: 'The Impact Seeker' },
+            story: {
+              id: `<p>Kamu bukan tipe yang butuh sorotan. Yang nggerakin kamu setiap hari bukan tepuk tangan — tapi rasa bahwa apa yang kamu kerjain benar-benar berarti buat sesuatu atau seseorang.</p><p>Kamu bisa kerja keras dalam keheningan. Kamu bisa nggak diakui dan tetap lanjut. Tapi satu hal yang bisa benar-benar menguras kamu adalah ketika kamu merasa semua yang kamu lakukan sia-sia. Ketika nggak ada dampak nyata yang bisa kamu lihat atau rasakan.</p><p>Itulah sumber terdalammu — bukan ambisi untuk bersinar, tapi keinginan untuk <em>bermakna</em>.</p>`,
+              en: `<p>You're not the type who needs the spotlight. What moves you every day isn't applause — it's the feeling that what you do actually matters to something or someone.</p><p>You can work hard in silence. You can go unrecognized and still keep going. But one thing that truly drains you is feeling like everything you do is pointless. When there's no real impact you can see or feel.</p><p>That's your deepest source — not the ambition to shine, but the desire to <em>matter</em>.</p>`
+            },
+            strength: { id: 'Tujuan yang kuat dan tahan banting', en: 'Strong and resilient purpose' },
+            weakness: { id: 'Bisa burn out kalau nggak ngerasa cukup meaningful', en: 'Can burn out when things feel meaningless' }
+          },
+          {
+            min: 10, max: 13, emoji: '👑',
+            name: { id: 'The Recognition Driver', en: 'The Recognition Driver' },
+            story: {
+              id: `<p>Kamu termotivasi oleh pengakuan dan koneksi. Dan itu bukan hal yang perlu kamu malu-maluin.</p><p>Manusia adalah makhluk sosial. Butuh diakui itu bukan kelemahan karakter — itu kebutuhan dasar yang valid. Bedanya kamu dengan orang lain adalah kamu jujur sama diri sendiri soal ini.</p><p>Kamu kerja paling baik ketika effort kamu dilihat. Kamu paling bersemangat ketika ada orang yang percaya sama kamu. Dan ketika itu nggak terjadi? Kamu nggak langsung menyerah — tapi energimu memang berkurang, dan itu manusiawi.</p>`,
+              en: `<p>You're motivated by recognition and connection. And that's nothing to be ashamed of.</p><p>Humans are social creatures. Needing to be acknowledged isn't a character flaw — it's a valid basic need. What sets you apart is your honesty with yourself about this.</p><p>You work best when your effort is seen. You're most energized when someone believes in you. And when that doesn't happen? You don't give up immediately — but your energy does dip, and that's human.</p>`
+            },
+            strength: { id: 'Hangat, sosial, dan menggerakkan orang lain', en: 'Warm, social, and inspiring to others' },
+            weakness: { id: 'Rentan kecewa kalau kerja keras diabaikan', en: 'Vulnerable to disappointment when efforts are ignored' }
+          },
+          {
+            min: 14, max: 17, emoji: '🧭',
+            name: { id: 'The Autonomy Chaser', en: 'The Autonomy Chaser' },
+            story: {
+              id: `<p>Yang paling kamu buru bukan uang, bukan pujian — tapi kebebasan. Kebebasan untuk memilih, untuk bergerak sesuai ritmu kamu sendiri, untuk nggak harus minta izin atas hidupmu.</p><p>Kamu bisa sangat disiplin dan produktif — tapi hanya kalau caranya kamu yang tentuin. Dikontrol terlalu ketat itu rasanya seperti sesak napas. Dan kamu akan rela melepas banyak hal demi tetap punya kendali atas dirimu sendiri.</p><p>Orang mungkin melihatmu sebagai pribadi yang susah diatur. Padahal kamu hanya tahu satu hal dengan sangat jelas: hidupmu, pilihanmu.</p>`,
+              en: `<p>What you chase most isn't money, not praise — it's freedom. Freedom to choose, to move at your own pace, to not need permission for your own life.</p><p>You can be highly disciplined and productive — but only when you set the terms. Being controlled too tightly feels like suffocation. And you'd willingly give up a lot to keep control over yourself.</p><p>People might see you as difficult to manage. But really, you just know one thing very clearly: your life, your choices.</p>`
+            },
+            strength: { id: 'Mandiri, disiplin, dan punya prinsip kuat', en: 'Independent, disciplined, and principled' },
+            weakness: { id: 'Bisa kesulitan berkolaborasi kalau nggak ada ruang gerak', en: 'Can struggle to collaborate without enough freedom' }
+          },
+          {
+            min: 18, max: 20, emoji: '⚡',
+            name: { id: 'The Growth Addict', en: 'The Growth Addict' },
+            story: {
+              id: `<p>Kamu bukan ambisius dalam arti yang klise. Kamu bukan yang ngejar gelar atau status. Yang kamu kejar adalah rasa berkembang itu sendiri — sensasi ketika kamu bisa melakukan sesuatu hari ini yang kemarin belum bisa kamu lakukan.</p><p>Stuck itu musuh terbesarmu. Bukan karena kamu perfeksionis, tapi karena kamu hidup dengan perasaan bahwa waktu selalu bergerak dan kamu harus terus bergerak bersamanya.</p><p>Tantangan baru bukan ancaman buat kamu. Itu oksigen.</p>`,
+              en: `<p>You're not ambitious in the cliché sense. You're not chasing titles or status. What you chase is the feeling of growth itself — the sensation of being able to do something today that you couldn't do yesterday.</p><p>Being stuck is your biggest enemy. Not because you're a perfectionist, but because you live with the feeling that time is always moving and you must keep moving with it.</p><p>New challenges aren't a threat to you. They're oxygen.</p>`
+            },
+            strength: { id: 'Adaptif, ambisius, dan selalu relevan', en: 'Adaptive, ambitious, and always relevant' },
+            weakness: { id: 'Jarang benar-benar puas dengan pencapaian sendiri', en: 'Rarely truly satisfied with own achievements' }
+          }
+        ]
+      },
+      {
+        id: 'selfaware', icon: '🧬', type: 'text',
+        title: { id: 'How Self-Aware Are You Really?', en: 'How Self-Aware Are You Really?' },
+        desc: { id: 'Kamu pikir kamu kenal dirimu? Coba dulu.', en: 'You think you know yourself? Let\'s find out.' },
+        questions: [
+          {
+            text: { id: 'Kalau seseorang mengkritik kamu, reaksi pertama kamu adalah...', en: 'When someone criticizes you, your first reaction is...' },
+            options: [
+              { label: { id: 'Defensif, baru belakangan mikirin apakah mereka bener.', en: 'Defensive, then later consider if they\'re right.' }, points: 2 },
+              { label: { id: 'Langsung introspeksi, ada benernya nggak.', en: 'Immediately introspect whether there\'s truth in it.' }, points: 4 },
+              { label: { id: 'Sakit hati dulu, susah objektif.', en: 'Hurt first, hard to be objective.' }, points: 1 },
+              { label: { id: 'Tergantung siapa yang ngomong.', en: 'Depends on who said it.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Kamu tau nggak apa trigger emosi negatif kamu?', en: 'Do you know what triggers your negative emotions?' },
+            options: [
+              { label: { id: 'Ya, dan gw bisa antisipasi sebelum meledak.', en: 'Yes, and I can anticipate before I blow up.' }, points: 4 },
+              { label: { id: 'Sebagian besar iya.', en: 'Mostly yes.' }, points: 3 },
+              { label: { id: 'Nggak terlalu, gw baru sadar setelah kejadian.', en: 'Not really, I only realize after it happens.' }, points: 2 },
+              { label: { id: 'Nggak sama sekali.', en: 'Not at all.' }, points: 1 }
+            ]
+          },
+          {
+            text: { id: 'Gimana kamu tau kalau kamu lagi stres?', en: 'How do you know when you\'re stressed?' },
+            options: [
+              { label: { id: 'Gw langsung sadar dan tau harus ngapain.', en: 'I\'m immediately aware and know what to do.' }, points: 4 },
+              { label: { id: 'Nyadarnya dari perubahan perilaku gw.', en: 'I notice it from changes in my behavior.' }, points: 3 },
+              { label: { id: 'Orang lain yang biasanya bilang gw keliatan stres.', en: 'Others usually tell me I look stressed.' }, points: 2 },
+              { label: { id: 'Seringnya gw nggak sadar sampai udah parah.', en: 'I often don\'t realize until it\'s serious.' }, points: 1 }
+            ]
+          },
+          {
+            text: { id: 'Kamu bisa bedain antara apa yang kamu mau vs apa yang orang lain mau buat kamu?', en: 'Can you tell the difference between what you want vs what others want for you?' },
+            options: [
+              { label: { id: 'Ya, cukup jelas.', en: 'Yes, quite clearly.' }, points: 4 },
+              { label: { id: 'Kadang-kadang iya.', en: 'Sometimes.' }, points: 3 },
+              { label: { id: 'Susah, sering kebaur.', en: 'Hard to tell, often mixed up.' }, points: 2 },
+              { label: { id: 'Nggak, gw masih mencari tahu.', en: 'No, I\'m still figuring it out.' }, points: 1 }
+            ]
+          },
+          {
+            text: { id: 'Terakhir kali kamu salah, kamu...', en: 'The last time you were wrong, you...' },
+            options: [
+              { label: { id: 'Langsung akui dan cari cara memperbaiki.', en: 'Immediately admitted it and found a way to fix it.' }, points: 4 },
+              { label: { id: 'Akui tapi butuh waktu.', en: 'Admitted it but needed time.' }, points: 3 },
+              { label: { id: 'Cari-cari alasan dulu sebelum akui.', en: 'Made excuses first before admitting.' }, points: 2 },
+              { label: { id: 'Susah banget buat akui.', en: 'Really hard to admit.' }, points: 1 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 5, max: 9, emoji: '🌫️',
+            name: { id: 'The Unconscious Wanderer', en: 'The Unconscious Wanderer' },
+            story: {
+              id: `<p>Kamu bukan orang yang buruk — kamu cuma belum banyak meluangkan waktu untuk benar-benar duduk dan bertanya: <em>sebenernya gw ini siapa?</em></p><p>Reaksimu sering datang sebelum refleksimu. Emosi muncul, kamu ikutin, baru belakangan kamu pertanyakan. Dan itu normal untuk banyak orang — tapi juga bisa jadi sumber masalah yang berulang.</p><p>Kabar baiknya? Self-awareness bisa dilatih. Dan fakta bahwa kamu mau ngambil quiz ini adalah tanda bahwa kamu mulai penasaran. Itu langkah pertama yang nggak kecil.</p>`,
+              en: `<p>You're not a bad person — you just haven't spent much time really sitting down and asking: <em>who am I really?</em></p><p>Your reactions often come before your reflections. Emotions arise, you follow them, then question later. That's normal for many people — but it can also be the source of recurring problems.</p><p>Good news? Self-awareness can be trained. And the fact that you took this quiz is a sign you're starting to get curious. That's no small first step.</p>`
+            },
+            strength: { id: 'Spontan dan autentik dalam reaksi', en: 'Spontaneous and authentic in reactions' },
+            weakness: { id: 'Mudah reaktif tanpa filter', en: 'Easily reactive without a filter' }
+          },
+          {
+            min: 10, max: 14, emoji: '🌤️',
+            name: { id: 'The Growing Observer', en: 'The Growing Observer' },
+            story: {
+              id: `<p>Kamu sedang dalam perjalanan yang bagus. Kamu udah cukup sadar untuk tahu bahwa dirimu punya pola — tapi belum selalu bisa menangkapnya sebelum terjadi.</p><p>Kamu bisa refleksi setelah kejadian dengan cukup baik. Kamu nggak selalu defensif. Tapi masih ada bagian dari dirimu yang belum sepenuhnya kamu kenali — dan itu bukan kelemahan, itu ruang untuk tumbuh.</p><p>Terus perhatiin dirimu. Bukan untuk menghakimi, tapi untuk benar-benar mengenal.</p>`,
+              en: `<p>You're on a good journey. You're aware enough to know you have patterns — but can't always catch them before they happen.</p><p>You can reflect after the fact reasonably well. You're not always defensive. But there are still parts of yourself you haven't fully gotten to know — and that's not a weakness, that's room to grow.</p><p>Keep paying attention to yourself. Not to judge, but to truly know.</p>`
+            },
+            strength: { id: 'Mau belajar dan terbuka untuk refleksi', en: 'Willing to learn and open to reflection' },
+            weakness: { id: 'Masih sering bereaksi sebelum refleksi', en: 'Still often reacts before reflecting' }
+          },
+          {
+            min: 15, max: 17, emoji: '🔭',
+            name: { id: 'The Conscious Navigator', en: 'The Conscious Navigator' },
+            story: {
+              id: `<p>Kamu punya level self-awareness yang di atas rata-rata. Kamu tau triggermu. Kamu bisa bedain antara emosimu dan faktanya. Dan kamu cukup jujur dengan dirimu sendiri untuk mengakui kesalahan.</p><p>Ini bukan hal yang mudah. Banyak orang menghabiskan bertahun-tahun tanpa pernah sampai di level ini.</p><p>Tantangan kamu sekarang bukan lagi mengenali — tapi konsisten. Menerapkan apa yang kamu tau tentang dirimu bahkan di momen paling sulit.</p>`,
+              en: `<p>You have an above-average level of self-awareness. You know your triggers. You can separate your emotions from the facts. And you're honest enough with yourself to admit mistakes.</p><p>This isn't easy. Many people spend years never reaching this level.</p><p>Your challenge now isn't recognition — it's consistency. Applying what you know about yourself even in the hardest moments.</p>`
+            },
+            strength: { id: 'Sadar diri dan mampu regulasi emosi', en: 'Self-aware and capable of emotional regulation' },
+            weakness: { id: 'Bisa terlalu keras menghakimi diri sendiri', en: 'Can be too hard on yourself' }
+          },
+          {
+            min: 18, max: 20, emoji: '💎',
+            name: { id: 'The Clear Mirror', en: 'The Clear Mirror' },
+            story: {
+              id: `<p>Kamu sangat langka. Self-awareness di level ini bukan sesuatu yang datang secara alami — ini hasil dari banyak momen susah yang kamu pilih untuk hadapi daripada kabur.</p><p>Kamu tau siapa kamu. Kamu tau apa yang kamu mau. Kamu tau apa yang bisa menggerakkanmu dan apa yang bisa menghancurkanmu. Dan kamu jujur tentang semuanya — bahkan bagian yang nggak indah.</p><p>Hati-hati satu hal: orang seself-aware ini kadang lupa bahwa orang lain berada di tahap yang berbeda. Kesabaranmu dengan orang yang belum sejauh kamu itu juga bagian dari perjalanan.</p>`,
+              en: `<p>You're very rare. Self-awareness at this level isn't something that comes naturally — it's the result of many hard moments you chose to face rather than flee.</p><p>You know who you are. You know what you want. You know what can move you and what can break you. And you're honest about all of it — even the not-so-pretty parts.</p><p>Watch out for one thing: people this self-aware sometimes forget others are at different stages. Your patience with those not as far along is also part of the journey.</p>`
+            },
+            strength: { id: 'Sangat sadar diri dan autentik', en: 'Highly self-aware and authentic' },
+            weakness: { id: 'Bisa kurang sabar dengan orang yang less self-aware', en: 'Can be impatient with less self-aware people' }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'vibes',
+    icon: '🎨',
+    title: { id: 'Vibes & Estetika', en: 'Vibes & Aesthetic' },
+    desc: { id: 'Selera kamu ngomong lebih banyak dari yang kamu kira.', en: 'Your taste says more than you think.' },
+    quizzes: [
+      {
+        id: 'season', icon: '🍂', type: 'image',
+        title: { id: 'What Season Matches Your Soul?', en: 'What Season Matches Your Soul?' },
+        desc: { id: 'Pilih gambar yang paling kamu rasain. Bukan yang paling indah — yang paling <em>kamu</em>.', en: 'Pick the image you feel most. Not the prettiest — the most <em>you</em>.' },
+        questions: [
+          {
+            text: { id: 'Pilih gambar yang paling kamu rasain:', en: 'Pick the image you feel most:' },
+            images: [
+              { src: 'https://i.ibb.co/dsTDh7YP/58918946-fc83-49b0-bb1a-f9776dbe86af.jpg', label: { id: 'Musim Semi', en: 'Spring' }, points: 1 },
+              { src: 'https://i.ibb.co/rGK4swhm/U-td-Hb-VZUSunwtw42bz-TFg-2k.webp', label: { id: 'Musim Panas', en: 'Summer' }, points: 2 },
+              { src: 'https://i.ibb.co/7J23JrfH/t-Pac-Ob30-Veu0d-M-e-Gijo-GA-2k.webp', label: { id: 'Musim Gugur', en: 'Autumn' }, points: 3 },
+              { src: 'https://i.ibb.co/HTz6bthj/Bi-MAAz-N1-XS2mia-SSs-IVxpg-2k.webp', label: { id: 'Musim Dingin', en: 'Winter' }, points: 4 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 1, max: 1, emoji: '🌸',
+            name: { id: 'The Spring Soul', en: 'The Spring Soul' },
+            story: {
+              id: `<p>Ada sesuatu di dalam kamu yang selalu percaya bahwa hal baik akan datang. Bukan naif — tapi harapan yang kamu jaga dengan sangat sadar.</p><p>Kamu suka awal-awal. Awal hubungan, awal proyek, awal hari. Ada energi di sana yang bikin kamu hidup. Kamu adalah orang yang orang lain datangi ketika mereka butuh semangat.</p><p>Tapi kadang, kamu juga capek jadi yang selalu ceria. Dan itu valid. Musim semi pun punya harinya yang mendung.</p>`,
+              en: `<p>There's something in you that always believes good things are coming. Not naivety — but hope you hold onto very consciously.</p><p>You love beginnings. Beginning of relationships, projects, days. There's energy there that makes you feel alive. You're the person others come to when they need encouragement.</p><p>But sometimes, you're also tired of always being the cheerful one. And that's valid. Even spring has its cloudy days.</p>`
+            },
+            strength: { id: 'Penuh harapan dan menggerakkan orang lain', en: 'Hopeful and uplifting to others' },
+            weakness: { id: 'Bisa terlalu idealistis', en: 'Can be overly idealistic' }
+          },
+          {
+            min: 2, max: 2, emoji: '☀️',
+            name: { id: 'The Summer Soul', en: 'The Summer Soul' },
+            story: {
+              id: `<p>Energimu hadir. Orang merasakannya bahkan sebelum kamu ngomong sesuatu. Kamu tipe yang bikin ruangan jadi hidup — bukan karena kamu selalu berisik, tapi karena kehadiranmu punya bobot.</p><p>Kamu suka intensitas. Perasaan yang kuat, momen yang penuh, koneksi yang langsung terasa. Kamu nggak terlalu suka hal yang layu dan setengah-setengah.</p><p>Yang perlu kamu jaga: musim panas yang terlalu panas bisa membakar. Pastikan energimu juga punya tempat untuk beristirahat.</p>`,
+              en: `<p>Your energy is present. People feel it even before you say something. You're the type who makes a room come alive — not because you're always loud, but because your presence has weight.</p><p>You like intensity. Strong feelings, full moments, immediate connections. You're not big on things that are faded and half-hearted.</p><p>What to watch: summer that's too hot can burn. Make sure your energy also has a place to rest.</p>`
+            },
+            strength: { id: 'Karismatik, intens, dan penuh energi', en: 'Charismatic, intense, and full of energy' },
+            weakness: { id: 'Bisa overwhelm diri sendiri dan orang sekitar', en: 'Can overwhelm yourself and those around you' }
+          },
+          {
+            min: 3, max: 3, emoji: '🍂',
+            name: { id: 'The Autumn Soul', en: 'The Autumn Soul' },
+            story: {
+              id: `<p>Ada kedalaman di dalam kamu yang nggak semua orang bisa lihat langsung. Kamu menikmati hal-hal yang kaya — percakapan yang bermakna, perasaan yang kompleks, keindahan yang nggak perlu dijelaskan.</p><p>Kamu romantis dalam cara yang subtil. Kamu suka nostalgia. Kamu sering merasakan sesuatu lebih dalam dari yang kamu tunjukkan ke luar.</p><p>Musim gugur itu indah justru karena ia jujur — daun yang jatuh bukan sebuah kegagalan, tapi bagian dari siklus. Kamu paham itu lebih dari kebanyakan orang.</p>`,
+              en: `<p>There's a depth inside you that not everyone can see right away. You enjoy things that are rich — meaningful conversations, complex feelings, beauty that doesn't need explanation.</p><p>You're romantic in a subtle way. You love nostalgia. You often feel things more deeply than you show on the outside.</p><p>Autumn is beautiful precisely because it's honest — falling leaves aren't failure, they're part of a cycle. You understand that more than most.</p>`
+            },
+            strength: { id: 'Dalam, reflektif, dan penuh empati', en: 'Deep, reflective, and full of empathy' },
+            weakness: { id: 'Bisa terjebak di nostalgia atau melankolia', en: 'Can get trapped in nostalgia or melancholy' }
+          },
+          {
+            min: 4, max: 4, emoji: '❄️',
+            name: { id: 'The Winter Soul', en: 'The Winter Soul' },
+            story: {
+              id: `<p>Kamu tenang dengan cara yang nggak semua orang bisa pahami. Keheningan bukan ketakutan buat kamu — itu rumah.</p><p>Kamu selektif. Dengan energimu, dengan waktumu, dengan orang-orang yang kamu izinkan masuk. Dan itu bukan karena kamu dingin — tapi karena kamu tau persis apa yang berharga.</p><p>Di bawah permukaan yang tampak tenang itu, ada pikiran yang terus bergerak. Ada perasaan yang dalam. Winter selalu punya badai — hanya saja kamu tau kapan harus menunjukkannya.</p>`,
+              en: `<p>You're calm in a way not everyone can understand. Silence isn't fear for you — it's home.</p><p>You're selective. With your energy, your time, the people you allow in. And that's not because you're cold — it's because you know exactly what's valuable.</p><p>Under that seemingly calm surface, there are thoughts constantly moving. There are deep feelings. Winter always has its storms — you just know when to show them.</p>`
+            },
+            strength: { id: 'Tenang, selektif, dan punya kedalaman besar', en: 'Calm, selective, and deeply profound' },
+            weakness: { id: 'Bisa keliatan distant atau sulit dijangkau', en: 'Can appear distant or hard to reach' }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'social',
+    icon: '🎉',
+    title: { id: 'Sosial & Energi', en: 'Social & Energy' },
+    desc: { id: 'Gimana kamu di antara orang lain — dan sendirian.', en: 'How you are among others — and alone.' },
+    quizzes: [
+      {
+        id: 'socialenergy', icon: '⚡', type: 'text',
+        title: { id: "What's Your Social Energy?", en: "What's Your Social Energy?" },
+        desc: { id: 'Introvert? Extrovert? Atau sesuatu yang jauh lebih kompleks?', en: 'Introvert? Extrovert? Or something far more complex?' },
+        questions: [
+          {
+            text: { id: 'Setelah seharian ketemu banyak orang, kamu ngerasa...', en: 'After a full day with many people, you feel...' },
+            options: [
+              { label: { id: 'Exhausted. Butuh sendirian dulu.', en: 'Exhausted. Need alone time.' }, points: 1 },
+              { label: { id: 'Biasa aja, tergantung orangnya.', en: 'Okay, depends on the people.' }, points: 2 },
+              { label: { id: 'Energized! Malah pengen lanjut.', en: 'Energized! Want to keep going.' }, points: 4 },
+              { label: { id: 'Campur aduk, tergantung mood.', en: 'Mixed, depends on my mood.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Di acara yang kamu nggak kenal siapapun, kamu...', en: 'At an event where you know nobody, you...' },
+            options: [
+              { label: { id: 'Stay di sudut, tunggu ada yang nyamperin.', en: 'Stay in a corner, wait for someone to approach.' }, points: 1 },
+              { label: { id: 'Cari satu orang buat ngobrol dalam.', en: 'Find one person to have a deep conversation with.' }, points: 2 },
+              { label: { id: 'Langsung approach orang dan kenalan.', en: 'Immediately approach people and introduce yourself.' }, points: 4 },
+              { label: { id: 'Scroll HP dulu, lihat situasi.', en: 'Scroll your phone first, read the room.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Weekend ideal buat kamu adalah...', en: 'Your ideal weekend is...' },
+            options: [
+              { label: { id: 'Di rumah, tenang, nggak kemana-mana.', en: 'At home, quiet, going nowhere.' }, points: 1 },
+              { label: { id: 'Nongkrong sama 1-2 orang deket.', en: 'Hanging out with 1-2 close people.' }, points: 2 },
+              { label: { id: 'Hangout rame-rame, makin rame makin seru.', en: 'Group hangout, the more the merrier.' }, points: 4 },
+              { label: { id: 'Tergantung minggu itu selelah apa.', en: 'Depends how exhausting the week was.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Kalau lagi ada masalah, kamu lebih suka...', en: 'When you have a problem, you prefer to...' },
+            options: [
+              { label: { id: 'Diem dan proses sendiri dulu.', en: 'Be quiet and process alone first.' }, points: 1 },
+              { label: { id: 'Cerita ke satu orang yang paling dipercaya.', en: 'Tell one trusted person.' }, points: 2 },
+              { label: { id: 'Cerita ke beberapa orang, minta berbagai perspektif.', en: 'Tell a few people, get various perspectives.' }, points: 4 },
+              { label: { id: 'Tergantung seberapa berat masalahnya.', en: 'Depends on how heavy the problem is.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Orang baru sering bilang kamu terlihat...', en: 'New people often say you seem...' },
+            options: [
+              { label: { id: 'Pendiam atau misterius.', en: 'Quiet or mysterious.' }, points: 1 },
+              { label: { id: 'Thoughtful dan pendengar yang baik.', en: 'Thoughtful and a good listener.' }, points: 2 },
+              { label: { id: 'Friendly dan gampang diajak ngobrol.', en: 'Friendly and easy to talk to.' }, points: 4 },
+              { label: { id: 'Beda-beda tergantung situasi.', en: 'Different depending on the situation.' }, points: 3 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 5, max: 8, emoji: '🌙',
+            name: { id: 'The Deep Introvert', en: 'The Deep Introvert' },
+            story: {
+              id: `<p>Kamu bukan antisosial. Kamu selektif — dan itu jauh lebih akurat.</p><p>Keramaian bukan musuhmu, tapi ia menguras sesuatu yang nggak bisa langsung diisi lagi. Kamu butuh keheningan bukan karena kamu lemah secara sosial, tapi karena di sanalah kamu benar-benar bisa jadi dirimu sendiri.</p><p>Hubungan yang kamu punya mungkin nggak banyak — tapi kedalamannya jarang bisa ditandingi. Kamu hadir sepenuhnya ketika kamu memilih untuk hadir. Dan itu sesuatu yang sangat berharga.</p>`,
+              en: `<p>You're not antisocial. You're selective — and that's far more accurate.</p><p>Crowds aren't your enemy, but they drain something that can't be refilled immediately. You need silence not because you're socially weak, but because that's where you can truly be yourself.</p><p>The relationships you have may not be many — but their depth is rarely matched. You're fully present when you choose to be. And that's something very valuable.</p>`
+            },
+            strength: { id: 'Pendengar luar biasa dan hadir sepenuhnya', en: 'Extraordinary listener and fully present' },
+            weakness: { id: 'Bisa keliatan dingin atau tidak tertarik', en: 'Can appear cold or uninterested' }
+          },
+          {
+            min: 9, max: 12, emoji: '🕯️',
+            name: { id: 'The Selective Connector', en: 'The Selective Connector' },
+            story: {
+              id: `<p>Kamu ada di tengah — tapi bukan karena kamu nggak punya pendirian. Justru sebaliknya: kamu cukup sadar diri untuk tau bahwa energi sosialmu itu kontekstual.</p><p>Kamu bisa sangat hadir dan hangat dengan orang yang tepat. Tapi kamu juga nggak akan memaksakan diri untuk jadi versi yang lebih extrovert dari dirimu hanya karena situasinya menuntut.</p><p>Kamu pilih koneksi yang bermakna. Dan kamu nggak minta maaf untuk itu.</p>`,
+              en: `<p>You're in the middle — but not because you lack conviction. Quite the opposite: you're self-aware enough to know your social energy is contextual.</p><p>You can be very present and warm with the right people. But you also won't force yourself to be a more extroverted version of yourself just because the situation demands it.</p><p>You choose meaningful connections. And you don't apologize for that.</p>`
+            },
+            strength: { id: 'Fleksibel dan punya hubungan yang bermakna', en: 'Flexible and has meaningful relationships' },
+            weakness: { id: 'Lingkaran kecil bisa terasa isolating', en: 'Small circle can feel isolating' }
+          },
+          {
+            min: 13, max: 16, emoji: '🌊',
+            name: { id: 'The Fluid Adapter', en: 'The Fluid Adapter' },
+            story: {
+              id: `<p>Energi sosialmu seperti air — bisa mengisi bentuk apapun yang dibutuhkan. Kamu bisa rame, bisa sepi, bisa jadi yang paling vokal di ruangan atau yang paling diam di sudut — dan dua-duanya terasa nyaman.</p><p>Ini kelebihanmu yang besar. Tapi ini juga bisa jadi kebingunganmu. Karena kadang bahkan kamu sendiri nggak tau hari ini versi kamu yang mana yang mau tampil.</p><p>Yang penting: kenal dirimu di momen itu. Jangan paksa adaptasi kalau yang kamu butuhkan adalah istirahat.</p>`,
+              en: `<p>Your social energy is like water — it can fill whatever shape is needed. You can be loud, can be quiet, can be the most vocal in the room or the most silent in the corner — and both feel comfortable.</p><p>This is your great strength. But it can also be your confusion. Because sometimes even you don't know which version of yourself wants to show up today.</p><p>What matters: know yourself in that moment. Don't force adaptation when what you need is rest.</p>`
+            },
+            strength: { id: 'Adaptif dan bisa masuk ke berbagai situasi sosial', en: 'Adaptive and can fit into various social situations' },
+            weakness: { id: 'Kadang nggak tau sendiri butuh apa', en: 'Sometimes doesn\'t know what they need' }
+          },
+          {
+            min: 17, max: 20, emoji: '☀️',
+            name: { id: 'The Natural Energizer', en: 'The Natural Energizer' },
+            story: {
+              id: `<p>Orang lain bukan hanya nggak nguras kamu — mereka literally mengisi kamu. Keramaian adalah bahan bakarmu. Dan kamu sering jadi yang bikin orang lain merasa welcome, hangat, dan bersemangat.</p><p>Kamu punya karisma yang nggak harus selalu disengaja. Kehadiran kamu punya dampak.</p><p>Tapi hati-hati satu hal: karena kamu sangat nyaman sama orang lain, kadang kamu lupa untuk benar-benar check in sama dirimu sendiri. Keramaian bisa jadi cara yang nyaman untuk menghindari keheningan yang sebenarnya perlu kamu hadapi.</p>`,
+              en: `<p>Other people don't just not drain you — they literally fill you up. Crowds are your fuel. And you're often the one who makes others feel welcome, warm, and energized.</p><p>You have charisma that doesn't always have to be intentional. Your presence has impact.</p><p>But watch one thing: because you're so comfortable with others, you sometimes forget to truly check in with yourself. Crowds can be a comfortable way to avoid the silence you actually need to face.</p>`
+            },
+            strength: { id: 'Karismatik dan memberi energi pada orang lain', en: 'Charismatic and energizing to others' },
+            weakness: { id: 'Bisa takut atau menghindari kesendirian', en: 'Can fear or avoid solitude' }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'chaos',
+    icon: '💀',
+    title: { id: 'Chaos & Kebiasaan', en: 'Chaos & Habits' },
+    desc: { id: 'Seberapa berantakan sebenernya hidup kamu?', en: 'How chaotic is your life really?' },
+    quizzes: [
+      {
+        id: 'chaoslevel', icon: '🌀', type: 'text',
+        title: { id: 'Your Inner Chaos Level', en: 'Your Inner Chaos Level' },
+        desc: { id: 'Dari luar mungkin keliatan oke. Tapi di dalem?', en: 'From the outside it might look fine. But inside?' },
+        questions: [
+          {
+            text: { id: 'Notifikasi di HP kamu sekarang ada berapa?', en: 'How many notifications do you have on your phone right now?' },
+            options: [
+              { label: { id: '0. Semua udah dibaca dan dibereskan.', en: '0. All read and cleared.' }, points: 1 },
+              { label: { id: 'Di bawah 20, masih oke lah.', en: 'Under 20, still manageable.' }, points: 2 },
+              { label: { id: 'Ratusan. Gw udah nyerah.', en: 'Hundreds. I\'ve given up.' }, points: 4 },
+              { label: { id: 'Ribuan. Gw matiin notifikasi semua.', en: 'Thousands. I turned off all notifications.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada rencana mendadak berubah, kamu...', en: 'When plans suddenly change, you...' },
+            options: [
+              { label: { id: 'Tenang. Langsung adaptasi.', en: 'Stay calm. Adapt immediately.' }, points: 1 },
+              { label: { id: 'Agak terganggu tapi bisa handle.', en: 'A bit bothered but can handle it.' }, points: 2 },
+              { label: { id: 'Panik dulu, baru mikir.', en: 'Panic first, then think.' }, points: 4 },
+              { label: { id: 'Kesel, tapi pura-pura santai.', en: 'Annoyed, but pretend to be chill.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'To-do list kamu...', en: 'Your to-do list is...' },
+            options: [
+              { label: { id: 'Rapi, tertulis, ada prioritasnya.', en: 'Neat, written down, prioritized.' }, points: 1 },
+              { label: { id: 'Ada, tapi nggak selalu diikutin.', en: 'Exists, but not always followed.' }, points: 2 },
+              { label: { id: 'Semua ada di kepala. Berantakan.', en: 'All in my head. Chaotic.' }, points: 4 },
+              { label: { id: 'To-do list apa? Gw improvisasi aja.', en: 'What to-do list? I just improvise.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Sebelum tidur, pikiran kamu biasanya...', en: 'Before sleeping, your thoughts are usually...' },
+            options: [
+              { label: { id: 'Tenang. Gw udah selesaikan apa yang perlu diselesaikan.', en: 'Calm. I\'ve finished what needed to be done.' }, points: 1 },
+              { label: { id: 'Sedikit mikir tapi bisa tidur.', en: 'Thinking a little but can sleep.' }, points: 2 },
+              { label: { id: 'Racing thoughts. Tidur jam 3 pagi.', en: 'Racing thoughts. Asleep at 3am.' }, points: 4 },
+              { label: { id: 'Kosong karena udah terlalu capek.', en: 'Empty because I\'m too exhausted.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Kalau dikasih waktu bebas tak terduga, kamu...', en: 'Given unexpected free time, you...' },
+            options: [
+              { label: { id: 'Langsung produktif, udah ada list yang mau dikerjain.', en: 'Immediately productive, already have a list.' }, points: 1 },
+              { label: { id: 'Santai dulu, baru mikir mau ngapain.', en: 'Rest first, then figure out what to do.' }, points: 2 },
+              { label: { id: 'Bingung mau ngapain, malah nggak ngapa-ngapain.', en: 'Don\'t know what to do, end up doing nothing.' }, points: 4 },
+              { label: { id: 'Isi dengan hal random yang tiba-tiba muncul.', en: 'Fill it with random things that suddenly come up.' }, points: 3 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 5, max: 8, emoji: '🏛️',
+            name: { id: 'Controlled & Composed', en: 'Controlled & Composed' },
+            story: {
+              id: `<p>Kamu adalah anomali yang langka. Di dunia yang terus-terusan berantakan, kamu punya sistem — dan sistemmu bekerja.</p><p>Bukan berarti hidupmu sempurna. Tapi kamu punya kemampuan untuk membawa keteraturan ke dalam ketidakpastian. Orang sekitar kamu sering tanpa sadar bergantung pada energi stabilmu.</p><p>Yang perlu kamu jaga: jangan sampai kebutuhan akan keteraturan berubah jadi rigiditas. Hidup yang terlalu terkontrol kadang kehilangan ruang untuk hal-hal indah yang datang tanpa rencana.</p>`,
+              en: `<p>You're a rare anomaly. In a world that's constantly chaotic, you have a system — and your system works.</p><p>That doesn't mean your life is perfect. But you have the ability to bring order to uncertainty. People around you often unconsciously depend on your stable energy.</p><p>What to watch: don't let the need for order turn into rigidity. A life too controlled sometimes loses room for beautiful things that come unplanned.</p>`
+            },
+            strength: { id: 'Reliabel, stabil, dan bisa diandalkan', en: 'Reliable, stable, and dependable' },
+            weakness: { id: 'Bisa terlalu rigid kalau ada yang nggak sesuai rencana', en: 'Can be too rigid when things don\'t go to plan' }
+          },
+          {
+            min: 9, max: 12, emoji: '⚖️',
+            name: { id: 'Functional Chaos', en: 'Functional Chaos' },
+            story: {
+              id: `<p>Dari luar, kamu keliatan cukup oke. Dan memang, kamu oke — hanya saja di balik itu ada lapisan kekacauan yang berhasil kamu manage dengan cukup baik.</p><p>Kamu bukan yang paling teratur, tapi kamu juga bukan yang paling berantakan. Kamu ada di tempat yang sangat manusiawi: mencoba, kadang gagal, tapi terus jalan.</p><p>Dan honestly? Itu cukup. Nggak semua orang harus punya hidup yang Instagram-worthy tersusun rapi.</p>`,
+              en: `<p>From the outside, you look fairly okay. And indeed, you are okay — it's just that behind it there's a layer of chaos you manage well enough.</p><p>You're not the most organized, but you're not the most chaotic either. You're in a very human place: trying, sometimes failing, but keep going.</p><p>And honestly? That's enough. Not everyone needs to have an Instagram-worthy, neatly arranged life.</p>`
+            },
+            strength: { id: 'Realistis, fleksibel, dan tidak perfeksionis', en: 'Realistic, flexible, and not perfectionist' },
+            weakness: { id: 'Terkadang terlalu banyak yang di-juggle sekaligus', en: 'Sometimes juggling too many things at once' }
+          },
+          {
+            min: 13, max: 16, emoji: '🌀',
+            name: { id: 'Organized Chaos', en: 'Organized Chaos' },
+            story: {
+              id: `<p>Sistemmu aneh. Orang lain nggak akan ngerti kalau kamu jelasin. Tapi entah kenapa, it works — setidaknya buat kamu.</p><p>Kamu berpikir dengan cara yang non-linear. Kamu sering lompat dari satu hal ke hal lain tanpa terlihat ada koneksinya, tapi di kepalamu semuanya terhubung dengan logika yang hanya kamu yang benar-benar pahami.</p><p>Kamu chaos yang produktif. Bukan berantakan karena malas, tapi karena otakmu bergerak lebih cepat dari struktur yang ada.</p>`,
+              en: `<p>Your system is weird. Others won't understand if you explain it. But somehow, it works — at least for you.</p><p>You think in non-linear ways. You often jump from one thing to another without apparent connection, but in your head everything is linked with logic only you truly understand.</p><p>You're productive chaos. Not messy from laziness, but because your mind moves faster than existing structures.</p>`
+            },
+            strength: { id: 'Kreatif dan punya cara problem-solving yang unik', en: 'Creative with a unique problem-solving approach' },
+            weakness: { id: 'Susah dijelasin atau diduplikasikan orang lain', en: 'Hard to explain or replicate for others' }
+          },
+          {
+            min: 17, max: 20, emoji: '🔥',
+            name: { id: 'Full Chaos Mode', en: 'Full Chaos Mode' },
+            story: {
+              id: `<p>Hidupmu berantakan dan kamu udah cukup damai sama fakta itu. Bukan karena kamu menyerah, tapi karena kamu udah belajar bahwa chaos adalah kondisi defaultmu — dan kamu masih bisa function di dalamnya.</p><p>Kamu improvisator sejati. Rencana yang terlalu rigid justru bikin kamu nggak bisa gerak. Kamu butuh kebebasan untuk merespons momen, bukan mengeksekusi jadwal.</p><p>Satu hal yang perlu kamu jaga: pastikan chaos itu bukan cara kamu menghindari hal-hal yang sebenarnya perlu diselesaikan.</p>`,
+              en: `<p>Your life is chaotic and you've made enough peace with that fact. Not because you've given up, but because you've learned that chaos is your default state — and you can still function within it.</p><p>You're a true improviser. Plans that are too rigid actually prevent you from moving. You need freedom to respond to moments, not execute schedules.</p><p>One thing to watch: make sure the chaos isn't a way of avoiding things that actually need to be dealt with.</p>`
+            },
+            strength: { id: 'Adaptif, spontan, dan nggak kaku', en: 'Adaptive, spontaneous, and not rigid' },
+            weakness: { id: 'Deadline dan komitmen jangka panjang bisa jadi musuh', en: 'Deadlines and long-term commitments can be enemies' }
+          }
+        ]
+      }
+    ]
+  }
+];
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  document.getElementById('navBack').textContent = t[l].navBack;
+  renderLayer1();
+  if (currentCat) {
+    document.getElementById('l2-back').textContent = t[l].l2Back;
+    document.getElementById('l2-label').textContent = currentCat.title[l];
+    document.getElementById('l2-title').textContent = currentCat.title[l];
+    document.getElementById('l2-desc').textContent = currentCat.desc[l];
+    const grid = document.getElementById('quizListGrid');
+    grid.innerHTML = '';
+    currentCat.quizzes.forEach(quiz => {
+      const card = document.createElement('div');
+      card.className = 'quiz-list-card';
+      card.innerHTML = `
+        <span class="qlc-icon">${quiz.icon}</span>
+        <div class="qlc-body">
+          <p class="qlc-type">${quiz.type === 'image' ? '🖼 Image Quiz' : 'Text Quiz'}</p>
+          <h3 class="qlc-title">${quiz.title[l]}</h3>
+          <p class="qlc-desc">${quiz.desc[l]}</p>
+        </div>
+        <span class="qlc-arrow">→</span>
+      `;
+      card.onclick = () => startQuiz(quiz.id);
+      grid.appendChild(card);
+    });
+  }
+  if (currentQuiz) {
+    document.getElementById('l3-back').textContent = t[l].l3Back;
+    document.getElementById('quizCatLabel').textContent = currentCat.icon + ' ' + currentCat.title[l];
+    document.getElementById('quizTitle').textContent = currentQuiz.title[l];
+    document.getElementById('resType').textContent = t[l].resType;
+    document.getElementById('btnRetake').textContent = t[l].btnRetake;
+    document.getElementById('btnTryMore').textContent = t[l].btnTryMore;
+    buildQuizQuestions();
+    updateProgress();
+  }
+}
+function goToLayer(n) {
+  document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
+  document.getElementById('layer' + n).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderLayer1() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
+  document.getElementById('l1-label').textContent = t[lang].l1Label;
+  document.getElementById('l1-title').textContent = t[lang].l1Title;
+  document.getElementById('l1-desc').textContent = t[lang].l1Desc;
+  categories.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    card.innerHTML = `
+      <span class="cat-icon">${cat.icon}</span>
+      <p class="cat-label">Kategori</p>
+      <h3 class="cat-title">${cat.title[lang]}</h3>
+      <p class="cat-count">${cat.desc[lang]}</p>
+    `;
+    card.onclick = () => showCategory(cat.id);
+    grid.appendChild(card);
+  });
+}
+
+function showCategory(catId) {
+  currentCat = categories.find(c => c.id === catId);
+  const grid = document.getElementById('quizListGrid');
+  grid.innerHTML = '';
+  document.getElementById('l2-back').textContent = t[lang].l2Back;
+  document.getElementById('l2-label').textContent = currentCat.title[lang];
+  document.getElementById('l2-title').textContent = currentCat.title[lang];
+  document.getElementById('l2-desc').textContent = currentCat.desc[lang];
+  currentCat.quizzes.forEach(quiz => {
+    const card = document.createElement('div');
+    card.className = 'quiz-list-card';
+    card.innerHTML = `
+      <span class="qlc-icon">${quiz.icon}</span>
+      <div class="qlc-body">
+        <p class="qlc-type">${quiz.type === 'image' ? '🖼️ Image Quiz' : '📝 Text Quiz'}</p>
+        <h3 class="qlc-title">${quiz.title[lang]}</h3>
+        <p class="qlc-desc">${quiz.desc[lang]}</p>
+      </div>
+      <span class="qlc-arrow">→</span>
+    `;
+    card.onclick = () => startQuiz(quiz.id);
+    grid.appendChild(card);
+  });
+  goToLayer(2);
+}
+
+function startQuiz(quizId) {
+  currentQuiz = null;
+  categories.forEach(cat => {
+    const found = cat.quizzes.find(q => q.id === quizId);
+    if (found) currentQuiz = found;
+  });
+  if (!currentQuiz) return;
+  currentQ = 0;
+  answers = new Array(currentQuiz.questions.length).fill(null);
+  document.getElementById('l3-back').textContent = t[lang].l3Back;
+  document.getElementById('quizCatLabel').textContent = `${currentCat.icon} ${currentCat.title[lang]}`;
+  document.getElementById('quizTitle').textContent = currentQuiz.title[lang];
+  document.getElementById('resType').textContent = t[lang].resType;
+  document.getElementById('btnRetake').textContent = t[lang].btnRetake;
+  document.getElementById('btnTryMore').textContent = t[lang].btnTryMore;
+  document.getElementById('resultBlock').classList.remove('show');
+  buildQuizQuestions();
+  updateProgress();
+  goToLayer(3);
+}
+
+function buildQuizQuestions() {
+  const container = document.getElementById('quizContainer');
+  container.style.display = 'block';
+  container.innerHTML = '';
+  currentQuiz.questions.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'q-block' + (qi === 0 ? ' active' : '');
+    block.id = 'qblock-' + qi;
+    let inner = `<p class="q-text">${q.text[lang]}</p>`;
+    if (currentQuiz.type === 'image') {
+      inner += `<div class="img-picker-grid">`;
+      q.images.forEach((img, ii) => {
+        inner += `<div class="img-opt" id="imgopt-${qi}-${ii}" onclick="selectImg(${qi},${ii},${img.points})">
+          <img src="${img.src}" alt="${img.label[lang]}" loading="lazy">
+          <div class="img-opt-label">${img.label[lang]}</div>
+        </div>`;
+      });
+      inner += `</div>`;
+    } else {
+      inner += `<div class="options">`;
+      q.options.forEach((opt, oi) => {
+        inner += `<div class="opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi},${opt.points})">
+          <div class="dot" id="dot-${qi}-${oi}"></div>
+          <span class="opt-text">${opt.label[lang]}</span>
+        </div>`;
+      });
+      inner += `</div>`;
+    }
+    const isLast = qi === currentQuiz.questions.length - 1;
+    inner += `<div class="q-nav">
+      ${qi > 0 ? `<button class="btn-prev" onclick="prevQ()">${t[lang].btnPrev}</button>` : '<span></span>'}
+      ${isLast
+        ? `<button class="btn-result" id="btnResult-${qi}" onclick="showResult()" disabled>${t[lang].btnResult}</button>`
+        : `<button class="btn-next" id="btnNext-${qi}" onclick="nextQ()" disabled>${t[lang].btnNext}</button>`}
+    </div>
+    <p class="err-msg" id="err-${qi}">${t[lang].errMsg}</p>`;
+    block.innerHTML = inner;
+    container.appendChild(block);
+  });
+}
+
+function selectOpt(qi, oi, points) {
+  answers[qi] = points;
+  const q = currentQuiz.questions[qi];
+  q.options.forEach((_, i) => document.getElementById(`opt-${qi}-${i}`).classList.remove('selected'));
+  document.getElementById(`opt-${qi}-${oi}`).classList.add('selected');
+  enableNext(qi);
+}
+
+function selectImg(qi, ii, points) {
+  answers[qi] = points;
+  const q = currentQuiz.questions[qi];
+  q.images.forEach((_, i) => document.getElementById(`imgopt-${qi}-${i}`).classList.remove('selected'));
+  document.getElementById(`imgopt-${qi}-${ii}`).classList.add('selected');
+  enableNext(qi);
+}
+
+function enableNext(qi) {
+  const isLast = qi === currentQuiz.questions.length - 1;
+  const btn = document.getElementById(isLast ? `btnResult-${qi}` : `btnNext-${qi}`);
+  if (btn) btn.disabled = false;
+  document.getElementById(`err-${qi}`).style.display = 'none';
+}
+
+function nextQ() {
+  if (answers[currentQ] === null) { document.getElementById(`err-${currentQ}`).style.display = 'block'; return; }
+  document.getElementById('qblock-' + currentQ).classList.remove('active');
+  currentQ++;
+  document.getElementById('qblock-' + currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevQ() {
+  document.getElementById('qblock-' + currentQ).classList.remove('active');
+  currentQ--;
+  document.getElementById('qblock-' + currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const total = currentQuiz.questions.length;
+  const pct = (currentQ / total) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = t[lang].progressLabel(currentQ + 1, total);
+}
+
+function showResult() {
+  if (answers[currentQ] === null) { document.getElementById(`err-${currentQ}`).style.display = 'block'; return; }
+  const total = answers.reduce((a, b) => a + b, 0);
+  const res = currentQuiz.results.find(r => total >= r.min && total <= r.max);
+  if (!res) return;
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('resEmoji').textContent = res.emoji;
+  document.getElementById('resName').textContent = res.name[lang];
+  document.getElementById('resStory').innerHTML = res.story[lang];
+  document.getElementById('resPills').innerHTML = `
+    <span class="pill pill-s">✦ ${res.strength[lang]}</span>
+    <span class="pill pill-w">⚠ ${res.weakness[lang]}</span>`;
+  document.getElementById('resultBlock').classList.add('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function retakeQuiz() {
+  currentQ = 0;
+  answers = new Array(currentQuiz.questions.length).fill(null);
+  document.getElementById('resultBlock').classList.remove('show');
+  buildQuizQuestions();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderLayer1();
+</script>
+</body>
+</html>
