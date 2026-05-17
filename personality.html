@@ -799,6 +799,7 @@ function setLang(l) {
   }
 }
 function goToLayer(n) {
+  currentLayer = n;
   document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
   document.getElementById('layer' + n).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -806,13 +807,12 @@ function goToLayer(n) {
 
 const completedQuizzes = new Set();
 
+let currentLayer = 1;
+
 function navGoBack() {
-  const activeLayer = document.querySelector('.layer.active');
-  if (!activeLayer) { window.location.href = 'index.html'; return; }
-  const id = activeLayer.id;
-  if (id === 'layer1') { window.location.href = 'index.html'; }
-  else if (id === 'layer2') { goToLayer(1); }
-  else if (id === 'layer3') { goToLayer(2); }
+  if (currentLayer === 1) { window.location.href = 'index.html'; }
+  else if (currentLayer === 2) { goToLayer(1); }
+  else if (currentLayer === 3) { goToLayer(2); }
 }
 
 function renderLayer1() {
