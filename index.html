@@ -89,7 +89,32 @@ section { padding: 5rem 2rem; }
 .quiz-card p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
 .quiz-card-cta { font-size: 14px; font-weight: 500; color: var(--accent); }
 
-.berita-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.berita-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.berita-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.berita-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.berita-grid::-webkit-scrollbar-thumb {
+  background: rgba(193,125,74,0.45);
+  border-radius: 20px;
+}
+
+.berita-grid .berita-card {
+  min-width: 280px;
+  flex-shrink: 0;
+}
 .berita-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.25s; }
 .berita-card:hover { border-color: var(--accent); transform: translateY(-3px); }
 .berita-img { width: 100%; height: 160px; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 52px; }
@@ -299,32 +324,35 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
     <p class="section-label" data-i18n="beritaLabel">Berita Unik</p>
     <h2 class="section-title" data-i18n="beritaTitle">Yang aneh, yang nyata.</h2>
     <p class="section-desc" data-i18n="beritaDesc">Fakta dan berita unik yang bikin kamu bilang "hah, serius?"</p>
-    <div class="berita-grid">
-      <div class="berita-card">
-        <div class="berita-img">🐙</div>
-        <div class="berita-body">
-          <p class="berita-tag" data-i18n="b1Tag">Sains</p>
-          <h4 data-i18n="b1Title">Gurita Punya 3 Jantung dan Darah Biru</h4>
-          <p data-i18n="b1Desc">Dan kalau salah satu jantungnya berhenti saat berenang, mereka lebih suka jalan di dasar laut.</p>
-        </div>
-      </div>
-      <div class="berita-card">
-        <div class="berita-img">😴</div>
-        <div class="berita-body">
-          <p class="berita-tag" data-i18n="b2Tag">Psikologi</p>
-          <h4 data-i18n="b2Title">Otak Kamu Aktif Lebih Keras Saat Tidur</h4>
-          <p data-i18n="b2Desc">Saat kamu tidur, otak justru kerja keras buat cuci racun dan konsolidasikan memori harian kamu.</p>
-        </div>
-      </div>
-      <div class="berita-card">
-        <div class="berita-img">🌏</div>
-        <div class="berita-body">
-          <p class="berita-tag" data-i18n="b3Tag">Dunia</p>
-          <h4 data-i18n="b3Title">Ada Tempat yang Bisa Ngalamin 4 Musim dalam Sehari</h4>
-          <p data-i18n="b3Desc">Di beberapa bagian New Zealand, kamu bisa ngerasain panas, hujan, dingin, dan angin kencang dalam satu hari.</p>
-        </div>
-      </div>
+<div class="berita-grid">
+  <a class="berita-card" href="sains.html" style="text-decoration:none; color:inherit;">
+    <div class="berita-img">🧪</div>
+    <div class="berita-body">
+      <h4>Sains</h4>
     </div>
+  </a>
+
+  <a class="berita-card" href="psikologi.html" style="text-decoration:none; color:inherit;">
+    <div class="berita-img">🧠</div>
+    <div class="berita-body">
+      <h4>Psikologi</h4>
+    </div>
+  </a>
+
+  <a class="berita-card" href="dunia.html" style="text-decoration:none; color:inherit;">
+    <div class="berita-img">🌍</div>
+    <div class="berita-body">
+      <h4>Dunia</h4>
+    </div>
+  </a>
+
+  <a class="berita-card" href="fauna.html" style="text-decoration:none; color:inherit;">
+    <div class="berita-img">🦁</div>
+    <div class="berita-body">
+      <h4>Fauna</h4>
+    </div>
+  </a>
+</div>
   </div>
 </section>
 
