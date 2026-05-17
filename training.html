@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feel Better — KenapaGw</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKYV55FYCX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NKYV55FYCX');</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0E0C0A;--bg2:#161310;--bg3:#1E1A16;--surface:#231F1B;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --text:#F0EBE4;--muted:#B8AFA7;--accent:#C17D4A;
+  --accent-light:rgba(193,125,74,0.15);
+  --green:rgba(100,200,120,0.15);--green-text:#7dd494;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;min-height:100vh;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(14,12,10,0.92);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--accent);font-style:italic;}
+.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.nav-back{font-size:14px;color:var(--muted);text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;}
+.nav-back:hover{color:var(--accent);}
+.lang-toggle{display:flex;gap:4px;background:var(--surface);border-radius:100px;padding:4px;border:0.5px solid var(--border2);}
+.lang-btn{padding:4px 12px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.lang-btn.active{background:var(--accent);color:white;}
+
+/* TICKER */
+.ticker-wrap{background:var(--accent);padding:10px 0;overflow:hidden;border-bottom:0.5px solid rgba(255,255,255,0.15);width:100%;}
+.ticker-track{display:flex;width:max-content;animation:ticker 22s linear infinite;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{font-size:13px;font-weight:500;color:white;white-space:nowrap;padding:0 3rem;}
+.ticker-item::after{content:'✦';opacity:0.6;margin-left:3rem;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* PAGES */
+.page{display:none;max-width:680px;margin:0 auto;padding:6rem 2rem 5rem;animation:fadeUp 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.section-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:0.75rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:0.75rem;}
+.section-desc{font-size:16px;color:var(--muted);margin-bottom:2.5rem;line-height:1.7;}
+
+/* EMOTION CARDS */
+.emotion-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:2rem;}
+.emotion-card{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem 1rem;cursor:pointer;transition:all 0.25s;text-align:center;}
+.emotion-card:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--bg3);}
+.emotion-card.selected{border-color:var(--accent);background:var(--accent-light);}
+.emotion-emoji{font-size:36px;display:block;margin-bottom:0.5rem;}
+.emotion-label{font-size:13px;font-weight:500;color:var(--text);}
+.emotion-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* CHECK-IN */
+.checkin-wrap{background:var(--surface);border:0.5px solid var(--border2);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;}
+.checkin-label{font-size:13px;color:var(--muted);margin-bottom:0.75rem;line-height:1.6;}
+.checkin-textarea{width:100%;background:var(--bg);border:0.5px solid var(--border2);border-radius:12px;padding:13px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;resize:none;outline:none;min-height:100px;transition:border-color 0.2s;}
+.checkin-textarea:focus{border-color:var(--accent);}
+.checkin-textarea::placeholder{color:rgba(184,175,167,0.4);}
+.checkin-hint{font-size:12px;color:var(--muted);margin-top:0.5rem;font-style:italic;}
+
+/* SUB-EMOTION */
+.sub-emotions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:2rem;}
+.sub-btn{padding:9px 18px;border-radius:100px;background:var(--surface);border:0.5px solid var(--border2);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s;}
+.sub-btn:hover{border-color:var(--accent);color:var(--text);}
+.sub-btn.selected{background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500;}
+
+/* BUTTONS */
+.btn-primary{width:100%;padding:15px 32px;background:var(--accent);color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s;margin-top:0.5rem;}
+.btn-primary:hover{opacity:0.85;transform:translateY(-2px);}
+.btn-primary:disabled{opacity:0.35;cursor:not-allowed;transform:none;}
+.btn-ghost{background:none;border:0.5px solid var(--border2);color:var(--muted);padding:10px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;transition:all 0.2s;margin-top:0.75rem;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+/* AI GUIDE STEPS */
+.guide-header{display:flex;align-items:center;gap:12px;margin-bottom:2rem;}
+.guide-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent-light);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.guide-meta{flex:1;}
+.guide-name{font-size:13px;font-weight:600;color:var(--accent);}
+.guide-status{font-size:12px;color:var(--muted);}
+
+.steps-wrap{display:flex;flex-direction:column;gap:1rem;}
+.step-item{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:1.25rem 1.4rem;transition:all 0.3s;}
+.step-item.active-step{border-color:var(--accent);background:var(--bg3);}
+.step-item.done-step{border-color:rgba(100,200,120,0.3);background:rgba(100,200,120,0.05);}
+.step-num{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.step-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
+.step-body{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1rem;}
+.step-input{width:100%;background:var(--bg);border:0.5px solid var(--border2);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;resize:none;outline:none;min-height:80px;transition:border-color 0.2s;margin-bottom:0.75rem;}
+.step-input:focus{border-color:var(--accent);}
+.step-input::placeholder{color:rgba(184,175,167,0.4);}
+.step-done-badge{display:none;font-size:12px;color:var(--green-text);background:var(--green);padding:4px 12px;border-radius:100px;display:inline-flex;align-items:center;gap:4px;}
+
+/* BREATHING */
+.breath-wrap{display:flex;flex-direction:column;align-items:center;padding:1rem 0;}
+.breath-circle{width:100px;height:100px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--accent);transition:transform 4s ease,opacity 0.5s;margin-bottom:1rem;}
+.breath-circle.inhale{transform:scale(1.5);}
+.breath-circle.exhale{transform:scale(1);}
+.breath-instruction{font-size:15px;color:var(--muted);text-align:center;min-height:24px;}
+.breath-count{font-size:13px;color:var(--muted);margin-top:0.5rem;text-align:center;}
+
+/* TIMER */
+.timer-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:var(--accent-light);border:0.5px solid rgba(193,125,74,0.3);border-radius:100px;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-bottom:0.75rem;}
+.timer-btn:hover{background:var(--accent);color:white;}
+.timer-display{font-size:22px;font-weight:700;color:var(--accent);text-align:center;margin-bottom:0.5rem;font-variant-numeric:tabular-nums;}
+
+/* LOADING */
+.ai-loading{display:flex;align-items:center;gap:10px;padding:1.5rem;color:var(--muted);font-size:14px;}
+.dot-pulse{display:flex;gap:4px;}
+.dot-pulse span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.2s ease-in-out infinite;}
+.dot-pulse span:nth-child(2){animation-delay:0.2s;}
+.dot-pulse span:nth-child(3){animation-delay:0.4s;}
+@keyframes pulse{0%,100%{opacity:0.3;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}
+
+/* MOOD CHECK */
+.mood-grid{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:1.5rem 0;}
+.mood-opt{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:12px 16px;border-radius:14px;border:0.5px solid var(--border);background:var(--surface);transition:all 0.2s;min-width:64px;}
+.mood-opt:hover{border-color:var(--accent);background:var(--accent-light);}
+.mood-opt.selected{border-color:var(--accent);background:var(--accent-light);}
+.mood-emoji-big{font-size:28px;}
+.mood-label-sm{font-size:11px;color:var(--muted);}
+
+/* COMPLETION */
+.completion-wrap{text-align:center;padding:2rem 0;animation:fadeUp 0.5s ease;}
+.completion-emoji{font-size:60px;display:block;margin-bottom:1rem;}
+.completion-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:0.75rem;}
+.completion-desc{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:2rem;}
+
+/* DIVIDER */
+.divider{border:none;border-top:0.5px solid var(--border);margin:2rem 0;}
+
+/* FLOAT */
+#floating-actions{position:fixed;bottom:24px;right:24px;z-index:99999;display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+.fab{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;text-decoration:none;cursor:pointer;border:none;box-shadow:0 4px 16px rgba(0,0,0,0.4);white-space:nowrap;color:white;}
+.fab-donate{background:var(--accent);}
+
+@media(max-width:600px){
+  .page{padding-left:1.25rem;padding-right:1.25rem;}
+  .emotion-grid{grid-template-columns:repeat(3,1fr);}
+  .mood-grid{gap:8px;}
+  .mood-opt{padding:10px 12px;min-width:56px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html" id="navBack">← Kembali</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')">ID</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">🧠 Perasaan kamu valid — kita proses bareng yuk</span>
+    <span class="ticker-item">💛 Suka KenapaGw? Support via Mandiri · a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">🧠 Perasaan kamu valid — kita proses bareng yuk</span>
+    <span class="ticker-item">💛 Suka KenapaGw? Support via Mandiri · a.n. Dhita Artya Utama · 1550012925023</span>
+  </div>
+</div>
+
+<!-- PAGE 1: PILIH KONDISI -->
+<div class="page active" id="page1">
+  <p class="section-label" id="lbl-tag">Feel Better</p>
+  <h1 class="section-title" id="lbl-title">Lagi gimana nih?</h1>
+  <p class="section-desc" id="lbl-desc">Pilih yang paling deket sama kondisi kamu sekarang. Ga perlu sempurna, yang penting jujur aja.</p>
+
+  <div class="emotion-grid" id="emotionGrid">
+    <div class="emotion-card" onclick="selectEmotion('sad')">
+      <span class="emotion-emoji">😢</span>
+      <p class="emotion-label" id="e-sad">Lagi Sedih</p>
+      <p class="emotion-sub" id="es-sad">Galau, nangis, berat</p>
+    </div>
+    <div class="emotion-card" onclick="selectEmotion('angry')">
+      <span class="emotion-emoji">😤</span>
+      <p class="emotion-label" id="e-angry">Lagi Marah</p>
+      <p class="emotion-sub" id="es-angry">Emosi, kesel, frustrasi</p>
+    </div>
+    <div class="emotion-card" onclick="selectEmotion('anxious')">
+      <span class="emotion-emoji">😰</span>
+      <p class="emotion-label" id="e-anxious">Cemas</p>
+      <p class="emotion-sub" id="es-anxious">Deg-degan, overthinking</p>
+    </div>
+    <div class="emotion-card" onclick="selectEmotion('tired')">
+      <span class="emotion-emoji">😮‍💨</span>
+      <p class="emotion-label" id="e-tired">Exhausted</p>
+      <p class="emotion-sub" id="es-tired">Capek, drain, hampa</p>
+    </div>
+    <div class="emotion-card" onclick="selectEmotion('lonely')">
+      <span class="emotion-emoji">🌧️</span>
+      <p class="emotion-label" id="e-lonely">Kesepian</p>
+      <p class="emotion-sub" id="es-lonely">Sendirian, ga ada yg ngerti</p>
+    </div>
+    <div class="emotion-card" onclick="selectEmotion('cantSleep')">
+      <span class="emotion-emoji">🌙</span>
+      <p class="emotion-label" id="e-cantSleep">Ga Bisa Tidur</p>
+      <p class="emotion-sub" id="es-cantSleep">Pikiran ga bisa stop</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: CHECK-IN -->
+<div class="page" id="page2">
+  <button class="btn-ghost" onclick="goPage(1)" style="margin-bottom:1.5rem;">← <span id="lbl-back">Balik</span></button>
+  <p class="section-label" id="lbl-tag2">Check-in</p>
+  <h2 class="section-title" id="lbl-checkin-title">Ceritain dikit?</h2>
+  <p class="section-desc" id="lbl-checkin-desc">Ga perlu panjang. Tulis apa yang lagi di kepala kamu — bebas, no judgment.</p>
+
+  <!-- Sub-emotions -->
+  <div class="sub-emotions" id="subEmotions"></div>
+
+  <div class="checkin-wrap">
+    <p class="checkin-label" id="lbl-checkin-prompt">Lagi kenapa? (opsional — tapi makin jujur, makin personal bantuannya)</p>
+    <textarea class="checkin-textarea" id="checkinText" maxlength="600" placeholder="Tulis di sini..." rows="4"></textarea>
+    <p class="checkin-hint" id="lbl-checkin-hint">✦ Ini cuma buat kamu. Ga disimpen, ga dikirim ke siapapun.</p>
+  </div>
+
+  <button class="btn-primary" id="btnStartGuide" onclick="startGuide()">
+    <span id="lbl-start-btn">Bantu aku →</span>
+  </button>
+</div>
+
+<!-- PAGE 3: AI GUIDE -->
+<div class="page" id="page3">
+  <div class="guide-header">
+    <div class="guide-avatar">🤍</div>
+    <div class="guide-meta">
+      <p class="guide-name">KenapaGw AI</p>
+      <p class="guide-status" id="lbl-guide-status">Lagi nyiapin sesuatu buat kamu...</p>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="ai-loading" id="aiLoading">
+    <div class="dot-pulse"><span></span><span></span><span></span></div>
+    <span id="lbl-ai-loading">Bentar ya, lagi mikirin yang terbaik buat kamu...</span>
+  </div>
+
+  <!-- Steps container -->
+  <div class="steps-wrap" id="stepsWrap" style="display:none;"></div>
+
+  <!-- Next step button -->
+  <button class="btn-primary" id="btnNextStep" style="display:none;margin-top:1.5rem;" onclick="completeCurrentStep()">
+    <span id="lbl-next-step">Lanjut →</span>
+  </button>
+
+  <!-- Finish -->
+  <button class="btn-ghost" id="btnFinish" style="display:none;width:100%;margin-top:1rem;" onclick="goPage(4)">
+    <span id="lbl-finish-btn">Lihat ringkasan →</span>
+  </button>
+</div>
+
+<!-- PAGE 4: MOOD CHECK + COMPLETION -->
+<div class="page" id="page4">
+  <div class="completion-wrap" id="completionWrap" style="display:none;">
+    <span class="completion-emoji">🌟</span>
+    <h2 class="completion-title" id="lbl-done-title">Udah selesai!</h2>
+    <p class="completion-desc" id="lbl-done-desc">Kamu udah lakuin sesuatu yang penting hari ini — ngerawat diri sendiri. Itu bukan hal kecil.</p>
+    <hr class="divider">
+  </div>
+
+  <p class="section-label" id="lbl-mood-tag">Mood Check</p>
+  <h2 class="section-title" id="lbl-mood-title">Sekarang gimana rasanya?</h2>
+  <p class="section-desc" id="lbl-mood-desc">Dibanding tadi sebelum mulai, perasaan kamu sekarang...</p>
+
+  <div class="mood-grid">
+    <div class="mood-opt" onclick="selectMood(1)">
+      <span class="mood-emoji-big">😞</span>
+      <span class="mood-label-sm" id="mood1">Masih berat</span>
+    </div>
+    <div class="mood-opt" onclick="selectMood(2)">
+      <span class="mood-emoji-big">😐</span>
+      <span class="mood-label-sm" id="mood2">Biasa aja</span>
+    </div>
+    <div class="mood-opt" onclick="selectMood(3)">
+      <span class="mood-emoji-big">🙂</span>
+      <span class="mood-label-sm" id="mood3">Lumayan</span>
+    </div>
+    <div class="mood-opt" onclick="selectMood(4)">
+      <span class="mood-emoji-big">😊</span>
+      <span class="mood-label-sm" id="mood4">Lebih baik</span>
+    </div>
+    <div class="mood-opt" onclick="selectMood(5)">
+      <span class="mood-emoji-big">🥰</span>
+      <span class="mood-label-sm" id="mood5">Jauh lebih baik!</span>
+    </div>
+  </div>
+
+  <div id="moodResponse" style="display:none; margin-top:1.5rem; padding:1.25rem; background:var(--surface); border-radius:16px; border:0.5px solid var(--border2);">
+    <p style="font-size:15px;color:var(--muted);line-height:1.8;" id="moodResponseText"></p>
+  </div>
+
+  <button class="btn-primary" onclick="restartSession()" style="margin-top:2rem;" id="lbl-restart">Mulai sesi baru →</button>
+  <a href="index.html" class="btn-ghost" style="display:block;text-align:center;text-decoration:none;margin-top:0.75rem;" id="lbl-home">← Balik ke beranda</a>
+</div>
+
+<div id="floating-actions">
+  <a class="fab fab-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">💛 Donate</a>
+</div>
+
+<script>
+// ── STATE ────────────────────────────────────────────────────────────────────
+let lang = 'id';
+let selectedEmotion = null;
+let selectedSubs = [];
+let currentStepIndex = 0;
+let parsedSteps = [];
+let breathInterval = null;
+
+// ── i18n ─────────────────────────────────────────────────────────────────────
+const T = {
+  id: {
+    navBack: '← Kembali', back: 'Balik',
+    tag: 'Feel Better', title: 'Lagi gimana nih?',
+    desc: 'Pilih yang paling deket sama kondisi kamu sekarang. Ga perlu sempurna, yang penting jujur aja.',
+    tag2: 'Check-in', checkinTitle: 'Ceritain dikit?',
+    checkinDesc: 'Ga perlu panjang. Tulis apa yang lagi di kepala kamu — bebas, no judgment.',
+    checkinPrompt: 'Lagi kenapa? (opsional — tapi makin jujur, makin personal bantuannya)',
+    checkinHint: '✦ Ini cuma buat kamu. Ga disimpen, ga dikirim ke siapapun.',
+    startBtn: 'Bantu aku →',
+    guideStatus: 'Lagi nyiapin sesuatu buat kamu...',
+    aiLoading: 'Bentar ya, lagi mikirin yang terbaik buat kamu...',
+    nextStep: 'Lanjut →', finishBtn: 'Lihat ringkasan →',
+    doneTitle: 'Udah selesai!',
+    doneDesc: 'Kamu udah lakuin sesuatu yang penting hari ini — ngerawat diri sendiri. Itu bukan hal kecil.',
+    moodTag: 'Mood Check', moodTitle: 'Sekarang gimana rasanya?',
+    moodDesc: 'Dibanding tadi sebelum mulai, perasaan kamu sekarang...',
+    mood1:'Masih berat', mood2:'Biasa aja', mood3:'Lumayan', mood4:'Lebih baik', mood5:'Jauh lebih baik!',
+    restart: 'Mulai sesi baru →', home: '← Balik ke beranda',
+    emotions: {
+      sad:{label:'Lagi Sedih',sub:'Galau, nangis, berat'},
+      angry:{label:'Lagi Marah',sub:'Emosi, kesel, frustrasi'},
+      anxious:{label:'Cemas',sub:'Deg-degan, overthinking'},
+      tired:{label:'Exhausted',sub:'Capek, drain, hampa'},
+      lonely:{label:'Kesepian',sub:'Sendirian, ga ada yg ngerti'},
+      cantSleep:{label:'Ga Bisa Tidur',sub:'Pikiran ga bisa stop'},
+    },
+    subEmotions: {
+      sad:['Ditinggal seseorang','Ngerasa ga cukup','Kehilangan sesuatu','Capek nahan semuanya','Tanpa alasan jelas'],
+      angry:['Diperlakukan ga adil','Ga didengar','Dikecewain orang','Frustrasi sama diri sendiri','Situasi di luar kontrol'],
+      anxious:['Takut sama masa depan','Overthinking hal kecil','Ngerasa ga aman','Khawatir sama orang lain','Panik tiba-tiba'],
+      tired:['Kerja terus-terusan','Emosional drain','Ga ada waktu buat diri sendiri','Ngerasa hampa','Semua terasa berat'],
+      lonely:['Ga ada yang ngerti','Sendirian padahal rame','Kangen seseorang','Ngerasa ga belong','Jauh dari orang terdekat'],
+      cantSleep:['Pikiran ga bisa stop','Khawatir besok','Terbayang sesuatu','Ngerasa ga tenang','Ga tau kenapa'],
+    },
+    breathIn:'Tarik napas...', breathHold:'Tahan...', breathOut:'Hembuskan perlahan...',
+    breathDone:'Selesai! Gimana rasanya?',
+    stepDone:'✓ Selesai', startTimer:'▶ Mulai',
+  },
+  en: {
+    navBack: '← Back', back: 'Back',
+    tag: 'Feel Better', title: "How are you feeling?",
+    desc: "Pick what's closest to how you're feeling right now. No need to be exact, just honest.",
+    tag2: 'Check-in', checkinTitle: 'Tell me a little?',
+    checkinDesc: "Doesn't have to be long. Write whatever's in your head — freely, no judgment.",
+    checkinPrompt: "What's going on? (optional — but the more honest, the more personal the help)",
+    checkinHint: '✦ This is just for you. Nothing saved, nothing sent to anyone.',
+    startBtn: 'Help me →',
+    guideStatus: 'Getting something ready for you...',
+    aiLoading: 'Give me a sec, thinking of the best approach for you...',
+    nextStep: 'Continue →', finishBtn: 'See summary →',
+    doneTitle: "You're done!",
+    doneDesc: "You did something important today — taking care of yourself. That's not a small thing.",
+    moodTag: 'Mood Check', moodTitle: 'How do you feel now?',
+    moodDesc: 'Compared to before we started, you feel...',
+    mood1:'Still heavy', mood2:'About the same', mood3:'A bit better', mood4:'Better', mood5:'Much better!',
+    restart: 'Start a new session →', home: '← Back to home',
+    emotions: {
+      sad:{label:'Feeling Sad',sub:'Down, tearful, heavy'},
+      angry:{label:'Feeling Angry',sub:'Upset, irritated, frustrated'},
+      anxious:{label:'Anxious',sub:'Nervous, overthinking'},
+      tired:{label:'Exhausted',sub:'Drained, burned out, empty'},
+      lonely:{label:'Lonely',sub:'Isolated, misunderstood'},
+      cantSleep:{label:"Can't Sleep",sub:'Mind won\'t stop running'},
+    },
+    subEmotions: {
+      sad:['Lost someone','Feeling not enough','Grieving something','Tired of holding it in','Sad for no clear reason'],
+      angry:['Treated unfairly','Not being heard','Let down by someone','Frustrated with myself','Things out of my control'],
+      anxious:['Scared of the future','Overthinking small things','Feeling unsafe','Worried about others','Sudden panic'],
+      tired:['Overworking','Emotionally drained','No time for myself','Feeling empty','Everything feels heavy'],
+      lonely:['No one understands','Alone in a crowd','Missing someone','Don\'t feel like I belong','Far from loved ones'],
+      cantSleep:['Mind won\'t stop','Worried about tomorrow','Replaying something','Feeling restless','Not sure why'],
+    },
+    breathIn:'Breathe in...', breathHold:'Hold...', breathOut:'Breathe out slowly...',
+    breathDone:'Done! How do you feel?',
+    stepDone:'✓ Done', startTimer:'▶ Start',
+  }
+};
+
+// ── LANG ─────────────────────────────────────────────────────────────────────
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  const t = T[l];
+  document.getElementById('navBack').textContent = t.navBack;
+  document.getElementById('lbl-back').textContent = t.back;
+  document.getElementById('lbl-tag').textContent = t.tag;
+  document.getElementById('lbl-title').textContent = t.title;
+  document.getElementById('lbl-desc').textContent = t.desc;
+  document.getElementById('lbl-tag2').textContent = t.tag2;
+  document.getElementById('lbl-checkin-title').textContent = t.checkinTitle;
+  document.getElementById('lbl-checkin-desc').textContent = t.checkinDesc;
+  document.getElementById('lbl-checkin-prompt').textContent = t.checkinPrompt;
+  document.getElementById('lbl-checkin-hint').textContent = t.checkinHint;
+  document.getElementById('lbl-start-btn').textContent = t.startBtn;
+  document.getElementById('lbl-guide-status').textContent = t.guideStatus;
+  document.getElementById('lbl-ai-loading').textContent = t.aiLoading;
+  document.getElementById('lbl-next-step').textContent = t.nextStep;
+  document.getElementById('lbl-finish-btn').textContent = t.finishBtn;
+  document.getElementById('lbl-done-title').textContent = t.doneTitle;
+  document.getElementById('lbl-done-desc').textContent = t.doneDesc;
+  document.getElementById('lbl-mood-tag').textContent = t.moodTag;
+  document.getElementById('lbl-mood-title').textContent = t.moodTitle;
+  document.getElementById('lbl-mood-desc').textContent = t.moodDesc;
+  document.getElementById('mood1').textContent = t.mood1;
+  document.getElementById('mood2').textContent = t.mood2;
+  document.getElementById('mood3').textContent = t.mood3;
+  document.getElementById('mood4').textContent = t.mood4;
+  document.getElementById('mood5').textContent = t.mood5;
+  document.getElementById('lbl-restart').textContent = t.restart;
+  document.getElementById('lbl-home').textContent = t.home;
+  document.getElementById('checkinText').placeholder = l === 'id' ? 'Tulis di sini...' : 'Write here...';
+  // update emotion labels
+  Object.keys(t.emotions).forEach(k => {
+    const el = document.getElementById('e-' + k);
+    const es = document.getElementById('es-' + k);
+    if (el) el.textContent = t.emotions[k].label;
+    if (es) es.textContent = t.emotions[k].sub;
+  });
+  // re-render sub emotions if on page 2
+  if (selectedEmotion) renderSubEmotions();
+}
+
+// ── NAV ──────────────────────────────────────────────────────────────────────
+function goPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── EMOTION SELECT ───────────────────────────────────────────────────────────
+function selectEmotion(emotion) {
+  selectedEmotion = emotion;
+  selectedSubs = [];
+  renderSubEmotions();
+  goPage(2);
+}
+
+function renderSubEmotions() {
+  const t = T[lang];
+  const subs = t.subEmotions[selectedEmotion] || [];
+  const wrap = document.getElementById('subEmotions');
+  wrap.innerHTML = subs.map(s =>
+    `<button class="sub-btn" onclick="toggleSub(this, '${s.replace(/'/g,"\\'")}') ">${s}</button>`
+  ).join('');
+}
+
+function toggleSub(btn, val) {
+  btn.classList.toggle('selected');
+  if (selectedSubs.includes(val)) {
+    selectedSubs = selectedSubs.filter(s => s !== val);
+  } else {
+    selectedSubs.push(val);
+  }
+}
+
+// ── START GUIDE ──────────────────────────────────────────────────────────────
+async function startGuide() {
+  const checkinText = document.getElementById('checkinText').value.trim();
+  const t = T[lang];
+  const btn = document.getElementById('btnStartGuide');
+  btn.disabled = true;
+
+  goPage(3);
+  document.getElementById('aiLoading').style.display = 'flex';
+  document.getElementById('stepsWrap').style.display = 'none';
+  document.getElementById('btnNextStep').style.display = 'none';
+  document.getElementById('btnFinish').style.display = 'none';
+
+  const emotionLabel = t.emotions[selectedEmotion]?.label || selectedEmotion;
+  const subsText = selectedSubs.length ? selectedSubs.join(', ') : '-';
+
+  const systemPrompt = lang === 'id'
+    ? `Kamu adalah teman curhat yang hangat, jujur, dan nemenin orang lewat momen berat. Gaya ngomong kamu santai, kayak temen deket — pakai "kamu/aku", sesekali bisa bercanda ringan kalau situasinya memungkinkan, tapi tetap empathetic. BUKAN terapis, BUKAN robot. Kamu peduli beneran.
+
+Tugasmu: buat 4 guided steps yang personal berdasarkan kondisi user. Tiap step harus actionable dan interaktif.
+
+Format response WAJIB dalam JSON seperti ini (jangan tambahkan teks lain di luar JSON):
+{
+  "opening": "Kalimat pembuka hangat dan personal, max 2 kalimat.",
+  "steps": [
+    {
+      "title": "Judul step pendek",
+      "body": "Penjelasan / instruksi step ini. Boleh 2-3 kalimat. Warm dan personal.",
+      "type": "write|breathe|timer|affirm",
+      "placeholder": "placeholder untuk input (kalau type=write)",
+      "duration": 30
+    }
+  ]
+}
+
+Tipe step yang tersedia:
+- "write": user menulis sesuatu (refleksi, gratitude, letter, dll)
+- "breathe": guided breathing exercise
+- "timer": istirahat / fokus dengan timer (duration dalam detik)
+- "affirm": tampilkan afirmasi / kalimat kuat, user cukup baca dan resapi
+
+Buat 4 steps yang mengalir natural — dari yang ringan ke yang lebih dalam. Sesuaikan dengan kondisi user.`
+    : `You are a warm, honest friend who helps people through tough moments. Your tone is casual and caring — like a close friend — sometimes lightly humorous when appropriate, but always empathetic. NOT a therapist, NOT a robot. You genuinely care.
+
+Your task: create 4 personalized guided steps based on the user's condition. Each step must be actionable and interactive.
+
+Response format MUST be JSON like this (no other text outside JSON):
+{
+  "opening": "Warm and personal opening message, max 2 sentences.",
+  "steps": [
+    {
+      "title": "Short step title",
+      "body": "Explanation / instruction for this step. 2-3 sentences. Warm and personal.",
+      "type": "write|breathe|timer|affirm",
+      "placeholder": "input placeholder (if type=write)",
+      "duration": 30
+    }
+  ]
+}
+
+Available step types:
+- "write": user writes something (reflection, gratitude, letter, etc.)
+- "breathe": guided breathing exercise
+- "timer": rest / focus with timer (duration in seconds)
+- "affirm": show affirmation / powerful statement, user reads and absorbs
+
+Create 4 steps that flow naturally — from lighter to deeper. Tailor to the user's condition.`;
+
+  const userMsg = lang === 'id'
+    ? `Kondisi: ${emotionLabel}\nSpesifik: ${subsText}\nCerita user: ${checkinText || '(tidak diceritakan)'}\n\nBuatkan 4 guided steps yang personal buat kondisi ini.`
+    : `Condition: ${emotionLabel}\nSpecifics: ${subsText}\nUser story: ${checkinText || '(not shared)'}\n\nCreate 4 personalized guided steps for this condition.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+
+    const data = await res.json();
+    const raw = data.content?.map(c => c.text || '').join('') || '';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+
+    document.getElementById('aiLoading').style.display = 'none';
+    document.getElementById('lbl-guide-status').textContent = lang === 'id' ? 'Gw di sini bareng kamu 🤍' : "I'm here with you 🤍";
+
+    parsedSteps = parsed.steps || [];
+    currentStepIndex = 0;
+
+    renderSteps(parsed.opening, parsedSteps);
+    btn.disabled = false;
+
+  } catch(e) {
+    console.error(e);
+    document.getElementById('aiLoading').innerHTML = `<span style="color:#e07070;">${lang === 'id' ? 'Waduh, ada error. Coba lagi ya!' : 'Oops, something went wrong. Try again!'}</span>`;
+    btn.disabled = false;
+  }
+}
+
+// ── RENDER STEPS ─────────────────────────────────────────────────────────────
+function renderSteps(opening, steps) {
+  const wrap = document.getElementById('stepsWrap');
+  wrap.style.display = 'flex';
+
+  let html = `<div style="background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:1.1rem 1.4rem;margin-bottom:0.5rem;">
+    <p style="font-size:15px;color:var(--muted);line-height:1.8;">${escHtml(opening)}</p>
+  </div>`;
+
+  steps.forEach((step, i) => {
+    const isFirst = i === 0;
+    html += `<div class="step-item ${isFirst ? 'active-step' : ''}" id="step-${i}" style="${isFirst ? '' : 'opacity:0.45;pointer-events:none;'}">
+      <p class="step-num">${lang === 'id' ? 'Langkah' : 'Step'} ${i+1} / ${steps.length}</p>
+      <p class="step-title">${escHtml(step.title)}</p>
+      <p class="step-body">${escHtml(step.body)}</p>
+      ${renderStepContent(step, i)}
+    </div>`;
+  });
+
+  wrap.innerHTML = html;
+
+  // Show next button for first step
+  showStepControls(0);
+}
+
+function renderStepContent(step, i) {
+  if (step.type === 'write') {
+    return `<textarea class="step-input" id="step-input-${i}" placeholder="${escHtml(step.placeholder || (lang === 'id' ? 'Tulis di sini...' : 'Write here...'))}"></textarea>`;
+  }
+  if (step.type === 'breathe') {
+    return `<div class="breath-wrap" id="breath-wrap-${i}">
+      <div class="breath-circle" id="breath-circle-${i}">${lang === 'id' ? 'Siap?' : 'Ready?'}</div>
+      <p class="breath-instruction" id="breath-inst-${i}"></p>
+      <p class="breath-count" id="breath-count-${i}"></p>
+      <button class="timer-btn" onclick="startBreathing(${i})" id="breath-btn-${i}">▶ ${lang === 'id' ? 'Mulai' : 'Start'}</button>
+    </div>`;
+  }
+  if (step.type === 'timer') {
+    const dur = step.duration || 60;
+    return `<div style="text-align:center;">
+      <p class="timer-display" id="timer-display-${i}">${formatTime(dur)}</p>
+      <button class="timer-btn" onclick="startTimer(${i}, ${dur})" id="timer-btn-${i}">▶ ${lang === 'id' ? 'Mulai' : 'Start'}</button>
+    </div>`;
+  }
+  if (step.type === 'affirm') {
+    return `<div style="background:var(--accent-light);border:0.5px solid rgba(193,125,74,0.3);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.75rem;">
+      <p style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--text);line-height:1.7;font-style:italic;">"${escHtml(step.body)}"</p>
+    </div>`;
+  }
+  return '';
+}
+
+function showStepControls(idx) {
+  const isLast = idx === parsedSteps.length - 1;
+  document.getElementById('btnNextStep').style.display = isLast ? 'none' : 'block';
+  document.getElementById('btnFinish').style.display = isLast ? 'block' : 'none';
+}
+
+function completeCurrentStep() {
+  // Mark current as done
+  const curr = document.getElementById('step-' + currentStepIndex);
+  if (curr) {
+    curr.classList.remove('active-step');
+    curr.classList.add('done-step');
+    curr.style.opacity = '1';
+    curr.style.pointerEvents = 'none';
+  }
+  currentStepIndex++;
+  // Activate next
+  const next = document.getElementById('step-' + currentStepIndex);
+  if (next) {
+    next.classList.add('active-step');
+    next.style.opacity = '1';
+    next.style.pointerEvents = 'auto';
+    next.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  showStepControls(currentStepIndex);
+}
+
+// ── BREATHING ─────────────────────────────────────────────────────────────────
+function startBreathing(stepIdx) {
+  const t = T[lang];
+  const circle = document.getElementById('breath-circle-' + stepIdx);
+  const inst = document.getElementById('breath-inst-' + stepIdx);
+  const count = document.getElementById('breath-count-' + stepIdx);
+  const btn = document.getElementById('breath-btn-' + stepIdx);
+  btn.style.display = 'none';
+
+  let cycle = 0;
+  const maxCycles = 3;
+
+  function doCycle() {
+    if (cycle >= maxCycles) {
+      circle.textContent = '🤍';
+      circle.style.transform = 'scale(1)';
+      inst.textContent = t.breathDone;
+      count.textContent = '';
+      return;
+    }
+    cycle++;
+    count.textContent = `${cycle} / ${maxCycles}`;
+
+    // Inhale 4s
+    circle.textContent = t.breathIn.split('...')[0];
+    inst.textContent = t.breathIn;
+    circle.style.transform = 'scale(1.5)';
+    setTimeout(() => {
+      // Hold 4s
+      circle.textContent = t.breathHold.split('...')[0];
+      inst.textContent = t.breathHold;
+      setTimeout(() => {
+        // Exhale 6s
+        circle.textContent = t.breathOut.split('...')[0];
+        inst.textContent = t.breathOut;
+        circle.style.transform = 'scale(1)';
+        setTimeout(doCycle, 6000);
+      }, 4000);
+    }, 4000);
+  }
+
+  doCycle();
+}
+
+// ── TIMER ─────────────────────────────────────────────────────────────────────
+function startTimer(stepIdx, duration) {
+  const display = document.getElementById('timer-display-' + stepIdx);
+  const btn = document.getElementById('timer-btn-' + stepIdx);
+  btn.style.display = 'none';
+  let remaining = duration;
+
+  const interval = setInterval(() => {
+    remaining--;
+    display.textContent = formatTime(remaining);
+    if (remaining <= 0) {
+      clearInterval(interval);
+      display.textContent = lang === 'id' ? 'Selesai! ✓' : 'Done! ✓';
+    }
+  }, 1000);
+}
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}:${sec.toString().padStart(2,'0')}`;
+}
+
+// ── MOOD CHECK ───────────────────────────────────────────────────────────────
+const moodResponses = {
+  id: {
+    1: "Makasih udah jujur. Kadang sesi kayak gini ga langsung bikin semuanya berasa ringan — dan itu okay. Yang penting kamu udah nyobain. Perasaan ini pasti bergerak juga.",
+    2: "Ga kenapa-kenapa. Kadang butuh waktu lebih lama. Yang penting kamu udah luangin waktu buat diri sendiri hari ini — itu udah berarti banyak.",
+    3: "Lumayan itu udah progress loh. Kamu udah lakuin sesuatu buat diri sendiri. Tetap di sini, tetap jaga diri ya.",
+    4: "Seneng denger itu! Kamu ngebuktiin sendiri bahwa kamu bisa ngerawat dirimu. Terusin ya — kamu tau cara ngebantu diri sendiri sekarang.",
+    5: "Wah ini bikin ikutan seneng! Kamu keren banget. Inget momen ini — kamu bisa sampai sini dari yang tadi. Dan kamu bisa lagi kapanpun.",
+  },
+  en: {
+    1: "Thanks for being honest. Sometimes a session like this doesn't immediately make everything feel lighter — and that's okay. You tried. These feelings will shift.",
+    2: "That's alright. Sometimes it takes longer. What matters is you made time for yourself today — that already means a lot.",
+    3: "A little better is still progress. You did something for yourself. Stay here, keep taking care of yourself.",
+    4: "Really glad to hear that! You proved to yourself that you can take care of you. Keep going — you know how to help yourself now.",
+    5: "That makes me so happy! You're amazing. Remember this moment — you got here from where you were. And you can do it again anytime.",
+  }
+};
+
+function selectMood(val) {
+  document.querySelectorAll('.mood-opt').forEach(o => o.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  const resp = document.getElementById('moodResponse');
+  const text = document.getElementById('moodResponseText');
+  text.textContent = moodResponses[lang][val];
+  resp.style.display = 'block';
+  document.getElementById('completionWrap').style.display = 'block';
+  resp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ── RESTART ──────────────────────────────────────────────────────────────────
+function restartSession() {
+  selectedEmotion = null;
+  selectedSubs = [];
+  currentStepIndex = 0;
+  parsedSteps = [];
+  document.getElementById('checkinText').value = '';
+  document.getElementById('stepsWrap').innerHTML = '';
+  document.getElementById('moodResponse').style.display = 'none';
+  document.getElementById('completionWrap').style.display = 'none';
+  document.querySelectorAll('.mood-opt').forEach(o => o.classList.remove('selected'));
+  document.getElementById('btnStartGuide').disabled = false;
+  goPage(1);
+}
+
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
