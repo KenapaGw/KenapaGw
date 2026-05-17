@@ -564,10 +564,11 @@ const categories = [
 
   <p>What we see on the surface may only be a tiny fraction of Earth's mysteries 🌌</p>
 </div>
+`
     }
-    }
+  }
 ]
-},
+  },
 
   {
     id: 'psychology',
@@ -626,7 +627,7 @@ initComments(articleId);
   goToLayer(3);
 }
 
-renderLayer1();
+
 function showCategory(catId) {
   currentCat = categories.find(c => c.id === catId);
 
@@ -685,6 +686,12 @@ function sbFetch(path, opts = {}) {
 
 function timeAgo(iso) {
   const diff = (Date.now() - new Date(iso)) / 1000;
+  if (lang === 'en') {
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return Math.floor(diff/60) + ' min ago';
+    if (diff < 86400) return Math.floor(diff/3600) + ' hr ago';
+    return Math.floor(diff/86400) + ' days ago';
+  }
   if (diff < 60) return 'baru saja';
   if (diff < 3600) return Math.floor(diff/60) + ' menit lalu';
   if (diff < 86400) return Math.floor(diff/3600) + ' jam lalu';
@@ -897,10 +904,18 @@ function goToLayer(layerNum) {
   document.querySelectorAll('.layer').forEach(layer => {
     layer.classList.remove('active');
   });
-
   document.getElementById('layer' + layerNum).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  document.getElementById('navBack').textContent = t[lang].navBack;
+  // Update nav back button text & behaviour per layer
+  const navBack = document.getElementById('navBack');
+  if (layerNum === 1) {
+    navBack.textContent = lang === 'id' ? '← Beranda' : '← Home';
+  } else if (layerNum === 2) {
+    navBack.textContent = lang === 'id' ? '← Kategori' : '← Categories';
+  } else {
+    navBack.textContent = lang === 'id' ? '← Artikel' : '← Articles';
+  }
   document.getElementById('l3-back').textContent = t[lang].l3Back;
 }
 
@@ -908,22 +923,59 @@ function setLang(newLang) {
   lang = newLang;
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.remove('active');
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === newLang);
   });
 
-  document.querySelector(`.lang-btn[onclick="setLang('${newLang}')"]`)?.classList.add('active');
+  // Re-render current view
+  if (currentArticle) {
+    openArticle(currentArticle.id);
+  } else if (currentCat) {
+    showCategory(currentCat.id);
+  } else {
+    renderLayer1();
+  }
 
-  renderLayer1();
-
-  if (currentCat) showCategory(currentCat.id);
-  if (currentArticle) openArticle(currentArticle.id);
+  // Update nav back text for current active layer
+  const activeLayer = ['layer1','layer2','layer3'].find(id =>
+    document.getElementById(id).classList.contains('active')
+  );
+  const layerNum = parseInt(activeLayer?.replace('layer','') || '1');
+  const navBack = document.getElementById('navBack');
+  if (layerNum === 1) {
+    navBack.textContent = lang === 'id' ? '← Beranda' : '← Home';
+  } else if (layerNum === 2) {
+    navBack.textContent = lang === 'id' ? '← Kategori' : '← Categories';
+  } else {
+    navBack.textContent = lang === 'id' ? '← Artikel' : '← Articles';
+  }
 }
 
+window.onload = function () {
+  // Read URL param: Berita.html?cat=science → skip layer1, go straight to article list
+  const params = new URLSearchParams(window.location.search);
+  const catParam = params.get('cat');
+  if (catParam) {
+    const found = categories.find(c => c.id === catParam);
+    if (found) {
+      showCategory(catParam);
+      return;
+    }
+  }
+  renderLayer1();
+};
+
 function navGoBack() {
+  const params = new URLSearchParams(window.location.search);
+  const catParam = params.get('cat');
   if (document.getElementById('layer3').classList.contains('active')) {
     goToLayer(2);
   } else if (document.getElementById('layer2').classList.contains('active')) {
-    goToLayer(1);
+    // If we came from index via ?cat=, go back to index
+    if (catParam) {
+      window.location.href = 'index.html';
+    } else {
+      goToLayer(1);
+    }
   } else {
     window.location.href = 'index.html';
   }
