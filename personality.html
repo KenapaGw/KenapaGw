@@ -816,10 +816,13 @@ function navGoBack() {
     goToLayer(1);
   } else if (currentLayer === 3) {
     const resultVisible = document.getElementById('resultBlock').classList.contains('show');
+    const quizContainerVisible = document.getElementById('quizContainer').style.display !== 'none';
     if (resultVisible) {
       goToLayer(2);
-    } else if (currentQ > 0) {
+    } else if (quizContainerVisible && currentQ > 0) {
       prevQ();
+    } else if (quizContainerVisible && currentQ === 0) {
+      goToLayer(2);
     } else {
       goToLayer(2);
     }
