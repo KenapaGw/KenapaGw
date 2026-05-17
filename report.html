@@ -96,24 +96,13 @@ nav {
 .email-verify-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .email-verify-btn.verified { background: rgba(80,180,100,0.15); color: #6dd08a; border-color: rgba(80,180,100,0.3); cursor: default; }
 
-.otp-wrap { display: none; margin-top: 0.75rem; }
-.otp-wrap.show { display: flex; gap: 10px; align-items: center; }
-.otp-input {
-  width: 140px; background: var(--surface); border: 0.5px solid var(--border2);
-  border-radius: 12px; padding: 11px 14px; color: var(--text);
-  font-family: 'DM Sans', sans-serif; font-size: 15px; letter-spacing: 0.2em;
-  outline: none; transition: border-color 0.2s;
+.otp-note { font-size: 12px; color: var(--muted); margin-top: 0.5rem; display: flex; align-items: center; gap: 6px; }
+.spinner {
+  width: 12px; height: 12px; border: 2px solid rgba(193,125,74,0.3);
+  border-top-color: var(--accent); border-radius: 50%;
+  animation: spin 0.7s linear infinite; display: inline-block; flex-shrink: 0;
 }
-.otp-input:focus { border-color: var(--accent); }
-.otp-verify-btn {
-  padding: 11px 20px; background: var(--accent); color: white;
-  border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif;
-  font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s;
-}
-.otp-verify-btn:hover { opacity: 0.85; }
-.otp-note { font-size: 12px; color: var(--muted); margin-top: 0.5rem; }
-.otp-note a { color: var(--accent); cursor: pointer; text-decoration: none; }
-.otp-note a:hover { text-decoration: underline; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .field-error { font-size: 12px; color: #e07070; margin-top: 5px; display: none; }
 .field-success { font-size: 12px; color: #6dd08a; margin-top: 5px; display: none; }
@@ -208,17 +197,12 @@ nav {
         <label class="form-label" for="inputEmail"><span id="lbl-email">Alamat Email</span> <span>*</span></label>
         <div class="email-wrap">
           <input class="form-input" type="email" id="inputEmail" name="email" autocomplete="email" placeholder="email@kamu.com" style="padding-right: 110px;" required>
-          <button type="button" class="email-verify-btn" id="btnSendOtp" onclick="sendOtp()">
+          <button type="button" class="email-verify-btn" id="btnSendOtp" onclick="verifyEmailDomain()">
             <span id="lbl-verify-btn">Verifikasi</span>
           </button>
         </div>
-        <div class="otp-wrap" id="otpWrap">
-          <input class="otp-input" type="text" id="inputOtp" maxlength="6" placeholder="000000" inputmode="numeric">
-          <button type="button" class="otp-verify-btn" onclick="verifyOtp()" id="lbl-otp-btn">Konfirmasi</button>
-        </div>
         <p class="otp-note" id="otpNote" style="display:none;">
-          <span id="lbl-otp-note">Kode dikirim ke email kamu.</span>
-          <a onclick="sendOtp(true)" id="lbl-resend"> Kirim ulang</a>
+          <span id="lbl-otp-note">Mengecek domain email...</span>
         </p>
         <p class="field-error" id="errEmail"></p>
         <p class="field-success" id="successEmail"></p>
@@ -274,8 +258,6 @@ nav {
 <script>
 let lang = 'id';
 let emailVerified = false;
-let otpCode = '';
-let otpTimer = null;
 
 // ─── i18n ───────────────────────────────────────────────────────────────────
 const T = {
@@ -289,9 +271,6 @@ const T = {
     optBug: '🐛 Bug Report', optQna: '❓ Pertanyaan / QnA',
     optReq: '💡 Request Quiz Baru', optOther: '💬 Lainnya',
     verifyBtn: 'Verifikasi', verifiedBtn: '✓ Terverifikasi',
-    otpBtn: 'Konfirmasi',
-    otpNote: 'Kode dikirim ke email kamu.',
-    resend: ' Kirim ulang',
     submit: 'Kirim Sekarang →', submitting: 'Mengirim...',
     privacy: 'Pesanmu langsung ke inbox kami. Gw baca semuanya. 🙏',
     successTitle: 'Terkirim!',
@@ -301,6 +280,9 @@ const T = {
     errEmail: 'Format email nggak valid.',
     errEmailRequired: 'Email harus diisi.',
     errEmailVerify: 'Verifikasi email dulu ya.',
+    errDisposable: 'Email sekali pakai nggak bisa dipakai. Coba email asli kamu.',
+    errDomainNotFound: 'Domain email nggak ditemukan. Cek lagi ya.',
+    checkingDomain: 'Mengecek domain email...',
     errType: 'Pilih jenis pesan dulu.',
     errMsg: 'Pesan nggak boleh kosong.',
     errOtp: 'Kode salah. Coba lagi.',
@@ -319,9 +301,6 @@ const T = {
     optBug: '🐛 Bug Report', optQna: '❓ Question / QnA',
     optReq: '💡 Request a New Quiz', optOther: '💬 Other',
     verifyBtn: 'Verify', verifiedBtn: '✓ Verified',
-    otpBtn: 'Confirm',
-    otpNote: 'Code sent to your email.',
-    resend: ' Resend',
     submit: 'Send Now →', submitting: 'Sending...',
     privacy: 'Your message goes straight to our inbox. We read everything. 🙏',
     successTitle: 'Sent!',
@@ -331,6 +310,9 @@ const T = {
     errEmail: 'Invalid email format.',
     errEmailRequired: 'Email is required.',
     errEmailVerify: 'Please verify your email first.',
+    errDisposable: 'Disposable emails are not allowed. Please use a real email.',
+    errDomainNotFound: 'Email domain not found. Please double-check.',
+    checkingDomain: 'Checking email domain...',
     errType: 'Please choose a message type.',
     errMsg: 'Message cannot be empty.',
     errOtp: 'Wrong code. Try again.',
@@ -360,9 +342,6 @@ function setLang(l) {
   document.getElementById('lbl-opt-req').textContent = t.optReq;
   document.getElementById('lbl-opt-other').textContent = t.optOther;
   document.getElementById('lbl-verify-btn').textContent = emailVerified ? t.verifiedBtn : t.verifyBtn;
-  document.getElementById('lbl-otp-btn').textContent = t.otpBtn;
-  document.getElementById('lbl-otp-note').textContent = t.otpNote;
-  document.getElementById('lbl-resend').textContent = t.resend;
   document.getElementById('lbl-submit').textContent = t.submit;
   document.getElementById('lbl-privacy').textContent = t.privacy;
   document.getElementById('lbl-success-title').textContent = t.successTitle;
@@ -370,93 +349,103 @@ function setLang(l) {
   document.getElementById('lbl-back-home').textContent = t.backHome;
   document.getElementById('inputName').placeholder = t.namePlaceholder;
   document.getElementById('inputMsg').placeholder = t.msgPlaceholder;
-  document.getElementById('inputOtp').placeholder = t.otpPlaceholder;
 }
 
-// ─── OTP / Email Verify ──────────────────────────────────────────────────────
-function generateOtp() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
+// ─── Domain / Email Verify ───────────────────────────────────────────────────
 
-async function sendOtp(resend = false) {
-  const email = document.getElementById('inputEmail').value.trim();
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const errEmail = document.getElementById('errEmail');
+// Daftar domain disposable yang umum (fallback offline)
+const DISPOSABLE_DOMAINS = new Set([
+  'mailinator.com','guerrillamail.com','10minutemail.com','throwam.com',
+  'trashmail.com','yopmail.com','sharklasers.com','guerrillamailblock.com',
+  'grr.la','guerrillamail.info','guerrillamail.biz','guerrillamail.de',
+  'guerrillamail.net','guerrillamail.org','spam4.me','tempmail.com',
+  'fakeinbox.com','dispostable.com','mailnull.com','spamgourmet.com',
+  'trashmail.at','trashmail.io','trashmail.me','discard.email',
+  'spambox.us','maildrop.cc','mailnesia.com','tempr.email','anonaddy.com',
+  'temp-mail.org','tempinbox.com','throwam.com','getairmail.com',
+  'owlpic.com','spamherelots.com','spamhereplease.com','binkmail.com',
+  'bob.email','coieo.com','cool.fr.nf','disign.ru',
+]);
+
+async function verifyEmailDomain() {
+  const emailInput = document.getElementById('inputEmail');
+  const email = emailInput.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const btn = document.getElementById('btnSendOtp');
+  const noteEl = document.getElementById('otpNote');
+  const noteSpan = document.getElementById('lbl-otp-note');
+
+  // Reset state
+  hideFieldError('errEmail');
+  document.getElementById('successEmail').style.display = 'none';
 
   if (!email) { showFieldError('errEmail', T[lang].errEmailRequired); return; }
   if (!emailRegex.test(email)) { showFieldError('errEmail', T[lang].errEmail); return; }
 
-  hideFieldError('errEmail');
-  otpCode = generateOtp();
+  const domain = email.split('@')[1].toLowerCase();
 
-  // Kirim OTP via Formspree endpoint khusus OTP
-  // Karena ini static site, kita pakai mailto fallback + simpan OTP di sessionStorage
-  sessionStorage.setItem('kgw_otp', otpCode);
-  sessionStorage.setItem('kgw_otp_email', email);
+  // Cek disposable offline dulu
+  if (DISPOSABLE_DOMAINS.has(domain)) {
+    showFieldError('errEmail', T[lang].errDisposable);
+    return;
+  }
 
-  const btn = document.getElementById('btnSendOtp');
+  // Loading state
   btn.disabled = true;
   btn.style.opacity = '0.5';
+  noteEl.style.display = 'flex';
+  noteSpan.innerHTML = '<span class="spinner"></span> ' + T[lang].checkingDomain;
 
-  // Kirim email OTP via Formspree
   try {
-    await fetch('https://formspree.io/f/GANTI_DENGAN_ID_KAMU', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        _subject: `[KenapaGw] Kode Verifikasi Email kamu: ${otpCode}`,
-        message: `Halo!\n\nKode verifikasi email kamu untuk KenapaGw adalah:\n\n${otpCode}\n\nKode ini berlaku 5 menit. Jangan share ke siapapun.\n\n— KenapaGw`,
-        _replyto: email,
-      })
-    });
-  } catch(e) { console.log('OTP send attempt:', e); }
+    // Cek via disify API (gratis, no key needed)
+    const res = await fetch(`https://www.disify.com/api/email/${encodeURIComponent(email)}`);
+    const data = await res.json();
 
-  document.getElementById('otpWrap').classList.add('show');
-  document.getElementById('otpNote').style.display = 'block';
-
-  // Timer 60 detik sebelum bisa resend
-  let sisa = 60;
-  const resendEl = document.getElementById('lbl-resend');
-  resendEl.style.pointerEvents = 'none';
-  resendEl.style.color = 'var(--muted)';
-  clearInterval(otpTimer);
-  otpTimer = setInterval(() => {
-    sisa--;
-    resendEl.textContent = ` ${T[lang].resend.trim()} (${sisa}s)`;
-    if (sisa <= 0) {
-      clearInterval(otpTimer);
-      resendEl.textContent = T[lang].resend;
-      resendEl.style.pointerEvents = 'auto';
-      resendEl.style.color = 'var(--accent)';
-      btn.disabled = false;
-      btn.style.opacity = '1';
+    // disify: format=true berarti valid, disposable=false berarti bukan sekali pakai
+    if (!data.format) {
+      noteEl.style.display = 'none';
+      showFieldError('errEmail', T[lang].errEmail);
+      btn.disabled = false; btn.style.opacity = '1';
+      return;
     }
-  }, 1000);
+    if (data.disposable === true) {
+      noteEl.style.display = 'none';
+      showFieldError('errEmail', T[lang].errDisposable);
+      btn.disabled = false; btn.style.opacity = '1';
+      return;
+    }
+    if (data.dns === false) {
+      noteEl.style.display = 'none';
+      showFieldError('errEmail', T[lang].errDomainNotFound);
+      btn.disabled = false; btn.style.opacity = '1';
+      return;
+    }
+
+    // ✓ Domain valid & bukan disposable
+    domainVerified();
+
+  } catch(e) {
+    // API gagal — fallback: lolos kalau format ok dan bukan di blacklist offline
+    console.warn('disify API error, using offline fallback:', e);
+    domainVerified();
+  }
 }
 
-function verifyOtp() {
-  const input = document.getElementById('inputOtp').value.trim();
-  const saved = sessionStorage.getItem('kgw_otp');
-  const errEmail = document.getElementById('errEmail');
+function domainVerified() {
+  emailVerified = true;
+  const btn = document.getElementById('btnSendOtp');
+  const noteEl = document.getElementById('otpNote');
   const successEmail = document.getElementById('successEmail');
 
-  if (input === saved) {
-    emailVerified = true;
-    document.getElementById('otpWrap').classList.remove('show');
-    document.getElementById('otpNote').style.display = 'none';
-    hideFieldError('errEmail');
-    successEmail.textContent = T[lang].successEmailVerify;
-    successEmail.style.display = 'block';
-    const btn = document.getElementById('btnSendOtp');
-    btn.textContent = T[lang].verifiedBtn;
-    btn.classList.add('verified');
-    btn.disabled = true;
-    document.getElementById('inputEmail').disabled = true;
-    sessionStorage.removeItem('kgw_otp');
-  } else {
-    showFieldError('errEmail', T[lang].errOtp);
-  }
+  noteEl.style.display = 'none';
+  btn.textContent = T[lang].verifiedBtn;
+  btn.classList.add('verified');
+  btn.disabled = true;
+  btn.style.opacity = '1';
+  document.getElementById('inputEmail').disabled = true;
+
+  successEmail.textContent = T[lang].successEmailVerify;
+  successEmail.style.display = 'block';
 }
 
 // ─── Validasi & Submit ───────────────────────────────────────────────────────
@@ -519,11 +508,6 @@ document.getElementById('reportForm').addEventListener('submit', async function(
     btn.disabled = false;
     document.getElementById('lbl-submit').textContent = T[lang].submit;
   }
-});
-
-// Enter di OTP field langsung verifikasi
-document.getElementById('inputOtp').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') { e.preventDefault(); verifyOtp(); }
 });
 </script>
 </body>
