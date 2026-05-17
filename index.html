@@ -435,9 +435,43 @@ function setLang(lang) {
 </script>
 
 
-<div class="float-btns">
-  <a class="float-btn float-btn-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">💛 Donate</a>
-  <a class="float-btn float-btn-bug" href="mailto:akunlmpodcast@gmail.com?subject=Bug%20Report%20-%20KenapaGw&body=Halo,%20saya%20menemukan%20bug%20di%20KenapaGw:%0A%0A" target="_blank">🐛 Report Bug</a>
+
+<style>
+#floating-actions {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+.fab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+.fab-donate { background: #C17D4A; }
+.fab-bug { background: #2a2520; border: 0.5px solid rgba(255,255,255,0.15); }
+@media (max-width: 700px) {
+  #floating-actions { bottom: 20px; right: 14px; }
+  .fab { padding: 9px 14px; font-size: 12px; }
+}
+</style>
+<div id="floating-actions">
+  <a class="fab fab-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">💛 Donate</a>
+  <a class="fab fab-bug" href="mailto:akunlmpodcast@gmail.com?subject=Bug%20Report%20-%20KenapaGw&body=Halo,%20saya%20menemukan%20bug:%0A%0A">🐛 Report Bug</a>
 </div>
+
 </body>
 </html>
