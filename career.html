@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKYV55FYCX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NKYV55FYCX');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Quiz — KenapaGw</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0E0C0A; --bg2: #161310; --bg3: #1E1A16; --surface: #231F1B;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+  --text: #F0EBE4; --muted: #B8AFA7; --accent: #C17D4A;
+  --accent-light: rgba(193,125,74,0.15);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.7; min-height: 100vh; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem; background: rgba(14,12,10,0.92);
+  backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border);
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; }
+.nav-logo span { color: var(--accent); font-style: italic; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-back { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; padding: 0; }
+.nav-back:hover { color: var(--accent); }
+.lang-toggle { display: flex; gap: 4px; background: var(--surface); border-radius: 100px; padding: 4px; border: 0.5px solid var(--border); }
+.lang-btn {
+  padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500;
+  cursor: pointer; border: none; background: transparent; color: var(--muted);
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.lang-btn.active { background: var(--accent); color: white; }
+
+/* LAYERS */
+.layer { display: none; padding: 5rem 2rem 4rem; max-width: 1000px; margin: 0 auto; }
+.layer.active { display: block; animation: fadeUp 0.4s ease; }
+
+.section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.75rem; }
+.section-desc { font-size: 16px; color: var(--muted); max-width: 500px; margin-bottom: 3rem; }
+
+.back-btn {
+  background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif;
+  font-size: 14px; cursor: pointer; padding: 0; margin-bottom: 1.5rem;
+  display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+}
+.back-btn:hover { color: var(--accent); }
+
+/* GRID */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+
+/* CATEGORY CARD */
+.cat-card {
+  background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px;
+  padding: 1.75rem; cursor: pointer; transition: all 0.25s;
+}
+.cat-card:hover { border-color: var(--accent); transform: translateY(-3px); background: var(--bg3); }
+.cat-icon { font-size: 32px; margin-bottom: 0.75rem; display: block; }
+.cat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.4rem; }
+.cat-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.cat-count { font-size: 13px; color: var(--muted); }
+
+/* QUIZ LIST CARD */
+.quiz-list-card {
+  background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px;
+  padding: 1.5rem; cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 16px;
+}
+.quiz-list-card:hover { border-color: var(--accent); transform: translateX(4px); background: var(--bg3); }
+.qlc-icon { font-size: 28px; flex-shrink: 0; }
+.qlc-body { flex: 1; }
+.qlc-type { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 3px; }
+.qlc-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.qlc-desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.qlc-arrow { color: var(--accent); font-size: 18px; flex-shrink: 0; }
+.quiz-list-card.completed { border-color: rgba(193,125,74,0.4); }
+.quiz-list-card.completed .qlc-title { color: var(--accent); }
+.completed-badge { font-size: 11px; padding: 3px 10px; border-radius: 100px; background: var(--accent-light); color: var(--accent); font-weight: 500; margin-top: 4px; display: inline-block; }
+.cat-card.has-completed { border-color: rgba(193,125,74,0.3); }
+.cat-progress { font-size: 12px; color: var(--accent); margin-top: 4px; }
+
+/* QUIZ AREA */
+.quiz-wrap { max-width: 680px; margin: 0 auto; }
+.quiz-header { margin-bottom: 2rem; }
+.quiz-topic-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+.quiz-topic-title { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; color: var(--text); line-height: 1.2; }
+
+.progress-wrap { margin-bottom: 2.5rem; }
+.progress-bar { height: 2px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+.progress-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+/* TEXT QUIZ */
+.q-block { display: none; }
+.q-block.active { display: block; animation: fadeUp 0.35s ease; }
+.q-text { font-family: 'Playfair Display', serif; font-size: clamp(1.05rem, 3vw, 1.3rem); color: var(--text); margin-bottom: 1.5rem; line-height: 1.4; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 18px; border: 0.5px solid var(--border); border-radius: 12px;
+  cursor: pointer; transition: all 0.2s; background: var(--surface);
+}
+.opt:hover { border-color: var(--accent); background: var(--bg3); transform: translateX(4px); }
+.opt.selected { border-color: var(--accent); background: var(--accent-light); }
+.opt.selected .dot { background: var(--accent); border-color: var(--accent); }
+.dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border2); flex-shrink: 0; margin-top: 2px; transition: all 0.2s; }
+.opt-text { font-size: 15px; color: var(--text); line-height: 1.5; }
+
+/* NAV BUTTONS */
+.q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 12px; }
+.btn-prev {
+  padding: 12px 24px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500; cursor: pointer; background: transparent;
+  color: var(--muted); border: 0.5px solid var(--border2); transition: all 0.2s;
+}
+.btn-prev:hover { color: var(--text); border-color: var(--text); }
+.btn-next, .btn-result {
+  padding: 12px 28px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500; cursor: pointer;
+  background: var(--accent); color: white; border: none; transition: all 0.2s; margin-left: auto;
+}
+.btn-next:hover, .btn-result:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-next:disabled, .btn-result:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+.err-msg { font-size: 13px; color: #e07070; margin-top: 8px; display: none; }
+
+/* RESULT */
+.result-block { display: none; animation: fadeUp 0.5s ease; }
+.result-block.show { display: block; }
+.result-emoji { font-size: 52px; margin-bottom: 1rem; display: block; }
+.result-type { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+.result-name { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; color: var(--text); margin-bottom: 1rem; line-height: 1.2; }
+.result-story { font-size: 16px; color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
+.result-story p { margin-bottom: 0.75rem; }
+.result-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; }
+.pill { padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; }
+.pill-s { background: rgba(80,180,100,0.15); color: #6dd08a; }
+.pill-w { background: rgba(220,120,60,0.15); color: #e0906a; }
+.result-divider { border: none; border-top: 0.5px solid var(--border); margin: 2rem 0; }
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-retake {
+  padding: 12px 24px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500; cursor: pointer; background: transparent;
+  color: var(--muted); border: 0.5px solid var(--border2); transition: all 0.2s;
+}
+.btn-retake:hover { color: var(--text); border-color: var(--text); }
+.btn-try-more {
+  padding: 12px 24px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500; cursor: pointer; background: var(--accent);
+  color: white; border: none; transition: all 0.2s;
+}
+.btn-try-more:hover { opacity: 0.85; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .layer { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+
+.ticker-wrap {
+  background: var(--accent); padding: 10px 0; overflow: hidden;
+  border-top: 0.5px solid rgba(255,255,255,0.15);
+  border-bottom: 0.5px solid rgba(255,255,255,0.15);
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .ticker-wrap { top: 53px; }
+  .ticker-item { font-size: 12px; padding: 0 1.5rem; }
+  .layer { padding-top: 10rem; }
+}
+.ticker-track {
+  display: flex; width: max-content;
+  animation: ticker 20s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  font-size: 13px; font-weight: 500; color: white;
+  white-space: nowrap; padding: 0 3rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.ticker-item::after { content: '✦'; opacity: 0.6; }
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.float-btns {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+  transform: translateZ(0); will-change: transform;
+}
+.float-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 100px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  text-decoration: none; cursor: pointer; border: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4); white-space: nowrap;
+  transform: translateZ(0); opacity: 1; appearance: none;
+}
+.float-btn-donate { background: var(--accent); color: white; }
+.float-btn-bug { background: var(--surface); color: var(--muted); border: 0.5px solid var(--border2); }
+@media (max-width: 700px) {
+  .float-btns { bottom: 20px; right: 16px; }
+  .float-btn { padding: 9px 14px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
+  <div class="nav-right">
+    <button class="nav-back" onclick="navGoBack()" id="navBack">← Kembali</button>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')">ID</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+  </div>
+</div>
+
+<!-- LAYER 1: CATEGORIES -->
+<div class="layer active" id="layer1">
+  <p class="section-label" id="l1-label">Career Quiz</p>
+  <h1 class="section-title" id="l1-title">Pilih kategori</h1>
+  <p class="section-desc" id="l1-desc">Mulai dari yang paling bikin kamu penasaran.</p>
+  <div class="card-grid" id="catGrid"></div>
+</div>
+
+<!-- LAYER 2: QUIZ LIST -->
+<div class="layer" id="layer2">
+  <button class="back-btn" onclick="goToLayer(1)" id="l2-back">← Semua Kategori</button>
+  <p class="section-label" id="l2-label"></p>
+  <h2 class="section-title" id="l2-title"></h2>
+  <p class="section-desc" id="l2-desc"></p>
+  <div class="card-grid" id="quizListGrid"></div>
+</div>
+
+<!-- LAYER 3: QUIZ -->
+<div class="layer" id="layer3">
+  <div class="quiz-wrap">
+    <button class="back-btn" onclick="goToLayer(2)" id="l3-back">← Pilih Quiz Lain</button>
+    <div class="quiz-header">
+      <p class="quiz-topic-label" id="quizCatLabel"></p>
+      <h2 class="quiz-topic-title" id="quizTitle"></h2>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="progress-label" id="progressLabel"></p>
+    </div>
+    <div id="quizContainer"></div>
+    <div class="result-block" id="resultBlock">
+      <span class="result-emoji" id="resEmoji"></span>
+      <p class="result-type" id="resType">Tipe kamu</p>
+      <h3 class="result-name" id="resName"></h3>
+      <div class="result-story" id="resStory"></div>
+      <div class="result-pills" id="resPills"></div>
+      <hr class="result-divider">
+      <div class="result-actions">
+        <button class="btn-retake" id="btnRetake" onclick="retakeQuiz()">← Ulangi</button>
+        <button class="btn-try-more" id="btnTryMore" onclick="goToLayer(2)">Coba Quiz Lain</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="float-btns">
+  <a class="float-btn float-btn-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">💛 Donate</a>
+  <a class="float-btn float-btn-bug" href="mailto:akunlmpodcast@gmail.com?subject=Bug%20Report%20-%20KenapaGw&body=Halo,%20saya%20menemukan%20bug:%0A%0A">🐛 Report Bug</a>
+</div>
+
+<script>
+let lang = 'id';
+let currentCat = null;
+let currentQuiz = null;
+let currentQ = 0;
+let answers = [];
+let completedQuizzes = new Set();
+
+const t = {
+  id: {
+    navBack: '← Kembali',
+    l1Label: 'Career Quiz',
+    l1Title: 'Pilih kategori',
+    l1Desc: 'Mulai dari yang paling bikin kamu penasaran.',
+    l2Back: '← Semua Kategori',
+    l3Back: '← Pilih Quiz Lain',
+    quizCount: quiz => `${quiz} quiz`,
+    progressLabel: (cur, total) => `${cur} dari ${total}`,
+    resType: 'Tipe kamu',
+    btnRetake: '← Ulangi',
+    btnTryMore: 'Coba Quiz Lain',
+    btnNext: 'Lanjut →',
+    btnResult: 'Lihat Hasil →',
+    btnPrev: '← Kembali',
+    errMsg: 'Pilih jawaban dulu ya!',
+  },
+  en: {
+    navBack: '← Back',
+    l1Label: 'Career Quiz',
+    l1Title: 'Choose a category',
+    l1Desc: 'Start with whatever makes you most curious.',
+    l2Back: '← All Categories',
+    l3Back: '← Other Quizzes',
+    quizCount: quiz => `${quiz} quizzes`,
+    progressLabel: (cur, total) => `${cur} of ${total}`,
+    resType: 'Your type',
+    btnRetake: '← Retake',
+    btnTryMore: 'Try Another Quiz',
+    btnNext: 'Next →',
+    btnResult: 'See My Result →',
+    btnPrev: '← Back',
+    errMsg: 'Pick an answer first!',
+  }
+};
+
+const categories = [
+  {
+    id: 'work-personality',
+    icon: '💼',
+    title: { id: 'Work Personality', en: 'Work Personality' },
+    desc: { id: 'Gimana cara kamu sebenarnya bekerja?', en: 'How do you actually work?' },
+    quizzes: [
+      {
+        id: 'work-type', icon: '🧩', type: 'text',
+        title: { id: 'Kamu Tipe Pekerja yang Mana?', en: 'What Kind of Worker Are You?' },
+        desc: { id: 'Cara kerja kamu ngomong lebih banyak soal dirimu daripada yang kamu kira.', en: 'Your work style says more about you than you think.' },
+        questions: [
+          {
+            text: { id: 'Senin pagi, ada meeting mendadak yang nggak ada di agenda. Reaksi pertama kamu?', en: 'Monday morning, there\'s a sudden unscheduled meeting. Your first reaction?' },
+            options: [
+              { label: { id: 'Oke sih, gw fleksibel aja.', en: 'Fine, I\'m flexible.' }, points: 3 },
+              { label: { id: 'Agak terganggu — jadwal gw udah gw atur dari semalam.', en: 'A bit annoyed — I already planned my schedule.' }, points: 1 },
+              { label: { id: 'Excited, mungkin ada hal penting yang bakal dibahas.', en: 'Excited, something important might be discussed.' }, points: 4 },
+              { label: { id: 'Cemas. Gw butuh waktu buat prepare dulu.', en: 'Anxious. I need time to prepare first.' }, points: 2 }
+            ]
+          },
+          {
+            text: { id: 'Kamu dikasih proyek besar tanpa instruksi detail. Kamu...', en: 'You\'re given a big project with no detailed instructions. You...' },
+            options: [
+              { label: { id: 'Langsung mulai, sambil jalan sambil belajar.', en: 'Jump right in, learn as you go.' }, points: 4 },
+              { label: { id: 'Buat outline dulu, baru eksekusi step by step.', en: 'Make an outline first, then execute step by step.' }, points: 1 },
+              { label: { id: 'Tanya sana-sini buat dapetin gambaran besar.', en: 'Ask around to get the big picture.' }, points: 3 },
+              { label: { id: 'Riset dulu panjang sebelum mulai ngapa-ngapain.', en: 'Research extensively before doing anything.' }, points: 2 }
+            ]
+          },
+          {
+            text: { id: 'Teman kerja kamu salah, dan itu bakal berdampak ke hasil akhir. Kamu...', en: 'A coworker made a mistake that will affect the final output. You...' },
+            options: [
+              { label: { id: 'Langsung kasih tau dengan jelas, waktu terlalu berharga buat muter-muter.', en: 'Tell them directly, time is too valuable to beat around the bush.' }, points: 1 },
+              { label: { id: 'Betulin dulu diam-diam, baru kasih tau.', en: 'Fix it quietly first, then tell them.' }, points: 2 },
+              { label: { id: 'Kasih tau dengan hati-hati biar nggak nyakitin.', en: 'Tell them carefully so as not to hurt their feelings.' }, points: 3 },
+              { label: { id: 'Jadiin momen buat brainstorm bareng soal solusinya.', en: 'Turn it into a brainstorming moment for the solution.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Di akhir hari kerja yang panjang, hal yang bikin kamu paling puas adalah...', en: 'At the end of a long workday, what satisfies you the most?' },
+            options: [
+              { label: { id: 'Checklist selesai semua, nggak ada yang ketinggalan.', en: 'Every checklist done, nothing left behind.' }, points: 1 },
+              { label: { id: 'Nemuin cara baru buat ngerjain sesuatu yang lebih efisien.', en: 'Found a new way to do something more efficiently.' }, points: 2 },
+              { label: { id: 'Tim gw happy dan kita capai target bareng.', en: 'My team is happy and we hit the target together.' }, points: 3 },
+              { label: { id: 'Masalah kompleks yang tadi bikin pusing akhirnya solved.', en: 'A complex problem that was giving me a headache is finally solved.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalau kerja bareng orang lain, kamu paling sering jadi yang...', en: 'When working with others, you most often become the one who...' },
+            options: [
+              { label: { id: 'Mastiin semua orang tau tugasnya dan selesai tepat waktu.', en: 'Makes sure everyone knows their tasks and finishes on time.' }, points: 1 },
+              { label: { id: 'Nyari cara paling efektif buat capai tujuan.', en: 'Finds the most effective way to reach the goal.' }, points: 2 },
+              { label: { id: 'Jaga suasana tim tetap positif dan solid.', en: 'Keeps the team atmosphere positive and cohesive.' }, points: 3 },
+              { label: { id: 'Ngelempar ide-ide gila yang kadang jadi breakthrough.', en: 'Throws out wild ideas that sometimes become breakthroughs.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Deadline mepet, tapi ada detail kecil yang menurut kamu masih kurang sempurna. Kamu...', en: 'Deadline is tight, but there\'s a small detail you feel is still imperfect. You...' },
+            options: [
+              { label: { id: 'Tetap beresin dulu meski mepet. Hasil harus bener.', en: 'Fix it anyway even if it\'s tight. The result must be right.' }, points: 1 },
+              { label: { id: 'Evaluate dulu: seberapa besar dampaknya? Kalau kecil, skip.', en: 'Evaluate first: how big is the impact? If small, skip.' }, points: 2 },
+              { label: { id: 'Tanya tim dulu, mungkin mereka bisa bantu lebih cepet.', en: 'Ask the team first, maybe they can help faster.' }, points: 3 },
+              { label: { id: 'Submit aja — done is better than perfect.', en: 'Just submit — done is better than perfect.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kamu dikasih pilihan: kerja di project yang sudah jelas arahnya, atau project ambisius yang masih penuh ketidakpastian. Kamu pilih...', en: 'You\'re given a choice: work on a project with a clear direction, or an ambitious project full of uncertainty. You choose...' },
+            options: [
+              { label: { id: 'Yang sudah jelas. Gw bisa maksimalin eksekusinya.', en: 'The clear one. I can maximize the execution.' }, points: 1 },
+              { label: { id: 'Yang jelas dulu, sambil cari celah buat optimasi di dalamnya.', en: 'The clear one, while looking for optimization gaps within it.' }, points: 2 },
+              { label: { id: 'Yang ambisius, asal ada tim yang solid di belakang gw.', en: 'The ambitious one, as long as there\'s a solid team behind me.' }, points: 3 },
+              { label: { id: 'Yang ambisius — ketidakpastian itu justru menarik.', en: 'The ambitious one — uncertainty is actually exciting.' }, points: 4 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 7, max: 12, emoji: '🏗️',
+            name: { id: 'The Architect', en: 'The Architect' },
+            story: {
+              id: `<p>Kamu adalah orang yang membuat kekacauan jadi teratur. Di mana orang lain melihat tumpukan tugas yang membingungkan, kamu melihat struktur yang bisa dibangun — langkah demi langkah, rapi, terukur.</p><p>Kamu bukan tipe yang asal terjun. Sebelum mulai, kamu perlu tahu peta jalannya. Bukan karena kamu takut, tapi karena kamu tahu bahwa eksekusi yang baik dimulai dari perencanaan yang matang. Dan ketika plan-mu berjalan mulus? Itu rasanya seperti simfoni.</p><p>Tapi ada satu hal yang kadang jadi tantangan bagimu: dunia nggak selalu mau ikut jadwalmu. Ketika ada yang tiba-tiba berubah di luar rencana, kamu butuh sedikit lebih banyak waktu untuk menyesuaikan diri. Dan itu bukan kelemahan — itu harga yang kamu bayar untuk menjadi seseorang yang benar-benar <em>bisa diandalkan</em>.</p>`,
+              en: `<p>You're the person who turns chaos into order. Where others see a confusing pile of tasks, you see a structure that can be built — step by step, neat, measured.</p><p>You're not the type to just dive in. Before starting, you need to know the roadmap. Not because you're afraid, but because you know that good execution starts with solid planning. And when your plan runs smoothly? It feels like a symphony.</p><p>But there's one thing that sometimes challenges you: the world doesn't always want to follow your schedule. When something suddenly changes outside the plan, you need a little more time to adjust. And that's not a weakness — it's the price you pay for being someone who is truly <em>reliable</em>.</p>`
+            },
+            strength: { id: 'Terorganisir, konsisten, dan hasil kerja bisa dipercaya', en: 'Organized, consistent, and dependable output' },
+            weakness: { id: 'Bisa kewalahan kalau terlalu banyak perubahan mendadak', en: 'Can feel overwhelmed with too many sudden changes' }
+          },
+          {
+            min: 13, max: 17, emoji: '⚙️',
+            name: { id: 'The Optimizer', en: 'The Optimizer' },
+            story: {
+              id: `<p>Otakmu secara alami selalu bertanya: <em>"Ada cara yang lebih baik nggak?"</em> Kamu nggak puas hanya karena sesuatu sudah berhasil. Kamu ingin tahu kenapa berhasil, dan bagaimana caranya agar bisa lebih cepat, lebih efisien, lebih sedikit energi yang terbuang.</p><p>Kamu adalah aset paling berharga dalam tim mana pun — bukan karena kamu yang paling keras kerjanya, tapi karena kamu yang paling <em>cerdas</em> dalam bekerja. Kamu lihat celah yang orang lain lewatkan. Kamu usulkan solusi sebelum masalahnya jadi besar.</p><p>Tantanganmu? Kamu bisa terlalu lama di mode analisis dan telat eksekusi. Dan terkadang kamu lupa bahwa nggak semua hal perlu dioptimasi — beberapa hal cukup dikerjakan saja.</p>`,
+              en: `<p>Your brain naturally always asks: <em>"Is there a better way?"</em> You're not satisfied just because something works. You want to know why it works, and how it can be faster, more efficient, with less wasted energy.</p><p>You're the most valuable asset in any team — not because you work the hardest, but because you work the most <em>smartly</em>. You see gaps that others miss. You propose solutions before problems get big.</p><p>Your challenge? You can spend too long in analysis mode and be late to execute. And sometimes you forget that not everything needs to be optimized — some things just need to get done.</p>`
+            },
+            strength: { id: 'Analitis, efisien, dan selalu cari cara yang lebih baik', en: 'Analytical, efficient, and always seeking better ways' },
+            weakness: { id: 'Bisa paralysis by analysis kalau nggak dibatasi', en: 'Can fall into paralysis by analysis if not bounded' }
+          },
+          {
+            min: 18, max: 22, emoji: '🤝',
+            name: { id: 'The Connector', en: 'The Connector' },
+            story: {
+              id: `<p>Kamu tahu sesuatu yang banyak orang lupa: pekerjaan terbaik nggak lahir dari satu orang jenius yang bekerja sendirian. Pekerjaan terbaik lahir dari tim yang saling percaya, saling support, dan mau jujur satu sama lain.</p><p>Dan kamu adalah orang yang membuat itu mungkin terjadi. Kamu peka terhadap dinamika kelompok. Kamu tahu kapan seseorang butuh didukung dan kapan seseorang butuh diajak bicara. Kamu adalah lem yang membuat tim tetap bersatu bahkan ketika tekanan sedang tinggi.</p><p>Tapi ada harga yang harus kamu bayar: kamu sering mengutamakan keharmonisan sampai lupa bahwa kadang konflik yang sehat justru membawa tim ke level berikutnya. Dan terkadang kamu butuh belajar untuk <em>mengecewakan orang</em> demi hasil yang lebih baik.</p>`,
+              en: `<p>You know something many people forget: the best work doesn't come from one genius working alone. The best work comes from teams that trust each other, support each other, and are willing to be honest with one another.</p><p>And you're the person who makes that possible. You're attuned to group dynamics. You know when someone needs support and when someone needs a conversation. You're the glue that keeps teams together even when pressure is high.</p><p>But there's a price to pay: you often prioritize harmony until you forget that sometimes healthy conflict is what brings a team to the next level. And sometimes you need to learn to <em>disappoint people</em> for a better outcome.</p>`
+            },
+            strength: { id: 'Empatik, kolaboratif, dan bikin tim jadi lebih baik', en: 'Empathetic, collaborative, and makes teams better' },
+            weakness: { id: 'Susah confrontasi dan sering terlalu mengalah', en: 'Struggles with confrontation and often concedes too easily' }
+          },
+          {
+            min: 23, max: 28, emoji: '🚀',
+            name: { id: 'The Trailblazer', en: 'The Trailblazer' },
+            story: {
+              id: `<p>Kamu hidup di perbatasan antara "ini nggak mungkin" dan "kenapa nggak dicoba?" Ketika orang lain melihat risiko, kamu melihat peluang. Ketika ada ketidakpastian, kamu justru makin penasaran.</p><p>Kamu adalah tipe yang menggerakkan roda perubahan. Ide-idemu sering terdengar terlalu besar, terlalu berani — sampai tiba-tiba berhasil dan semua orang bilang "gw dari dulu udah lihat itu coming." Kamu nggak butuh peta karena kamu senang membuat petanya sendiri.</p><p>Tapi ada sisi gelap dari energimu ini: kamu bisa jadi susah untuk diikuti. Langkahmu terlalu cepat. Idemu berganti sebelum yang lama selesai. Dan dalam keseruanmu mengejar horizon baru, kamu kadang lupa bahwa ada orang-orang yang perlu kamu ajak serta — bukan hanya diajak berlari.</p>`,
+              en: `<p>You live on the border between "this is impossible" and "why not try?" When others see risk, you see opportunity. When there's uncertainty, you become even more curious.</p><p>You're the type that moves the wheels of change. Your ideas often sound too big, too bold — until they suddenly work and everyone says "I always saw that coming." You don't need a map because you enjoy making your own.</p><p>But there's a dark side to your energy: you can be hard to follow. Your pace is too fast. Your ideas change before the old ones are done. And in your excitement chasing new horizons, you sometimes forget that there are people you need to bring along — not just run with.</p>`
+            },
+            strength: { id: 'Inovatif, berani, dan nggak takut ambil risiko', en: 'Innovative, bold, and unafraid of risk' },
+            weakness: { id: 'Bisa ninggalin orang di belakang kalau nggak sadar diri', en: 'Can leave people behind without realizing it' }
+          }
+        ]
+      }
+    ]
+  }
+];
+
+function navGoBack() {
+  const active = document.querySelector('.layer.active');
+  if (active && active.id === 'layer1') {
+    window.location.href = 'index.html';
+  } else if (active && active.id === 'layer2') {
+    goToLayer(1);
+  } else if (active && active.id === 'layer3') {
+    goToLayer(2);
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+function goToLayer(n) {
+  document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
+  document.getElementById('layer' + n).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const navBack = document.getElementById('navBack');
+  if (n === 1) navBack.textContent = t[lang].navBack;
+  else if (n === 2) navBack.textContent = t[lang].l2Back;
+  else if (n === 3) navBack.textContent = t[lang].l3Back;
+}
+
+function setLang(newLang) {
+  lang = newLang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.getElementById('l1-label').textContent = t[lang].l1Label;
+  document.getElementById('l1-title').textContent = t[lang].l1Title;
+  document.getElementById('l1-desc').textContent = t[lang].l1Desc;
+  document.getElementById('navBack').textContent = t[lang].navBack;
+  document.getElementById('l2-back').textContent = t[lang].l2Back;
+  document.getElementById('l3-back').textContent = t[lang].l3Back;
+  document.getElementById('resType').textContent = t[lang].resType;
+  document.getElementById('btnRetake').textContent = t[lang].btnRetake;
+  document.getElementById('btnTryMore').textContent = t[lang].btnTryMore;
+  renderLayer1();
+  if (currentCat) showCategory(currentCat.id, false);
+}
+
+function renderLayer1() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
+  categories.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    const done = cat.quizzes.filter(q => completedQuizzes.has(q.id)).length;
+    if (done > 0) card.classList.add('has-completed');
+    card.innerHTML = `<span class="cat-icon">${cat.icon}</span><p class="cat-label">Kategori</p><h3 class="cat-title">${cat.title[lang]}</h3><p class="cat-count">${t[lang].quizCount(cat.quizzes.length)}</p>${done > 0 ? `<p class="cat-progress">✓ ${done} selesai</p>` : ''}`;
+    card.onclick = () => showCategory(cat.id, true);
+    grid.appendChild(card);
+  });
+}
+
+function showCategory(catId, navigate) {
+  currentCat = categories.find(c => c.id === catId);
+  const grid = document.getElementById('quizListGrid');
+  grid.innerHTML = '';
+  document.getElementById('l2-label').textContent = currentCat.title[lang];
+  document.getElementById('l2-title').textContent = currentCat.title[lang];
+  document.getElementById('l2-desc').textContent = currentCat.desc[lang];
+  currentCat.quizzes.forEach(quiz => {
+    const card = document.createElement('div');
+    const isDone = completedQuizzes.has(quiz.id);
+    card.className = 'quiz-list-card' + (isDone ? ' completed' : '');
+    card.innerHTML = `<span class="qlc-icon">${quiz.icon}</span><div class="qlc-body"><p class="qlc-type">📝 Text Quiz</p><h3 class="qlc-title">${quiz.title[lang]}</h3><p class="qlc-desc">${quiz.desc[lang]}</p>${isDone ? '<span class="completed-badge">✓ Udah dikerjain</span>' : ''}</div><span class="qlc-arrow">${isDone ? '✓' : '→'}</span>`;
+    card.onclick = () => startQuiz(quiz.id);
+    grid.appendChild(card);
+  });
+  if (navigate) goToLayer(2);
+}
+
+function startQuiz(quizId) {
+  currentQuiz = null;
+  categories.forEach(cat => { const f = cat.quizzes.find(q => q.id === quizId); if (f) currentQuiz = f; });
+  if (!currentQuiz) return;
+  currentQ = 0;
+  answers = new Array(currentQuiz.questions.length).fill(null);
+  document.getElementById('quizCatLabel').textContent = `${currentCat.icon} ${currentCat.title[lang]}`;
+  document.getElementById('quizTitle').textContent = currentQuiz.title[lang];
+  document.getElementById('resType').textContent = t[lang].resType;
+  document.getElementById('btnRetake').textContent = t[lang].btnRetake;
+  document.getElementById('btnTryMore').textContent = t[lang].btnTryMore;
+  document.getElementById('resultBlock').classList.remove('show');
+  buildQuizQuestions();
+  updateProgress();
+  goToLayer(3);
+}
+
+function buildQuizQuestions() {
+  const container = document.getElementById('quizContainer');
+  container.style.display = 'block';
+  container.innerHTML = '';
+  currentQuiz.questions.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'q-block' + (qi === 0 ? ' active' : '');
+    block.id = 'qblock-' + qi;
+    let inner = `<p class="q-text">${q.text[lang]}</p><div class="options">`;
+    q.options.forEach((opt, oi) => {
+      inner += `<div class="opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi},${opt.points})"><div class="dot" id="dot-${qi}-${oi}"></div><span class="opt-text">${opt.label[lang]}</span></div>`;
+    });
+    inner += `</div>`;
+    const isLast = qi === currentQuiz.questions.length - 1;
+    inner += `<div class="q-nav">${qi > 0 ? `<button class="btn-prev" onclick="prevQ()">${t[lang].btnPrev}</button>` : '<span></span>'}${isLast ? `<button class="btn-result" id="btnResult-${qi}" onclick="showResult()" disabled>${t[lang].btnResult}</button>` : `<button class="btn-next" id="btnNext-${qi}" onclick="nextQ()" disabled>${t[lang].btnNext}</button>`}</div><p class="err-msg" id="err-${qi}">${t[lang].errMsg}</p>`;
+    block.innerHTML = inner;
+    container.appendChild(block);
+  });
+}
+
+function selectOpt(qi, oi, points) {
+  answers[qi] = points;
+  currentQuiz.questions[qi].options.forEach((_, i) => document.getElementById(`opt-${qi}-${i}`).classList.remove('selected'));
+  document.getElementById(`opt-${qi}-${oi}`).classList.add('selected');
+  const isLast = qi === currentQuiz.questions.length - 1;
+  const btn = document.getElementById(isLast ? `btnResult-${qi}` : `btnNext-${qi}`);
+  if (btn) btn.disabled = false;
+  document.getElementById(`err-${qi}`).style.display = 'none';
+}
+
+function nextQ() {
+  if (answers[currentQ] === null) { document.getElementById(`err-${currentQ}`).style.display = 'block'; return; }
+  document.getElementById('qblock-' + currentQ).classList.remove('active');
+  currentQ++;
+  document.getElementById('qblock-' + currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevQ() {
+  document.getElementById('qblock-' + currentQ).classList.remove('active');
+  currentQ--;
+  document.getElementById('qblock-' + currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const total = currentQuiz.questions.length;
+  const pct = (currentQ / total) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = t[lang].progressLabel(currentQ + 1, total);
+}
+
+function showResult() {
+  if (answers[currentQ] === null) { document.getElementById(`err-${currentQ}`).style.display = 'block'; return; }
+  const total = answers.reduce((a, b) => a + b, 0);
+  const res = currentQuiz.results.find(r => total >= r.min && total <= r.max);
+  if (!res) return;
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('resEmoji').textContent = res.emoji;
+  document.getElementById('resName').textContent = res.name[lang];
+  document.getElementById('resStory').innerHTML = res.story[lang];
+  document.getElementById('resPills').innerHTML = `<span class="pill pill-s">✦ ${res.strength[lang]}</span><span class="pill pill-w">⚠ ${res.weakness[lang]}</span>`;
+  document.getElementById('resultBlock').classList.add('show');
+  completedQuizzes.add(currentQuiz.id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function retakeQuiz() {
+  currentQ = 0;
+  answers = new Array(currentQuiz.questions.length).fill(null);
+  document.getElementById('resultBlock').classList.remove('show');
+  buildQuizQuestions();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderLayer1();
+</script>
+</body>
+</html>
