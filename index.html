@@ -106,6 +106,29 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
   .nav-links { display: none; }
   .about-wrap { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+.ticker-wrap {
+  background: var(--accent); padding: 10px 0; overflow: hidden;
+  border-top: 0.5px solid rgba(255,255,255,0.15);
+  border-bottom: 0.5px solid rgba(255,255,255,0.15);
+}
+.ticker-track {
+  display: flex; width: max-content;
+  animation: ticker 20s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  font-size: 13px; font-weight: 500; color: white;
+  white-space: nowrap; padding: 0 3rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.ticker-item::after {
+  content: '✦'; opacity: 0.6;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 </style>
 </head>
 <body>
@@ -124,6 +147,15 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
     </div>
   </div>
 </nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+  </div>
+</div>
 
 <section class="hero">
   <p class="hero-tag" data-i18n="heroTag">Kenali dirimu lebih dalam</p>

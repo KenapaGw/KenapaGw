@@ -181,6 +181,27 @@ nav {
   .layer { padding-left: 1.25rem; padding-right: 1.25rem; }
   .img-picker-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+.ticker-wrap {
+  background: var(--accent); padding: 10px 0; overflow: hidden;
+  border-top: 0.5px solid rgba(255,255,255,0.15);
+  border-bottom: 0.5px solid rgba(255,255,255,0.15);
+}
+.ticker-track {
+  display: flex; width: max-content;
+  animation: ticker 20s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  font-size: 13px; font-weight: 500; color: white;
+  white-space: nowrap; padding: 0 3rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.ticker-item::after { content: '✦'; opacity: 0.6; }
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 </style>
 </head>
 <body>
@@ -188,13 +209,23 @@ nav {
 <nav>
   <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
   <div class="nav-right">
+    <button class="nav-back" onclick="navGoBack()" id="navBack">← Kembali</button>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('id')">ID</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
-    <button class="nav-back" onclick="navGoBack()" id="navBack">← Kembali</button>
+
   </div>
 </nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+  </div>
+</div>
 
 <!-- LAYER 1: CATEGORIES -->
 <div class="layer active" id="layer1">
