@@ -630,7 +630,7 @@ function openArticle(articleId) {
     currentArticle.title[lang];
 
 document.getElementById('articleContainer').innerHTML =
-  currentArticle.content;
+currentArticle.content[lang];
   
   document.getElementById('commentSection').classList.add('show');
 initComments(articleId);
