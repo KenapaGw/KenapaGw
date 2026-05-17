@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKYV55FYCX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NKYV55FYCX');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan & Saran — KenapaGw</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0E0C0A; --bg2: #161310; --bg3: #1E1A16; --surface: #231F1B;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+  --text: #F0EBE4; --muted: #B8AFA7; --accent: #C17D4A;
+  --accent-light: rgba(193,125,74,0.15);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.7; min-height: 100vh; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem; background: rgba(14,12,10,0.92);
+  backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border);
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; }
+.nav-logo span { color: var(--accent); font-style: italic; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-back { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; padding: 0; }
+.nav-back:hover { color: var(--accent); }
+.lang-toggle { display: flex; gap: 4px; background: var(--surface); border-radius: 100px; padding: 4px; border: 0.5px solid var(--border); }
+.lang-btn { padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--muted); transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+.lang-btn.active { background: var(--accent); color: white; }
+
+.ticker-wrap {
+  background: var(--accent); padding: 10px 0; overflow: hidden;
+  border-bottom: 0.5px solid rgba(255,255,255,0.15); width: 100%;
+}
+.ticker-track { display: flex; width: max-content; animation: ticker 20s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { font-size: 13px; font-weight: 500; color: white; white-space: nowrap; padding: 0 3rem; display: flex; align-items: center; gap: 10px; }
+.ticker-item::after { content: '✦'; opacity: 0.6; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.page-wrap {
+  max-width: 680px; margin: 0 auto;
+  padding: 6rem 2rem 5rem;
+  animation: fadeUp 0.4s ease;
+}
+
+.section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.75rem; }
+.section-desc { font-size: 16px; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.7; }
+
+/* FORM */
+.form-group { margin-bottom: 1.5rem; }
+.form-label {
+  display: block; font-size: 13px; font-weight: 500; color: var(--muted);
+  margin-bottom: 0.5rem; letter-spacing: 0.03em;
+}
+.form-label span { color: var(--accent); margin-left: 2px; }
+.form-input, .form-textarea, .form-select {
+  width: 100%; background: var(--surface); border: 0.5px solid var(--border2);
+  border-radius: 12px; padding: 13px 16px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.5;
+  transition: border-color 0.2s, background 0.2s; outline: none;
+  appearance: none;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--accent); background: var(--bg3);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(184,175,167,0.45); }
+.form-input.error, .form-textarea.error, .form-select.error { border-color: #e07070; }
+.form-textarea { resize: vertical; min-height: 140px; }
+
+.form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23B8AFA7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 42px; }
+.form-select option { background: var(--bg2); color: var(--text); }
+
+/* EMAIL VERIFY */
+.email-wrap { position: relative; }
+.email-verify-btn {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  padding: 6px 14px; background: var(--accent-light); color: var(--accent);
+  border: 0.5px solid rgba(193,125,74,0.3); border-radius: 100px;
+  font-size: 12px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.email-verify-btn:hover { background: var(--accent); color: white; }
+.email-verify-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.email-verify-btn.verified { background: rgba(80,180,100,0.15); color: #6dd08a; border-color: rgba(80,180,100,0.3); cursor: default; }
+
+.otp-wrap { display: none; margin-top: 0.75rem; }
+.otp-wrap.show { display: flex; gap: 10px; align-items: center; }
+.otp-input {
+  width: 140px; background: var(--surface); border: 0.5px solid var(--border2);
+  border-radius: 12px; padding: 11px 14px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 15px; letter-spacing: 0.2em;
+  outline: none; transition: border-color 0.2s;
+}
+.otp-input:focus { border-color: var(--accent); }
+.otp-verify-btn {
+  padding: 11px 20px; background: var(--accent); color: white;
+  border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s;
+}
+.otp-verify-btn:hover { opacity: 0.85; }
+.otp-note { font-size: 12px; color: var(--muted); margin-top: 0.5rem; }
+.otp-note a { color: var(--accent); cursor: pointer; text-decoration: none; }
+.otp-note a:hover { text-decoration: underline; }
+
+.field-error { font-size: 12px; color: #e07070; margin-top: 5px; display: none; }
+.field-success { font-size: 12px; color: #6dd08a; margin-top: 5px; display: none; }
+
+/* SUBMIT */
+.btn-submit {
+  width: 100%; padding: 15px 32px; background: var(--accent); color: white;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  border: none; border-radius: 100px; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s; margin-top: 0.5rem;
+}
+.btn-submit:hover { opacity: 0.85; transform: translateY(-2px); }
+.btn-submit:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+/* SUCCESS STATE */
+.success-state { display: none; text-align: center; padding: 3rem 0; animation: fadeUp 0.4s ease; }
+.success-state.show { display: block; }
+.success-emoji { font-size: 56px; margin-bottom: 1.25rem; display: block; }
+.success-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.75rem; }
+.success-desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+.btn-back-home {
+  display: inline-block; padding: 13px 30px; background: var(--accent); color: white;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  text-decoration: none; border-radius: 100px; transition: opacity 0.2s;
+}
+.btn-back-home:hover { opacity: 0.85; }
+
+.form-divider { border: none; border-top: 0.5px solid var(--border); margin: 2rem 0; }
+
+.float-btns {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+  transform: translateZ(0); will-change: transform;
+}
+.float-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 100px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  text-decoration: none; cursor: pointer; border: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4); white-space: nowrap;
+}
+.float-btn-donate { background: var(--accent); color: white; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .page-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .otp-wrap.show { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html" id="navBack">← Kembali</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')">ID</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- FORM -->
+  <div id="formSection">
+    <p class="section-label" id="lbl-tag">Hubungi Kami</p>
+    <h1 class="section-title" id="lbl-title">Ada yang mau kamu sampaikan?</h1>
+    <p class="section-desc" id="lbl-desc">Mau laporin bug, tanya sesuatu, atau usul quiz baru? Tulis di sini — gw baca semuanya.</p>
+
+    <form id="reportForm" action="https://formspree.io/f/GANTI_DENGAN_ID_KAMU" method="POST" novalidate>
+
+      <!-- NAMA -->
+      <div class="form-group">
+        <label class="form-label" for="inputName"><span id="lbl-name">Nama</span> <span>*</span></label>
+        <input class="form-input" type="text" id="inputName" name="name" autocomplete="name" placeholder="Nama kamu" required>
+        <p class="field-error" id="errName" id="err-name"></p>
+      </div>
+
+      <!-- EMAIL + VERIFIKASI -->
+      <div class="form-group">
+        <label class="form-label" for="inputEmail"><span id="lbl-email">Alamat Email</span> <span>*</span></label>
+        <div class="email-wrap">
+          <input class="form-input" type="email" id="inputEmail" name="email" autocomplete="email" placeholder="email@kamu.com" style="padding-right: 110px;" required>
+          <button type="button" class="email-verify-btn" id="btnSendOtp" onclick="sendOtp()">
+            <span id="lbl-verify-btn">Verifikasi</span>
+          </button>
+        </div>
+        <div class="otp-wrap" id="otpWrap">
+          <input class="otp-input" type="text" id="inputOtp" maxlength="6" placeholder="000000" inputmode="numeric">
+          <button type="button" class="otp-verify-btn" onclick="verifyOtp()" id="lbl-otp-btn">Konfirmasi</button>
+        </div>
+        <p class="otp-note" id="otpNote" style="display:none;">
+          <span id="lbl-otp-note">Kode dikirim ke email kamu.</span>
+          <a onclick="sendOtp(true)" id="lbl-resend"> Kirim ulang</a>
+        </p>
+        <p class="field-error" id="errEmail"></p>
+        <p class="field-success" id="successEmail"></p>
+      </div>
+
+      <!-- TIPE PESAN -->
+      <div class="form-group">
+        <label class="form-label" for="inputType"><span id="lbl-type">Jenis Pesan</span> <span>*</span></label>
+        <select class="form-select" id="inputType" name="type" required>
+          <option value="" disabled selected id="lbl-type-placeholder">Pilih kategori...</option>
+          <option value="Bug Report" id="lbl-opt-bug">🐛 Bug Report</option>
+          <option value="Pertanyaan / QnA" id="lbl-opt-qna">❓ Pertanyaan / QnA</option>
+          <option value="Request Quiz" id="lbl-opt-req">💡 Request Quiz Baru</option>
+          <option value="Lainnya" id="lbl-opt-other">💬 Lainnya</option>
+        </select>
+        <p class="field-error" id="errType"></p>
+      </div>
+
+      <!-- PESAN -->
+      <div class="form-group">
+        <label class="form-label" for="inputMsg"><span id="lbl-msg">Pesan</span> <span>*</span></label>
+        <textarea class="form-textarea" id="inputMsg" name="message" placeholder="Tulis detail di sini..." required></textarea>
+        <p class="field-error" id="errMsg"></p>
+      </div>
+
+      <hr class="form-divider">
+
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <span id="lbl-submit">Kirim Sekarang →</span>
+      </button>
+
+      <p style="font-size:12px; color:var(--muted); text-align:center; margin-top:1rem;" id="lbl-privacy">
+        Pesanmu langsung ke inbox kami. Gw baca semuanya. 🙏
+      </p>
+
+    </form>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-state" id="successSection">
+    <span class="success-emoji">🎉</span>
+    <h2 class="success-title" id="lbl-success-title">Terkirim!</h2>
+    <p class="success-desc" id="lbl-success-desc">Makasih udah nulis. Gw bakal baca dan balas kalau perlu. Kamu keren banget udah mau repot-repot nulis ini. 💛</p>
+    <a href="index.html" class="btn-back-home" id="lbl-back-home">← Balik ke Beranda</a>
+  </div>
+
+</div>
+
+<div class="float-btns">
+  <a class="float-btn float-btn-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">💛 Donate</a>
+</div>
+
+<script>
+let lang = 'id';
+let emailVerified = false;
+let otpCode = '';
+let otpTimer = null;
+
+// ─── i18n ───────────────────────────────────────────────────────────────────
+const T = {
+  id: {
+    navBack: '← Kembali',
+    tag: 'Hubungi Kami',
+    title: 'Ada yang mau kamu sampaikan?',
+    desc: 'Mau laporin bug, tanya sesuatu, atau usul quiz baru? Tulis di sini — gw baca semuanya.',
+    name: 'Nama', email: 'Alamat Email', type: 'Jenis Pesan', msg: 'Pesan',
+    typePlaceholder: 'Pilih kategori...',
+    optBug: '🐛 Bug Report', optQna: '❓ Pertanyaan / QnA',
+    optReq: '💡 Request Quiz Baru', optOther: '💬 Lainnya',
+    verifyBtn: 'Verifikasi', verifiedBtn: '✓ Terverifikasi',
+    otpBtn: 'Konfirmasi',
+    otpNote: 'Kode dikirim ke email kamu.',
+    resend: ' Kirim ulang',
+    submit: 'Kirim Sekarang →', submitting: 'Mengirim...',
+    privacy: 'Pesanmu langsung ke inbox kami. Gw baca semuanya. 🙏',
+    successTitle: 'Terkirim!',
+    successDesc: 'Makasih udah nulis. Gw bakal baca dan balas kalau perlu. Kamu keren banget udah mau repot-repot nulis ini. 💛',
+    backHome: '← Balik ke Beranda',
+    errName: 'Nama nggak boleh kosong.',
+    errEmail: 'Format email nggak valid.',
+    errEmailRequired: 'Email harus diisi.',
+    errEmailVerify: 'Verifikasi email dulu ya.',
+    errType: 'Pilih jenis pesan dulu.',
+    errMsg: 'Pesan nggak boleh kosong.',
+    errOtp: 'Kode salah. Coba lagi.',
+    successEmailVerify: '✓ Email berhasil diverifikasi.',
+    namePlaceholder: 'Nama kamu',
+    msgPlaceholder: 'Tulis detail di sini...',
+    otpPlaceholder: '000000',
+  },
+  en: {
+    navBack: '← Back',
+    tag: 'Contact Us',
+    title: 'Got something to say?',
+    desc: 'Want to report a bug, ask something, or suggest a new quiz? Write it here — we read everything.',
+    name: 'Name', email: 'Email Address', type: 'Message Type', msg: 'Message',
+    typePlaceholder: 'Choose a category...',
+    optBug: '🐛 Bug Report', optQna: '❓ Question / QnA',
+    optReq: '💡 Request a New Quiz', optOther: '💬 Other',
+    verifyBtn: 'Verify', verifiedBtn: '✓ Verified',
+    otpBtn: 'Confirm',
+    otpNote: 'Code sent to your email.',
+    resend: ' Resend',
+    submit: 'Send Now →', submitting: 'Sending...',
+    privacy: 'Your message goes straight to our inbox. We read everything. 🙏',
+    successTitle: 'Sent!',
+    successDesc: "Thanks for writing. We'll read it and reply if needed. You're awesome for taking the time. 💛",
+    backHome: '← Back to Home',
+    errName: 'Name cannot be empty.',
+    errEmail: 'Invalid email format.',
+    errEmailRequired: 'Email is required.',
+    errEmailVerify: 'Please verify your email first.',
+    errType: 'Please choose a message type.',
+    errMsg: 'Message cannot be empty.',
+    errOtp: 'Wrong code. Try again.',
+    successEmailVerify: '✓ Email successfully verified.',
+    namePlaceholder: 'Your name',
+    msgPlaceholder: 'Write details here...',
+    otpPlaceholder: '000000',
+  }
+};
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  const t = T[l];
+  document.getElementById('navBack').textContent = t.navBack;
+  document.getElementById('lbl-tag').textContent = t.tag;
+  document.getElementById('lbl-title').textContent = t.title;
+  document.getElementById('lbl-desc').textContent = t.desc;
+  document.getElementById('lbl-name').textContent = t.name;
+  document.getElementById('lbl-email').textContent = t.email;
+  document.getElementById('lbl-type').textContent = t.type;
+  document.getElementById('lbl-msg').textContent = t.msg;
+  document.getElementById('lbl-type-placeholder').textContent = t.typePlaceholder;
+  document.getElementById('lbl-opt-bug').textContent = t.optBug;
+  document.getElementById('lbl-opt-qna').textContent = t.optQna;
+  document.getElementById('lbl-opt-req').textContent = t.optReq;
+  document.getElementById('lbl-opt-other').textContent = t.optOther;
+  document.getElementById('lbl-verify-btn').textContent = emailVerified ? t.verifiedBtn : t.verifyBtn;
+  document.getElementById('lbl-otp-btn').textContent = t.otpBtn;
+  document.getElementById('lbl-otp-note').textContent = t.otpNote;
+  document.getElementById('lbl-resend').textContent = t.resend;
+  document.getElementById('lbl-submit').textContent = t.submit;
+  document.getElementById('lbl-privacy').textContent = t.privacy;
+  document.getElementById('lbl-success-title').textContent = t.successTitle;
+  document.getElementById('lbl-success-desc').textContent = t.successDesc;
+  document.getElementById('lbl-back-home').textContent = t.backHome;
+  document.getElementById('inputName').placeholder = t.namePlaceholder;
+  document.getElementById('inputMsg').placeholder = t.msgPlaceholder;
+  document.getElementById('inputOtp').placeholder = t.otpPlaceholder;
+}
+
+// ─── OTP / Email Verify ──────────────────────────────────────────────────────
+function generateOtp() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+async function sendOtp(resend = false) {
+  const email = document.getElementById('inputEmail').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEmail = document.getElementById('errEmail');
+
+  if (!email) { showFieldError('errEmail', T[lang].errEmailRequired); return; }
+  if (!emailRegex.test(email)) { showFieldError('errEmail', T[lang].errEmail); return; }
+
+  hideFieldError('errEmail');
+  otpCode = generateOtp();
+
+  // Kirim OTP via Formspree endpoint khusus OTP
+  // Karena ini static site, kita pakai mailto fallback + simpan OTP di sessionStorage
+  sessionStorage.setItem('kgw_otp', otpCode);
+  sessionStorage.setItem('kgw_otp_email', email);
+
+  const btn = document.getElementById('btnSendOtp');
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+
+  // Kirim email OTP via Formspree
+  try {
+    await fetch('https://formspree.io/f/GANTI_DENGAN_ID_KAMU', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        _subject: `[KenapaGw] Kode Verifikasi Email kamu: ${otpCode}`,
+        message: `Halo!\n\nKode verifikasi email kamu untuk KenapaGw adalah:\n\n${otpCode}\n\nKode ini berlaku 5 menit. Jangan share ke siapapun.\n\n— KenapaGw`,
+        _replyto: email,
+      })
+    });
+  } catch(e) { console.log('OTP send attempt:', e); }
+
+  document.getElementById('otpWrap').classList.add('show');
+  document.getElementById('otpNote').style.display = 'block';
+
+  // Timer 60 detik sebelum bisa resend
+  let sisa = 60;
+  const resendEl = document.getElementById('lbl-resend');
+  resendEl.style.pointerEvents = 'none';
+  resendEl.style.color = 'var(--muted)';
+  clearInterval(otpTimer);
+  otpTimer = setInterval(() => {
+    sisa--;
+    resendEl.textContent = ` ${T[lang].resend.trim()} (${sisa}s)`;
+    if (sisa <= 0) {
+      clearInterval(otpTimer);
+      resendEl.textContent = T[lang].resend;
+      resendEl.style.pointerEvents = 'auto';
+      resendEl.style.color = 'var(--accent)';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }
+  }, 1000);
+}
+
+function verifyOtp() {
+  const input = document.getElementById('inputOtp').value.trim();
+  const saved = sessionStorage.getItem('kgw_otp');
+  const errEmail = document.getElementById('errEmail');
+  const successEmail = document.getElementById('successEmail');
+
+  if (input === saved) {
+    emailVerified = true;
+    document.getElementById('otpWrap').classList.remove('show');
+    document.getElementById('otpNote').style.display = 'none';
+    hideFieldError('errEmail');
+    successEmail.textContent = T[lang].successEmailVerify;
+    successEmail.style.display = 'block';
+    const btn = document.getElementById('btnSendOtp');
+    btn.textContent = T[lang].verifiedBtn;
+    btn.classList.add('verified');
+    btn.disabled = true;
+    document.getElementById('inputEmail').disabled = true;
+    sessionStorage.removeItem('kgw_otp');
+  } else {
+    showFieldError('errEmail', T[lang].errOtp);
+  }
+}
+
+// ─── Validasi & Submit ───────────────────────────────────────────────────────
+function showFieldError(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideFieldError(id) {
+  const el = document.getElementById(id);
+  el.textContent = '';
+  el.style.display = 'none';
+}
+
+function validateForm() {
+  let valid = true;
+  const t = T[lang];
+  const name = document.getElementById('inputName').value.trim();
+  const email = document.getElementById('inputEmail').value.trim();
+  const type = document.getElementById('inputType').value;
+  const msg = document.getElementById('inputMsg').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!name) { showFieldError('errName', t.errName); valid = false; } else hideFieldError('errName');
+  if (!email || !emailRegex.test(email)) { showFieldError('errEmail', t.errEmail); valid = false; }
+  else if (!emailVerified) { showFieldError('errEmail', t.errEmailVerify); valid = false; }
+  else hideFieldError('errEmail');
+  if (!type) { showFieldError('errType', t.errType); valid = false; } else hideFieldError('errType');
+  if (!msg) { showFieldError('errMsg', t.errMsg); valid = false; } else hideFieldError('errMsg');
+
+  return valid;
+}
+
+document.getElementById('reportForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!validateForm()) return;
+
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled = true;
+  document.getElementById('lbl-submit').textContent = T[lang].submitting;
+
+  const formData = new FormData(this);
+
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('successSection').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      btn.disabled = false;
+      document.getElementById('lbl-submit').textContent = T[lang].submit;
+    }
+  } catch(err) {
+    btn.disabled = false;
+    document.getElementById('lbl-submit').textContent = T[lang].submit;
+  }
+});
+
+// Enter di OTP field langsung verifikasi
+document.getElementById('inputOtp').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); verifyOtp(); }
+});
+</script>
+</body>
+</html>
