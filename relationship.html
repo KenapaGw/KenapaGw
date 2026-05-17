@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<title>Relationship Quiz — KenapaGw</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKYV55FYCX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NKYV55FYCX');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0E0C0A;--bg2:#161310;--bg3:#1E1A16;--surface:#231F1B;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --text:#F0EBE4;--muted:#B8AFA7;--accent:#C17D4A;
+  --accent-light:rgba(193,125,74,0.15);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(14,12,10,0.92);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--accent);font-style:italic;}
+.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.lang-toggle{display:flex;gap:4px;background:var(--surface);border-radius:100px;padding:4px;border:0.5px solid var(--border2);}
+.lang-btn{padding:4px 14px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.lang-btn.active{background:var(--accent);color:white;}
+.ticker-wrap{background:var(--accent);padding:10px 0;overflow:hidden;border-bottom:0.5px solid rgba(255,255,255,0.15);width:100%;}
+.ticker-track{display:flex;width:max-content;animation:ticker 20s linear infinite;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{font-size:13px;font-weight:500;color:white;white-space:nowrap;padding:0 3rem;}
+.ticker-item::after{content:'✦';opacity:0.6;margin-left:3rem;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.layer{display:none;padding:5rem 2rem 4rem;max-width:1000px;margin:0 auto;}
+.layer.active{display:block;animation:fadeUp 0.4s ease;}
+.section-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:0.75rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:0.75rem;}
+.section-desc{font-size:16px;color:var(--muted);max-width:500px;margin-bottom:3rem;}
+.back-btn{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;padding:0;margin-bottom:1.5rem;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s;}
+.back-btn:hover{color:var(--accent);}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem;cursor:pointer;transition:all 0.25s;}
+.cat-card:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--bg3);}
+.cat-icon{font-size:32px;margin-bottom:0.75rem;display:block;}
+.cat-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:0.4rem;}
+.cat-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+.cat-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+.quiz-list-card{background:var(--surface);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:16px;}
+.quiz-list-card:hover{border-color:var(--accent);transform:translateX(4px);background:var(--bg3);}
+.quiz-list-card.completed{border-color:rgba(193,125,74,0.4);}
+.quiz-list-card.completed .qlc-title{color:var(--accent);}
+.qlc-icon{font-size:28px;flex-shrink:0;}
+.qlc-body{flex:1;}
+.qlc-type{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:3px;}
+.qlc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+.qlc-desc{font-size:13px;color:var(--muted);line-height:1.4;}
+.qlc-arrow{color:var(--accent);font-size:18px;flex-shrink:0;}
+.completed-badge{font-size:11px;padding:3px 10px;border-radius:100px;background:var(--accent-light);color:var(--accent);font-weight:500;margin-top:4px;display:inline-block;}
+.quiz-wrap{max-width:680px;margin:0 auto;}
+.quiz-topic-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:0.5rem;}
+.quiz-topic-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4vw,2rem);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:2rem;}
+.progress-wrap{margin-bottom:2.5rem;}
+.progress-bar{height:2px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.4s ease;}
+.progress-label{font-size:12px;color:var(--muted);margin-top:6px;}
+.q-block{display:none;}
+.q-block.active{display:block;animation:fadeUp 0.35s ease;}
+.q-text{font-family:'Playfair Display',serif;font-size:clamp(1.05rem,3vw,1.3rem);color:var(--text);margin-bottom:1.5rem;line-height:1.4;}
+.options{display:flex;flex-direction:column;gap:10px;}
+.opt{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:0.5px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s;background:var(--surface);}
+.opt:hover{border-color:var(--accent);background:var(--bg3);transform:translateX(4px);}
+.opt.selected{border-color:var(--accent);background:var(--accent-light);}
+.opt.selected .dot{background:var(--accent);border-color:var(--accent);}
+.dot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;margin-top:2px;transition:all 0.2s;}
+.opt-text{font-size:15px;color:var(--text);line-height:1.5;}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;gap:12px;}
+.btn-prev{padding:12px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;background:transparent;color:var(--muted);border:0.5px solid var(--border2);transition:all 0.2s;}
+.btn-prev:hover{color:var(--text);border-color:var(--text);}
+.btn-next,.btn-result{padding:12px 28px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;background:var(--accent);color:white;border:none;transition:all 0.2s;margin-left:auto;}
+.btn-next:hover,.btn-result:hover{opacity:0.85;transform:translateY(-1px);}
+.btn-next:disabled,.btn-result:disabled{opacity:0.3;cursor:not-allowed;transform:none;}
+.err-msg{font-size:13px;color:#e07070;margin-top:8px;display:none;}
+.result-block{display:none;animation:fadeUp 0.5s ease;}
+.result-block.show{display:block;}
+.result-emoji{font-size:52px;margin-bottom:1rem;display:block;}
+.result-type{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:0.5rem;}
+.result-name{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.2;}
+.result-story{font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:1.5rem;}
+.result-story p{margin-bottom:0.75rem;}
+.result-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2rem;}
+.pill{padding:6px 16px;border-radius:100px;font-size:13px;font-weight:500;}
+.pill-s{background:rgba(80,180,100,0.15);color:#6dd08a;}
+.pill-w{background:rgba(220,120,60,0.15);color:#e0906a;}
+.result-divider{border:none;border-top:0.5px solid var(--border);margin:2rem 0;}
+.result-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-retake{padding:12px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;background:transparent;color:var(--muted);border:0.5px solid var(--border2);transition:all 0.2s;}
+.btn-retake:hover{color:var(--text);border-color:var(--text);}
+.btn-try-more{padding:12px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;background:var(--accent);color:white;border:none;transition:all 0.2s;}
+.btn-try-more:hover{opacity:0.85;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:600px){.layer{padding-left:1.25rem;padding-right:1.25rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')">ID</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+  </div>
+</div>
+
+<!-- LAYER 1: CATEGORIES -->
+<div class="layer active" id="layer1">
+  <p class="section-label" id="l1-label">Relationship Quiz</p>
+  <h1 class="section-title" id="l1-title">Pilih kategori</h1>
+  <p class="section-desc" id="l1-desc">Hubunganmu ngomong banyak soal dirimu. Mulai dari yang paling bikin kamu penasaran.</p>
+  <div class="card-grid" id="catGrid"></div>
+</div>
+
+<!-- LAYER 2: QUIZ LIST -->
+<div class="layer" id="layer2">
+  <button class="back-btn" onclick="goToLayer(1)" id="l2-back">← Semua Kategori</button>
+  <p class="section-label" id="l2-label"></p>
+  <h2 class="section-title" id="l2-title"></h2>
+  <p class="section-desc" id="l2-desc"></p>
+  <div class="card-grid" id="quizListGrid"></div>
+</div>
+
+<!-- LAYER 3: QUIZ -->
+<div class="layer" id="layer3">
+  <div class="quiz-wrap">
+    <button class="back-btn" onclick="navGoBack()" id="l3-back">← Pilih Quiz Lain</button>
+    <p class="quiz-topic-label" id="quizCatLabel"></p>
+    <h2 class="quiz-topic-title" id="quizTitle"></h2>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="progress-label" id="progressLabel"></p>
+    </div>
+    <div id="quizContainer"></div>
+    <div class="result-block" id="resultBlock">
+      <span class="result-emoji" id="resEmoji"></span>
+      <p class="result-type" id="resType">Tipe kamu</p>
+      <h3 class="result-name" id="resName"></h3>
+      <div class="result-story" id="resStory"></div>
+      <div class="result-pills" id="resPills"></div>
+      <hr class="result-divider">
+      <div class="result-actions">
+        <button class="btn-retake" id="btnRetake" onclick="retakeQuiz()">← Ulangi</button>
+        <button class="btn-try-more" id="btnTryMore" onclick="goToLayer(2)">Coba Quiz Lain</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+#floating-actions{position:fixed;bottom:24px;right:24px;z-index:99999;display:flex;flex-direction:column;gap:10px;align-items:flex-end;-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+.fab{display:flex;align-items:center;gap:8px;padding:11px 18px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;text-decoration:none;color:white;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.35);}
+.fab-donate{background:#C17D4A;}
+.fab-bug{background:#2a2520;border:0.5px solid rgba(255,255,255,0.15);}
+@media(max-width:700px){#floating-actions{bottom:20px;right:14px;}.fab{padding:9px 14px;font-size:12px;}}
+</style>
+<div id="floating-actions">
+  <a class="fab fab-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">💛 Donate</a>
+  <a class="fab fab-bug" href="mailto:akunlmpodcast@gmail.com?subject=Bug%20Report%20-%20KenapaGw&body=Halo,%20saya%20menemukan%20bug:%0A%0A">🐛 Report Bug</a>
+</div>
+
+<script>
+let lang = 'id';
+let currentCat = null;
+let currentQuiz = null;
+let currentQ = 0;
+let answers = [];
+let currentLayer = 1;
+const completedQuizzes = new Set();
+
+const t = {
+  id: { l1Label:'Relationship Quiz', l1Title:'Pilih kategori', l1Desc:'Hubunganmu ngomong banyak soal dirimu. Mulai dari yang paling bikin kamu penasaran.', l2Back:'← Semua Kategori', l3Back:'← Pilih Quiz Lain', resType:'Tipe kamu', btnRetake:'← Ulangi', btnTryMore:'Coba Quiz Lain', btnNext:'Lanjut →', btnResult:'Lihat Hasil →', btnPrev:'← Kembali', errMsg:'Pilih jawaban dulu ya!', progressLabel:(c,t)=>`${c} dari ${t}` },
+  en: { l1Label:'Relationship Quiz', l1Title:'Choose a category', l1Desc:'Your relationships say a lot about you. Start with whatever makes you most curious.', l2Back:'← All Categories', l3Back:'← Other Quizzes', resType:'Your type', btnRetake:'← Retake', btnTryMore:'Try Another Quiz', btnNext:'Next →', btnResult:'See My Result →', btnPrev:'← Back', errMsg:'Pick an answer first!', progressLabel:(c,t)=>`${c} of ${t}` }
+};
+
+const categories = [
+  {
+    id: 'attachment',
+    icon: '🔗',
+    title: { id: 'Attachment Style', en: 'Attachment Style' },
+    desc: { id: 'Cara kamu terhubung dengan orang lain punya akar yang dalam.', en: 'How you connect with others has deep roots.' },
+    quizzes: [
+      {
+        id: 'att1', icon: '💭', type: 'text',
+        title: { id: 'Apa Attachment Style Kamu?', en: 'What Is Your Attachment Style?' },
+        desc: { id: 'Secure, anxious, avoidant, atau fearful — kamu yang mana?', en: 'Secure, anxious, avoidant, or fearful — which one are you?' },
+        questions: [
+          { text: { id: 'Kalau pasangan kamu tiba-tiba jarang chat, kamu...', en: 'When your partner suddenly texts less, you...' }, options: [ { label: { id: 'Santai, mungkin dia lagi sibuk.', en: 'Chill, they\'re probably busy.' }, points: 1 }, { label: { id: 'Langsung mikirin hal yang paling buruk.', en: 'Immediately think the worst.' }, points: 3 }, { label: { id: 'Lebih nyaman, gw juga butuh ruang.', en: 'Feel relieved, I need space too.' }, points: 2 }, { label: { id: 'Takut tapi pura-pura gapapa.', en: 'Scared but pretend it\'s fine.' }, points: 4 } ] },
+          { text: { id: 'Waktu kamu butuh dukungan emosional, kamu...', en: 'When you need emotional support, you...' }, options: [ { label: { id: 'Langsung bilang ke pasangan, gw nyaman minta tolong.', en: 'Tell my partner directly, I\'m comfortable asking.' }, points: 1 }, { label: { id: 'Berlebihan nyarinya sampai terasa menuntut.', en: 'Seek it excessively until it feels demanding.' }, points: 3 }, { label: { id: 'Penanganan sendiri, males ngerepotin orang.', en: 'Handle it alone, don\'t want to bother anyone.' }, points: 2 }, { label: { id: 'Mau minta tapi takut ditolak, akhirnya diem.', en: 'Want to ask but fear rejection, end up silent.' }, points: 4 } ] },
+          { text: { id: 'Soal keintiman emosional, kamu...', en: 'When it comes to emotional intimacy, you...' }, options: [ { label: { id: 'Nyaman dan mau terbuka dengan orang yang tepat.', en: 'Comfortable and willing to open up to the right person.' }, points: 1 }, { label: { id: 'Terlalu cepat terbuka karena takut kehilangan.', en: 'Open up too fast for fear of losing them.' }, points: 3 }, { label: { id: 'Susah buka diri, rasanya terlalu vulnerable.', en: 'Hard to open up, feels too vulnerable.' }, points: 2 }, { label: { id: 'Mau tapi selalu sabotase diri sendiri.', en: 'Want to but always self-sabotage.' }, points: 4 } ] },
+          { text: { id: 'Kalau ada konflik, kamu cenderung...', en: 'During conflict, you tend to...' }, options: [ { label: { id: 'Hadapi langsung dengan tenang dan cari solusi.', en: 'Address it calmly and find a solution.' }, points: 1 }, { label: { id: 'Eskalasi cepat karena takut konflik berarti putus.', en: 'Escalate quickly fearing conflict means breakup.' }, points: 3 }, { label: { id: 'Menarik diri dan butuh waktu sendiri dulu.', en: 'Withdraw and need alone time first.' }, points: 2 }, { label: { id: 'Freeze — nggak tau harus ngapain.', en: 'Freeze — don\'t know what to do.' }, points: 4 } ] },
+          { text: { id: 'Pikiran tentang hubungan jangka panjang bikin kamu...', en: 'Thoughts about long-term relationships make you feel...' }, options: [ { label: { id: 'Excited dan hopeful.', en: 'Excited and hopeful.' }, points: 1 }, { label: { id: 'Anxious — takut mereka akan pergi.', en: 'Anxious — scared they\'ll leave.' }, points: 3 }, { label: { id: 'Overwhelmed — terlalu banyak komitmen.', en: 'Overwhelmed — too much commitment.' }, points: 2 }, { label: { id: 'Campur aduk antara mau dan takut.', en: 'Mixed between wanting it and fearing it.' }, points: 4 } ] }
+        ],
+        results: [
+          { min: 5, max: 7, emoji: '🌿', name: { id: 'Secure Attachment', en: 'Secure Attachment' }, story: { id: `<p>Kamu salah satu yang langka. Kamu bisa dekat tanpa kehilangan diri sendiri, bisa jauh tanpa langsung panik.</p><p>Ini bukan berarti hidupmu sempurna atau kamu nggak pernah insecure. Tapi kamu punya fondasi kepercayaan — pada dirimu sendiri dan pada orang lain — yang bikin kamu bisa navigate hubungan dengan lebih sehat.</p><p>Orang dengan secure attachment biasanya jadi "tempat berlabuh" bagi partner mereka. Kamu bisa jadi itu — tapi pastikan kamu juga punya tempat berlabuh sendiri.</p>`, en: `<p>You're one of the rare ones. You can be close without losing yourself, and distant without immediately panicking.</p><p>This doesn't mean your life is perfect or you're never insecure. But you have a foundation of trust — in yourself and others — that helps you navigate relationships more healthily.</p><p>People with secure attachment often become an "anchor" for their partners. You can be that — just make sure you have your own anchor too.</p>` }, strength: { id: 'Stabil, bisa komunikasi, nyaman dengan kedekatan', en: 'Stable, communicative, comfortable with closeness' }, weakness: { id: 'Bisa underestimate kebutuhan orang lain yang insecure', en: 'May underestimate the needs of insecure partners' } },
+          { min: 8, max: 11, emoji: '🌀', name: { id: 'Avoidant Attachment', en: 'Avoidant Attachment' }, story: { id: `<p>Kamu belajar sangat awal bahwa ketergantungan itu berbahaya. Entah karena kebutuhanmu pernah diabaikan, atau karena kamu terlalu sering lihat bahwa mengandalkan orang lain berakhir dengan kecewa.</p><p>Jadi kamu membangun sistem pertahanan yang rapi: jadi mandiri, jadi kuat, jadi yang nggak butuh siapa-siapa.</p><p>Masalahnya, intimacy itu butuh kerentanan. Dan kerentanan itu satu hal yang paling susah kamu izinkan dirimu sendiri untuk rasain.</p>`, en: `<p>You learned very early that dependency is dangerous. Either your needs were once ignored, or you saw too often that relying on others ends in disappointment.</p><p>So you built a neat defense system: become independent, become strong, become someone who needs no one.</p><p>The problem is, intimacy requires vulnerability. And vulnerability is the one thing you find hardest to allow yourself to feel.</p>` }, strength: { id: 'Mandiri dan nggak gampang tergantung', en: 'Independent and not easily dependent' }, weakness: { id: 'Susah membiarkan orang masuk sepenuhnya', en: 'Hard to let people in fully' } },
+          { min: 12, max: 16, emoji: '🌊', name: { id: 'Anxious Attachment', en: 'Anxious Attachment' }, story: { id: `<p>Kamu cinta dengan intensitas penuh. Tapi di balik cinta itu ada kecemasan yang konstan — apakah mereka benar-benar peduli? Apakah cinta mereka cukup? Apakah kamu cukup?</p><p>Kamu mungkin sering disebut "terlalu banyak maunya" atau "terlalu sensitif." Tapi bukan itu masalahnya. Masalahnya adalah kamu belum benar-benar percaya bahwa kamu layak untuk dicintai tanpa syarat.</p><p>Dan itu bukan salahmu. Itu luka yang bisa disembuhkan — tapi butuh kesadaran dan kerja yang tulus.</p>`, en: `<p>You love with full intensity. But behind that love is constant anxiety — do they really care? Is their love enough? Are you enough?</p><p>You might often be called "too needy" or "too sensitive." But that's not the issue. The issue is you haven't truly believed you're worthy of being loved unconditionally.</p><p>And that's not your fault. It's a wound that can be healed — but it takes awareness and genuine work.</p>` }, strength: { id: 'Penuh cinta dan sangat devoted', en: 'Full of love and deeply devoted' }, weakness: { id: 'Rentan overthink dan butuh banyak reassurance', en: 'Prone to overthinking and needing lots of reassurance' } },
+          { min: 17, max: 20, emoji: '🌫️', name: { id: 'Fearful-Avoidant Attachment', en: 'Fearful-Avoidant Attachment' }, story: { id: `<p>Kamu mau dicintai — tapi kamu takut dicintai. Kamu mau dekat — tapi kedekatan itu menakutkan. Kamu push orang away, lalu menyesal. Kamu tarik mereka kembali, lalu overwhelmed.</p><p>Ini bukan karena kamu "susah diatur." Ini karena kamu pernah belajar bahwa orang yang seharusnya aman justru jadi sumber luka. Jadi otak kamu sekarang nggak bisa bedain mana yang aman dan mana yang berbahaya.</p><p>Tapi kamu bisa belajar ulang. Pelan-pelan. Dengan orang yang tepat dan mungkin bantuan profesional.</p>`, en: `<p>You want to be loved — but you're afraid of being loved. You want closeness — but closeness is terrifying. You push people away, then regret it. You pull them back, then feel overwhelmed.</p><p>This isn't because you're "difficult." It's because you once learned that the people who were supposed to be safe became sources of pain. So your brain now can't distinguish what's safe from what's dangerous.</p><p>But you can relearn. Slowly. With the right person and perhaps professional help.</p>` }, strength: { id: 'Sangat empatis karena pernah merasakan banyak hal', en: 'Highly empathetic from having experienced so much' }, weakness: { id: 'Push-pull yang melelahkan diri sendiri dan orang lain', en: 'Push-pull dynamic that exhausts self and others' } }
+        ]
+      },
+      {
+        id: 'att2', icon: '🪞', type: 'text',
+        title: { id: 'Seberapa Besar Kamu Takut Ditinggal?', en: 'How Much Do You Fear Abandonment?' },
+        desc: { id: 'Rasa takut ditinggal itu universal. Tapi seberapa dalam itu ngontrol hidupmu?', en: 'Fear of abandonment is universal. But how deeply does it control your life?' },
+        questions: [
+          { text: { id: 'Kalau seseorang penting tiba-tiba menjauh, kamu...', en: 'When someone important suddenly distances themselves, you...' }, options: [ { label: { id: 'Kasih ruang dan tunggu mereka siap ngobrol.', en: 'Give them space and wait until they\'re ready to talk.' }, points: 1 }, { label: { id: 'Langsung reach out, gw harus tau ada apa.', en: 'Reach out immediately, I need to know what\'s wrong.' }, points: 3 }, { label: { id: 'Tarik diri juga, kalau mereka mau pergi biarin aja.', en: 'Pull back too, if they want to leave let them.' }, points: 2 }, { label: { id: 'Panik dan mulai mikirin skenario terburuk.', en: 'Panic and start thinking of worst-case scenarios.' }, points: 4 } ] },
+          { text: { id: 'Dalam hubungan, kamu lebih sering...', en: 'In relationships, you more often...' }, options: [ { label: { id: 'Ngerasa aman dan nggak terlalu khawatir soal masa depan.', en: 'Feel secure and don\'t worry too much about the future.' }, points: 1 }, { label: { id: 'Minta kepastian berulang kali tentang perasaan mereka.', en: 'Repeatedly ask for reassurance about their feelings.' }, points: 3 }, { label: { id: 'Menghindari terlalu attach biar nggak sakit kalau berakhir.', en: 'Avoid getting too attached so it won\'t hurt if it ends.' }, points: 2 }, { label: { id: 'Selalu nunggu "pukulan" berikutnya datang.', en: 'Always waiting for the next "blow" to come.' }, points: 4 } ] },
+          { text: { id: 'Ketika kamu dikritik oleh seseorang yang kamu sayang...', en: 'When criticized by someone you care about...' }, options: [ { label: { id: 'Bisa menerimanya dengan cukup baik.', en: 'Can receive it fairly well.' }, points: 1 }, { label: { id: 'Langsung takut ini tanda mereka akan meninggalkan gw.', en: 'Immediately fear this means they\'ll leave me.' }, points: 3 }, { label: { id: 'Tutup diri dan nggak mau ngomongin lebih lanjut.', en: 'Shut down and refuse to discuss further.' }, points: 2 }, { label: { id: 'Hancur — buat gw ini konfirmasi gw memang nggak cukup.', en: 'Devastated — it confirms I\'m not good enough.' }, points: 4 } ] },
+          { text: { id: 'Pola dalam hubunganmu yang paling sering muncul adalah...', en: 'The most recurring pattern in your relationships is...' }, options: [ { label: { id: 'Komunikasi yang cukup sehat dan mutual.', en: 'Fairly healthy and mutual communication.' }, points: 1 }, { label: { id: 'Gw yang lebih banyak usaha daripada mereka.', en: 'I put in more effort than them.' }, points: 3 }, { label: { id: 'Gw yang selalu menjaga jarak biar nggak terluka.', en: 'I always keep distance to avoid getting hurt.' }, points: 2 }, { label: { id: 'Hot and cold — intens lalu menghilang.', en: 'Hot and cold — intense then disappearing.' }, points: 4 } ] },
+          { text: { id: 'Kalau hubungan berakhir, kamu biasanya...', en: 'When a relationship ends, you usually...' }, options: [ { label: { id: 'Sedih tapi bisa move on dengan sehat.', en: 'Sad but can move on healthily.' }, points: 1 }, { label: { id: 'Obsess tentang apa yang salah sangat lama.', en: 'Obsess over what went wrong for a very long time.' }, points: 3 }, { label: { id: 'Langsung tutup perasaan dan pura-pura fine.', en: 'Immediately shut down feelings and pretend to be fine.' }, points: 2 }, { label: { id: 'Hancur tapi sekaligus merasa "gw tau ini akan terjadi."', en: 'Devastated but also feel "I knew this would happen."' }, points: 4 } ] }
+        ],
+        results: [
+          { min: 5, max: 7, emoji: '🌱', name: { id: 'Rasa Aman yang Kokoh', en: 'Solid Inner Security' }, story: { id: `<p>Kamu punya fondasi yang solid. Bukan berarti kamu nggak pernah takut kehilangan — tapi ketakutan itu nggak sampai mendrive keputusan-keputusan besarmu dalam hubungan.</p><p>Kamu bisa give and receive cinta dengan relatif seimbang. Dan itu sesuatu yang berharga banget — terutama buat orang-orang di sekitarmu yang mungkin belum punya itu.</p>`, en: `<p>You have a solid foundation. This doesn't mean you never fear loss — but that fear doesn't drive your major relationship decisions.</p><p>You can give and receive love in a relatively balanced way. And that's something very valuable — especially for people around you who may not have it yet.</p>` }, strength: { id: 'Stabil dan nggak reaktif dalam hubungan', en: 'Stable and non-reactive in relationships' }, weakness: { id: 'Mungkin kurang empati terhadap yang lebih insecure', en: 'May lack empathy toward more insecure people' } },
+          { min: 8, max: 11, emoji: '🧊', name: { id: 'Defensive Detachment', en: 'Defensive Detachment' }, story: { id: `<p>Cara kamu melindungi diri dari rasa takut ditinggal adalah dengan tidak terlalu attach dari awal. Logis secara defensif — tapi costly secara emosional.</p><p>Kamu mungkin sudah melewati satu atau beberapa kehilangan yang cukup besar sampai otak kamu memutuskan: lebih baik tidak terlalu berharap.</p><p>Yang menarik adalah, di dalam ketidakattach-an itu, rasa takut kehilangan tetap ada. Hanya saja ia bersembunyi di balik dinginnya jarak yang kamu jaga.</p>`, en: `<p>Your way of protecting yourself from fear of abandonment is not getting too attached from the start. Defensively logical — but emotionally costly.</p><p>You may have gone through one or several significant losses that made your brain decide: better not to hope too much.</p><p>The interesting thing is, within that detachment, the fear of loss still exists. It just hides behind the coldness of the distance you maintain.</p>` }, strength: { id: 'Nggak mudah hancur ketika ditinggalkan', en: 'Not easily devastated when left' }, weakness: { id: 'Sulit merasakan kedalaman koneksi yang sesungguhnya', en: 'Hard to experience true depth of connection' } },
+          { min: 12, max: 16, emoji: '🌊', name: { id: 'Abandonment Anxiety', en: 'Abandonment Anxiety' }, story: { id: `<p>Rasa takut ditinggal sudah jadi background noise di hampir setiap hubunganmu. Kamu selalu sedikit menunggu saat seseorang akan pergi.</p><p>Dan ironisnya, kecemasan itu sendiri yang sering membuat orang merasa tercekik dan akhirnya... pergi. Bukan karena kamu buruk. Tapi karena kamu butuh lebih dari yang bisa mereka berikan tanpa sadar kenapa.</p><p>Kuncinya bukan mencari orang yang "tidak akan pergi." Tapi belajar bahwa bahkan jika mereka pergi, kamu akan tetap baik-baik saja.</p>`, en: `<p>Fear of abandonment has become background noise in almost every relationship you have. You're always slightly waiting for the moment someone will leave.</p><p>And ironically, that anxiety itself often makes people feel suffocated and eventually... leave. Not because you're bad. But because you need more than they can give without knowing why.</p><p>The key isn't finding someone who "won't leave." It's learning that even if they leave, you'll be okay.</p>` }, strength: { id: 'Sangat devoted dan tidak mudah menyerah', en: 'Deeply devoted and not easily giving up' }, weakness: { id: 'Kecemasan yang menguras energi diri dan pasangan', en: 'Anxiety that drains both self and partner\'s energy' } },
+          { min: 17, max: 20, emoji: '🌪️', name: { id: 'Deep Abandonment Wound', en: 'Deep Abandonment Wound' }, story: { id: `<p>Luka ini bukan sesuatu yang baru. Ia sudah ada jauh sebelum hubungan romantis pertamamu. Mungkin dari masa kecil, dari kehilangan yang terlalu awal, dari seseorang yang seharusnya ada tapi tidak.</p><p>Dan karena lukanya dalam, ia memengaruhi segalanya — cara kamu berharap, cara kamu mencintai, cara kamu menyabotase hal-hal baik yang datang.</p><p>Ini bukan sesuatu yang bisa diselesaikan sendiri sepenuhnya. Dan tidak apa-apa untuk mencari bantuan profesional untuk ini.</p>`, en: `<p>This wound isn't new. It existed long before your first romantic relationship. Perhaps from childhood, from a loss that came too early, from someone who should have been there but wasn't.</p><p>And because the wound is deep, it affects everything — how you hope, how you love, how you sabotage good things that come.</p><p>This isn't something you can fully resolve alone. And it's okay to seek professional help for this.</p>` }, strength: { id: 'Sangat empatis terhadap orang yang juga terluka', en: 'Deeply empathetic toward others who are also wounded' }, weakness: { id: 'Luka yang perlu penanganan lebih dari sekadar self-help', en: 'A wound that needs more than just self-help' } }
+        ]
+      },
+      {
+        id: 'att3', icon: '🤝', type: 'text',
+        title: { id: 'Gimana Kamu Minta Kebutuhan Dipenuhi?', en: 'How Do You Ask for Your Needs to Be Met?' },
+        desc: { id: 'Cara kamu minta atau nggak minta itu revealing banget.', en: 'How you ask — or don\'t ask — is very revealing.' },
+        questions: [
+          { text: { id: 'Ketika kamu butuh perhatian lebih, kamu...', en: 'When you need more attention, you...' }, options: [ { label: { id: 'Bilang langsung dengan jelas.', en: 'Say it directly and clearly.' }, points: 1 }, { label: { id: 'Hint-hint berharap mereka ngerti sendiri.', en: 'Drop hints hoping they\'ll figure it out.' }, points: 2 }, { label: { id: 'Minta tapi dengan cara yang passive-aggressive.', en: 'Ask but in a passive-aggressive way.' }, points: 3 }, { label: { id: 'Diam dan akhirnya meledak atau menangis.', en: 'Stay quiet and eventually explode or cry.' }, points: 4 } ] },
+          { text: { id: 'Kamu paling takut kalau kamu minta sesuatu...', en: 'You\'re most afraid that if you ask for something...' }, options: [ { label: { id: 'Mungkin ditolak tapi itu oke.', en: 'It might be denied but that\'s okay.' }, points: 1 }, { label: { id: 'Mereka pikir gw terlalu demanding.', en: 'They\'ll think I\'m too demanding.' }, points: 2 }, { label: { id: 'Mereka akan pergi karena gw terlalu banyak maunya.', en: 'They\'ll leave because I want too much.' }, points: 4 }, { label: { id: 'Mereka nggak akan peduli dan itu menyakitkan.', en: 'They won\'t care and that will hurt.' }, points: 3 } ] },
+          { text: { id: 'Ketika kebutuhanmu tidak dipenuhi, kamu biasanya...', en: 'When your needs aren\'t met, you usually...' }, options: [ { label: { id: 'Komunikasikan dengan tenang dan cari solusi.', en: 'Communicate calmly and find a solution.' }, points: 1 }, { label: { id: 'Sulk diam-diam sambil berharap mereka notice.', en: 'Sulk quietly while hoping they notice.' }, points: 2 }, { label: { id: 'Jadi lebih clingy atau demanding dari biasanya.', en: 'Become more clingy or demanding than usual.' }, points: 3 }, { label: { id: 'Menarik diri sepenuhnya sebagai hukuman.', en: 'Withdraw completely as punishment.' }, points: 4 } ] },
+          { text: { id: 'Soal boundaries dalam hubungan, kamu...', en: 'When it comes to boundaries in relationships, you...' }, options: [ { label: { id: 'Punya dan bisa komunikasikan dengan jelas.', en: 'Have them and can communicate them clearly.' }, points: 1 }, { label: { id: 'Punya tapi sering takut untuk ngomong.', en: 'Have them but often afraid to speak up.' }, points: 2 }, { label: { id: 'Nggak punya atau selalu kompromi habis-habisan.', en: 'Don\'t have them or always compromise completely.' }, points: 3 }, { label: { id: 'Boundaries gw berubah tergantung mood dan orang.', en: 'My boundaries change depending on mood and person.' }, points: 4 } ] },
+          { text: { id: 'Kalau pasangan tidak memenuhi ekspektasimu, reaksi pertamamu adalah...', en: 'When your partner doesn\'t meet your expectations, your first reaction is...' }, options: [ { label: { id: 'Ngobrolin dengan tenang dan cari titik tengah.', en: 'Talk about it calmly and find middle ground.' }, points: 1 }, { label: { id: 'Diam sambil ngerasa kecewa dalam hati.', en: 'Stay quiet while feeling disappointed inside.' }, points: 2 }, { label: { id: 'Marah atau emotional lebih dari yang seharusnya.', en: 'Get more angry or emotional than necessary.' }, points: 3 }, { label: { id: 'Ngerasa ini bukti mereka nggak benar-benar peduli.', en: 'Feel this proves they don\'t really care.' }, points: 4 } ] }
+        ],
+        results: [
+          { min: 5, max: 8, emoji: '🗣️', name: { id: 'Direct Communicator', en: 'Direct Communicator' }, story: { id: `<p>Kamu punya kemampuan yang tidak semua orang punya: kamu bisa bilang apa yang kamu butuhkan tanpa drama berlebihan.</p><p>Ini bukan sesuatu yang datang begitu saja. Kemungkinan kamu sudah kerja keras untuk belajar ini, atau kamu tumbuh di lingkungan yang mengajarkan bahwa kebutuhanmu valid.</p><p>Kamu adalah pasangan yang relatif mudah untuk dicintai — bukan karena kamu sempurna, tapi karena kamu tidak membuat orang lain harus menebak-nebak.</p>`, en: `<p>You have an ability not everyone has: you can say what you need without excessive drama.</p><p>This doesn't come automatically. You've likely worked hard to learn this, or grew up in an environment that taught you your needs are valid.</p><p>You're a relatively easy partner to love — not because you're perfect, but because you don't make others guess.</p>` }, strength: { id: 'Komunikasi yang jelas dan tidak manipulatif', en: 'Clear and non-manipulative communication' }, weakness: { id: 'Bisa kurang sabar dengan yang masih struggle komunikasi', en: 'Can be impatient with those still struggling to communicate' } },
+          { min: 9, max: 12, emoji: '🤐', name: { id: 'Silent Hoper', en: 'Silent Hoper' }, story: { id: `<p>Kamu berharap banyak — tapi jarang mengungkapkannya secara langsung. Kamu berharap orang yang menyayangimu cukup peka untuk tahu tanpa harus diberitahu.</p><p>Masalahnya, bahkan orang yang paling mencintaimu pun bukan pembaca pikiran. Dan ketika mereka gagal memenuhi harapanmu yang tidak terucap, kamu kecewa. Mereka bingung. Lingkaran ini terus berputar.</p><p>Langkah terkecil yang bisa mengubah banyak hal: coba ungkapkan satu kebutuhan yang selama ini kamu pendam. Lihat apa yang terjadi.</p>`, en: `<p>You hope a lot — but rarely express it directly. You hope the people who love you are perceptive enough to know without being told.</p><p>The problem is, even those who love you most aren't mind readers. And when they fail to meet your unspoken expectations, you're disappointed. They're confused. The cycle keeps spinning.</p><p>The smallest step that can change a lot: try expressing one need you've been holding back. See what happens.</p>` }, strength: { id: 'Tidak menuntut secara eksplisit', en: 'Not explicitly demanding' }, weakness: { id: 'Ekspektasi tersembunyi yang akhirnya jadi resentment', en: 'Hidden expectations that eventually become resentment' } },
+          { min: 13, max: 16, emoji: '🌋', name: { id: 'Emotional Broadcaster', en: 'Emotional Broadcaster' }, story: { id: `<p>Kebutuhanmu nyata dan valid. Tapi cara kamu mengkomunikasikannya sering kali terasa terlalu besar — terlalu intens, terlalu urgent — sampai orang lain merasa kewalahan.</p><p>Ini bukan berarti kamu salah untuk punya kebutuhan. Ini soal volume dan cara penyampaian.</p><p>Ketika kamu bisa menurunkan intensitas itu sedikit — bukan menghilangkan perasaanmu, tapi menyampaikannya dengan lebih tenang — koneksimu dengan orang lain akan jauh lebih dalam.</p>`, en: `<p>Your needs are real and valid. But the way you communicate them often feels too big — too intense, too urgent — until others feel overwhelmed.</p><p>This doesn't mean you're wrong to have needs. It's about volume and delivery.</p><p>When you can lower that intensity a little — not eliminate your feelings, but express them more calmly — your connections with others will be much deeper.</p>` }, strength: { id: 'Tidak menyembunyikan kebutuhan emosional', en: 'Doesn\'t hide emotional needs' }, weakness: { id: 'Intensitas yang bisa membuat orang merasa dikepung', en: 'Intensity that can make others feel besieged' } },
+          { min: 17, max: 20, emoji: '🎭', name: { id: 'Indirect Protector', en: 'Indirect Protector' }, story: { id: `<p>Kamu butuh banyak hal — tapi kamu tidak pernah bisa minta secara langsung. Entah karena takut ditolak, takut keliatan lemah, atau karena kamu memang tidak tahu caranya.</p><p>Jadi kamu minta dengan cara lain: diam yang mencolok, menarik diri, atau kadang ledakan kecil yang datang dari nowhere.</p><p>Orang di sekitarmu mungkin bingung. Mereka mau membantu tapi tidak tahu harus mulai dari mana. Dan kamu pun lelah karena kebutuhanmu tidak pernah terpenuhi dengan cara yang benar-benar memuaskan.</p>`, en: `<p>You need many things — but you can never ask directly. Either because you fear rejection, fear looking weak, or simply don't know how.</p><p>So you ask in other ways: pointed silence, withdrawing, or sometimes small explosions that come from nowhere.</p><p>People around you may be confused. They want to help but don't know where to start. And you're also tired because your needs are never met in a truly satisfying way.</p>` }, strength: { id: 'Melindungi diri dari penolakan langsung', en: 'Protects self from direct rejection' }, weakness: { id: 'Cara tidak langsung yang sering backfire', en: 'Indirect approach that often backfires' } }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'lovelang',
+    icon: '💝',
+    title: { id: 'Love Language', en: 'Love Language' },
+    desc: { id: 'Cara kamu kasih dan terima cinta lebih kompleks dari yang kamu kira.', en: 'How you give and receive love is more complex than you think.' },
+    quizzes: [
+      {
+        id: 'll1', icon: '🎁', type: 'text',
+        title: { id: 'Apa Love Language Utama Kamu?', en: 'What Is Your Primary Love Language?' },
+        desc: { id: '5 cara orang mengekspresikan dan menerima cinta. Kamu yang mana?', en: '5 ways people express and receive love. Which one are you?' },
+        questions: [
+          { text: { id: 'Kamu paling ngerasa dicintai ketika...', en: 'You feel most loved when...' }, options: [ { label: { id: 'Seseorang bilang hal-hal positif tentang gw.', en: 'Someone says positive things about me.' }, points: 1 }, { label: { id: 'Seseorang bantuin gw tanpa diminta.', en: 'Someone helps me without being asked.' }, points: 2 }, { label: { id: 'Seseorang kasih gw hadiah yang thoughtful.', en: 'Someone gives me a thoughtful gift.' }, points: 3 }, { label: { id: 'Seseorang kasih gw waktu dan perhatian penuh.', en: 'Someone gives me their full time and attention.' }, points: 4 }, { label: { id: 'Seseorang peluk atau sentuh gw dengan care.', en: 'Someone hugs or touches me with care.' }, points: 5 } ] },
+          { text: { id: 'Hal yang paling menyakitkan dalam hubungan adalah ketika...', en: 'The most painful thing in a relationship is when...' }, options: [ { label: { id: 'Kamu jarang dapat pujian atau apresiasi verbal.', en: 'You rarely receive compliments or verbal appreciation.' }, points: 1 }, { label: { id: 'Mereka nggak mau bantu meski kamu butuh.', en: 'They won\'t help even when you need it.' }, points: 2 }, { label: { id: 'Mereka lupa hari penting atau nggak kasih sesuatu.', en: 'They forget important days or give nothing.' }, points: 3 }, { label: { id: 'Mereka selalu terdistraksi saat bersamamu.', en: 'They\'re always distracted when with you.' }, points: 4 }, { label: { id: 'Mereka jarang menyentuh atau mendekat secara fisik.', en: 'They rarely touch or come close physically.' }, points: 5 } ] },
+          { text: { id: 'Cara favoritmu mengekspresikan cinta ke seseorang adalah...', en: 'Your favorite way to express love to someone is...' }, options: [ { label: { id: 'Bilang langsung betapa berartinya mereka untukmu.', en: 'Tell them directly how meaningful they are to you.' }, points: 1 }, { label: { id: 'Bantu mereka dengan tugas atau masalah mereka.', en: 'Help them with their tasks or problems.' }, points: 2 }, { label: { id: 'Pilihkan atau belikan sesuatu yang berkesan.', en: 'Pick or buy them something memorable.' }, points: 3 }, { label: { id: 'Habiskan waktu berkualitas berdua tanpa distraksi.', en: 'Spend quality time together without distractions.' }, points: 4 }, { label: { id: 'Peluk, pegang tangan, atau sentuhan kecil lainnya.', en: 'Hug, hold hands, or other small touches.' }, points: 5 } ] },
+          { text: { id: 'Ketika kamu lagi down, yang paling kamu butuhkan adalah...', en: 'When you\'re feeling down, what you need most is...' }, options: [ { label: { id: 'Kata-kata yang menguatkan dari orang terdekat.', en: 'Strengthening words from those closest to you.' }, points: 1 }, { label: { id: 'Bantuan konkret agar bebanmu lebih ringan.', en: 'Concrete help to lighten your load.' }, points: 2 }, { label: { id: 'Sesuatu kecil yang menunjukkan mereka peduli.', en: 'Something small that shows they care.' }, points: 3 }, { label: { id: 'Seseorang yang hadir sepenuhnya bersamamu.', en: 'Someone who is fully present with you.' }, points: 4 }, { label: { id: 'Pelukan atau kehadiran fisik yang menenangkan.', en: 'A hug or calming physical presence.' }, points: 5 } ] },
+          { text: { id: 'Tanda paling jelas bahwa seseorang mencintaimu menurut kamu adalah...', en: 'The clearest sign that someone loves you, in your opinion, is...' }, options: [ { label: { id: 'Mereka sering bilang "aku sayang kamu" atau memuji.', en: 'They often say "I love you" or give compliments.' }, points: 1 }, { label: { id: 'Mereka selalu ada dan siap membantu.', en: 'They\'re always there and ready to help.' }, points: 2 }, { label: { id: 'Mereka ingat hal-hal kecil dan memberikan hadiah.', en: 'They remember small things and give gifts.' }, points: 3 }, { label: { id: 'Mereka memprioritaskan waktunya untukmu.', en: 'They prioritize their time for you.' }, points: 4 }, { label: { id: 'Mereka selalu ingin dekat secara fisik denganmu.', en: 'They always want to be physically close to you.' }, points: 5 } ] }
+        ],
+        results: [
+          { min: 5, max: 7, emoji: '💬', name: { id: 'Words of Affirmation', en: 'Words of Affirmation' }, story: { id: `<p>Kata-kata bukan sekadar kata-kata untukmu. Mereka adalah bukti. "Aku bangga padamu." "Kamu berarti banget buat aku." "Kamu hebat dalam hal ini." Kalimat-kalimat seperti itu bisa membuat harimu jauh lebih baik.</p><p>Sebaliknya, kritik yang disampaikan dengan kasar, atau ketiadaan kata-kata apresiasi, bisa sangat menyakitkanmu bahkan ketika hal lain dalam hubungan berjalan baik.</p><p>Kamu nggak butuh puisi setiap hari. Kamu cuma butuh tahu bahwa kamu dilihat dan dihargai dengan kata-kata.</p>`, en: `<p>Words aren't just words to you. They're proof. "I'm proud of you." "You mean so much to me." "You're great at this." Phrases like these can make your day much better.</p><p>Conversely, criticism delivered harshly, or the absence of appreciative words, can deeply hurt you even when other things in the relationship are going well.</p><p>You don't need poetry every day. You just need to know you're seen and valued through words.</p>` }, strength: { id: 'Ekspresif dan pandai mengapresiasi orang lain', en: 'Expressive and good at appreciating others' }, weakness: { id: 'Sensitif terhadap kata-kata negatif atau kurangnya apresiasi', en: 'Sensitive to negative words or lack of appreciation' } },
+          { min: 8, max: 11, emoji: '🛠️', name: { id: 'Acts of Service', en: 'Acts of Service' }, story: { id: `<p>Bagimu, tindakan lebih bermakna dari kata-kata. Seseorang yang tiba-tiba masak untukmu ketika kamu lelah, yang bantu kamu pindahan tanpa diminta, yang beresin hal-hal yang kamu lupa — itu yang bikin kamu ngerasa dicintai.</p><p>Kamu mungkin juga sangat service-oriented dalam cara kamu mencintai. Kamu menunjukkan cintamu dengan melakukan, membantu, menyiapkan.</p><p>Tantanganmu: belajar mengucapkan kebutuhanmu secara verbal, bukan hanya berharap orang lain otomatis melakukan hal yang sama untukmu.</p>`, en: `<p>For you, actions mean more than words. Someone who suddenly cooks for you when you're tired, who helps you move without being asked, who takes care of things you forgot — that's what makes you feel loved.</p><p>You're also likely very service-oriented in how you love. You show your love by doing, helping, preparing.</p><p>Your challenge: learning to verbalize your needs, not just hoping others automatically do the same for you.</p>` }, strength: { id: 'Praktis dan sangat helpful dalam hubungan', en: 'Practical and very helpful in relationships' }, weakness: { id: 'Bisa burn out kalau tidak ada reciprocity', en: 'Can burn out without reciprocity' } },
+          { min: 12, max: 15, emoji: '🎁', name: { id: 'Receiving Gifts', en: 'Receiving Gifts' }, story: { id: `<p>Ini bukan soal materialisme. Hadiah adalah simbol — bukti bahwa seseorang memikirkanmu ketika kamu tidak ada, bahwa mereka mendengar hal-hal kecil yang kamu sebut, bahwa kamu ada di kepala mereka.</p><p>Kamu mungkin sangat pandai memilih hadiah untuk orang lain karena kamu benar-benar memperhatikan. Dan kamu berharap diperlakukan sama.</p><p>Kalau pasanganmu bukan tipe gift-giver, itu bisa menjadi sumber frustrasi besar. Komunikasikan ini — bukan sebagai tuntutan material, tapi sebagai kebutuhan untuk merasa diingat.</p>`, en: `<p>This isn't about materialism. Gifts are symbols — proof that someone thinks of you when you're not around, that they heard the small things you mentioned, that you're in their mind.</p><p>You're probably very good at choosing gifts for others because you truly pay attention. And you hope to be treated the same.</p><p>If your partner isn't a gift-giver type, that can be a major source of frustration. Communicate this — not as a material demand, but as a need to feel remembered.</p>` }, strength: { id: 'Sangat attentive terhadap detail tentang orang yang dicintai', en: 'Highly attentive to details about loved ones' }, weakness: { id: 'Bisa disalahartikan sebagai materialistis', en: 'Can be misunderstood as materialistic' } },
+          { min: 16, max: 19, emoji: '⏰', name: { id: 'Quality Time', en: 'Quality Time' }, story: { id: `<p>Kamu tidak butuh aktivitas mewah. Yang kamu butuhkan adalah kehadiran yang penuh. Seseorang yang benar-benar ada — menatap matamu, mendengarkan tanpa sambil scroll HP, memilih untuk ada bersamamu.</p><p>Gangguan kecil bisa terasa seperti penolakan besar bagimu. Bukan karena kamu lebay, tapi karena bagimu waktu = prioritas = bukti cinta.</p><p>Tantanganmu: sampaikan ini ke pasangan. Karena banyak orang yang mencintaimu dengan cara lain, bukan karena mereka tidak peduli, tapi karena bahasa cinta mereka berbeda.</p>`, en: `<p>You don't need lavish activities. What you need is full presence. Someone who is truly there — meeting your eyes, listening without scrolling their phone, choosing to be with you.</p><p>Small distractions can feel like major rejection to you. Not because you're dramatic, but because for you time = priority = proof of love.</p><p>Your challenge: communicate this to your partner. Because many people love you in other ways, not because they don't care, but because their love language is different.</p>` }, strength: { id: 'Hadir sepenuhnya saat bersama orang yang dicintai', en: 'Fully present when with loved ones' }, weakness: { id: 'Bisa merasa terabaikan ketika partner sibuk', en: 'Can feel neglected when partner is busy' } },
+          { min: 20, max: 25, emoji: '🤗', name: { id: 'Physical Touch', en: 'Physical Touch' }, story: { id: `<p>Sentuhan bukan sekadar fisik untukmu — ia adalah bahasa. Pelukan yang lama, tangan yang digenggam, kepala yang bersandar di bahu — semua itu adalah kata-kata yang tidak perlu diucapkan.</p><p>Ketika sentuhan itu absen — baik karena jarak fisik, konflik, atau pasangan yang memang bukan tipe affectionate — kamu bisa merasa sangat kesepian meski orang yang kamu cintai ada di depanmu.</p><p>Pastikan pasanganmu tahu ini. Bukan sebagai tuntutan, tapi sebagai cara mereka bisa mencintaimu dengan lebih efektif.</p>`, en: `<p>Touch isn't just physical for you — it's a language. Long hugs, held hands, a head resting on a shoulder — all of these are words that don't need to be spoken.</p><p>When touch is absent — whether from physical distance, conflict, or a partner who simply isn't the affectionate type — you can feel very lonely even with the person you love right in front of you.</p><p>Make sure your partner knows this. Not as a demand, but as a way they can love you more effectively.</p>` }, strength: { id: 'Sangat affectionate dan koneksi fisik yang dalam', en: 'Highly affectionate with deep physical connection' }, weakness: { id: 'Rentan merasa disconnected dalam hubungan jarak jauh', en: 'Vulnerable to feeling disconnected in long-distance relationships' } }
+        ]
+      },
+      {
+        id: 'll2', icon: '🔄', type: 'text',
+        title: { id: 'Love Language Kamu vs Pasangan: Udah Match?', en: 'Your Love Language vs Partner\'s: Do They Match?' },
+        desc: { id: 'Perbedaan love language adalah salah satu sumber konflik terbesar yang nggak disadari.', en: 'Differences in love language are one of the biggest unrecognized sources of conflict.' },
+        questions: [
+          { text: { id: 'Kamu sering ngerasa "kurang dicintai" meski pasangan sudah berusaha?', en: 'Do you often feel "less loved" even though your partner has tried?' }, options: [ { label: { id: 'Jarang — gw biasanya ngerasa cukup.', en: 'Rarely — I usually feel enough.' }, points: 1 }, { label: { id: 'Kadang, tapi gw tau mereka care.', en: 'Sometimes, but I know they care.' }, points: 2 }, { label: { id: 'Sering, dan gw nggak selalu bisa jelasin kenapa.', en: 'Often, and I can\'t always explain why.' }, points: 3 }, { label: { id: 'Hampir selalu — rasanya nggak pernah cukup.', en: 'Almost always — it never feels like enough.' }, points: 4 } ] },
+          { text: { id: 'Kamu tahu apa yang membuat pasanganmu merasa paling dicintai?', en: 'Do you know what makes your partner feel most loved?' }, options: [ { label: { id: 'Ya, dan gw sengaja lakuin itu untuk mereka.', en: 'Yes, and I intentionally do that for them.' }, points: 1 }, { label: { id: 'Kira-kira tau tapi nggak selalu konsisten.', en: 'Kind of know but not always consistent.' }, points: 2 }, { label: { id: 'Nggak terlalu yakin sebenarnya.', en: 'Not really sure actually.' }, points: 3 }, { label: { id: 'Belum pernah ngobrolin ini sama sekali.', en: 'Never discussed this at all.' }, points: 4 } ] },
+          { text: { id: 'Pernah nggak kamu berikan sesuatu yang kamu pikir akan diapresiasi tapi pasangan biasa aja?', en: 'Have you ever given something you thought would be appreciated but your partner was indifferent?' }, options: [ { label: { id: 'Jarang — gw cukup kenal mereka.', en: 'Rarely — I know them well enough.' }, points: 1 }, { label: { id: 'Pernah beberapa kali dan gw bingung.', en: 'A few times and I was confused.' }, points: 2 }, { label: { id: 'Sering — rasanya usaha gw sering miss the mark.', en: 'Often — my efforts often seem to miss the mark.' }, points: 3 }, { label: { id: 'Hampir selalu — kami memang kayaknya beda banget.', en: 'Almost always — we really seem very different.' }, points: 4 } ] },
+          { text: { id: 'Apakah kamu dan pasangan pernah ngobrolin soal kebutuhan emosional masing-masing?', en: 'Have you and your partner ever talked about each other\'s emotional needs?' }, options: [ { label: { id: 'Ya, secara terbuka dan itu sangat membantu.', en: 'Yes, openly and it was very helpful.' }, points: 1 }, { label: { id: 'Sedikit, tapi bisa lebih dalam lagi.', en: 'A little, but could go deeper.' }, points: 2 }, { label: { id: 'Jarang, rasanya awkward atau nggak tahu mulai dari mana.', en: 'Rarely, it feels awkward or I don\'t know where to start.' }, points: 3 }, { label: { id: 'Belum pernah.', en: 'Never.' }, points: 4 } ] },
+          { text: { id: 'Kalau kamu tahu love language pasanganmu berbeda darimu, kamu...', en: 'If you knew your partner\'s love language was different from yours, you...' }, options: [ { label: { id: 'Akan berusaha belajar cara mencintai mereka sesuai bahasa mereka.', en: 'Would make an effort to love them in their language.' }, points: 1 }, { label: { id: 'Akan coba tapi mungkin tidak selalu berhasil.', en: 'Would try but might not always succeed.' }, points: 2 }, { label: { id: 'Mungkin kesulitan — susah keluar dari cara gw sendiri.', en: 'Might struggle — hard to step out of my own way.' }, points: 3 }, { label: { id: 'Nggak yakin bisa — rasanya butuh terlalu banyak effort.', en: 'Not sure I could — feels like too much effort.' }, points: 4 } ] }
+        ],
+        results: [
+          { min: 5, max: 8, emoji: '🌿', name: { id: 'Love Language Awareness yang Tinggi', en: 'High Love Language Awareness' }, story: { id: `<p>Kamu sudah melakukan sesuatu yang tidak semua orang lakukan: kamu benar-benar mengenal cara mencintai dan cara merasa dicintai — baik milikmu maupun pasanganmu.</p><p>Ini adalah fondasi yang kuat. Tapi ingat, love language bisa berubah seiring waktu dan situasi. Teruslah bertanya dan memperbarui pemahaman ini secara berkala.</p>`, en: `<p>You've done something not everyone does: you truly understand how to love and how to feel loved — both yours and your partner's.</p><p>This is a strong foundation. But remember, love languages can change over time and situations. Keep asking and updating this understanding regularly.</p>` }, strength: { id: 'Sadar diri dan attentive terhadap kebutuhan pasangan', en: 'Self-aware and attentive to partner\'s needs' }, weakness: { id: 'Bisa terlalu "analytical" soal perasaan', en: 'Can be too "analytical" about feelings' } },
+          { min: 9, max: 12, emoji: '🌤️', name: { id: 'Sedang Belajar', en: 'Still Learning' }, story: { id: `<p>Kamu sudah di jalur yang benar. Ada kesadaran, ada niat — tapi masih ada gap antara tahu dan benar-benar menerapkan.</p><p>Satu hal sederhana yang bisa kamu lakukan minggu ini: tanyakan langsung ke pasanganmu, "Apa yang paling bikin kamu ngerasa dicintai?" Dan dengarkan tanpa menghakimi.</p>`, en: `<p>You're on the right track. There's awareness, there's intention — but there's still a gap between knowing and truly applying.</p><p>One simple thing you can do this week: ask your partner directly, "What makes you feel most loved?" And listen without judging.</p>` }, strength: { id: 'Mau belajar dan open terhadap feedback', en: 'Willing to learn and open to feedback' }, weakness: { id: 'Masih perlu konsistensi dalam menerapkan', en: 'Still needs consistency in applying' } },
+          { min: 13, max: 16, emoji: '🌧️', name: { id: 'Love Language Gap', en: 'Love Language Gap' }, story: { id: `<p>Ada jarak yang cukup besar antara cara kamu dan pasanganmu mengekspresikan cinta. Dan kemungkinan besar itu adalah sumber dari banyak konflik kecil yang rasanya tidak ada ujungnya.</p><p>Kabar baiknya: ini bukan masalah compatibility. Ini masalah komunikasi. Dan komunikasi bisa dipelajari.</p><p>Mulailah dengan satu percakapan yang jujur. Bukan tentang siapa yang salah, tapi tentang bagaimana kalian bisa lebih baik dalam mencintai satu sama lain.</p>`, en: `<p>There's a significant gap between how you and your partner express love. And this is likely the source of many small conflicts that feel endless.</p><p>Good news: this isn't a compatibility problem. It's a communication problem. And communication can be learned.</p><p>Start with one honest conversation. Not about who's wrong, but about how you can both be better at loving each other.</p>` }, strength: { id: 'Mulai menyadari ada yang perlu diperbaiki', en: 'Starting to realize something needs fixing' }, weakness: { id: 'Gap yang kalau dibiarkan bisa jadi resentment', en: 'Gap that if left unaddressed can become resentment' } },
+          { min: 17, max: 20, emoji: '🌪️', name: { id: 'Disconnected Languages', en: 'Disconnected Languages' }, story: { id: `<p>Kamu dan pasanganmu mungkin sudah lama bicara dalam bahasa yang berbeda tanpa menyadarinya. Kamu memberi apa yang kamu inginkan terima, bukan apa yang mereka butuhkan. Mereka melakukan hal yang sama.</p><p>Hasilnya? Dua orang yang berusaha keras tapi sama-sama merasa tidak cukup dicintai.</p><p>Ini bisa diubah. Tapi butuh keberanian untuk mulai bicara tentang hal yang selama ini dianggap seharusnya sudah dimengerti.</p>`, en: `<p>You and your partner may have been speaking different languages for a long time without realizing it. You give what you want to receive, not what they need. They do the same.</p><p>The result? Two people trying hard but both feeling not loved enough.</p><p>This can change. But it takes courage to start talking about things that were assumed to be already understood.</p>` }, strength: { id: 'Masih ada potensi kalau keduanya mau berkomunikasi', en: 'Still potential if both are willing to communicate' }, weakness: { id: 'Butuh usaha besar dari dua pihak untuk bridging the gap', en: 'Requires significant effort from both to bridge the gap' } }
+        ]
+      },
+      {
+        id: 'll3', icon: '💔', type: 'text',
+        title: { id: 'Apa yang Bikin Kamu Merasa Nggak Dicintai?', en: 'What Makes You Feel Unloved?' },
+        desc: { id: 'Hal-hal kecil yang konsisten itu sering lebih menyakitkan dari konflik besar.', en: 'Consistent small things often hurt more than big conflicts.' },
+        questions: [
+          { text: { id: 'Kamu paling ngerasa nggak dihargai ketika...', en: 'You feel most unappreciated when...' }, options: [ { label: { id: 'Usaha atau kerja kerasmu tidak diakui.', en: 'Your effort or hard work goes unacknowledged.' }, points: 2 }, { label: { id: 'Mereka sibuk HP saat kalian lagi bareng.', en: 'They\'re on their phone when you\'re together.' }, points: 4 }, { label: { id: 'Mereka lupa hal penting yang sudah kamu ceritakan.', en: 'They forget important things you\'ve shared.' }, points: 3 }, { label: { id: 'Mereka jarang atau tidak pernah menyentuhmu.', en: 'They rarely or never touch you.' }, points: 5 }, { label: { id: 'Mereka nggak pernah bilang hal positif tentangmu.', en: 'They never say positive things about you.' }, points: 1 } ] },
+          { text: { id: 'Tanda paling besar bagi kamu bahwa hubungan sedang bermasalah adalah...', en: 'The biggest sign for you that a relationship is in trouble is...' }, options: [ { label: { id: 'Komunikasi mulai dingin dan minim.', en: 'Communication starts getting cold and minimal.' }, points: 1 }, { label: { id: 'Mereka tidak lagi memprioritaskan waktu bersamamu.', en: 'They no longer prioritize time with you.' }, points: 4 }, { label: { id: 'Mereka tidak lagi melakukan hal-hal kecil untukmu.', en: 'They no longer do small things for you.' }, points: 2 }, { label: { id: 'Kontak fisik menjadi sangat berkurang.', en: 'Physical contact becomes significantly reduced.' }, points: 5 }, { label: { id: 'Mereka tidak lagi memperhatikan detail tentangmu.', en: 'They no longer pay attention to details about you.' }, points: 3 } ] },
+          { text: { id: 'Hal yang paling sering bikin kamu insecure dalam hubungan adalah...', en: 'The thing that most often makes you insecure in relationships is...' }, options: [ { label: { id: 'Kurangnya pujian dan kata-kata positif.', en: 'Lack of compliments and positive words.' }, points: 1 }, { label: { id: 'Perasaan bahwa kamu selalu yang lebih usaha.', en: 'The feeling that you always put in more effort.' }, points: 2 }, { label: { id: 'Merasa tidak diingat atau tidak diprioritaskan.', en: 'Feeling forgotten or not prioritized.' }, points: 3 }, { label: { id: 'Merasa waktumu tidak dihargai.', en: 'Feeling your time isn\'t valued.' }, points: 4 }, { label: { id: 'Kurangnya kedekatan fisik.', en: 'Lack of physical closeness.' }, points: 5 } ] },
+          { text: { id: 'Konflik yang paling sering terjadi dalam hubunganmu biasanya tentang...', en: 'The most common conflict in your relationships is usually about...' }, options: [ { label: { id: 'Kurangnya apresiasi verbal.', en: 'Lack of verbal appreciation.' }, points: 1 }, { label: { id: 'Merasa tidak dibantu atau tidak didukung.', en: 'Feeling unhelped or unsupported.' }, points: 2 }, { label: { id: 'Mereka lupa atau tidak peduli dengan hal-hal penting.', en: 'They forget or don\'t care about important things.' }, points: 3 }, { label: { id: 'Tidak cukup waktu berkualitas bersama.', en: 'Not enough quality time together.' }, points: 4 }, { label: { id: 'Kurangnya kedekatan atau afeksi fisik.', en: 'Lack of physical closeness or affection.' }, points: 5 } ] },
+          { text: { id: 'Kalau kamu bisa mengubah satu hal dari cara pasanganmu mencintaimu, itu adalah...', en: 'If you could change one thing about how your partner loves you, it would be...' }, options: [ { label: { id: 'Lebih sering berkata-kata positif dan mengapresiasi.', en: 'More often saying positive words and appreciating.' }, points: 1 }, { label: { id: 'Lebih sering ambil tindakan nyata untuk meringankan bebanku.', en: 'More often taking real action to lighten my load.' }, points: 2 }, { label: { id: 'Lebih memperhatikan dan mengingat hal-hal penting.', en: 'More attention to and remembering important things.' }, points: 3 }, { label: { id: 'Lebih hadir dan fokus saat bersama.', en: 'More present and focused when together.' }, points: 4 }, { label: { id: 'Lebih banyak kontak fisik dan kedekatan.', en: 'More physical contact and closeness.' }, points: 5 } ] }
+        ],
+        results: [
+          { min: 5, max: 7, emoji: '💬', name: { id: 'Kamu Butuh Kata-kata', en: 'You Need Words' }, story: { id: `<p>Hal terkecil yang bisa membuat perbedaan besar dalam hidupmu adalah kata-kata yang diucapkan dengan tulus. "Kamu melakukan itu dengan baik." "Terima kasih sudah ada." "Aku bangga padamu."</p><p>Dan ketika kata-kata itu tidak datang — atau datang dengan sedikit dan jarang — kamu mulai mempertanyakan segalanya.</p><p>Komunikasikan ini ke pasanganmu. Bukan sebagai keluhan, tapi sebagai informasi: ini yang membuat aku merasa dicintai.</p>`, en: `<p>The smallest thing that can make the biggest difference in your life is words spoken sincerely. "You did that well." "Thank you for being here." "I'm proud of you."</p><p>And when those words don't come — or come rarely — you start questioning everything.</p><p>Communicate this to your partner. Not as a complaint, but as information: this is what makes me feel loved.</p>` }, strength: { id: 'Sangat baik dalam memberi apresiasi verbal kepada orang lain', en: 'Very good at giving verbal appreciation to others' }, weakness: { id: 'Mudah terluka oleh kata-kata atau kurangnya apresiasi', en: 'Easily hurt by words or lack of appreciation' } },
+          { min: 8, max: 11, emoji: '🛠️', name: { id: 'Kamu Butuh Tindakan', en: 'You Need Actions' }, story: { id: `<p>Kata-kata indah terasa kosong bagimu kalau tidak diikuti tindakan. Yang kamu butuhkan adalah bukti konkret — bahwa mereka mau repot untukmu, bahwa mereka hadir ketika kamu butuh, bahwa cinta itu ditunjukkan lewat perbuatan.</p><p>Kamu mungkin sering merasa lelah karena "semua dilakukan sendiri" dalam hubungan. Itu tanda bahwa kebutuhan dasarmu belum terpenuhi.</p>`, en: `<p>Beautiful words feel empty to you if not followed by action. What you need is concrete proof — that they're willing to go through trouble for you, that they're present when you need them, that love is shown through deeds.</p><p>You may often feel tired because "everything is done alone" in the relationship. That's a sign your basic needs aren't being met.</p>` }, strength: { id: 'Praktis dan hands-on dalam mencintai', en: 'Practical and hands-on in loving' }, weakness: { id: 'Bisa frustrated dengan yang lebih verbal dari aktif', en: 'Can be frustrated with those more verbal than active' } },
+          { min: 12, max: 15, emoji: '🎁', name: { id: 'Kamu Butuh Diingat', en: 'You Need to Be Remembered' }, story: { id: `<p>Bukan soal hadiahnya — tapi soal fakta bahwa mereka mengingat. Ulang tahunmu, hal yang kamu ceritakan bulan lalu, makanan favoritmu. Itu semua adalah cara mereka mengatakan: "Aku memperhatikan kamu."</p><p>Ketika itu tidak terjadi, kamu tidak hanya kecewa — kamu merasa invisible. Dan itu jauh lebih menyakitkan.</p>`, en: `<p>It's not about the gift itself — it's about the fact that they remember. Your birthday, something you mentioned last month, your favorite food. All of these are ways of saying: "I pay attention to you."</p><p>When that doesn't happen, you don't just feel disappointed — you feel invisible. And that hurts far more.</p>` }, strength: { id: 'Sangat thoughtful dan memperhatikan detail orang lain', en: 'Very thoughtful and attentive to others\' details' }, weakness: { id: 'Bisa terlalu fokus pada simbol daripada substansi', en: 'Can be too focused on symbols rather than substance' } },
+          { min: 16, max: 19, emoji: '⏰', name: { id: 'Kamu Butuh Kehadiran', en: 'You Need Presence' }, story: { id: `<p>Kamu tidak butuh seseorang yang sempurna. Kamu butuh seseorang yang benar-benar ada — yang matanya tidak teralihkan saat kamu bicara, yang memilihmu atas segalanya di momen-momen yang penting.</p><p>Distraksi kecil bisa terasa seperti penolakan besar. Ini bukan drama — ini adalah cara otakmu membaca cinta: waktu = prioritas.</p>`, en: `<p>You don't need someone perfect. You need someone who's truly there — whose eyes don't wander when you speak, who chooses you above all in important moments.</p><p>Small distractions can feel like major rejection. This isn't drama — it's how your brain reads love: time = priority.</p>` }, strength: { id: 'Sangat present dan penuh perhatian saat bersama orang tercinta', en: 'Very present and attentive when with loved ones' }, weakness: { id: 'Bisa merasa terabaikan dengan mudah', en: 'Can easily feel neglected' } },
+          { min: 20, max: 25, emoji: '🤗', name: { id: 'Kamu Butuh Sentuhan', en: 'You Need Touch' }, story: { id: `<p>Pelukan yang tulus, tangan yang digenggam saat jalan, kepala yang bersandar — ini bukan hal kecil bagimu. Ini adalah cara kamu tahu bahwa kamu dicintai tanpa satu kata pun harus diucapkan.</p><p>Ketika sentuhan itu tidak ada, kamu bisa merasa sangat jauh dari seseorang meski kamu ada di ruangan yang sama. Dan itu adalah kesepian yang berbeda — kesepian di tengah keramaian.</p>`, en: `<p>A genuine hug, a held hand while walking, a head leaning on a shoulder — these aren't small things to you. This is how you know you're loved without a single word needing to be spoken.</p><p>When that touch is absent, you can feel very far from someone even when you're in the same room. And that's a different kind of loneliness — loneliness in the middle of company.</p>` }, strength: { id: 'Sangat affectionate dan hangat secara fisik', en: 'Very affectionate and physically warm' }, weakness: { id: 'Sangat terpengaruh oleh kurangnya afeksi fisik', en: 'Greatly affected by lack of physical affection' } }
+        ]
+      }
+    ]
+  }
+];
+
+let currentLayer = 1;
+const completedQuizzes = new Set();
+
+function navGoBack() {
+  if (currentLayer === 1) { window.location.href = 'index.html'; }
+  else if (currentLayer === 2) { goToLayer(1); }
+  else if (currentLayer === 3) {
+    const resultVisible = document.getElementById('resultBlock').classList.contains('show');
+    const quizContainerVisible = document.getElementById('quizContainer').style.display !== 'none';
+    if (resultVisible) { goToLayer(2); }
+    else if (quizContainerVisible && currentQ > 0) { prevQ(); }
+    else { goToLayer(2); }
+  }
+}
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+  renderLayer1();
+  if (currentCat) showCategory(currentCat.id, false);
+}
+
+function goToLayer(n) {
+  currentLayer = n;
+  document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
+  document.getElementById('layer' + n).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderLayer1() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
+  categories.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    card.innerHTML = `<span class="cat-icon">${cat.icon}</span><p class="cat-label">Kategori</p><h3 class="cat-title">${cat.title[lang]}</h3><p class="cat-desc">${cat.desc[lang]}</p>`;
+    card.onclick = () => showCategory(cat.id, true);
+    grid.appendChild(card);
+  });
+}
+
+function showCategory(catId, navigate) {
+  currentCat = categories.find(c => c.id === catId);
+  const grid = document.getElementById('quizListGrid');
+  grid.innerHTML = '';
+  document.getElementById('l2-label').textContent = currentCat.title[lang];
+  document.getElementById('l2-title').textContent = currentCat.title[lang];
+  document.getElementById('l2-desc').textContent = currentCat.desc[lang];
+  currentCat.quizzes.forEach(quiz => {
+    const card = document.createElement('div');
+    const isDone = completedQuizzes.has(quiz.id);
+    card.className = 'quiz-list-card' + (isDone ? ' completed' : '');
+    card.innerHTML = `<span class="qlc-icon">${quiz.icon}</span><div class="qlc-body"><p class="qlc-type">📝 Text Quiz</p><h3 class="qlc-title">${quiz.title[lang]}</h3><p class="qlc-desc">${quiz.desc[lang]}</p>${isDone ? '<span class="completed-badge">✓ Udah dikerjain</span>' : ''}</div><span class="qlc-arrow">${isDone ? '✓' : '→'}</span>`;
+    card.onclick = () => startQuiz(quiz.id);
+    grid.appendChild(card);
+  });
+  if (navigate) goToLayer(2);
+}
+
+function startQuiz(quizId) {
+  currentQuiz = null;
+  categories.forEach(cat => { const f = cat.quizzes.find(q => q.id === quizId); if (f) currentQuiz = f; });
+  if (!currentQuiz) return;
+  currentQ = 0;
+  answers = new Array(currentQuiz.questions.length).fill(null);
+  document.getElementById('quizCatLabel').textContent = `${currentCat.icon} ${currentCat.title[lang]}`;
+  document.getElementById('quizTitle').textContent = currentQuiz.title[lang];
+  document.getElementById('resType').textContent = t[lang].resType;
+  document.getElementById('btnRetake').textContent = t[lang].btnRetake;
+  document.getElementById('btnTryMore').textContent = t[lang].btnTryMore;
+  document.getElementById('resultBlock').classList.remove('show');
+  buildQuizQuestions();
+  updateProgress();
+  goToLayer(3);
+}
+
+function buildQuizQuestions() {
+  const container = document.getElementById('quizContainer');
+  container.style.display = 'block';
+  container.innerHTML = '';
+  currentQuiz.questions.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'q-block' + (qi === 0 ? ' active' : '');
+    block.id = 'qblock-' + qi;
+    let inner = `<p class="q-text">${q.text[lang]}</p><div class="options">`;
+    q.options.forEach((opt, oi) => {
+      inner += `<div class="opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi},${opt.points})"><div class="dot" id="dot-${qi}-${oi}"></div><span class="opt-text">${opt.label[lang]}</span></div>`;
+    });
+    inner += `</div>`;
+    const isLast = qi === currentQuiz.questions.length - 1;
+    inner += `<div class="q-nav">${qi > 0 ? `<button class="btn-prev" onclick="prevQ()">${t[lang].btnPrev}</button>` : '<span></span>'}${isLast ? `<button class="btn-result" id="btnResult-${qi}" onclick="showResult()" disabled>${t[lang].btnResult}</button>` : `<button class="btn-next" id="btnNext-${qi}" onclick="nextQ()" disabled>${t[lang].btnNext}</button>`}</div><p class="err-msg" id="err-${qi}">${t[lang].errMsg}</p>`;
+    block.innerHTML = inner;
+    container.appendChild(block);
+  });
+}
+
+function selectOpt(qi, oi, points) {
+  answers[qi] = points;
+  currentQuiz.questions[qi].options.forEach((_, i) => document.getElementById(`opt-${qi}-${i}`).classList.remove('selected'));
+  document.getElementById(`opt-${qi}-${oi}`).classList.add('selected');
+  const isLast = qi === currentQuiz.questions.length - 1;
+  const btn = document.getElementById(isLast ? `btnResult-${qi}` : `btnNext-${qi}`);
+  if (btn) btn.disabled = false;
+  document.getElementById(`err-${qi}`).style.display = 'none';
+}
+
+function nextQ() {
+  if (answers[currentQ] === null) { document.getElementById(`err-${currentQ}`).style.display = 'block'; return; }
+  document.getElementById('qblock-' + currentQ).classList.remove('active');
+  currentQ++;
+  document.getElementById('qblock-' + currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevQ() {
+  document.getElementById('qblock-' + currentQ).classList.remove('active');
+  currentQ--;
+  document.getElementById('qblock-' + currentQ).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const total = currentQuiz.questions.length;
+  const pct = (currentQ / total) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = t[lang].progressLabel(currentQ + 1, total);
+}
+
+function showResult() {
+  if (answers[currentQ] === null) { document.getElementById(`err-${currentQ}`).style.display = 'block'; return; }
+  const total = answers.reduce((a, b) => a + b, 0);
+  const res = currentQuiz.results.find(r => total >= r.min && total <= r.max);
+  if (!res) return;
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('resEmoji').textContent = res.emoji;
+  document.getElementById('resName').textContent = res.name[lang];
+  document.getElementById('resStory').innerHTML = res.story[lang];
+  document.getElementById('resPills').innerHTML = `<span class="pill pill-s">✦ ${res.strength[lang]}</span><span class="pill pill-w">⚠ ${res.weakness[lang]}</span>`;
+  document.getElementById('resultBlock').classList.add('show');
+  completedQuizzes.add(currentQuiz.id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function retakeQuiz() {
+  currentQ = 0;
+  answers = new Array(currentQuiz.questions.length).fill(null);
+  document.getElementById('resultBlock').classList.remove('show');
+  buildQuizQuestions();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderLayer1();
+</script>
+</body>
+</html>
