@@ -369,6 +369,58 @@ nav {
 @media (max-width: 1200px) {
   .ad-sidebar { display: none; }
 }
+
+/* ── ARTICLE BODY ── */
+.article-body { max-width: 680px; }
+.article-lead { font-size: 18px !important; color: var(--text) !important; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8 !important; margin-bottom: 1.75rem !important; }
+.article-body p { font-size: 16px; color: var(--muted); line-height: 1.9; margin-bottom: 1.25rem; }
+.article-body h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--text); margin: 2.5rem 0 1rem; line-height: 1.3; }
+.article-body h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin: 2rem 0 0.75rem; letter-spacing: 0.01em; }
+
+/* FACT BANNER */
+.fact-banner {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--accent-light); border: 1px solid rgba(193,125,74,0.3);
+  border-radius: 14px; padding: 1rem 1.25rem; margin: 1.5rem 0;
+  font-size: 15px; color: var(--text); line-height: 1.6;
+}
+.fact-banner-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+/* PULL QUOTE */
+.pull-quote {
+  border-left: 3px solid var(--accent); padding: 0.9rem 1.25rem;
+  margin: 1.75rem 0; background: rgba(193,125,74,0.07); border-radius: 0 12px 12px 0;
+}
+.pull-quote p { font-family: 'Playfair Display', serif; font-size: 1.05rem !important; color: var(--text) !important; line-height: 1.7 !important; margin: 0 !important; font-style: italic; }
+.pull-quote cite { display: block; margin-top: 0.5rem; font-size: 11px; color: var(--accent); font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* MINERAL CARD */
+.mineral-card {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--surface); border: 0.5px solid var(--border2);
+  border-radius: 14px; padding: 1.1rem 1.25rem; margin: 1.5rem 0;
+}
+.mineral-icon { font-size: 2rem; flex-shrink: 0; }
+.mineral-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+.mineral-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; }
+
+/* IMPLICATION LIST */
+.implication-list { display: flex; flex-direction: column; gap: 10px; margin: 1.5rem 0; }
+.impl-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--surface); border: 0.5px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.1rem;
+}
+.impl-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.impl-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.impl-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+/* DISCLAIMER BOX */
+.disclaimer-box {
+  background: rgba(224,180,80,0.08); border: 1px solid rgba(224,180,80,0.25);
+  border-radius: 12px; padding: 1rem 1.25rem; margin: 1.5rem 0;
+}
+.disclaimer-box p { font-size: 14px !important; color: var(--muted) !important; line-height: 1.6 !important; margin: 0 !important; }
 </style>
 </head>
 <body>
@@ -509,60 +561,200 @@ const categories = [
    articles: [
   {
     id: 'lautan',
-    icon: '🌍',
+    icon: '🌍💧',
     title: {
-      id: 'Lautan Tersembunyi di Dalam Perut Bumi',
-      en: 'Hidden Ocean Inside Earth'
+      id: 'Lautan Tersembunyi di Dalam Bumi: Sains Modern & Perspektif Islam',
+      en: 'Hidden Ocean Inside Earth: Modern Science & Islamic Perspective'
     },
     desc: {
-      id: 'Cadangan air raksasa jauh di bawah kaki kita.',
-      en: 'A massive water reservoir deep beneath our feet.'
+      id: 'Bumi menyimpan rahasia air raksasa — dan Al-Qur'an punya hal menarik soal ini.',
+      en: 'Earth hides a massive water secret — and the Qur'an has something interesting to say about it.'
     },
     content: {
       id: `
 <div class="article-body">
-  <p>Para ilmuwan menemukan indikasi adanya cadangan air raksasa yang tersembunyi jauh di bawah permukaan bumi, tepatnya di dalam mantel bumi.</p>
 
-  <p>Air ini tidak berbentuk samudra biasa, melainkan terperangkap di dalam mineral bernama <strong>ringwoodite</strong>. Volume totalnya diperkirakan bisa mencapai <strong>tiga kali lebih besar dari seluruh lautan di permukaan bumi</strong>.</p>
+  <p class="article-lead">Selama ini kita mengira hampir seluruh air Bumi ada di lautan, sungai, dan lapisan es di permukaan. Tapi penelitian geofisika justru menunjukkan sesuatu yang jauh lebih mengejutkan...</p>
 
-  <div class="pull-quote">
-    <p>"Bukan lautan dengan ombak dan ikan, tapi reservoir air raksasa yang tersembunyi di dalam batuan bumi."</p>
+  <div class="fact-banner">
+    <span class="fact-banner-icon">💡</span>
+    <span>Kemungkinan ada reservoir air raksasa jauh di dalam mantel Bumi, dengan kapasitas yang bisa setara <strong>beberapa kali volume seluruh samudra di permukaan.</strong></span>
   </div>
 
-  <h2>Kenapa Ini Penting?</h2>
-  <p>Penemuan ini mengubah cara ilmuwan memahami siklus air bumi dan menunjukkan bahwa planet kita jauh lebih kompleks dari yang kita kira.</p>
+  <p>Tapi tunggu dulu. Ini bukan berarti ada "laut bawah tanah" seperti samudra kosong dengan ikan hiu berenang di dalam perut Bumi. 😄</p>
 
-  <h2>Refleksi Islam 🌍</h2>
-  <p>Dalam Islam, penemuan seperti ini bisa menjadi pengingat bahwa ciptaan Allah jauh lebih luas daripada pengetahuan manusia.</p>
+  <p>Yang ditemukan adalah <strong>air yang terikat secara kimia di dalam struktur mineral</strong>, terutama mineral bernama <em>ringwoodite</em>, yang berada di zona transisi mantel Bumi sekitar 410–660 km di bawah permukaan.</p>
 
-  <div class="pull-quote">
-    <p><em>"Dan tidak ada sesuatu pun melainkan pada sisi Kami-lah perbendaharaannya." (QS Al-Hijr: 21)</em></p>
+  <h2>🔬 Apa Sebenarnya yang Ditemukan?</h2>
+
+  <p>Pada 2014, para ilmuwan menemukan bukti kuat bahwa zona mantel transisi Bumi mengandung air dalam jumlah sangat besar. Caranya? Mereka mempelajari <strong>gelombang seismik</strong> (gelombang gempa) dan melihat pola yang cocok dengan fenomena <em>dehydration melting</em> — yaitu ketika mineral yang menyimpan air melepaskan kandungan H₂O-nya akibat tekanan dan suhu ekstrem.</p>
+
+  <div class="mineral-card">
+    <div class="mineral-icon">🪨</div>
+    <div>
+      <p class="mineral-name">Ringwoodite</p>
+      <p class="mineral-desc">Mineral unik yang struktur kristalnya bisa "menjebak" hidrogen — artinya menyimpan air dalam bentuk terikat di dalam batuan. Ditemukan di kedalaman 410–660 km.</p>
+    </div>
   </div>
 
-  <p>Apa yang tampak di permukaan mungkin hanya sebagian kecil dari misteri bumi 🌌</p>
+  <p>Jadi headline <em>"ada lautan di dalam Bumi"</em> itu secara ilmiah agak clickbait. 😄 Yang lebih akurat:</p>
+
+  <div class="pull-quote">
+    <p>"Bumi kemungkinan memiliki reservoir air raksasa di mantel, dalam bentuk air yang tersimpan di mineral — bukan samudra cair biasa."</p>
+  </div>
+
+  <h2>🌊 Tapi Implikasinya Tetap Mindblowing</h2>
+
+  <div class="implication-list">
+    <div class="impl-item">
+      <span class="impl-icon">🔄</span>
+      <div>
+        <p class="impl-title">Siklus air jauh lebih dalam</p>
+        <p class="impl-desc">Bukan cuma permukaan ↔ atmosfer, tapi juga permukaan ↔ interior planet.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <span class="impl-icon">🌍</span>
+      <div>
+        <p class="impl-title">Air mungkin sudah ada sejak awal</p>
+        <p class="impl-desc">Air bisa jadi sudah menjadi bagian dari struktur Bumi sejak planet ini terbentuk.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <span class="impl-icon">❓</span>
+      <div>
+        <p class="impl-title">Mengubah pemahaman kita</p>
+        <p class="impl-desc">Ini mengubah cara kita memahami asal-usul air di planet kita secara fundamental.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>📖 Perspektif Islam: Apakah Al-Qur'an Pernah Menyinggung Ini?</h2>
+
+  <div class="disclaimer-box">
+    <p>⚠️ <strong>Harus jujur dan hati-hati:</strong> Al-Qur'an bukan buku geologi. Jangan memaksakan ayat jadi "bukti ilmiah literal." Yang ada di bawah ini adalah bahan <em>tadabbur</em> — refleksi dan perenungan — bukan tafsir ilmiah pasti.</p>
+  </div>
+
+  <h3>1) Laut Berlapis-lapis</h3>
+
+  <div class="pull-quote">
+    <p>"Atau seperti gelap gulita di lautan yang dalam, yang diliputi ombak, di atasnya ombak (lagi), di atasnya (lagi) awan..."</p>
+    <cite>QS An-Nur 24:40</cite>
+  </div>
+
+  <p>Ayat ini menggambarkan laut dalam, lapisan gelap, dan gelombang yang bertumpuk. Sebagian Muslim mengaitkannya dengan fenomena <em>internal waves</em> di laut dalam. Apakah ini bicara tentang air di mantel Bumi? Tidak secara langsung — konteksnya adalah permisalan spiritual. Tapi ayat ini tetap mengajak kita merenungkan kompleksitas dunia air yang tidak terlihat mata.</p>
+
+  <h3>2) Laut yang "Dipenuhi" / "Menyala"</h3>
+
+  <div class="pull-quote">
+    <p>"Wal-bahril masjūr" — Demi laut yang penuh meluap / yang dinyalakan.</p>
+    <cite>QS At-Tur 52:6</cite>
+  </div>
+
+  <p>Kata <em>masjūr</em> punya beberapa tafsir: yang dipenuhi, yang meluap, atau yang dipanaskan. Beberapa orang modern menghubungkannya dengan aktivitas geotermal bawah laut atau panas interior Bumi. Tapi sekali lagi — ini interpretasi reflektif, bukan tafsir ilmiah yang pasti.</p>
+
+  <h3>3) Air sebagai Fondasi Kehidupan</h3>
+
+  <div class="pull-quote">
+    <p>"Dan Kami jadikan dari air segala sesuatu yang hidup."</p>
+    <cite>QS Al-Anbiya 21:30</cite>
+  </div>
+
+  <p>Ini bukan soal geologi — tapi menarik karena air ditempatkan sebagai unsur fundamental kehidupan. Dan sains modern makin menunjukkan bahwa air Bumi bukan sekadar fenomena permukaan, tapi mungkin bagian mendalam dari struktur planet sejak awal pembentukannya. 🌌</p>
+
 </div>
 `,
       en: `
 <div class="article-body">
-  <p>Scientists discovered evidence of a massive hidden water reservoir deep inside Earth's mantle.</p>
 
-  <p>This water is trapped inside a mineral called <strong>ringwoodite</strong>, with an estimated volume up to <strong>three times larger than all Earth's oceans combined</strong>.</p>
+  <p class="article-lead">We've long assumed most of Earth's water sits in oceans, rivers, and ice at the surface. But geophysical research reveals something far more surprising...</p>
 
-  <div class="pull-quote">
-    <p>"Not an ocean with waves, but a giant hidden water reservoir inside Earth's rocks."</p>
+  <div class="fact-banner">
+    <span class="fact-banner-icon">💡</span>
+    <span>There's likely a massive water reservoir deep inside Earth's mantle, potentially holding <strong>several times the volume of all surface oceans combined.</strong></span>
   </div>
 
-  <h2>Why Does This Matter?</h2>
-  <p>This discovery changes how scientists understand Earth's water cycle and shows our planet is far more complex than we imagined.</p>
+  <p>But hold on — this doesn't mean there's an underground ocean with sharks swimming inside Earth's belly. 😄</p>
 
-  <h2>Islamic Reflection 🌍</h2>
-  <p>From an Islamic perspective, discoveries like this remind us how vast Allah's creation truly is.</p>
+  <p>What was discovered is <strong>water chemically bound inside mineral structures</strong>, particularly a mineral called <em>ringwoodite</em>, located in Earth's mantle transition zone about 410–660 km below the surface.</p>
 
-  <div class="pull-quote">
-    <p><em>"And there is not a thing except that with Us are its treasures." (Qur'an 15:21)</em></p>
+  <h2>🔬 What Was Actually Discovered?</h2>
+
+  <p>In 2014, scientists found strong evidence that Earth's mantle transition zone contains enormous amounts of water. How? By studying <strong>seismic waves</strong> (earthquake waves) and identifying patterns consistent with <em>dehydration melting</em> — where water-storing minerals release their H₂O under extreme pressure and temperature.</p>
+
+  <div class="mineral-card">
+    <div class="mineral-icon">🪨</div>
+    <div>
+      <p class="mineral-name">Ringwoodite</p>
+      <p class="mineral-desc">A unique mineral whose crystal structure can "trap" hydrogen — storing water in bound form inside the rock. Found at depths of 410–660 km.</p>
+    </div>
   </div>
 
-  <p>What we see on the surface may only be a tiny fraction of Earth's mysteries 🌌</p>
+  <p>So headlines like <em>"there's an ocean inside Earth"</em> are scientifically a bit clickbait. 😄 More accurately:</p>
+
+  <div class="pull-quote">
+    <p>"Earth likely has a massive water reservoir in its mantle, stored in mineral form — not a liquid ocean."</p>
+  </div>
+
+  <h2>🌊 But the Implications Are Still Mindblowing</h2>
+
+  <div class="implication-list">
+    <div class="impl-item">
+      <span class="impl-icon">🔄</span>
+      <div>
+        <p class="impl-title">A much deeper water cycle</p>
+        <p class="impl-desc">Not just surface ↔ atmosphere, but also surface ↔ planetary interior.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <span class="impl-icon">🌍</span>
+      <div>
+        <p class="impl-title">Water may have been here from the start</p>
+        <p class="impl-desc">Water could be a structural part of Earth since the planet first formed.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <span class="impl-icon">❓</span>
+      <div>
+        <p class="impl-title">Rewriting our understanding</p>
+        <p class="impl-desc">This fundamentally changes how we understand the origin of water on our planet.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>📖 Islamic Perspective: Does the Qur'an Touch on This?</h2>
+
+  <div class="disclaimer-box">
+    <p>⚠️ <strong>A note of honesty:</strong> The Qur'an is not a geology textbook. We shouldn't force verses to become "literal scientific proof." What follows is material for <em>tadabbur</em> — reflection and contemplation — not definitive scientific exegesis.</p>
+  </div>
+
+  <h3>1) Layered Seas</h3>
+
+  <div class="pull-quote">
+    <p>"Or like darkness in a vast, deep sea, overwhelmed with waves, upon which are waves, over which are clouds..."</p>
+    <cite>Qur'an, An-Nur 24:40</cite>
+  </div>
+
+  <p>This verse describes deep sea darkness, layered waves, and unseen depths. Some Muslims connect it to <em>internal waves</em> in the deep ocean. Does it directly describe water in the mantle? Not literally — it's a spiritual metaphor. But it invites us to reflect on the complexity of water worlds invisible to the eye.</p>
+
+  <h3>2) The Sea "Filled" / "Ignited"</h3>
+
+  <div class="pull-quote">
+    <p>"Wal-bahril masjūr" — By the sea filled / set ablaze.</p>
+    <cite>Qur'an, At-Tur 52:6</cite>
+  </div>
+
+  <p>The word <em>masjūr</em> carries multiple interpretations: overflowing, swelling, or heated/blazing. Some modern readers link it to geothermal activity or Earth's heated interior. Again — this is reflective interpretation, not definitive exegesis.</p>
+
+  <h3>3) Water as the Foundation of Life</h3>
+
+  <div class="pull-quote">
+    <p>"And We made from water every living thing."</p>
+    <cite>Qur'an, Al-Anbiya 21:30</cite>
+  </div>
+
+  <p>Not about geology per se — but striking because water is positioned as the fundamental element of life. And modern science increasingly shows that Earth's water isn't just a surface phenomenon, but possibly a deep structural part of the planet since its very formation. 🌌</p>
+
 </div>
 `
     }
@@ -901,81 +1093,48 @@ async function submitReply(parentId) {
 }
 
 function goToLayer(layerNum) {
-  document.querySelectorAll('.layer').forEach(layer => {
-    layer.classList.remove('active');
-  });
+  document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
   document.getElementById('layer' + layerNum).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Update nav back button text & behaviour per layer
   const navBack = document.getElementById('navBack');
-  if (layerNum === 1) {
-    navBack.textContent = lang === 'id' ? '← Beranda' : '← Home';
-  } else if (layerNum === 2) {
-    navBack.textContent = lang === 'id' ? '← Kategori' : '← Categories';
-  } else {
-    navBack.textContent = lang === 'id' ? '← Artikel' : '← Articles';
-  }
+  if (layerNum === 1) navBack.textContent = lang === 'id' ? '← Beranda' : '← Home';
+  else if (layerNum === 2) navBack.textContent = lang === 'id' ? '← Kategori' : '← Categories';
+  else navBack.textContent = lang === 'id' ? '← Artikel' : '← Articles';
   document.getElementById('l3-back').textContent = t[lang].l3Back;
 }
 
 function setLang(newLang) {
   lang = newLang;
-
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === newLang);
   });
-
-  // Re-render current view
-  if (currentArticle) {
-    openArticle(currentArticle.id);
-  } else if (currentCat) {
-    showCategory(currentCat.id);
-  } else {
-    renderLayer1();
-  }
-
-  // Update nav back text for current active layer
-  const activeLayer = ['layer1','layer2','layer3'].find(id =>
-    document.getElementById(id).classList.contains('active')
-  );
+  if (currentArticle) openArticle(currentArticle.id);
+  else if (currentCat) showCategory(currentCat.id);
+  else renderLayer1();
+  const activeLayer = ['layer1','layer2','layer3'].find(id => document.getElementById(id).classList.contains('active'));
   const layerNum = parseInt(activeLayer?.replace('layer','') || '1');
   const navBack = document.getElementById('navBack');
-  if (layerNum === 1) {
-    navBack.textContent = lang === 'id' ? '← Beranda' : '← Home';
-  } else if (layerNum === 2) {
-    navBack.textContent = lang === 'id' ? '← Kategori' : '← Categories';
-  } else {
-    navBack.textContent = lang === 'id' ? '← Artikel' : '← Articles';
-  }
+  if (layerNum === 1) navBack.textContent = lang === 'id' ? '← Beranda' : '← Home';
+  else if (layerNum === 2) navBack.textContent = lang === 'id' ? '← Kategori' : '← Categories';
+  else navBack.textContent = lang === 'id' ? '← Artikel' : '← Articles';
 }
 
 window.onload = function () {
-  // Read URL param: Berita.html?cat=science → skip layer1, go straight to article list
-  const params = new URLSearchParams(window.location.search);
-  const catParam = params.get('cat');
+  const catParam = new URLSearchParams(window.location.search).get('cat');
   if (catParam) {
     const found = categories.find(c => c.id === catParam);
-    if (found) {
-      showCategory(catParam);
-      return;
-    }
+    if (found) { showCategory(catParam); return; }
   }
   renderLayer1();
 };
 
 function navGoBack() {
-  const params = new URLSearchParams(window.location.search);
-  const catParam = params.get('cat');
+  const catParam = new URLSearchParams(window.location.search).get('cat');
   if (document.getElementById('layer3').classList.contains('active')) {
     goToLayer(2);
   } else if (document.getElementById('layer2').classList.contains('active')) {
-    // If we came from index via ?cat=, go back to index
-    if (catParam) {
-      window.location.href = 'index.html';
-    } else {
-      goToLayer(1);
-    }
+    if (catParam) window.location.href = 'index.html';
+    else goToLayer(1);
   } else {
     window.location.href = 'index.html';
   }
