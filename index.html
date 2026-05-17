@@ -69,8 +69,7 @@ nav {
 .ad-inner span { font-size: 13px; color: var(--muted); }
 .ad-badge { font-size: 10px; padding: 3px 10px; border-radius: 100px; background: var(--accent-light); color: var(--accent); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }
 .ad-mid-wrap { background: var(--bg2); padding: 3rem 2rem; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
-.ad-mid-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 300px)); justify-content: center; gap: 20px; }
-.ad-mid-inner { width: 100%; height: 250px; border: 1.5px dashed rgba(193,125,74,0.25); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.ad-mid-inner { max-width: 300px; margin: 0 auto; height: 250px; border: 1.5px dashed rgba(193,125,74,0.25); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
 
 section { padding: 5rem 2rem; }
 .section-inner { max-width: 1000px; margin: 0 auto; }
@@ -128,7 +127,6 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
   .ticker-wrap { top: 53px; }
   .ticker-item { font-size: 12px; padding: 0 1.5rem; }
   .hero { padding: 10rem 1.5rem 4rem; }
-  .ad-mid-grid { grid-template-columns: minmax(0, 300px); }
 }
 .ticker-track {
   display: flex; width: max-content;
@@ -233,7 +231,7 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
 <div class="ad-banner">
   <div class="ad-inner">
     <span class="ad-badge">Iklan</span>
-    <span data-i18n="adTop">Ruang iklan tersedia — hubungi kami di akunlmpodcast@gmail.com untuk pasang iklan di sini</span>
+    <span data-i18n="adTop">Pasang iklan di sini — hubungi: akunlmpodcast@gmail.com</span>
   </div>
 </div>
 
@@ -264,36 +262,18 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
         <p data-i18n="q3Desc">Kerja keras tapi ngerasa stuck? Mungkin bukan karena kamu malas. Cari tau tipe pekerja kamu.</p>
         <span class="quiz-card-cta" data-i18n="qCta">Mulai Quiz →</span>
       </a>
-      <a class="quiz-card" href="mental-health.html">
-        <span class="quiz-card-icon">🧠</span>
-        <p class="quiz-card-tag" data-i18n="q4Tag">Mental Health</p>
-        <h3 data-i18n="q4Title">Mental Health Issue Quiz</h3>
-        <p data-i18n="q4Desc">Cek kondisi emosional kamu lewat pertanyaan ringan. Bukan diagnosis, tapi bisa jadi awal buat lebih paham diri.</p>
-        <span class="quiz-card-cta" data-i18n="qCta">Mulai Quiz →</span>
-      </a>
     </div>
   </div>
 </section>
 
 <div class="ad-mid-wrap">
-  <div class="ad-mid-grid">
-    <div class="ad-mid-inner">
-      <span class="ad-badge">Iklan 1</span>
-      <span style="font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">300 x 250</span>
-      <span style="font-size:12px; color:var(--muted);" data-i18n="adMid">Hubungi kami di akunlmpodcast@gmail.com untuk pasang iklan</span>
-    </div>
-    <div class="ad-mid-inner">
-      <span class="ad-badge">Iklan 2</span>
-      <span style="font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">300 x 250</span>
-      <span style="font-size:12px; color:var(--muted);" data-i18n="adMid">Hubungi kami di akunlmpodcast@gmail.com untuk pasang iklan</span>
-    </div>
-    <div class="ad-mid-inner">
-      <span class="ad-badge">Iklan 3</span>
-      <span style="font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">300 x 250</span>
-      <span style="font-size:12px; color:var(--muted);" data-i18n="adMid">Hubungi kami di akunlmpodcast@gmail.com untuk pasang iklan</span>
-    </div>
+  <div class="ad-mid-inner">
+    <span class="ad-badge">Iklan</span>
+    <span style="font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">300 × 250</span>
+    <span style="font-size:12px; color:var(--muted);" data-i18n="adMid">Hubungi: akunlmpodcast@gmail.com</span>
   </div>
 </div>
+
 <section id="berita" style="background: var(--bg);">
   <div class="section-inner">
     <p class="section-label" data-i18n="beritaLabel">Berita Unik</p>
@@ -301,26 +281,41 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
     <p class="section-desc" data-i18n="beritaDesc">Fakta dan berita unik yang bikin kamu bilang "hah, serius?"</p>
     <div class="berita-grid">
       <div class="berita-card">
-        <div class="berita-img">🎭</div>
-        <div class="berita-body">
-          <p class="berita-tag" data-i18n="b1Tag">People</p>
-        </div>
-      </div>
-      <div class="berita-card">
         <div class="berita-img">🐙</div>
         <div class="berita-body">
-          <p class="berita-tag" data-i18n="b2Tag">Animal</p>
+          <p class="berita-tag" data-i18n="b1Tag">Sains</p>
+          <h4 data-i18n="b1Title">Gurita Punya 3 Jantung dan Darah Biru</h4>
+          <p data-i18n="b1Desc">Dan kalau salah satu jantungnya berhenti saat berenang, mereka lebih suka jalan di dasar laut.</p>
         </div>
       </div>
       <div class="berita-card">
-        <div class="berita-img">🌍</div>
+        <div class="berita-img">😴</div>
         <div class="berita-body">
-          <p class="berita-tag" data-i18n="b3Tag">World</p>
+          <p class="berita-tag" data-i18n="b2Tag">Psikologi</p>
+          <h4 data-i18n="b2Title">Otak Kamu Aktif Lebih Keras Saat Tidur</h4>
+          <p data-i18n="b2Desc">Saat kamu tidur, otak justru kerja keras buat cuci racun dan konsolidasikan memori harian kamu.</p>
+        </div>
+      </div>
+      <div class="berita-card">
+        <div class="berita-img">🌏</div>
+        <div class="berita-body">
+          <p class="berita-tag" data-i18n="b3Tag">Dunia</p>
+          <h4 data-i18n="b3Title">Ada Tempat yang Bisa Ngalamin 4 Musim dalam Sehari</h4>
+          <p data-i18n="b3Desc">Di beberapa bagian New Zealand, kamu bisa ngerasain panas, hujan, dingin, dan angin kencang dalam satu hari.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
+<div class="ad-banner">
+  <div class="ad-inner" style="max-width:728px; flex-direction:column; height:auto; padding:1rem 0; gap:6px;">
+    <span class="ad-badge">Iklan</span>
+    <span style="font-size:13px; color:var(--muted); text-align:center;">Ingin produk atau jasamu tampil di sini?</span>
+    <span style="font-size:13px; color:#C17D4A; font-weight:500; text-align:center;">Hubungi kami: akunlmpodcast@gmail.com</span>
+  </div>
+</div>
 
 <section id="tentang" style="background: var(--bg2);">
   <div class="section-inner">
@@ -353,7 +348,7 @@ footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-al
 <div class="ad-banner">
   <div class="ad-inner">
     <span class="ad-badge">Iklan</span>
-    <span data-i18n="adBottom">Tertarik pasang iklan? Hubungi kami di akunlmpodcast@gmail.com</span>
+    <span data-i18n="adBottom">Tertarik pasang iklan? Kirim email ke akunlmpodcast@gmail.com</span>
   </div>
 </div>
 
@@ -394,17 +389,18 @@ const i18n = {
     q2Desc: 'Pola hubunganmu ngomong banyak soal dirimu. Cari tau attachment style kamu sekarang.',
     q3Tag: 'Career', q3Title: 'Career Quiz',
     q3Desc: 'Kerja keras tapi ngerasa stuck? Mungkin bukan karena kamu malas. Cari tau tipe pekerja kamu.',
-    q4Tag: 'Mental Health', q4Title: 'Mental Health Issue Quiz',
-    q4Desc: 'Cek kondisi emosional kamu lewat pertanyaan ringan. Bukan diagnosis, tapi bisa jadi awal buat lebih paham diri.',
     qCta: 'Mulai Quiz →', q3Cta: 'Mulai Quiz →',
-    adTop: 'Ruang iklan tersedia — hubungi kami di akunlmpodcast@gmail.com untuk pasang iklan di sini',
-    adMid: 'Hubungi kami di akunlmpodcast@gmail.com untuk pasang iklan',
-    adBottom: 'Tertarik pasang iklan? Hubungi kami di akunlmpodcast@gmail.com',
+    adTop: 'Pasang iklan di sini — hubungi: akunlmpodcast@gmail.com',
+    adMid: 'Hubungi: akunlmpodcast@gmail.com',
+    adBottom: 'Tertarik pasang iklan? Kirim email ke akunlmpodcast@gmail.com',
     beritaLabel: 'Berita Unik', beritaTitle: 'Yang aneh, yang nyata.',
     beritaDesc: 'Fakta dan berita unik yang bikin kamu bilang "hah, serius?"',
-    b1Tag: 'People',
-    b2Tag: 'Animal',
-    b3Tag: 'World',
+    b1Tag: 'Sains', b1Title: 'Gurita Punya 3 Jantung dan Darah Biru',
+    b1Desc: 'Dan kalau salah satu jantungnya berhenti saat berenang, mereka lebih suka jalan di dasar laut.',
+    b2Tag: 'Psikologi', b2Title: 'Otak Kamu Aktif Lebih Keras Saat Tidur',
+    b2Desc: 'Saat kamu tidur, otak justru kerja keras buat cuci racun dan konsolidasikan memori harian kamu.',
+    b3Tag: 'Dunia', b3Title: 'Ada Tempat yang Bisa Ngalamin 4 Musim dalam Sehari',
+    b3Desc: 'Di beberapa bagian New Zealand, kamu bisa ngerasain panas, hujan, dingin, dan angin kencang dalam satu hari.',
     tentangLabel: 'Tentang KenapaGw',
     tentangTitle: 'Dibuat buat yang sering nanya ke diri sendiri',
     tentangP1: 'KenapaGw lahir dari satu pertanyaan sederhana yang semua orang pernah tanya tapi jarang dapat jawaban yang jujur.',
@@ -426,17 +422,18 @@ const i18n = {
     q2Desc: 'Your relationship patterns say a lot about you. Find out your attachment style now.',
     q3Tag: 'Career', q3Title: 'Career Quiz',
     q3Desc: "Working hard but feeling stuck? Maybe it's not because you're lazy. Find out your work type.",
-    q4Tag: 'Mental Health', q4Title: 'Mental Health Issue Quiz',
-    q4Desc: 'Check in with your emotional state through light questions. Not a diagnosis, just a starting point to understand yourself better.',
     qCta: 'Start Quiz →', q3Cta: 'Start Quiz →',
-    adTop: 'Ad space available — contact us at akunlmpodcast@gmail.com to advertise here',
-    adMid: 'Contact us at akunlmpodcast@gmail.com to place an ad',
+    adTop: 'Advertise here — contact: akunlmpodcast@gmail.com',
+    adMid: 'Contact: akunlmpodcast@gmail.com',
     adBottom: 'Interested in advertising? Contact us at akunlmpodcast@gmail.com',
     beritaLabel: 'Weird Facts', beritaTitle: 'Strange but real.',
     beritaDesc: 'Facts and weird news that make you say "wait, seriously?"',
-    b1Tag: 'People',
-    b2Tag: 'Animal',
-    b3Tag: 'World',
+    b1Tag: 'Science', b1Title: 'Octopuses Have 3 Hearts and Blue Blood',
+    b1Desc: "And if one heart stops while swimming, they prefer to walk along the ocean floor.",
+    b2Tag: 'Psychology', b2Title: 'Your Brain Works Harder When You Sleep',
+    b2Desc: 'While you sleep, your brain is hard at work flushing out toxins and consolidating your daily memories.',
+    b3Tag: 'World', b3Title: 'There Are Places That Experience 4 Seasons in One Day',
+    b3Desc: 'In parts of New Zealand, you can experience heat, rain, cold, and strong winds all in a single day.',
     tentangLabel: 'About KenapaGw',
     tentangTitle: 'Built for those who often question themselves',
     tentangP1: 'KenapaGw was born from one simple question that everyone has asked but rarely gets an honest answer to.',
@@ -499,6 +496,3 @@ function setLang(lang) {
 
 </body>
 </html>
-
-
-

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <!-- Google Analytics -->
@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Career Quiz â€” KenapaGw</title>
+<title>Career Quiz — KenapaGw</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -188,7 +188,7 @@ nav {
   white-space: nowrap; padding: 0 3rem;
   display: flex; align-items: center; gap: 10px;
 }
-.ticker-item::after { content: 'âœ¦'; opacity: 0.6; }
+.ticker-item::after { content: '✦'; opacity: 0.6; }
 @keyframes ticker {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -214,7 +214,7 @@ nav {
   .float-btn { padding: 9px 14px; font-size: 12px; }
 }
 
-/* â”€â”€ COMMENT SECTION â”€â”€ */
+/* ── COMMENT SECTION ── */
 .comment-section { display:none; margin-top:2.5rem; animation:fadeUp 0.4s ease; }
 .comment-section.show { display:block; }
 .comment-section-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:1.25rem; color:var(--text); display:flex; align-items:center; gap:8px; }
@@ -265,67 +265,81 @@ nav {
 .comments-loading { text-align:center; padding:1rem; color:var(--muted); font-size:13px; }
 
 
-/* SIDE ADS */
-.side-ad {
+/* ── STICKY SIDEBAR ADS ── */
+.ad-sidebar {
   position: fixed;
-  top: 112px;
-  z-index: 40;
-  width: 160px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
   display: flex;
-  justify-content: center;
-  pointer-events: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
-.side-ad-left { left: max(18px, calc((100vw - 1000px) / 2 - 190px)); }
-.side-ad-right { right: max(18px, calc((100vw - 1000px) / 2 - 190px)); }
-.side-ad-card {
-  width: 160px;
-  height: min(600px, calc(100vh - 140px));
-  min-height: 420px;
-  border: 1.5px dashed rgba(193,125,74,0.28);
+.ad-sidebar-left  { left: 12px; }
+.ad-sidebar-right { right: 12px; }
+.ad-sidebar-box {
+  width: 120px;
+  height: 240px;
+  background: var(--bg2);
+  border: 1.5px dashed rgba(193,125,74,0.25);
   border-radius: 12px;
-  background: rgba(35,31,27,0.78);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  text-align: center;
-  pointer-events: auto;
-  backdrop-filter: blur(10px);
+  padding: 10px;
 }
-.side-ad-card .ad-badge {
-  font-size: 10px;
-  padding: 3px 10px;
+.ad-sidebar-badge {
+  font-size: 9px;
+  padding: 2px 8px;
   border-radius: 100px;
-  background: var(--accent-light);
-  color: var(--accent);
+  background: rgba(193,125,74,0.15);
+  color: #C17D4A;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.side-ad-size {
-  font-size: 12px;
+.ad-sidebar-text {
+  font-size: 10px;
   color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.side-ad-text {
-  max-width: 110px;
-  font-size: 12px;
+  text-align: center;
   line-height: 1.5;
-  color: var(--muted);
 }
-@media (max-width: 1380px), (max-height: 620px) {
-  .side-ad { display: none; }
+.ad-sidebar-email {
+  font-size: 9px;
+  color: #C17D4A;
+  text-align: center;
+  word-break: break-all;
+  line-height: 1.4;
+}
+@media (max-width: 1200px) {
+  .ad-sidebar { display: none; }
 }
 </style>
 </head>
 <body>
 
+<div class="ad-sidebar ad-sidebar-left">
+  <div class="ad-sidebar-box">
+    <span class="ad-sidebar-badge">Iklan</span>
+    <span class="ad-sidebar-text">Pasang iklan di sini</span>
+    <span class="ad-sidebar-email">akunlmpodcast@gmail.com</span>
+  </div>
+</div>
+<div class="ad-sidebar ad-sidebar-right">
+  <div class="ad-sidebar-box">
+    <span class="ad-sidebar-badge">Iklan</span>
+    <span class="ad-sidebar-text">Pasang iklan di sini</span>
+    <span class="ad-sidebar-email">akunlmpodcast@gmail.com</span>
+  </div>
+</div>
+
 <nav>
   <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
   <div class="nav-right">
-    <button class="nav-back" onclick="navGoBack()" id="navBack">â† Kembali</button>
+    <button class="nav-back" onclick="navGoBack()" id="navBack">← Kembali</button>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('id')">ID</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -335,26 +349,12 @@ nav {
 
 <div class="ticker-wrap">
   <div class="ticker-track">
-    <span class="ticker-item">ðŸ’› Suka konten KenapaGw? Support kami via transfer â€” Mandiri a.n. Dhita Artya Utama Â· 1550012925023</span>
-    <span class="ticker-item">ðŸ’› Suka konten KenapaGw? Support kami via transfer â€” Mandiri a.n. Dhita Artya Utama Â· 1550012925023</span>
-    <span class="ticker-item">ðŸ’› Suka konten KenapaGw? Support kami via transfer â€” Mandiri a.n. Dhita Artya Utama Â· 1550012925023</span>
-    <span class="ticker-item">ðŸ’› Suka konten KenapaGw? Support kami via transfer â€” Mandiri a.n. Dhita Artya Utama Â· 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
+    <span class="ticker-item">💛 Suka konten KenapaGw? Support kami via transfer — Mandiri a.n. Dhita Artya Utama · 1550012925023</span>
   </div>
 </div>
-<aside class="side-ad side-ad-left" aria-label="Iklan kiri">
-  <div class="side-ad-card">
-    <span class="ad-badge">Iklan Kiri</span>
-    <span class="side-ad-size">160 x 600</span>
-    <span class="side-ad-text">Hubungi akunlmpodcast@gmail.com untuk pasang iklan</span>
-  </div>
-</aside>
-<aside class="side-ad side-ad-right" aria-label="Iklan kanan">
-  <div class="side-ad-card">
-    <span class="ad-badge">Iklan Kanan</span>
-    <span class="side-ad-size">160 x 600</span>
-    <span class="side-ad-text">Hubungi akunlmpodcast@gmail.com untuk pasang iklan</span>
-  </div>
-</aside>
 
 <!-- LAYER 1: CATEGORIES -->
 <div class="layer active" id="layer1">
@@ -366,7 +366,7 @@ nav {
 
 <!-- LAYER 2: QUIZ LIST -->
 <div class="layer" id="layer2">
-  <button class="back-btn" onclick="goToLayer(1)" id="l2-back">â† Semua Kategori</button>
+  <button class="back-btn" onclick="goToLayer(1)" id="l2-back">← Semua Kategori</button>
   <p class="section-label" id="l2-label"></p>
   <h2 class="section-title" id="l2-title"></h2>
   <p class="section-desc" id="l2-desc"></p>
@@ -376,7 +376,7 @@ nav {
 <!-- LAYER 3: QUIZ -->
 <div class="layer" id="layer3">
   <div class="quiz-wrap">
-    <button class="back-btn" onclick="goToLayer(2)" id="l3-back">â† Pilih Quiz Lain</button>
+    <button class="back-btn" onclick="goToLayer(2)" id="l3-back">← Pilih Quiz Lain</button>
     <div class="quiz-header">
       <p class="quiz-topic-label" id="quizCatLabel"></p>
       <h2 class="quiz-topic-title" id="quizTitle"></h2>
@@ -394,22 +394,22 @@ nav {
       <div class="result-pills" id="resPills"></div>
       <hr class="result-divider">
       <div class="result-actions">
-        <button class="btn-retake" id="btnRetake" onclick="retakeQuiz()">â† Ulangi</button>
+        <button class="btn-retake" id="btnRetake" onclick="retakeQuiz()">← Ulangi</button>
         <button class="btn-try-more" id="btnTryMore" onclick="goToLayer(2)">Coba Quiz Lain</button>
       </div>
 
     <!-- COMMENT SECTION -->
     <div class="comment-section" id="commentSection">
       <hr class="result-divider" style="margin-bottom:2rem;">
-      <p class="comment-section-title">ðŸ’¬ <span id="cmt-title">Komentar</span></p>
+      <p class="comment-section-title">💬 <span id="cmt-title">Komentar</span></p>
 
       <!-- Emoji Reactions -->
       <div class="reactions-wrap" id="reactionsWrap">
-        <button class="react-btn" data-emoji="â¤ï¸" onclick="toggleReact('â¤ï¸')">â¤ï¸ <span class="react-count" id="react-â¤ï¸">0</span></button>
-        <button class="react-btn" data-emoji="ðŸ”¥" onclick="toggleReact('ðŸ”¥')">ðŸ”¥ <span class="react-count" id="react-ðŸ”¥">0</span></button>
-        <button class="react-btn" data-emoji="ðŸ˜®" onclick="toggleReact('ðŸ˜®')">ðŸ˜® <span class="react-count" id="react-ðŸ˜®">0</span></button>
-        <button class="react-btn" data-emoji="ðŸ˜‚" onclick="toggleReact('ðŸ˜‚')">ðŸ˜‚ <span class="react-count" id="react-ðŸ˜‚">0</span></button>
-        <button class="react-btn" data-emoji="ðŸ‘" onclick="toggleReact('ðŸ‘')">ðŸ‘ <span class="react-count" id="react-ðŸ‘">0</span></button>
+        <button class="react-btn" data-emoji="❤️" onclick="toggleReact('❤️')">❤️ <span class="react-count" id="react-❤️">0</span></button>
+        <button class="react-btn" data-emoji="🔥" onclick="toggleReact('🔥')">🔥 <span class="react-count" id="react-🔥">0</span></button>
+        <button class="react-btn" data-emoji="😮" onclick="toggleReact('😮')">😮 <span class="react-count" id="react-😮">0</span></button>
+        <button class="react-btn" data-emoji="😂" onclick="toggleReact('😂')">😂 <span class="react-count" id="react-😂">0</span></button>
+        <button class="react-btn" data-emoji="👍" onclick="toggleReact('👍')">👍 <span class="react-count" id="react-👍">0</span></button>
       </div>
 
       <!-- New Comment Input -->
@@ -419,7 +419,7 @@ nav {
         </div>
         <textarea class="comment-textarea" id="cmtText" placeholder="Tulis komentar kamu di sini..." maxlength="500"></textarea>
         <div class="comment-submit-row">
-          <button class="comment-submit-btn" id="cmtSubmitBtn" onclick="submitComment()">Kirim â†’</button>
+          <button class="comment-submit-btn" id="cmtSubmitBtn" onclick="submitComment()">Kirim →</button>
         </div>
       </div>
 
@@ -434,8 +434,8 @@ nav {
 </div>
 
 <div class="float-btns">
-  <a class="float-btn float-btn-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">ðŸ’› Donate</a>
-  <a class="float-btn float-btn-bug" href="mailto:akunlmpodcast@gmail.com?subject=Bug%20Report%20-%20KenapaGw&body=Halo,%20saya%20menemukan%20bug:%0A%0A">ðŸ› Report Bug</a>
+  <a class="float-btn float-btn-donate" href="https://wa.me/6285283291239?text=Halo%20KenapaGw!%20Saya%20mau%20donasi%20%F0%9F%92%9B" target="_blank">💛 Donate</a>
+  <a class="float-btn float-btn-bug" href="mailto:akunlmpodcast@gmail.com?subject=Bug%20Report%20-%20KenapaGw&body=Halo,%20saya%20menemukan%20bug:%0A%0A">🐛 Report Bug</a>
 </div>
 
 <script>
@@ -448,37 +448,37 @@ let completedQuizzes = new Set();
 
 const t = {
   id: {
-    navBack: 'â† Kembali',
+    navBack: '← Kembali',
     l1Label: 'Career Quiz',
     l1Title: 'Pilih kategori',
     l1Desc: 'Mulai dari yang paling bikin kamu penasaran.',
-    l2Back: 'â† Semua Kategori',
-    l3Back: 'â† Pilih Quiz Lain',
+    l2Back: '← Semua Kategori',
+    l3Back: '← Pilih Quiz Lain',
     quizCount: quiz => `${quiz} quiz`,
     progressLabel: (cur, total) => `${cur} dari ${total}`,
     resType: 'Tipe kamu',
-    btnRetake: 'â† Ulangi',
+    btnRetake: '← Ulangi',
     btnTryMore: 'Coba Quiz Lain',
-    btnNext: 'Lanjut â†’',
-    btnResult: 'Lihat Hasil â†’',
-    btnPrev: 'â† Kembali',
+    btnNext: 'Lanjut →',
+    btnResult: 'Lihat Hasil →',
+    btnPrev: '← Kembali',
     errMsg: 'Pilih jawaban dulu ya!',
   },
   en: {
-    navBack: 'â† Back',
+    navBack: '← Back',
     l1Label: 'Career Quiz',
     l1Title: 'Choose a category',
     l1Desc: 'Start with whatever makes you most curious.',
-    l2Back: 'â† All Categories',
-    l3Back: 'â† Other Quizzes',
+    l2Back: '← All Categories',
+    l3Back: '← Other Quizzes',
     quizCount: quiz => `${quiz} quizzes`,
     progressLabel: (cur, total) => `${cur} of ${total}`,
     resType: 'Your type',
-    btnRetake: 'â† Retake',
+    btnRetake: '← Retake',
     btnTryMore: 'Try Another Quiz',
-    btnNext: 'Next â†’',
-    btnResult: 'See My Result â†’',
-    btnPrev: 'â† Back',
+    btnNext: 'Next →',
+    btnResult: 'See My Result →',
+    btnPrev: '← Back',
     errMsg: 'Pick an answer first!',
   }
 };
@@ -486,12 +486,12 @@ const t = {
 const categories = [
   {
     id: 'work-personality',
-    icon: 'ðŸ’¼',
+    icon: '💼',
     title: { id: 'Work Personality', en: 'Work Personality' },
     desc: { id: 'Gimana cara kamu sebenarnya bekerja?', en: 'How do you actually work?' },
     quizzes: [
       {
-        id: 'work-type', icon: 'ðŸ§©', type: 'text',
+        id: 'work-type', icon: '🧩', type: 'text',
         title: { id: 'Kamu Tipe Pekerja yang Mana?', en: 'What Kind of Worker Are You?' },
         desc: { id: 'Cara kerja kamu ngomong lebih banyak soal dirimu daripada yang kamu kira.', en: 'Your work style says more about you than you think.' },
         questions: [
@@ -499,7 +499,7 @@ const categories = [
             text: { id: 'Senin pagi, ada meeting mendadak yang nggak ada di agenda. Reaksi pertama kamu?', en: 'Monday morning, there\'s a sudden unscheduled meeting. Your first reaction?' },
             options: [
               { label: { id: 'Oke sih, gw fleksibel aja.', en: 'Fine, I\'m flexible.' }, points: 3 },
-              { label: { id: 'Agak terganggu â€” jadwal gw udah gw atur dari semalam.', en: 'A bit annoyed â€” I already planned my schedule.' }, points: 1 },
+              { label: { id: 'Agak terganggu — jadwal gw udah gw atur dari semalam.', en: 'A bit annoyed — I already planned my schedule.' }, points: 1 },
               { label: { id: 'Excited, mungkin ada hal penting yang bakal dibahas.', en: 'Excited, something important might be discussed.' }, points: 4 },
               { label: { id: 'Cemas. Gw butuh waktu buat prepare dulu.', en: 'Anxious. I need time to prepare first.' }, points: 2 }
             ]
@@ -546,7 +546,7 @@ const categories = [
               { label: { id: 'Tetap beresin dulu meski mepet. Hasil harus bener.', en: 'Fix it anyway even if it\'s tight. The result must be right.' }, points: 1 },
               { label: { id: 'Evaluate dulu: seberapa besar dampaknya? Kalau kecil, skip.', en: 'Evaluate first: how big is the impact? If small, skip.' }, points: 2 },
               { label: { id: 'Tanya tim dulu, mungkin mereka bisa bantu lebih cepet.', en: 'Ask the team first, maybe they can help faster.' }, points: 3 },
-              { label: { id: 'Submit aja â€” done is better than perfect.', en: 'Just submit â€” done is better than perfect.' }, points: 4 }
+              { label: { id: 'Submit aja — done is better than perfect.', en: 'Just submit — done is better than perfect.' }, points: 4 }
             ]
           },
           {
@@ -555,33 +555,33 @@ const categories = [
               { label: { id: 'Yang sudah jelas. Gw bisa maksimalin eksekusinya.', en: 'The clear one. I can maximize the execution.' }, points: 1 },
               { label: { id: 'Yang jelas dulu, sambil cari celah buat optimasi di dalamnya.', en: 'The clear one, while looking for optimization gaps within it.' }, points: 2 },
               { label: { id: 'Yang ambisius, asal ada tim yang solid di belakang gw.', en: 'The ambitious one, as long as there\'s a solid team behind me.' }, points: 3 },
-              { label: { id: 'Yang ambisius â€” ketidakpastian itu justru menarik.', en: 'The ambitious one â€” uncertainty is actually exciting.' }, points: 4 }
+              { label: { id: 'Yang ambisius — ketidakpastian itu justru menarik.', en: 'The ambitious one — uncertainty is actually exciting.' }, points: 4 }
             ]
           }
         ],
         results: [
           {
-            min: 7, max: 12, emoji: 'ðŸ—ï¸',
+            min: 7, max: 12, emoji: '🏗️',
             name: { id: 'The Architect', en: 'The Architect' },
             story: {
-              id: `<p>Kamu adalah orang yang membuat kekacauan jadi teratur. Di mana orang lain melihat tumpukan tugas yang membingungkan, kamu melihat struktur yang bisa dibangun â€” langkah demi langkah, rapi, terukur.</p><p>Kamu bukan tipe yang asal terjun. Sebelum mulai, kamu perlu tahu peta jalannya. Bukan karena kamu takut, tapi karena kamu tahu bahwa eksekusi yang baik dimulai dari perencanaan yang matang. Dan ketika plan-mu berjalan mulus? Itu rasanya seperti simfoni.</p><p>Tapi ada satu hal yang kadang jadi tantangan bagimu: dunia nggak selalu mau ikut jadwalmu. Ketika ada yang tiba-tiba berubah di luar rencana, kamu butuh sedikit lebih banyak waktu untuk menyesuaikan diri. Dan itu bukan kelemahan â€” itu harga yang kamu bayar untuk menjadi seseorang yang benar-benar <em>bisa diandalkan</em>.</p>`,
-              en: `<p>You're the person who turns chaos into order. Where others see a confusing pile of tasks, you see a structure that can be built â€” step by step, neat, measured.</p><p>You're not the type to just dive in. Before starting, you need to know the roadmap. Not because you're afraid, but because you know that good execution starts with solid planning. And when your plan runs smoothly? It feels like a symphony.</p><p>But there's one thing that sometimes challenges you: the world doesn't always want to follow your schedule. When something suddenly changes outside the plan, you need a little more time to adjust. And that's not a weakness â€” it's the price you pay for being someone who is truly <em>reliable</em>.</p>`
+              id: `<p>Kamu adalah orang yang membuat kekacauan jadi teratur. Di mana orang lain melihat tumpukan tugas yang membingungkan, kamu melihat struktur yang bisa dibangun — langkah demi langkah, rapi, terukur.</p><p>Kamu bukan tipe yang asal terjun. Sebelum mulai, kamu perlu tahu peta jalannya. Bukan karena kamu takut, tapi karena kamu tahu bahwa eksekusi yang baik dimulai dari perencanaan yang matang. Dan ketika plan-mu berjalan mulus? Itu rasanya seperti simfoni.</p><p>Tapi ada satu hal yang kadang jadi tantangan bagimu: dunia nggak selalu mau ikut jadwalmu. Ketika ada yang tiba-tiba berubah di luar rencana, kamu butuh sedikit lebih banyak waktu untuk menyesuaikan diri. Dan itu bukan kelemahan — itu harga yang kamu bayar untuk menjadi seseorang yang benar-benar <em>bisa diandalkan</em>.</p>`,
+              en: `<p>You're the person who turns chaos into order. Where others see a confusing pile of tasks, you see a structure that can be built — step by step, neat, measured.</p><p>You're not the type to just dive in. Before starting, you need to know the roadmap. Not because you're afraid, but because you know that good execution starts with solid planning. And when your plan runs smoothly? It feels like a symphony.</p><p>But there's one thing that sometimes challenges you: the world doesn't always want to follow your schedule. When something suddenly changes outside the plan, you need a little more time to adjust. And that's not a weakness — it's the price you pay for being someone who is truly <em>reliable</em>.</p>`
             },
             strength: { id: 'Terorganisir, konsisten, dan hasil kerja bisa dipercaya', en: 'Organized, consistent, and dependable output' },
             weakness: { id: 'Bisa kewalahan kalau terlalu banyak perubahan mendadak', en: 'Can feel overwhelmed with too many sudden changes' }
           },
           {
-            min: 13, max: 17, emoji: 'âš™ï¸',
+            min: 13, max: 17, emoji: '⚙️',
             name: { id: 'The Optimizer', en: 'The Optimizer' },
             story: {
-              id: `<p>Otakmu secara alami selalu bertanya: <em>"Ada cara yang lebih baik nggak?"</em> Kamu nggak puas hanya karena sesuatu sudah berhasil. Kamu ingin tahu kenapa berhasil, dan bagaimana caranya agar bisa lebih cepat, lebih efisien, lebih sedikit energi yang terbuang.</p><p>Kamu adalah aset paling berharga dalam tim mana pun â€” bukan karena kamu yang paling keras kerjanya, tapi karena kamu yang paling <em>cerdas</em> dalam bekerja. Kamu lihat celah yang orang lain lewatkan. Kamu usulkan solusi sebelum masalahnya jadi besar.</p><p>Tantanganmu? Kamu bisa terlalu lama di mode analisis dan telat eksekusi. Dan terkadang kamu lupa bahwa nggak semua hal perlu dioptimasi â€” beberapa hal cukup dikerjakan saja.</p>`,
-              en: `<p>Your brain naturally always asks: <em>"Is there a better way?"</em> You're not satisfied just because something works. You want to know why it works, and how it can be faster, more efficient, with less wasted energy.</p><p>You're the most valuable asset in any team â€” not because you work the hardest, but because you work the most <em>smartly</em>. You see gaps that others miss. You propose solutions before problems get big.</p><p>Your challenge? You can spend too long in analysis mode and be late to execute. And sometimes you forget that not everything needs to be optimized â€” some things just need to get done.</p>`
+              id: `<p>Otakmu secara alami selalu bertanya: <em>"Ada cara yang lebih baik nggak?"</em> Kamu nggak puas hanya karena sesuatu sudah berhasil. Kamu ingin tahu kenapa berhasil, dan bagaimana caranya agar bisa lebih cepat, lebih efisien, lebih sedikit energi yang terbuang.</p><p>Kamu adalah aset paling berharga dalam tim mana pun — bukan karena kamu yang paling keras kerjanya, tapi karena kamu yang paling <em>cerdas</em> dalam bekerja. Kamu lihat celah yang orang lain lewatkan. Kamu usulkan solusi sebelum masalahnya jadi besar.</p><p>Tantanganmu? Kamu bisa terlalu lama di mode analisis dan telat eksekusi. Dan terkadang kamu lupa bahwa nggak semua hal perlu dioptimasi — beberapa hal cukup dikerjakan saja.</p>`,
+              en: `<p>Your brain naturally always asks: <em>"Is there a better way?"</em> You're not satisfied just because something works. You want to know why it works, and how it can be faster, more efficient, with less wasted energy.</p><p>You're the most valuable asset in any team — not because you work the hardest, but because you work the most <em>smartly</em>. You see gaps that others miss. You propose solutions before problems get big.</p><p>Your challenge? You can spend too long in analysis mode and be late to execute. And sometimes you forget that not everything needs to be optimized — some things just need to get done.</p>`
             },
             strength: { id: 'Analitis, efisien, dan selalu cari cara yang lebih baik', en: 'Analytical, efficient, and always seeking better ways' },
             weakness: { id: 'Bisa paralysis by analysis kalau nggak dibatasi', en: 'Can fall into paralysis by analysis if not bounded' }
           },
           {
-            min: 18, max: 22, emoji: 'ðŸ¤',
+            min: 18, max: 22, emoji: '🤝',
             name: { id: 'The Connector', en: 'The Connector' },
             story: {
               id: `<p>Kamu tahu sesuatu yang banyak orang lupa: pekerjaan terbaik nggak lahir dari satu orang jenius yang bekerja sendirian. Pekerjaan terbaik lahir dari tim yang saling percaya, saling support, dan mau jujur satu sama lain.</p><p>Dan kamu adalah orang yang membuat itu mungkin terjadi. Kamu peka terhadap dinamika kelompok. Kamu tahu kapan seseorang butuh didukung dan kapan seseorang butuh diajak bicara. Kamu adalah lem yang membuat tim tetap bersatu bahkan ketika tekanan sedang tinggi.</p><p>Tapi ada harga yang harus kamu bayar: kamu sering mengutamakan keharmonisan sampai lupa bahwa kadang konflik yang sehat justru membawa tim ke level berikutnya. Dan terkadang kamu butuh belajar untuk <em>mengecewakan orang</em> demi hasil yang lebih baik.</p>`,
@@ -591,11 +591,11 @@ const categories = [
             weakness: { id: 'Susah confrontasi dan sering terlalu mengalah', en: 'Struggles with confrontation and often concedes too easily' }
           },
           {
-            min: 23, max: 28, emoji: 'ðŸš€',
+            min: 23, max: 28, emoji: '🚀',
             name: { id: 'The Trailblazer', en: 'The Trailblazer' },
             story: {
-              id: `<p>Kamu hidup di perbatasan antara "ini nggak mungkin" dan "kenapa nggak dicoba?" Ketika orang lain melihat risiko, kamu melihat peluang. Ketika ada ketidakpastian, kamu justru makin penasaran.</p><p>Kamu adalah tipe yang menggerakkan roda perubahan. Ide-idemu sering terdengar terlalu besar, terlalu berani â€” sampai tiba-tiba berhasil dan semua orang bilang "gw dari dulu udah lihat itu coming." Kamu nggak butuh peta karena kamu senang membuat petanya sendiri.</p><p>Tapi ada sisi gelap dari energimu ini: kamu bisa jadi susah untuk diikuti. Langkahmu terlalu cepat. Idemu berganti sebelum yang lama selesai. Dan dalam keseruanmu mengejar horizon baru, kamu kadang lupa bahwa ada orang-orang yang perlu kamu ajak serta â€” bukan hanya diajak berlari.</p>`,
-              en: `<p>You live on the border between "this is impossible" and "why not try?" When others see risk, you see opportunity. When there's uncertainty, you become even more curious.</p><p>You're the type that moves the wheels of change. Your ideas often sound too big, too bold â€” until they suddenly work and everyone says "I always saw that coming." You don't need a map because you enjoy making your own.</p><p>But there's a dark side to your energy: you can be hard to follow. Your pace is too fast. Your ideas change before the old ones are done. And in your excitement chasing new horizons, you sometimes forget that there are people you need to bring along â€” not just run with.</p>`
+              id: `<p>Kamu hidup di perbatasan antara "ini nggak mungkin" dan "kenapa nggak dicoba?" Ketika orang lain melihat risiko, kamu melihat peluang. Ketika ada ketidakpastian, kamu justru makin penasaran.</p><p>Kamu adalah tipe yang menggerakkan roda perubahan. Ide-idemu sering terdengar terlalu besar, terlalu berani — sampai tiba-tiba berhasil dan semua orang bilang "gw dari dulu udah lihat itu coming." Kamu nggak butuh peta karena kamu senang membuat petanya sendiri.</p><p>Tapi ada sisi gelap dari energimu ini: kamu bisa jadi susah untuk diikuti. Langkahmu terlalu cepat. Idemu berganti sebelum yang lama selesai. Dan dalam keseruanmu mengejar horizon baru, kamu kadang lupa bahwa ada orang-orang yang perlu kamu ajak serta — bukan hanya diajak berlari.</p>`,
+              en: `<p>You live on the border between "this is impossible" and "why not try?" When others see risk, you see opportunity. When there's uncertainty, you become even more curious.</p><p>You're the type that moves the wheels of change. Your ideas often sound too big, too bold — until they suddenly work and everyone says "I always saw that coming." You don't need a map because you enjoy making your own.</p><p>But there's a dark side to your energy: you can be hard to follow. Your pace is too fast. Your ideas change before the old ones are done. And in your excitement chasing new horizons, you sometimes forget that there are people you need to bring along — not just run with.</p>`
             },
             strength: { id: 'Inovatif, berani, dan nggak takut ambil risiko', en: 'Innovative, bold, and unafraid of risk' },
             weakness: { id: 'Bisa ninggalin orang di belakang kalau nggak sadar diri', en: 'Can leave people behind without realizing it' }
@@ -654,7 +654,7 @@ function renderLayer1() {
     card.className = 'cat-card';
     const done = cat.quizzes.filter(q => completedQuizzes.has(q.id)).length;
     if (done > 0) card.classList.add('has-completed');
-    card.innerHTML = `<span class="cat-icon">${cat.icon}</span><p class="cat-label">Kategori</p><h3 class="cat-title">${cat.title[lang]}</h3><p class="cat-count">${t[lang].quizCount(cat.quizzes.length)}</p>${done > 0 ? `<p class="cat-progress">âœ“ ${done} selesai</p>` : ''}`;
+    card.innerHTML = `<span class="cat-icon">${cat.icon}</span><p class="cat-label">Kategori</p><h3 class="cat-title">${cat.title[lang]}</h3><p class="cat-count">${t[lang].quizCount(cat.quizzes.length)}</p>${done > 0 ? `<p class="cat-progress">✓ ${done} selesai</p>` : ''}`;
     card.onclick = () => showCategory(cat.id, true);
     grid.appendChild(card);
   });
@@ -671,7 +671,7 @@ function showCategory(catId, navigate) {
     const card = document.createElement('div');
     const isDone = completedQuizzes.has(quiz.id);
     card.className = 'quiz-list-card' + (isDone ? ' completed' : '');
-    card.innerHTML = `<span class="qlc-icon">${quiz.icon}</span><div class="qlc-body"><p class="qlc-type">ðŸ“ Text Quiz</p><h3 class="qlc-title">${quiz.title[lang]}</h3><p class="qlc-desc">${quiz.desc[lang]}</p>${isDone ? '<span class="completed-badge">âœ“ Udah dikerjain</span>' : ''}</div><span class="qlc-arrow">${isDone ? 'âœ“' : 'â†’'}</span>`;
+    card.innerHTML = `<span class="qlc-icon">${quiz.icon}</span><div class="qlc-body"><p class="qlc-type">📝 Text Quiz</p><h3 class="qlc-title">${quiz.title[lang]}</h3><p class="qlc-desc">${quiz.desc[lang]}</p>${isDone ? '<span class="completed-badge">✓ Udah dikerjain</span>' : ''}</div><span class="qlc-arrow">${isDone ? '✓' : '→'}</span>`;
     card.onclick = () => startQuiz(quiz.id);
     grid.appendChild(card);
   });
@@ -761,7 +761,7 @@ function showResult() {
   document.getElementById('resEmoji').textContent = res.emoji;
   document.getElementById('resName').textContent = res.name[lang];
   document.getElementById('resStory').innerHTML = res.story[lang];
-  document.getElementById('resPills').innerHTML = `<span class="pill pill-s">âœ¦ ${res.strength[lang]}</span><span class="pill pill-w">âš  ${res.weakness[lang]}</span>`;
+  document.getElementById('resPills').innerHTML = `<span class="pill pill-s">✦ ${res.strength[lang]}</span><span class="pill pill-w">⚠ ${res.weakness[lang]}</span>`;
   document.getElementById('resultBlock').classList.add('show');
   if (res) initComments(res.name ? (res.name.id || res.name.en || res.name) : currentQuiz.id);
   completedQuizzes.add(currentQuiz.id);
@@ -780,7 +780,7 @@ function retakeQuiz() {
 renderLayer1();
 
 
-// â”€â”€ SUPABASE CONFIG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://qrarsfbgpkesbfiohcsk.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_ThdjzTHIplgQcMqm6SjmHA_sKgQABtj';
 const QUIZ_PAGE    = 'career'; // 'relationship' | 'personality' | 'career'
@@ -789,7 +789,7 @@ let currentResultKey = null;
 let myReactions = JSON.parse(localStorage.getItem('kgw_reactions') || '{}');
 let realtimeChannel = null;
 
-// â”€â”€ HELPERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── HELPERS ──────────────────────────────────────────────────────────────────
 function sbFetch(path, opts = {}) {
   return fetch(SUPABASE_URL + path, {
     ...opts,
@@ -815,7 +815,7 @@ function avatarLetter(name) {
   return (name || '?').trim().charAt(0).toUpperCase();
 }
 
-// â”€â”€ INIT COMMENT SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── INIT COMMENT SECTION ────────────────────────────────────────────────────
 function initComments(resultKey) {
   currentResultKey = QUIZ_PAGE + '-' + resultKey;
   document.getElementById('commentSection').classList.add('show');
@@ -829,14 +829,14 @@ function initComments(resultKey) {
   window._cmtPoll = setInterval(loadComments, 15000);
 }
 
-// â”€â”€ REACTIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── REACTIONS ────────────────────────────────────────────────────────────────
 async function loadReactions() {
   try {
     const r = await sbFetch(`/rest/v1/reactions?result_key=eq.${encodeURIComponent(currentResultKey)}&select=emoji,count`);
     const data = await r.json();
     const counts = {};
     data.forEach(row => { counts[row.emoji] = row.count; });
-    ['â¤ï¸','ðŸ”¥','ðŸ˜®','ðŸ˜‚','ðŸ‘'].forEach(e => {
+    ['❤️','🔥','😮','😂','👍'].forEach(e => {
       const el = document.getElementById('react-' + e);
       if (el) el.textContent = counts[e] || 0;
     });
@@ -887,7 +887,7 @@ async function toggleReact(emoji) {
   } catch(e) { console.warn('toggleReact:', e); }
 }
 
-// â”€â”€ COMMENTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── COMMENTS ─────────────────────────────────────────────────────────────────
 async function loadComments() {
   try {
     const r = await sbFetch(
@@ -903,7 +903,7 @@ async function loadComments() {
 function renderComments(comments) {
   const list = document.getElementById('commentsList');
   if (!comments.length) {
-    list.innerHTML = '<p class="no-comments">Belum ada komentar. Jadi yang pertama! ðŸ‘‡</p>';
+    list.innerHTML = '<p class="no-comments">Belum ada komentar. Jadi yang pertama! 👇</p>';
     return;
   }
   list.innerHTML = comments.map(c => renderCommentHTML(c)).join('');
@@ -934,7 +934,7 @@ function renderCommentHTML(c) {
       </div>
       <p class="comment-body">${escHtml(c.body)}</p>
       <div class="comment-actions">
-        <button class="comment-reply-btn" onclick="toggleReplyBox('${c.id}')">â†© Balas</button>
+        <button class="comment-reply-btn" onclick="toggleReplyBox('${c.id}')">↩ Balas</button>
       </div>
       ${repliesHTML}
       <div class="reply-input-wrap" id="reply-box-${c.id}">
@@ -942,7 +942,7 @@ function renderCommentHTML(c) {
         <textarea class="reply-textarea" id="reply-text-${c.id}" placeholder="Tulis balasan..." maxlength="300"></textarea>
         <div class="reply-submit-row">
           <button class="reply-cancel-btn" onclick="toggleReplyBox('${c.id}')">Batal</button>
-          <button class="reply-submit-btn" onclick="submitReply('${c.id}')">Kirim â†’</button>
+          <button class="reply-submit-btn" onclick="submitReply('${c.id}')">Kirim →</button>
         </div>
       </div>
     </div>`;
@@ -977,7 +977,7 @@ async function submitComment() {
     await loadComments();
   } catch(e) { alert('Gagal kirim komentar. Coba lagi ya!'); }
 
-  btn.disabled = false; btn.textContent = 'Kirim â†’';
+  btn.disabled = false; btn.textContent = 'Kirim →';
 }
 
 async function submitReply(parentId) {
@@ -1001,4 +1001,3 @@ async function submitReply(parentId) {
 </script>
 </body>
 </html>
-
