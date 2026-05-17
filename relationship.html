@@ -319,9 +319,6 @@ const categories = [
   }
 ];
 
-let currentLayer = 1;
-const completedQuizzes = new Set();
-
 function navGoBack() {
   if (currentLayer === 1) { window.location.href = 'index.html'; }
   else if (currentLayer === 2) { goToLayer(1); }
