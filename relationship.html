@@ -99,6 +99,57 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .btn-try-more:hover{opacity:0.85;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 @media(max-width:600px){.layer{padding-left:1.25rem;padding-right:1.25rem;}}
+
+/* ── COMMENT SECTION ── */
+.comment-section { display:none; margin-top:2.5rem; animation:fadeUp 0.4s ease; }
+.comment-section.show { display:block; }
+.comment-section-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:1.25rem; color:var(--text); display:flex; align-items:center; gap:8px; }
+.reactions-wrap { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1.75rem; }
+.react-btn { display:flex; align-items:center; gap:5px; padding:6px 14px; border-radius:100px; background:var(--surface); border:0.5px solid var(--border2); font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; transition:all 0.2s; color:var(--text); }
+.react-btn:hover { border-color:var(--accent); background:var(--accent-light); }
+.react-btn.reacted { background:var(--accent-light); border-color:var(--accent); color:var(--accent); font-weight:600; }
+.react-count { font-size:12px; color:var(--muted); min-width:8px; }
+.comment-input-wrap { background:var(--surface); border:0.5px solid var(--border2); border-radius:16px; padding:1rem; margin-bottom:1.5rem; }
+.comment-input-row { display:flex; gap:10px; margin-bottom:8px; }
+.comment-name-input { flex:1; background:var(--bg); border:0.5px solid var(--border2); border-radius:10px; padding:9px 13px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px; outline:none; transition:border-color 0.2s; }
+.comment-name-input:focus { border-color:var(--accent); }
+.comment-textarea { width:100%; background:var(--bg); border:0.5px solid var(--border2); border-radius:10px; padding:10px 13px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:14px; line-height:1.6; resize:none; outline:none; min-height:72px; transition:border-color 0.2s; }
+.comment-textarea:focus { border-color:var(--accent); }
+.comment-textarea::placeholder,.comment-name-input::placeholder { color:rgba(184,175,167,0.4); }
+.comment-submit-row { display:flex; justify-content:flex-end; margin-top:8px; }
+.comment-submit-btn { padding:8px 20px; background:var(--accent); color:white; border:none; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; cursor:pointer; transition:all 0.2s; }
+.comment-submit-btn:hover { opacity:0.85; }
+.comment-submit-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.comments-list { display:flex; flex-direction:column; gap:1rem; }
+.comment-item { background:var(--surface); border:0.5px solid var(--border); border-radius:14px; padding:1rem 1.1rem; }
+.comment-header { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.comment-avatar { width:28px; height:28px; border-radius:50%; background:var(--accent-light); border:1px solid var(--accent); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--accent); flex-shrink:0; }
+.comment-name { font-size:13px; font-weight:600; color:var(--text); }
+.comment-time { font-size:11px; color:var(--muted); margin-left:auto; }
+.comment-body { font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:8px; }
+.comment-actions { display:flex; gap:12px; align-items:center; }
+.comment-reply-btn { font-size:12px; color:var(--muted); background:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; padding:0; transition:color 0.2s; }
+.comment-reply-btn:hover { color:var(--accent); }
+.replies-list { margin-top:10px; padding-top:10px; border-top:0.5px solid var(--border); display:flex; flex-direction:column; gap:8px; }
+.reply-item { display:flex; gap:8px; }
+.reply-line { width:2px; background:var(--border2); border-radius:2px; flex-shrink:0; margin-left:4px; }
+.reply-content { flex:1; }
+.reply-name { font-size:12px; font-weight:600; color:var(--text); margin-bottom:2px; }
+.reply-body { font-size:13px; color:var(--muted); line-height:1.5; }
+.reply-time { font-size:10px; color:var(--muted); margin-top:2px; }
+.reply-input-wrap { margin-top:10px; background:var(--bg); border:0.5px solid var(--border2); border-radius:12px; padding:10px 12px; display:none; }
+.reply-input-wrap.show { display:block; }
+.reply-name-input,.reply-textarea { width:100%; background:transparent; border:none; border-bottom:0.5px solid var(--border2); padding:6px 0; color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px; outline:none; margin-bottom:6px; }
+.reply-textarea { resize:none; min-height:48px; border-bottom:none; }
+.reply-name-input::placeholder,.reply-textarea::placeholder { color:rgba(184,175,167,0.4); }
+.reply-submit-row { display:flex; justify-content:flex-end; gap:8px; }
+.reply-cancel-btn { padding:6px 14px; background:none; border:0.5px solid var(--border2); border-radius:100px; font-family:'DM Sans',sans-serif; font-size:12px; color:var(--muted); cursor:pointer; transition:all 0.2s; }
+.reply-cancel-btn:hover { border-color:var(--accent); color:var(--accent); }
+.reply-submit-btn { padding:6px 14px; background:var(--accent); color:white; border:none; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; cursor:pointer; transition:all 0.2s; }
+.reply-submit-btn:hover { opacity:0.85; }
+.no-comments { text-align:center; padding:1.5rem; color:var(--muted); font-size:14px; border:0.5px dashed var(--border2); border-radius:12px; }
+.comments-loading { text-align:center; padding:1rem; color:var(--muted); font-size:13px; }
+
 </style>
 </head>
 <body>
@@ -160,6 +211,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         <button class="btn-retake" id="btnRetake" onclick="retakeQuiz()">← Ulangi</button>
         <button class="btn-try-more" id="btnTryMore" onclick="goToLayer(2)">Coba Quiz Lain</button>
       </div>
+
+    <!-- COMMENT SECTION -->
+    <div class="comment-section" id="commentSection">
+      <hr class="result-divider" style="margin-bottom:2rem;">
+      <p class="comment-section-title">💬 <span id="cmt-title">Komentar</span></p>
+
+      <!-- Emoji Reactions -->
+      <div class="reactions-wrap" id="reactionsWrap">
+        <button class="react-btn" data-emoji="❤️" onclick="toggleReact('❤️')">❤️ <span class="react-count" id="react-❤️">0</span></button>
+        <button class="react-btn" data-emoji="🔥" onclick="toggleReact('🔥')">🔥 <span class="react-count" id="react-🔥">0</span></button>
+        <button class="react-btn" data-emoji="😮" onclick="toggleReact('😮')">😮 <span class="react-count" id="react-😮">0</span></button>
+        <button class="react-btn" data-emoji="😂" onclick="toggleReact('😂')">😂 <span class="react-count" id="react-😂">0</span></button>
+        <button class="react-btn" data-emoji="👍" onclick="toggleReact('👍')">👍 <span class="react-count" id="react-👍">0</span></button>
+      </div>
+
+      <!-- New Comment Input -->
+      <div class="comment-input-wrap">
+        <div class="comment-input-row">
+          <input class="comment-name-input" id="cmtName" type="text" placeholder="Nama kamu..." maxlength="40">
+        </div>
+        <textarea class="comment-textarea" id="cmtText" placeholder="Tulis komentar kamu di sini..." maxlength="500"></textarea>
+        <div class="comment-submit-row">
+          <button class="comment-submit-btn" id="cmtSubmitBtn" onclick="submitComment()">Kirim →</button>
+        </div>
+      </div>
+
+      <!-- Comments List -->
+      <div class="comments-list" id="commentsList">
+        <p class="comments-loading" id="cmtLoading">Memuat komentar...</p>
+      </div>
+    </div>
+
     </div>
   </div>
 </div>
@@ -388,6 +471,8 @@ function startQuiz(quizId) {
   document.getElementById('btnRetake').textContent = t[lang].btnRetake;
   document.getElementById('btnTryMore').textContent = t[lang].btnTryMore;
   document.getElementById('resultBlock').classList.remove('show');
+  document.getElementById('commentSection').classList.remove('show');
+  clearInterval(window._cmtPoll);
   buildQuizQuestions();
   updateProgress();
   goToLayer(3);
@@ -459,6 +544,7 @@ function showResult() {
   document.getElementById('resStory').innerHTML = res.story[lang];
   document.getElementById('resPills').innerHTML = `<span class="pill pill-s">✦ ${res.strength[lang]}</span><span class="pill pill-w">⚠ ${res.weakness[lang]}</span>`;
   document.getElementById('resultBlock').classList.add('show');
+  if (res) initComments(res.name ? (res.name.id || res.name.en || res.name) : currentQuiz.id);
   completedQuizzes.add(currentQuiz.id);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -473,6 +559,226 @@ function retakeQuiz() {
 }
 
 renderLayer1();
+
+
+// ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://qrarsfbgpkesbfiohcsk.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ThdjzTHIplgQcMqm6SjmHA_sKgQABtj';
+const QUIZ_PAGE    = 'relationship'; // 'relationship' | 'personality' | 'career'
+
+let currentResultKey = null;
+let myReactions = JSON.parse(localStorage.getItem('kgw_reactions') || '{}');
+let realtimeChannel = null;
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function sbFetch(path, opts = {}) {
+  return fetch(SUPABASE_URL + path, {
+    ...opts,
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || '',
+      ...opts.headers
+    }
+  });
+}
+
+function timeAgo(iso) {
+  const diff = (Date.now() - new Date(iso)) / 1000;
+  if (diff < 60) return 'baru saja';
+  if (diff < 3600) return Math.floor(diff/60) + ' menit lalu';
+  if (diff < 86400) return Math.floor(diff/3600) + ' jam lalu';
+  return Math.floor(diff/86400) + ' hari lalu';
+}
+
+function avatarLetter(name) {
+  return (name || '?').trim().charAt(0).toUpperCase();
+}
+
+// ── INIT COMMENT SECTION ────────────────────────────────────────────────────
+function initComments(resultKey) {
+  currentResultKey = QUIZ_PAGE + '-' + resultKey;
+  document.getElementById('commentSection').classList.add('show');
+  loadReactions();
+  loadComments();
+
+  // Realtime subscription
+  if (realtimeChannel) realtimeChannel.unsubscribe && realtimeChannel.unsubscribe();
+  // Supabase realtime via polling fallback (every 15s)
+  clearInterval(window._cmtPoll);
+  window._cmtPoll = setInterval(loadComments, 15000);
+}
+
+// ── REACTIONS ────────────────────────────────────────────────────────────────
+async function loadReactions() {
+  try {
+    const r = await sbFetch(`/rest/v1/reactions?result_key=eq.${encodeURIComponent(currentResultKey)}&select=emoji,count`);
+    const data = await r.json();
+    const counts = {};
+    data.forEach(row => { counts[row.emoji] = row.count; });
+    ['❤️','🔥','😮','😂','👍'].forEach(e => {
+      const el = document.getElementById('react-' + e);
+      if (el) el.textContent = counts[e] || 0;
+    });
+    // Mark already reacted
+    const myKey = myReactions[currentResultKey] || {};
+    document.querySelectorAll('.react-btn').forEach(btn => {
+      const em = btn.dataset.emoji;
+      btn.classList.toggle('reacted', !!myKey[em]);
+    });
+  } catch(e) { console.warn('loadReactions:', e); }
+}
+
+async function toggleReact(emoji) {
+  if (!currentResultKey) return;
+  const myKey = myReactions[currentResultKey] = myReactions[currentResultKey] || {};
+  const alreadyReacted = !!myKey[emoji];
+
+  // Optimistic UI
+  const countEl = document.getElementById('react-' + emoji);
+  const btn = document.querySelector(`.react-btn[data-emoji="${emoji}"]`);
+  let cur = parseInt(countEl.textContent) || 0;
+  if (alreadyReacted) {
+    myKey[emoji] = false;
+    countEl.textContent = Math.max(0, cur - 1);
+    btn.classList.remove('reacted');
+  } else {
+    myKey[emoji] = true;
+    countEl.textContent = cur + 1;
+    btn.classList.add('reacted');
+  }
+  localStorage.setItem('kgw_reactions', JSON.stringify(myReactions));
+
+  try {
+    if (alreadyReacted) {
+      // decrement
+      await sbFetch(`/rest/v1/rpc/decrement_reaction`, {
+        method: 'POST',
+        body: JSON.stringify({ p_result_key: currentResultKey, p_emoji: emoji })
+      });
+    } else {
+      // upsert / increment
+      await sbFetch(`/rest/v1/rpc/increment_reaction`, {
+        method: 'POST',
+        body: JSON.stringify({ p_result_key: currentResultKey, p_emoji: emoji })
+      });
+    }
+    loadReactions();
+  } catch(e) { console.warn('toggleReact:', e); }
+}
+
+// ── COMMENTS ─────────────────────────────────────────────────────────────────
+async function loadComments() {
+  try {
+    const r = await sbFetch(
+      `/rest/v1/comments?result_key=eq.${encodeURIComponent(currentResultKey)}&parent_id=is.null&order=created_at.desc&select=*,replies:comments!parent_id(*)`
+    );
+    const data = await r.json();
+    renderComments(Array.isArray(data) ? data : []);
+  } catch(e) {
+    document.getElementById('cmtLoading').textContent = 'Gagal memuat komentar.';
+  }
+}
+
+function renderComments(comments) {
+  const list = document.getElementById('commentsList');
+  if (!comments.length) {
+    list.innerHTML = '<p class="no-comments">Belum ada komentar. Jadi yang pertama! 👇</p>';
+    return;
+  }
+  list.innerHTML = comments.map(c => renderCommentHTML(c)).join('');
+}
+
+function renderCommentHTML(c) {
+  const replies = (c.replies || []).sort((a,b) => new Date(a.created_at) - new Date(b.created_at));
+  const repliesHTML = replies.length ? `
+    <div class="replies-list">
+      ${replies.map(r => `
+        <div class="reply-item">
+          <div class="reply-line"></div>
+          <div class="reply-content">
+            <p class="reply-name">${escHtml(r.author_name)}</p>
+            <p class="reply-body">${escHtml(r.body)}</p>
+            <p class="reply-time">${timeAgo(r.created_at)}</p>
+          </div>
+        </div>
+      `).join('')}
+    </div>` : '';
+
+  return `
+    <div class="comment-item" id="cmt-${c.id}">
+      <div class="comment-header">
+        <div class="comment-avatar">${avatarLetter(c.author_name)}</div>
+        <span class="comment-name">${escHtml(c.author_name)}</span>
+        <span class="comment-time">${timeAgo(c.created_at)}</span>
+      </div>
+      <p class="comment-body">${escHtml(c.body)}</p>
+      <div class="comment-actions">
+        <button class="comment-reply-btn" onclick="toggleReplyBox('${c.id}')">↩ Balas</button>
+      </div>
+      ${repliesHTML}
+      <div class="reply-input-wrap" id="reply-box-${c.id}">
+        <input class="reply-name-input" id="reply-name-${c.id}" type="text" placeholder="Nama kamu..." maxlength="40">
+        <textarea class="reply-textarea" id="reply-text-${c.id}" placeholder="Tulis balasan..." maxlength="300"></textarea>
+        <div class="reply-submit-row">
+          <button class="reply-cancel-btn" onclick="toggleReplyBox('${c.id}')">Batal</button>
+          <button class="reply-submit-btn" onclick="submitReply('${c.id}')">Kirim →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toggleReplyBox(commentId) {
+  const box = document.getElementById('reply-box-' + commentId);
+  box.classList.toggle('show');
+  if (box.classList.contains('show')) document.getElementById('reply-name-' + commentId).focus();
+}
+
+async function submitComment() {
+  const name = document.getElementById('cmtName').value.trim();
+  const body = document.getElementById('cmtText').value.trim();
+  if (!name) { alert('Nama nggak boleh kosong ya!'); return; }
+  if (!body) { alert('Komentar nggak boleh kosong!'); return; }
+
+  const btn = document.getElementById('cmtSubmitBtn');
+  btn.disabled = true; btn.textContent = 'Mengirim...';
+
+  try {
+    await sbFetch('/rest/v1/comments', {
+      method: 'POST',
+      prefer: 'return=minimal',
+      body: JSON.stringify({ result_key: currentResultKey, author_name: name, body, parent_id: null })
+    });
+    document.getElementById('cmtText').value = '';
+    await loadComments();
+  } catch(e) { alert('Gagal kirim komentar. Coba lagi ya!'); }
+
+  btn.disabled = false; btn.textContent = 'Kirim →';
+}
+
+async function submitReply(parentId) {
+  const name = document.getElementById('reply-name-' + parentId).value.trim();
+  const body = document.getElementById('reply-text-' + parentId).value.trim();
+  if (!name) { alert('Nama nggak boleh kosong ya!'); return; }
+  if (!body) { alert('Balasan nggak boleh kosong!'); return; }
+
+  try {
+    await sbFetch('/rest/v1/comments', {
+      method: 'POST',
+      prefer: 'return=minimal',
+      body: JSON.stringify({ result_key: currentResultKey, author_name: name, body, parent_id: parentId })
+    });
+    document.getElementById('reply-text-' + parentId).value = '';
+    toggleReplyBox(parentId);
+    await loadComments();
+  } catch(e) { alert('Gagal kirim balasan. Coba lagi ya!'); }
+}
+
 </script>
 </body>
 </html>
