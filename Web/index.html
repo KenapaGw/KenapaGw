@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KenapaGw — Kenali Dirimu Lebih Dalam</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0E0C0A; --bg2: #161310; --bg3: #1E1A16; --surface: #231F1B;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+  --text: #F0EBE4; --muted: #B8AFA7; --accent: #C17D4A;
+  --accent-light: rgba(193,125,74,0.15);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.7; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(14,12,10,0.92); backdrop-filter: blur(16px);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; }
+.nav-logo span { color: var(--accent); font-style: italic; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
+.lang-toggle { display: flex; gap: 4px; background: var(--surface); border-radius: 100px; padding: 4px; border: 0.5px solid var(--border2); }
+.lang-btn { padding: 4px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--muted); transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+.lang-btn.active { background: var(--accent); color: white; }
+
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(193,125,74,0.12) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;
+}
+.hero-tag { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 1.5rem; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 9vw, 7rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub { margin-top: 1.5rem; font-size: 18px; color: var(--muted); max-width: 500px; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+.hero-actions { margin-top: 2.5rem; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+
+.btn-primary { padding: 14px 32px; background: var(--accent); color: white; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; border-radius: 100px; transition: opacity 0.2s, transform 0.15s; border: none; cursor: pointer; display: inline-block; }
+.btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+.btn-secondary { padding: 14px 32px; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; border-radius: 100px; border: 1px solid var(--border2); transition: all 0.2s; cursor: pointer; display: inline-block; }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.ad-banner { background: var(--bg2); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); padding: 1rem 2rem; text-align: center; }
+.ad-inner { max-width: 728px; margin: 0 auto; height: 60px; border: 1.5px dashed rgba(193,125,74,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.ad-inner span { font-size: 13px; color: var(--muted); }
+.ad-badge { font-size: 10px; padding: 3px 10px; border-radius: 100px; background: var(--accent-light); color: var(--accent); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }
+.ad-mid-wrap { background: var(--bg2); padding: 3rem 2rem; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+.ad-mid-inner { max-width: 300px; margin: 0 auto; height: 250px; border: 1.5px dashed rgba(193,125,74,0.25); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+
+section { padding: 5rem 2rem; }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.75rem; }
+.section-desc { font-size: 16px; color: var(--muted); max-width: 500px; margin-bottom: 3rem; }
+
+.quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.quiz-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.25s; text-decoration: none; color: inherit; display: block; }
+.quiz-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.quiz-card-icon { font-size: 36px; margin-bottom: 1rem; display: block; }
+.quiz-card-tag { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+.quiz-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+.quiz-card p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
+.quiz-card-cta { font-size: 14px; font-weight: 500; color: var(--accent); }
+
+.berita-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.berita-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.25s; }
+.berita-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.berita-img { width: 100%; height: 160px; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 52px; }
+.berita-body { padding: 1.25rem; }
+.berita-tag { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+.berita-body h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3; }
+.berita-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
+.about-text p { font-size: 16px; color: var(--muted); margin-bottom: 1rem; line-height: 1.8; }
+.about-visual { background: var(--surface); border-radius: 20px; padding: 3rem; text-align: center; border: 0.5px solid var(--border); }
+.about-stat { margin-bottom: 2rem; }
+.about-stat:last-child { margin-bottom: 0; }
+.about-stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--accent); }
+.about-stat-label { font-size: 14px; color: var(--muted); }
+
+footer { background: var(--bg2); color: var(--text); padding: 3rem 2rem; text-align: center; border-top: 0.5px solid var(--border); }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; margin-bottom: 0.5rem; }
+.footer-logo span { color: var(--accent); font-style: italic; }
+.footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 700px) {
+  .nav-links { display: none; }
+  .about-wrap { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Kenapa<span>Gw</span></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#quiz" data-i18n="navQuiz">Quiz</a>
+      <a href="#berita" data-i18n="navBerita">Berita Unik</a>
+      <a href="#tentang" data-i18n="navTentang">Tentang</a>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')">ID</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="hero-tag" data-i18n="heroTag">Kenali dirimu lebih dalam</p>
+  <h1>Kenapa<em>Gw</em><br>Kayak Gini?</h1>
+  <p class="hero-sub" data-i18n="heroSub">Pertanyaan yang semua orang tanya tapi jarang berani jawab. Mulai dari sini.</p>
+  <div class="hero-actions">
+    <a href="#quiz" class="btn-primary" data-i18n="heroCta">Coba Quiz Sekarang →</a>
+    <a href="#tentang" class="btn-secondary" data-i18n="heroSec">Tentang Kami</a>
+  </div>
+</section>
+
+<div class="ad-banner">
+  <div class="ad-inner">
+    <span class="ad-badge">Iklan</span>
+    <span data-i18n="adTop">Ruang iklan tersedia — hubungi kami untuk pasang iklan di sini</span>
+  </div>
+</div>
+
+<section id="quiz" style="background: var(--bg);">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="quizLabel">Pilih Quiz</p>
+    <h2 class="section-title" data-i18n="quizTitle">Mau tau yang mana dulu?</h2>
+    <p class="section-desc" data-i18n="quizDesc">Semua quiz dibuat jujur, tanpa filter. Hasilnya bisa bikin kamu mikir.</p>
+    <div class="quiz-grid">
+      <a class="quiz-card" href="personality.html">
+        <span class="quiz-card-icon">🎭</span>
+        <p class="quiz-card-tag" data-i18n="q1Tag">Personality</p>
+        <h3 data-i18n="q1Title">Fun Personality Quiz</h3>
+        <p data-i18n="q1Desc">Kamu The Bold Driver atau The Heart-Led Soul? 5 pertanyaan, hasilnya lebih jujur dari yang kamu kira.</p>
+        <span class="quiz-card-cta" data-i18n="qCta">Mulai Quiz →</span>
+      </a>
+      <a class="quiz-card" href="relationship.html">
+        <span class="quiz-card-icon">💖</span>
+        <p class="quiz-card-tag" data-i18n="q2Tag">Relationship</p>
+        <h3 data-i18n="q2Title">Relationship Quiz</h3>
+        <p data-i18n="q2Desc">Pola hubunganmu ngomong banyak soal dirimu. Cari tau attachment style kamu sekarang.</p>
+        <span class="quiz-card-cta" data-i18n="qCta">Mulai Quiz →</span>
+      </a>
+      <div class="quiz-card" style="border-style: dashed; opacity: 0.4; cursor: default;">
+        <span class="quiz-card-icon">🚀</span>
+        <p class="quiz-card-tag" data-i18n="q3Tag">Coming Soon</p>
+        <h3 data-i18n="q3Title">Career Quiz</h3>
+        <p data-i18n="q3Desc">Kerja keras tapi ngerasa stuck? Mungkin bukan karena kamu malas. Segera hadir.</p>
+        <span class="quiz-card-cta" style="color:var(--muted);" data-i18n="q3Cta">Segera hadir</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ad-mid-wrap">
+  <div class="ad-mid-inner">
+    <span class="ad-badge">Iklan</span>
+    <span style="font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">300 × 250</span>
+    <span style="font-size:12px; color:var(--muted);" data-i18n="adMid">Hubungi kami untuk pasang iklan</span>
+  </div>
+</div>
+
+<section id="berita" style="background: var(--bg);">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="beritaLabel">Berita Unik</p>
+    <h2 class="section-title" data-i18n="beritaTitle">Yang aneh, yang nyata.</h2>
+    <p class="section-desc" data-i18n="beritaDesc">Fakta dan berita unik yang bikin kamu bilang "hah, serius?"</p>
+    <div class="berita-grid">
+      <div class="berita-card">
+        <div class="berita-img">🐙</div>
+        <div class="berita-body">
+          <p class="berita-tag" data-i18n="b1Tag">Sains</p>
+          <h4 data-i18n="b1Title">Gurita Punya 3 Jantung dan Darah Biru</h4>
+          <p data-i18n="b1Desc">Dan kalau salah satu jantungnya berhenti saat berenang, mereka lebih suka jalan di dasar laut.</p>
+        </div>
+      </div>
+      <div class="berita-card">
+        <div class="berita-img">😴</div>
+        <div class="berita-body">
+          <p class="berita-tag" data-i18n="b2Tag">Psikologi</p>
+          <h4 data-i18n="b2Title">Otak Kamu Aktif Lebih Keras Saat Tidur</h4>
+          <p data-i18n="b2Desc">Saat kamu tidur, otak justru kerja keras buat cuci racun dan konsolidasikan memori harian kamu.</p>
+        </div>
+      </div>
+      <div class="berita-card">
+        <div class="berita-img">🌏</div>
+        <div class="berita-body">
+          <p class="berita-tag" data-i18n="b3Tag">Dunia</p>
+          <h4 data-i18n="b3Title">Ada Tempat yang Bisa Ngalamin 4 Musim dalam Sehari</h4>
+          <p data-i18n="b3Desc">Di beberapa bagian New Zealand, kamu bisa ngerasain panas, hujan, dingin, dan angin kencang dalam satu hari.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tentang" style="background: var(--bg2);">
+  <div class="section-inner">
+    <div class="about-wrap">
+      <div class="about-text">
+        <p class="section-label" data-i18n="tentangLabel">Tentang KenapaGw</p>
+        <h2 data-i18n="tentangTitle">Dibuat buat yang sering nanya ke diri sendiri</h2>
+        <p data-i18n="tentangP1">KenapaGw lahir dari satu pertanyaan sederhana yang semua orang pernah tanya tapi jarang dapat jawaban yang jujur.</p>
+        <p data-i18n="tentangP2">Di sini, kamu bisa eksplorasi diri lewat quiz yang nggak judge, baca konten yang bikin mikir, dan pelan-pelan kenali diri sendiri lebih dalam.</p>
+        <a href="#quiz" class="btn-primary" style="margin-top:1rem;" data-i18n="tentangCta">Mulai Eksplorasi →</a>
+      </div>
+      <div class="about-visual">
+        <div class="about-stat">
+          <div class="about-stat-num">3</div>
+          <div class="about-stat-label" data-i18n="stat1">Quiz tersedia</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">100%</div>
+          <div class="about-stat-label" data-i18n="stat2">Jujur, no filter</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">0</div>
+          <div class="about-stat-label" data-i18n="stat3">Judgment di sini</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ad-banner">
+  <div class="ad-inner">
+    <span class="ad-badge">Iklan</span>
+    <span data-i18n="adBottom">Tertarik pasang iklan? Hubungi kami di akunlmpodcast@gmail.com</span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Kenapa<span>Gw</span></div>
+  <p style="font-size:14px; color:var(--muted); margin-top:0.5rem;" data-i18n="footerSub">Kenali dirimu. Hadapi dirimu.</p>
+  <div class="footer-links">
+    <a href="#quiz" data-i18n="navQuiz">Quiz</a>
+    <a href="#berita" data-i18n="navBerita">Berita Unik</a>
+    <a href="#tentang" data-i18n="navTentang">Tentang</a>
+    <a href="#" data-i18n="footerAd">Pasang Iklan</a>
+  </div>
+  <p style="margin-top:2rem; font-size:13px; color:rgba(247,243,238,0.3);">© 2026 KenapaGw</p>
+</footer>
+
+<script>
+const i18n = {
+  id: {
+    navQuiz: 'Quiz', navBerita: 'Berita Unik', navTentang: 'Tentang',
+    heroTag: 'Kenali dirimu lebih dalam',
+    heroSub: 'Pertanyaan yang semua orang tanya tapi jarang berani jawab. Mulai dari sini.',
+    heroCta: 'Coba Quiz Sekarang →', heroSec: 'Tentang Kami',
+    quizLabel: 'Pilih Quiz', quizTitle: 'Mau tau yang mana dulu?',
+    quizDesc: 'Semua quiz dibuat jujur, tanpa filter. Hasilnya bisa bikin kamu mikir.',
+    q1Tag: 'Personality', q1Title: 'Fun Personality Quiz',
+    q1Desc: 'Kamu The Bold Driver atau The Heart-Led Soul? 5 pertanyaan, hasilnya lebih jujur dari yang kamu kira.',
+    q2Tag: 'Relationship', q2Title: 'Relationship Quiz',
+    q2Desc: 'Pola hubunganmu ngomong banyak soal dirimu. Cari tau attachment style kamu sekarang.',
+    q3Tag: 'Coming Soon', q3Title: 'Career Quiz',
+    q3Desc: 'Kerja keras tapi ngerasa stuck? Mungkin bukan karena kamu malas. Segera hadir.',
+    qCta: 'Mulai Quiz →', q3Cta: 'Segera hadir',
+    adTop: 'Ruang iklan tersedia — hubungi kami untuk pasang iklan di sini',
+    adMid: 'Hubungi kami untuk pasang iklan',
+    adBottom: 'Tertarik pasang iklan? Hubungi kami di akunlmpodcast@gmail.com',
+    beritaLabel: 'Berita Unik', beritaTitle: 'Yang aneh, yang nyata.',
+    beritaDesc: 'Fakta dan berita unik yang bikin kamu bilang "hah, serius?"',
+    b1Tag: 'Sains', b1Title: 'Gurita Punya 3 Jantung dan Darah Biru',
+    b1Desc: 'Dan kalau salah satu jantungnya berhenti saat berenang, mereka lebih suka jalan di dasar laut.',
+    b2Tag: 'Psikologi', b2Title: 'Otak Kamu Aktif Lebih Keras Saat Tidur',
+    b2Desc: 'Saat kamu tidur, otak justru kerja keras buat cuci racun dan konsolidasikan memori harian kamu.',
+    b3Tag: 'Dunia', b3Title: 'Ada Tempat yang Bisa Ngalamin 4 Musim dalam Sehari',
+    b3Desc: 'Di beberapa bagian New Zealand, kamu bisa ngerasain panas, hujan, dingin, dan angin kencang dalam satu hari.',
+    tentangLabel: 'Tentang KenapaGw',
+    tentangTitle: 'Dibuat buat yang sering nanya ke diri sendiri',
+    tentangP1: 'KenapaGw lahir dari satu pertanyaan sederhana yang semua orang pernah tanya tapi jarang dapat jawaban yang jujur.',
+    tentangP2: 'Di sini, kamu bisa eksplorasi diri lewat quiz yang nggak judge, baca konten yang bikin mikir, dan pelan-pelan kenali diri sendiri lebih dalam.',
+    tentangCta: 'Mulai Eksplorasi →',
+    stat1: 'Quiz tersedia', stat2: 'Jujur, no filter', stat3: 'Judgment di sini',
+    footerSub: 'Kenali dirimu. Hadapi dirimu.', footerAd: 'Pasang Iklan',
+  },
+  en: {
+    navQuiz: 'Quiz', navBerita: 'Weird Facts', navTentang: 'About',
+    heroTag: 'Know yourself deeper',
+    heroSub: 'The question everyone asks but rarely dares to answer. Start here.',
+    heroCta: 'Try a Quiz Now →', heroSec: 'About Us',
+    quizLabel: 'Choose a Quiz', quizTitle: 'Which one first?',
+    quizDesc: 'Every quiz is honest, no filter. The results might make you think.',
+    q1Tag: 'Personality', q1Title: 'Fun Personality Quiz',
+    q1Desc: 'Are you The Bold Driver or The Heart-Led Soul? 5 questions, results more honest than you think.',
+    q2Tag: 'Relationship', q2Title: 'Relationship Quiz',
+    q2Desc: 'Your relationship patterns say a lot about you. Find out your attachment style now.',
+    q3Tag: 'Coming Soon', q3Title: 'Career Quiz',
+    q3Desc: "Working hard but feeling stuck? Maybe it's not because you're lazy. Coming soon.",
+    qCta: 'Start Quiz →', q3Cta: 'Coming soon',
+    adTop: 'Ad space available — contact us to advertise here',
+    adMid: 'Contact us to place an ad',
+    adBottom: 'Interested in advertising? Contact us at akunlmpodcast@gmail.com',
+    beritaLabel: 'Weird Facts', beritaTitle: 'Strange but real.',
+    beritaDesc: 'Facts and weird news that make you say "wait, seriously?"',
+    b1Tag: 'Science', b1Title: 'Octopuses Have 3 Hearts and Blue Blood',
+    b1Desc: "And if one heart stops while swimming, they prefer to walk along the ocean floor.",
+    b2Tag: 'Psychology', b2Title: 'Your Brain Works Harder When You Sleep',
+    b2Desc: 'While you sleep, your brain is hard at work flushing out toxins and consolidating your daily memories.',
+    b3Tag: 'World', b3Title: 'There Are Places That Experience 4 Seasons in One Day',
+    b3Desc: 'In parts of New Zealand, you can experience heat, rain, cold, and strong winds all in a single day.',
+    tentangLabel: 'About KenapaGw',
+    tentangTitle: 'Built for those who often question themselves',
+    tentangP1: 'KenapaGw was born from one simple question that everyone has asked but rarely gets an honest answer to.',
+    tentangP2: 'Here, you can explore yourself through non-judgmental quizzes, read thought-provoking content, and slowly get to know yourself more deeply.',
+    tentangCta: 'Start Exploring →',
+    stat1: 'Quizzes available', stat2: 'Honest, no filter', stat3: 'Judgment here',
+    footerSub: 'Know yourself. Face yourself.', footerAd: 'Advertise',
+  }
+};
+
+function setLang(lang) {
+  const T = i18n[lang];
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[key] !== undefined) el.textContent = T[key];
+  });
+}
+</script>
+
+</body>
+</html>
