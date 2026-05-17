@@ -37,11 +37,45 @@ nav {
 .nav-back { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .nav-back:hover { color: var(--accent); }
 
-/* AD BANNER */
-.ad-banner { background: var(--bg2); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); padding: 0.75rem 2rem; text-align: center; }
-.ad-inner { max-width: 728px; margin: 0 auto; height: 56px; border: 1.5px dashed rgba(193,125,74,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-.ad-inner span { font-size: 13px; color: var(--muted); }
-.ad-badge { font-size: 10px; padding: 3px 10px; border-radius: 100px; background: var(--accent-light); color: var(--accent); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }
+.ticker-wrap {
+  background: var(--accent);
+  padding: 10px 0;
+  overflow: hidden;
+  border-top: 0.5px solid rgba(255,255,255,0.15);
+  border-bottom: 0.5px solid rgba(255,255,255,0.15);
+  width: 100%;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 20s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ticker-item::after {
+  content: '✦';
+  opacity: 0.6;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
 /* PAGE WRAP */
 .page-wrap { max-width: 860px; margin: 0 auto; padding: 7rem 2rem 5rem; }
@@ -135,13 +169,6 @@ nav {
   </div>
 </nav>
 
-<div class="ad-banner">
-  <div class="ad-inner">
-    <span class="ad-badge">Iklan</span>
-    <span>Pasang iklan di sini — hubungi: akunlmpodcast@gmail.com</span>
-  </div>
-</div>
-
 <div class="page-wrap">
   <div class="page-header">
     <p class="page-label">Berita Unik · Kategori</p>
@@ -151,13 +178,6 @@ nav {
 
   <div class="artikel-list" id="artikelList"></div>
   <div class="pagination" id="pagination"></div>
-</div>
-
-<div class="ad-banner" style="margin-top: 2rem;">
-  <div class="ad-inner">
-    <span class="ad-badge">Iklan</span>
-    <span>Tertarik pasang iklan? Kirim email ke akunlmpodcast@gmail.com</span>
-  </div>
 </div>
 
 <div class="float-btns">
