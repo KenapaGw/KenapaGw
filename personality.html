@@ -1077,6 +1077,210 @@ const categories = [
             weakness: { id: 'Bisa takut atau menghindari kesendirian', en: 'Can fear or avoid solitude' }
           }
         ]
+      },
+      {
+        id: 'socialstyle', icon: '🦎', type: 'text',
+        title: { id: 'Bagaimana Gaya Sosialmu?', en: 'What Is Your Social Style?' },
+        desc: { id: 'Bukan cuma introvert atau extrovert. Lebih dari itu.', en: 'Not just introvert or extrovert. It\'s more than that.' },
+        questions: [
+          {
+            text: { id: 'Kamu datang ke gathering yang isinya mostly orang asing.', en: 'You arrive at a gathering mostly full of strangers.' },
+            options: [
+              { label: { id: 'Nyesel datang tapi stay karena udah terlanjur 😭', en: 'Regret coming but stay since you\'re already there 😭' }, points: 1 },
+              { label: { id: 'Cari spot aman sambil observasi dulu 👀', en: 'Find a safe spot and observe first 👀' }, points: 2 },
+              { label: { id: 'Cari satu orang yang keliatan approachable.', en: 'Find one person who looks approachable.' }, points: 3 },
+              { label: { id: 'Langsung cari orang buat diajak ngobrol 😎', en: 'Immediately look for someone to talk to 😎' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Weekend ideal buat recharge?', en: 'Ideal weekend to recharge?' },
+            options: [
+              { label: { id: 'Full me time, no disturbance.', en: 'Full me time, no disturbance.' }, points: 1 },
+              { label: { id: 'Satu-dua orang close friend udah cukup.', en: 'One or two close friends is enough.' }, points: 2 },
+              { label: { id: 'Tergantung mood dan energi minggu itu.', en: 'Depends on my mood and energy that week.' }, points: 3 },
+              { label: { id: 'Hangout rame seharian.', en: 'Group hangout all day.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Di group chat, kamu biasanya…', en: 'In a group chat, you usually…' },
+            options: [
+              { label: { id: 'Silent reader 👻', en: 'Silent reader 👻' }, points: 1 },
+              { label: { id: 'Yang suka reply satu orang privately.', en: 'The one who replies to people privately.' }, points: 2 },
+              { label: { id: 'Aktif kalau topiknya menarik.', en: 'Active when the topic is interesting.' }, points: 3 },
+              { label: { id: 'Starter chaos + meme dealer 😭', en: 'Chaos starter + meme dealer 😭' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Ketemu orang baru yang vibes-nya cocok banget.', en: 'You meet someone new whose vibe clicks perfectly.' },
+            options: [
+              { label: { id: 'Malah suspicious "ini terlalu cocok…" 👀', en: 'Suddenly suspicious "this feels too easy…" 👀' }, points: 1 },
+              { label: { id: 'Enjoy, tapi energi tetap kebatas.', en: 'Enjoy it, but energy still has a limit.' }, points: 2 },
+              { label: { id: 'Tetep hati-hati tapi interested.', en: 'Still cautious but interested.' }, points: 3 },
+              { label: { id: 'Langsung excited banget.', en: 'Immediately super excited.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada social conflict…', en: 'When there\'s a social conflict…' },
+            options: [
+              { label: { id: 'Berharap selesai sendiri 💀', en: 'Hope it resolves itself 💀' }, points: 1 },
+              { label: { id: 'Menghilang sementara.', en: 'Temporarily disappear.' }, points: 2 },
+              { label: { id: 'Mikir dulu sebelum respon.', en: 'Think before responding.' }, points: 3 },
+              { label: { id: 'Langsung bahas biar clear.', en: 'Address it directly to clear the air.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Setelah event besar, kamu biasanya…', en: 'After a big event, you usually…' },
+            options: [
+              { label: { id: 'Social battery dead total 🔋☠️', en: 'Social battery completely dead 🔋☠️' }, points: 1 },
+              { label: { id: 'Langsung recharge sendirian.', en: 'Immediately recharge alone.' }, points: 2 },
+              { label: { id: 'Seneng, tapi butuh cooldown.', en: 'Happy, but need a cooldown.' }, points: 3 },
+              { label: { id: 'Masih pengen lanjut nongkrong.', en: 'Still want to keep hanging out.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ngobrol, kamu lebih suka…', en: 'When having a conversation, you prefer…' },
+            options: [
+              { label: { id: 'Dengerin orang cerita.', en: 'Listening to people talk.' }, points: 2 },
+              { label: { id: 'Deep talk meaningful.', en: 'Deep, meaningful talk.' }, points: 3 },
+              { label: { id: 'Tergantung chemistry.', en: 'Depends on the chemistry.' }, points: 3 },
+              { label: { id: 'Random chaos ngobrol ngalor-ngidul.', en: 'Random chaotic conversations going everywhere.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalau sehari full ga ada chat atau notifikasi…', en: 'If you go a full day with no chats or notifications…' },
+            options: [
+              { label: { id: 'Heaven.', en: 'Heaven.' }, points: 1 },
+              { label: { id: 'Lumayan damai sih.', en: 'Pretty peaceful actually.' }, points: 2 },
+              { label: { id: 'Baru sadar pas malam.', en: 'Only realized at night.' }, points: 3 },
+              { label: { id: '"Kok sepi?" 😭', en: '"Why is it so quiet?" 😭' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Di tongkrongan kamu biasanya role-nya…', en: 'In your friend group your usual role is…' },
+            options: [
+              { label: { id: 'Observer yang sesekali nyeletuk.', en: 'Observer who occasionally speaks up.' }, points: 1 },
+              { label: { id: 'One-on-one specialist.', en: 'One-on-one specialist.' }, points: 2 },
+              { label: { id: 'Connector, nyambungin orang-orang.', en: 'Connector, linking people together.' }, points: 3 },
+              { label: { id: 'Pusat keributan.', en: 'Center of chaos.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Orang curhat panjang ke kamu.', en: 'Someone vents to you at length.' },
+            options: [
+              { label: { id: 'Please no.', en: 'Please no.' }, points: 1 },
+              { label: { id: 'Capek tapi ga enakan nolak 😭', en: 'Tired but feel bad saying no 😭' }, points: 2 },
+              { label: { id: 'Kalau orang tertentu, yes.', en: 'If it\'s the right person, yes.' }, points: 3 },
+              { label: { id: 'Seneng, trusted berarti.', en: 'Happy about it, means they trust you.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Networking event buat kamu itu…', en: 'A networking event for you is…' },
+            options: [
+              { label: { id: 'Nightmare fuel 💀', en: 'Nightmare fuel 💀' }, points: 1 },
+              { label: { id: 'Melelahkan tapi doable.', en: 'Tiring but doable.' }, points: 2 },
+              { label: { id: 'Bisa, asal ada purpose.', en: 'Fine, as long as there\'s a purpose.' }, points: 3 },
+              { label: { id: 'Playground 😎', en: 'Playground 😎' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalau harus present depan banyak orang…', en: 'If you have to present in front of many people…' },
+            options: [
+              { label: { id: 'Tolong cariin pengganti.', en: 'Please find someone to replace me.' }, points: 1 },
+              { label: { id: 'Bisa kalau prepared banget.', en: 'Okay if very well prepared.' }, points: 2 },
+              { label: { id: 'Nervous tapi bisa.', en: 'Nervous but can do it.' }, points: 3 },
+              { label: { id: 'LET\'S GO 🔥', en: 'LET\'S GO 🔥' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalau teman ngajak spontan keluar…', en: 'When a friend spontaneously invites you out…' },
+            options: [
+              { label: { id: 'Big no.', en: 'Big no.' }, points: 1 },
+              { label: { id: 'Perlu mental prep dulu 😭', en: 'Need mental prep first 😭' }, points: 2 },
+              { label: { id: 'Tergantung siapa.', en: 'Depends on who it is.' }, points: 3 },
+              { label: { id: 'Gas langsung.', en: 'Let\'s go immediately.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kamu lebih takut…', en: 'You\'re more afraid of…' },
+            options: [
+              { label: { id: 'Drained karena kebanyakan orang.', en: 'Being drained by too many people.' }, points: 1 },
+              { label: { id: 'Salah vibe sama orang.', en: 'Having the wrong vibe with someone.' }, points: 2 },
+              { label: { id: 'Small talk awkward.', en: 'Awkward small talk.' }, points: 3 },
+              { label: { id: 'Sendirian terlalu lama.', en: 'Being alone for too long.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalimat yang paling relate:', en: 'The most relatable sentence:' },
+            options: [
+              { label: { id: '"My room understands me." 😭', en: '"My room understands me." 😭' }, points: 1 },
+              { label: { id: '"I like people… in moderation."', en: '"I like people… in moderation."' }, points: 2 },
+              { label: { id: '"Depends on the people."', en: '"Depends on the people."' }, points: 3 },
+              { label: { id: '"People energize me."', en: '"People energize me."' }, points: 4 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 15, max: 25, emoji: '🌙',
+            name: { id: 'The Lone Strategist', en: 'The Lone Strategist' },
+            story: {
+              id: `<p>Lo genuinely nyaman sama ruang sendiri. Bukan berarti anti-orang, tapi lo ga butuh validasi sosial buat ngerasa utuh.</p><p>Kadang orang mikir lo dingin atau susah dideketin. Padahal enggak. Lo cuma highly selective soal energi.</p><p><em>Connection bukan ancaman. Orang yang tepat ga akan drain lo.</em></p>`,
+              en: `<p>You're genuinely comfortable with your own space. Not anti-social, but you don't need social validation to feel whole.</p><p>People sometimes think you're cold or hard to approach. You're not. You're just highly selective about energy.</p><p><em>Connection isn't a threat. The right people won't drain you.</em></p>`
+            },
+            strength: { id: 'Mandiri, observant, dan mentally resilient', en: 'Independent, observant, and mentally resilient' },
+            weakness: { id: 'Tembok emosional bisa terlalu tinggi', en: 'Emotional walls can get too high' }
+          },
+          {
+            min: 26, max: 35, emoji: '🔋',
+            name: { id: 'The Battery Saver', en: 'The Battery Saver' },
+            story: {
+              id: `<p>Lo suka interaksi… tapi ada limit keras 😭</p><p>Kalau terlalu banyak noise, small talk, atau energi chaotic, baterai lo langsung merah. Lo thrive di hubungan yang intentional, bukan keramaian random.</p><p><em>Recharge itu perlu. Tapi jangan sampai jadi alasan buat kabur terus.</em></p>`,
+              en: `<p>You like interaction… but there's a hard limit 😭</p><p>Too much noise, small talk, or chaotic energy and your battery hits red immediately. You thrive in intentional relationships, not random crowds.</p><p><em>Recharging is necessary. But don't let it become an excuse to keep running away.</em></p>`
+            },
+            strength: { id: 'Hubungan yang mindful dan selektif dengan sehat', en: 'Mindful relationships and healthy selectiveness' },
+            weakness: { id: 'Kadang self-isolation berkedok self-care', en: 'Sometimes self-isolation disguised as self-care' }
+          },
+          {
+            min: 36, max: 45, emoji: '🌊',
+            name: { id: 'The Quiet Current', en: 'The Quiet Current' },
+            story: {
+              id: `<p>Lo tenang tapi impactful. Ga selalu paling rame, tapi presence lo kerasa. Orang nyaman cerita ke lo karena lo grounded.</p><p>Lo bukan cari spotlight. Tapi begitu ngomong, biasanya ada isi.</p><p><em>Ga semua orang bisa baca pikiran lo. Speak up.</em></p>`,
+              en: `<p>You're calm but impactful. Not always the loudest, but your presence is felt. People feel comfortable opening up to you because you're grounded.</p><p>You don't seek the spotlight. But when you speak, there's usually substance.</p><p><em>Not everyone can read your mind. Speak up.</em></p>`
+            },
+            strength: { id: 'Emotional depth, kemampuan mendengar, dan thoughtful presence', en: 'Emotional depth, listening skills, and thoughtful presence' },
+            weakness: { id: 'Terlalu underplay diri sendiri', en: 'Tends to underplay themselves too much' }
+          },
+          {
+            min: 46, max: 54, emoji: '🦎',
+            name: { id: 'The Social Chameleon', en: 'The Social Chameleon' },
+            story: {
+              id: `<p>Lo adaptif banget. Di tempat yang klik, lo bisa jadi paling hidup. Di tempat yang awkward, lo bisa jadi wallpaper.</p><p>Energi sosial lo context-based.</p><p><em>Jangan lupa bedain adaptasi vs people-pleasing.</em></p>`,
+              en: `<p>You're incredibly adaptive. In places that click, you can be the most alive. In awkward situations, you can blend into the wallpaper.</p><p>Your social energy is fully context-based.</p><p><em>Don't forget to distinguish adaptation from people-pleasing.</em></p>`
+            },
+            strength: { id: 'Fleksibel, socially intelligent, dan mudah blend in', en: 'Flexible, socially intelligent, and easy to blend in' },
+            weakness: { id: 'Kadang terlalu menyesuaikan diri', en: 'Sometimes adapts too much to others' }
+          },
+          {
+            min: 55, max: 63, emoji: '🔥',
+            name: { id: 'The Selective Flame', en: 'The Selective Flame' },
+            story: {
+              id: `<p>Lo sosial. Tapi picky. Kalau chemistry-nya dapet? Lo warm, fun, alive. Kalau vibes-nya fake? Langsung shut down.</p><p>Banyak orang bingung karena lo keliatan extrovert di satu situasi, introvert di situasi lain.</p><p><em>Ga semua awkward beginning berarti bad connection.</em></p>`,
+              en: `<p>You're social. But picky. When the chemistry is there? You're warm, fun, alive. When the vibe feels fake? Instant shutdown.</p><p>People get confused because you seem extroverted in one situation and introverted in another.</p><p><em>Not every awkward beginning means a bad connection.</em></p>`
+            },
+            strength: { id: 'Authentic social instinct yang kuat', en: 'Strong authentic social instinct' },
+            weakness: { id: 'Bisa terlalu cepat dismiss orang', en: 'Can be too quick to dismiss people' }
+          },
+          {
+            min: 64, max: 75, emoji: '⚡',
+            name: { id: 'The Spark Plug', en: 'The Spark Plug' },
+            story: {
+              id: `<p>Lo literally powered by people 😆🔥 Interaksi bikin lo hidup. Networking, ngobrol, ketemu orang baru, spontaneous plans? Makanan.</p><p>Lo punya natural energy yang bikin orang ketarik.</p><p><em>Ga semua room perlu energi 100% dari lo 😭</em></p>`,
+              en: `<p>You're literally powered by people 😆🔥 Interaction keeps you alive. Networking, talking, meeting new people, spontaneous plans? That's food for you.</p><p>You have a natural energy that draws people in.</p><p><em>Not every room needs 100% of your energy 😭</em></p>`
+            },
+            strength: { id: 'Karismatik, socially fearless, dan penuh energi', en: 'Charismatic, socially fearless, and full of energy' },
+            weakness: { id: 'Rentan burnout dan overcommitment', en: 'Prone to burnout and overcommitment' }
+          }
+        ]
       }
     ]
   },
