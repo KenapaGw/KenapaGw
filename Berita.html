@@ -936,11 +936,28 @@ const categories = [
         },
         content: {
           id: `
+<style>
+.fn { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; background: var(--accent-light); color: var(--accent); border-radius: 50%; font-size: 10px; font-weight: 700; cursor: pointer; position: relative; top: -2px; margin: 0 1px; border: 1px solid rgba(193,125,74,0.3); flex-shrink: 0; }
+.fn-popup { position: absolute; z-index: 999; background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 260px; width: max-content; box-shadow: 0 8px 24px rgba(0,0,0,0.4); bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); pointer-events: auto; }
+.fn-popup strong { color: var(--text); }
+.fn-wrap { position: relative; display: inline-block; }
+</style>
+<script>
+function showFn(el) {
+  const popup = el.querySelector('.fn-popup');
+  if (popup) popup.style.display = 'block';
+}
+function hideFn(el) {
+  const popup = el.querySelector('.fn-popup');
+  if (popup) popup.style.display = 'none';
+}
+</script>
+
 <div class="article-body">
 
-  <p class="article-lead">Bayangin kamu lagi kerja shift malam di UGD. Tiba-tiba masuk seorang pasien kritis. Dokter langsung bergerak. Normal. Tapi beberapa menit kemudian... perawat mulai pingsan satu per satu.</p>
+  <p class="article-lead">Bayangin kamu lagi kerja shift malam di UGD. Tiba-tiba masuk seorang pasien kritis. Sesak napas. Detak jantung kacau. Tubuhnya lemah. Dokter langsung panik melakukan tindakan penyelamatan. Normal. Tapi beberapa menit kemudian... perawat mulai pingsan satu per satu.</p>
 
-  <p>Bukan karena capek. Bukan karena shock. Tapi karena diduga terpapar sesuatu dari tubuh pasien itu sendiri.</p>
+  <p>Bukan karena capek. Bukan karena shock. Tapi karena diduga terpapar sesuatu dari tubuh pasien itu sendiri <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">4</span><div class="fn-popup" style="display:none"><strong>Toxic Exposure</strong><br>Paparan zat berbahaya yang bikin tubuh bereaksi seperti mual, pusing, sesak, atau pingsan.</div></span>.</p>
 
   <img src="https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Gloria%20di%20bed%20%2B%20nurse%20pingsan%20%2B%20dokter%20panik.jpg" alt="Gloria di bed, nurse pingsan, dokter panik" style="width:100%; max-width:480px; display:block; margin: 1.5rem auto; border-radius:12px;">
 
@@ -948,15 +965,15 @@ const categories = [
 
   <h2>🏥 Kasus Gloria Ramirez: "The Toxic Lady"</h2>
 
-  <p>Tanggal <strong>19 Februari 1994</strong>, seorang wanita bernama <strong>Gloria Ramirez</strong>, 31 tahun, dibawa ke Riverside General Hospital, California. Gloria adalah pasien kanker serviks stadium akhir.</p>
+  <p>Tanggal <strong>19 Februari 1994</strong>, seorang wanita bernama <strong>Gloria Ramirez</strong>, 31 tahun, dibawa ke Riverside General Hospital, California. Gloria adalah pasien kanker serviks stadium akhir <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">7</span><div class="fn-popup" style="display:none"><strong>Kanker serviks stadium akhir</strong><br>Kanker pada leher rahim yang sudah dalam kondisi sangat serius, membuat tubuh jauh lebih rentan.</div></span>.</p>
 
-  <p>Saat tiba, kondisinya kritis — linglung, tekanan darah tidak stabil, detak jantung sangat cepat, napas abnormal. Tim medis langsung bergerak cepat. Tapi saat pemeriksaan dilakukan... mulai muncul hal yang aneh.</p>
+  <p>Saat tiba, kondisinya kritis — linglung, detak jantung sangat cepat, pola napas abnormal <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">1</span><div class="fn-popup" style="display:none"><strong>Cheyne-Stokes Respiration</strong><br>Pola napas yang naik turun tidak normal — pelan, makin cepat, makin dalam, lalu berhenti sebentar sebelum mulai lagi. Biasanya tanda kondisi kritis.</div></span>. Tim medis memberi obat penenang dan mencoba menstabilkan kondisinya menggunakan defibrillator <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">2</span><div class="fn-popup" style="display:none"><strong>Defibrillator</strong><br>Alat medis yang memberi sengatan listrik ke jantung untuk mengembalikan ritme normal. Yes, alat "CLEAR!" di film 😭</div></span>. Tapi saat pemeriksaan dilakukan... mulai muncul hal yang aneh.</p>
 
   <h2>👃 Bau Aneh dari Tubuhnya</h2>
 
-  <p>Staf medis memperhatikan tubuh Gloria tampak memiliki <strong>lapisan berminyak aneh</strong>. Lalu ada bau yang nggak biasa — ada yang bilang seperti bawang putih, ada yang bilang seperti buah manis, ada yang bilang campuran bahan kimia.</p>
+  <p>Staf medis memperhatikan tubuh Gloria tampak memiliki <strong>lapisan berminyak aneh</strong>. Lalu ada bau yang nggak biasa — seperti bawang putih, buah manis, atau campuran bahan kimia.</p>
 
-  <p>Saat darah Gloria diambil, petugas lab mencium bau mirip amonia dari sampel darahnya. Dan ada sesuatu yang lebih aneh lagi...</p>
+  <p>Saat darah Gloria diambil, petugas medis mencium bau mirip ammonia <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">3</span><div class="fn-popup" style="display:none"><strong>Ammonia</strong><br>Gas dengan bau kimia tajam, mirip cairan pembersih atau urine pekat.</div></span> dari sampel darahnya. Lalu situasi berubah jadi chaos.</p>
 
   <img src="https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Close-up%20darah%20dengan%20crystal%20particles%20aneh.jpg" alt="Partikel kristal dalam darah Gloria" style="width:100%; max-width:480px; display:block; margin: 1.5rem auto; border-radius:12px;">
 
@@ -981,15 +998,15 @@ const categories = [
 
   <img src="https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/THEORY%20SPLIT%20IMAGE.jpg" alt="Theory 1 vs Theory 2" style="width:100%; display:block; margin: 1.5rem auto; border-radius:12px;">
 
-  <h2>😵 Teori 1: Mass Hysteria (Panik Massal)</h2>
+  <h2>😵 Teori 1: Panik Massal</h2>
 
-  <p>Beberapa investigator menyebut ini kemungkinan <strong>mass psychogenic illness</strong> — orang-orang panik, tubuh ikut bereaksi, gejala menyebar. Argumennya: mayoritas korban adalah staf tertentu, gejalanya tidak konsisten, tidak semua orang di ruangan terdampak.</p>
+  <p>Beberapa investigator menyebut ini kemungkinan <strong>mass psychogenic illness</strong> <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">5</span><div class="fn-popup" style="display:none"><strong>Mass Psychogenic Illness</strong><br>Kondisi ketika kepanikan menyebar dan tubuh banyak orang ikut menunjukkan gejala fisik nyata.</div></span> — orang-orang panik, tubuh ikut bereaksi, gejala menyebar. Argumennya: mayoritas korban adalah staf tertentu, gejalanya tidak konsisten, tidak semua orang di ruangan terdampak.</p>
 
-  <p>Masuk akal? Sedikit. Tapi kritiknya: kalau cuma histeria, kenapa ada yang sampai perlu rawat inap serius?</p>
+  <p>Masuk akal? Sedikit. Tapi kritiknya: kalau cuma panik... kenapa ada yang sampai sakit serius?</p>
 
-  <h2>🧪 Teori 2: Dimethyl Sulfoxide (DMSO)</h2>
+  <h2>🧪 Teori 2: Reaksi Kimia Misterius</h2>
 
-  <p>Ini teori paling terkenal. Diduga Gloria memakai <strong>DMSO</strong>, zat kimia yang kadang dipakai sebagai pengobatan alternatif untuk nyeri. Teorinya: DMSO + oksigen + prosedur defibrillator → berubah jadi senyawa beracun yang membuat staf tumbang.</p>
+  <p>Ini teori paling terkenal. Diduga Gloria memakai <strong>DMSO</strong> <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">6</span><div class="fn-popup" style="display:none"><strong>DMSO (Dimethyl Sulfoxide)</strong><br>Cairan kimia yang kadang dipakai sebagai pengobatan alternatif. Dalam kasus ini hanya teori, bukan fakta pasti.</div></span>, zat kimia yang kadang dipakai sebagai pengobatan alternatif untuk nyeri. Teorinya: DMSO + oksigen + prosedur medis = kemungkinan menghasilkan senyawa berbahaya yang membuat staf tumbang.</p>
 
   <div class="pull-quote">
     <p>Masalahnya? Ini masih teori. Tidak pernah terbukti mutlak.</p>
@@ -999,14 +1016,14 @@ const categories = [
 
   <img src="https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/UNSOLVED%20MYSTERY%20ENDING.jpg" alt="Unresolved: The Unseen Threat" style="width:100%; max-width:360px; display:block; margin: 1.5rem auto; border-radius:12px;">
 
-  <p>Jawaban jujurnya? Nggak ada yang tahu pasti. Dan justru itu yang bikin kasus ini nempel sampai sekarang. Karena ini bukan cerita urban legend random. Ini <strong>documented medical incident</strong>.</p>
+  <p>Jawaban jujurnya? Nggak ada yang tahu pasti. Dan justru itu yang bikin kasus ini nempel sampai sekarang. Karena ini bukan urban legend random. Ini <strong>documented medical mystery</strong>.</p>
 
   <div class="fact-banner">
     <span class="fact-banner-icon">😰</span>
-    <span>Kalau teori DMSO benar — seorang pasien biasa bisa secara nggak sengaja menciptakan kondisi toksik di ruang rumah sakit. Kalau teori histeria benar — pikiran manusia bisa menciptakan chaos medis nyata. Dua-duanya serem.</span>
+    <span>Kalau teori reaksi kimia benar — seorang pasien biasa bisa secara nggak sengaja menciptakan kondisi berbahaya di rumah sakit. Kalau teori panik massal benar — pikiran manusia bisa menciptakan chaos medis nyata. Dua-duanya serem 😭</span>
   </div>
 
-  <p>Sampai hari ini, kasus Gloria Ramirez masih sering disebut sebagai salah satu <strong>misteri medis paling aneh dalam sejarah modern</strong>.</p>
+  <p>Sampai hari ini, kasus Gloria Ramirez masih sering disebut sebagai salah satu <strong>misteri medis paling aneh dalam sejarah modern</strong>. Mindblown level: 9.8/10 🤯</p>
 
 </div>
 `,
@@ -1015,7 +1032,7 @@ const categories = [
 
   <p class="article-lead">Imagine working a night shift in the ER. A critical patient comes in. Doctors rush in. Normal. But a few minutes later... nurses start collapsing one by one.</p>
 
-  <p>Not from exhaustion. Not from shock. But from suspected exposure to something from the patient's own body.</p>
+  <p>Not from exhaustion. Not from shock. But from suspected exposure to something from the patient's own body <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">4</span><div class="fn-popup" style="display:none"><strong>Toxic Exposure</strong><br>Exposure to a harmful substance that causes reactions like nausea, dizziness, difficulty breathing, or fainting.</div></span>.</p>
 
   <img src="https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Gloria%20di%20bed%20%2B%20nurse%20pingsan%20%2B%20dokter%20panik.jpg" alt="Gloria in bed, nurse collapsed, doctor panicking" style="width:100%; max-width:480px; display:block; margin: 1.5rem auto; border-radius:12px;">
 
@@ -1023,15 +1040,15 @@ const categories = [
 
   <h2>🏥 The Gloria Ramirez Case: "The Toxic Lady"</h2>
 
-  <p>On <strong>February 19, 1994</strong>, a woman named <strong>Gloria Ramirez</strong>, 31, was brought to Riverside General Hospital, California. Gloria was a late-stage cervical cancer patient.</p>
+  <p>On <strong>February 19, 1994</strong>, a woman named <strong>Gloria Ramirez</strong>, 31, was brought to Riverside General Hospital, California. Gloria was a late-stage cervical cancer patient <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">7</span><div class="fn-popup" style="display:none"><strong>Late-stage cervical cancer</strong><br>Cancer of the cervix in an advanced, critical state — making the body far more vulnerable to complications.</div></span>.</p>
 
-  <p>She arrived in critical condition — confused, unstable blood pressure, racing heart, abnormal breathing. The medical team moved fast. But as the examination began... strange things started happening.</p>
+  <p>She arrived in critical condition — confused, racing heart, abnormal breathing <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">1</span><div class="fn-popup" style="display:none"><strong>Cheyne-Stokes Respiration</strong><br>An abnormal breathing pattern — slow, then faster and deeper, then a brief stop before starting again. Usually a sign of critical condition.</div></span>. The team gave sedatives and tried to stabilize her using a defibrillator <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">2</span><div class="fn-popup" style="display:none"><strong>Defibrillator</strong><br>A medical device that delivers an electric shock to the heart to restore normal rhythm. Yes, the "CLEAR!" device from movies 😭</div></span>. But as the examination began... strange things started happening.</p>
 
   <h2>👃 A Strange Smell from Her Body</h2>
 
   <p>Staff noticed Gloria's body appeared to have an <strong>oily film</strong>. Then came an unusual smell — some described garlic, others sweet fruit, others a chemical mix.</p>
 
-  <p>When Gloria's blood was drawn, the lab tech smelled something like ammonia from the sample. And then something even stranger appeared...</p>
+  <p>When Gloria's blood was drawn, staff smelled something like ammonia <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">3</span><div class="fn-popup" style="display:none"><strong>Ammonia</strong><br>A gas with a sharp chemical smell, similar to cleaning fluid or concentrated urine.</div></span> from the sample. And then something even stranger appeared...</p>
 
   <img src="https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Close-up%20darah%20dengan%20crystal%20particles%20aneh.jpg" alt="Crystal particles in Gloria's blood" style="width:100%; max-width:480px; display:block; margin: 1.5rem auto; border-radius:12px;">
 
@@ -1058,13 +1075,13 @@ const categories = [
 
   <h2>😵 Theory 1: Mass Hysteria</h2>
 
-  <p>Some investigators suggested <strong>mass psychogenic illness</strong> — people panicked, bodies followed, symptoms spread. The argument: most victims were specific staff members, symptoms were inconsistent, not everyone in the room was affected.</p>
+  <p>Some investigators suggested <strong>mass psychogenic illness</strong> <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">5</span><div class="fn-popup" style="display:none"><strong>Mass Psychogenic Illness</strong><br>A condition where panic spreads and many people's bodies start showing real physical symptoms.</div></span> — people panicked, bodies followed, symptoms spread. The argument: most victims were specific staff, symptoms were inconsistent, not everyone in the room was affected.</p>
 
-  <p>Plausible? Somewhat. But the pushback: if it was just hysteria, why did some need serious hospitalization?</p>
+  <p>Plausible? Somewhat. But the pushback: if it was just panic... why did some need serious hospitalization?</p>
 
-  <h2>🧪 Theory 2: Dimethyl Sulfoxide (DMSO)</h2>
+  <h2>🧪 Theory 2: Mysterious Chemical Reaction</h2>
 
-  <p>The most well-known theory. Gloria was suspected to have been using <strong>DMSO</strong>, a chemical sometimes used as alternative pain treatment. The theory: DMSO + oxygen + defibrillator procedures → converts into a toxic compound that made staff collapse.</p>
+  <p>The most well-known theory. Gloria was suspected to have used <strong>DMSO</strong> <span class="fn-wrap" onmouseenter="showFn(this)" onmouseleave="hideFn(this)"><span class="fn">6</span><div class="fn-popup" style="display:none"><strong>DMSO (Dimethyl Sulfoxide)</strong><br>A chemical liquid sometimes used as alternative pain treatment. In this case it's only a theory, not confirmed fact.</div></span>, a chemical sometimes used as alternative pain treatment. The theory: DMSO + oxygen + medical procedures = possibly producing a harmful compound that made staff collapse.</p>
 
   <div class="pull-quote">
     <p>The problem? Still a theory. Never conclusively proven.</p>
@@ -1074,14 +1091,14 @@ const categories = [
 
   <img src="https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/UNSOLVED%20MYSTERY%20ENDING.jpg" alt="Unresolved: The Unseen Threat" style="width:100%; max-width:360px; display:block; margin: 1.5rem auto; border-radius:12px;">
 
-  <p>The honest answer? Nobody knows for certain. And that's exactly what makes this case stick. Because this isn't a random urban legend. This is a <strong>documented medical incident</strong>.</p>
+  <p>The honest answer? Nobody knows for certain. And that's exactly what makes this case stick. Because this isn't a random urban legend. This is a <strong>documented medical mystery</strong>.</p>
 
   <div class="fact-banner">
     <span class="fact-banner-icon">😰</span>
-    <span>If the DMSO theory is correct — an ordinary patient could accidentally create toxic conditions in a hospital room. If the mass hysteria theory is correct — the human mind can create real medical chaos. Both are terrifying.</span>
+    <span>If the chemical reaction theory is correct — an ordinary patient could accidentally create dangerous conditions in a hospital. If the mass panic theory is correct — the human mind can create real medical chaos. Both are terrifying 😭</span>
   </div>
 
-  <p>To this day, the Gloria Ramirez case is still cited as one of the <strong>strangest medical mysteries in modern history</strong>.</p>
+  <p>To this day, the Gloria Ramirez case is still cited as one of the <strong>strangest medical mysteries in modern history</strong>. Mindblown level: 9.8/10 🤯</p>
 
 </div>
 `
