@@ -1119,6 +1119,26 @@ function hideFn(el) {
   const popup = el.querySelector('.fn-popup');
   if (popup) popup.style.display = 'none';
 }
+window.showFn = showFn;
+window.hideFn = hideFn;
+
+document.addEventListener('mouseover', function(e) {
+  const wrap = e.target.closest('.fn-wrap');
+  if (wrap) {
+    const popup = wrap.querySelector('.fn-popup');
+    if (popup) popup.style.display = 'block';
+  }
+});
+document.addEventListener('mouseout', function(e) {
+  const wrap = e.target.closest('.fn-wrap');
+  if (wrap) {
+    const related = e.relatedTarget;
+    if (!wrap.contains(related)) {
+      const popup = wrap.querySelector('.fn-popup');
+      if (popup) popup.style.display = 'none';
+    }
+  }
+});
 
 function renderLayer1() {  const grid = document.getElementById('catGrid');
   grid.innerHTML = '';
