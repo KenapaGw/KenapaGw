@@ -1506,6 +1506,264 @@ const categories = [
         ]
       }
     ]
+  },
+  {
+    id: 'socialmask',
+    icon: '🎭',
+    title: { id: 'Social Mask', en: 'Social Mask' },
+    desc: { id: 'Versi kamu yang orang lihat... emang bener kamu?', en: 'The version people see... is that really you?' },
+    quizzes: [
+      {
+        id: 'maskthick', icon: '🎭', type: 'text',
+        title: { id: 'Topeng Sosial Kamu Seberapa Tebal?', en: 'How Thick Is Your Social Mask?' },
+        desc: { id: 'Versi kamu yang orang lihat... emang bener kamu?', en: 'The version people see... is that really you?' },
+        questions: [
+          {
+            text: { id: 'Kalau ada yang nanya, "Kamu gapapa?"', en: 'When someone asks, "Are you okay?"' },
+            options: [
+              { label: { id: 'Jawab jujur kalau emang trust.', en: 'Answer honestly if I trust them.' }, points: 2 },
+              { label: { id: '"Gapapa kok" padahal ga sepenuhnya.', en: '"I\'m fine" even though not entirely.' }, points: 6 },
+              { label: { id: 'Bercanda biar topik ganti.', en: 'Make a joke to change the subject.' }, points: 8 },
+              { label: { id: 'Auto bilang gapapa meski hidup runtuh.', en: 'Auto-say I\'m fine even when life is falling apart.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Di tongkrongan baru, kamu biasanya...', en: 'In a new social setting, you usually...' },
+            options: [
+              { label: { id: 'Jadi diri sendiri aja.', en: 'Just be yourself.' }, points: 1 },
+              { label: { id: 'Menyesuaikan vibe dulu.', en: 'Adjust to the vibe first.' }, points: 5 },
+              { label: { id: 'Jadi versi paling "likable".', en: 'Become the most "likable" version.' }, points: 9 },
+              { label: { id: 'Acting confident padahal internally buffering.', en: 'Act confident while internally buffering.' }, points: 7 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada yang ga suka sama kamu...', en: 'When someone doesn\'t like you...' },
+            options: [
+              { label: { id: 'Yaudah, ga semua orang harus suka.', en: 'It\'s fine, not everyone has to like me.' }, points: 2 },
+              { label: { id: 'Kepikiran bentar.', en: 'Think about it briefly.' }, points: 5 },
+              { label: { id: 'Mulai mikir salahku di mana.', en: 'Start thinking about where I went wrong.' }, points: 8 },
+              { label: { id: 'Pengen ngubah image diri.', en: 'Want to change my image.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Seberapa sering kamu bilang "terserah" padahal ada maunya?', en: 'How often do you say "whatever" when you actually have a preference?' },
+            options: [
+              { label: { id: 'Jarang.', en: 'Rarely.' }, points: 1 },
+              { label: { id: 'Kadang.', en: 'Sometimes.' }, points: 4 },
+              { label: { id: 'Sering.', en: 'Often.' }, points: 7 },
+              { label: { id: 'Itu personality trait.', en: 'That\'s just my personality trait.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Saat lagi capek secara emosional...', en: 'When you\'re emotionally exhausted...' },
+            options: [
+              { label: { id: 'Aku mundur buat recharge.', en: 'I step back to recharge.' }, points: 2 },
+              { label: { id: 'Tetap normal tapi lebih diem.', en: 'Stay normal but get quieter.' }, points: 5 },
+              { label: { id: 'Tetap cheerful biar ga ditanya-tanya.', en: 'Stay cheerful so nobody asks questions.' }, points: 8 },
+              { label: { id: 'Jadi entertainer buat nutupin semuanya.', en: 'Become the entertainer to cover everything up.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kalau awkward silence muncul...', en: 'When awkward silence appears...' },
+            options: [
+              { label: { id: 'Fine aja.', en: 'Fine with it.' }, points: 3 },
+              { label: { id: 'Agak ga nyaman.', en: 'A bit uncomfortable.' }, points: 5 },
+              { label: { id: 'Merasa harus isi suasana.', en: 'Feel like I have to fill the silence.' }, points: 8 },
+              { label: { id: 'Panic mode.', en: 'Panic mode.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Orang sering bilang kamu...', en: 'People often say you\'re...' },
+            options: [
+              { label: { id: 'Straightforward.', en: 'Straightforward.' }, points: 2 },
+              { label: { id: 'Chill.', en: 'Chill.' }, points: 4 },
+              { label: { id: 'Friendly banget.', en: 'Super friendly.' }, points: 7 },
+              { label: { id: '"Kamu selalu keliatan strong ya."', en: '"You always look so strong."' }, points: 9 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada konflik...', en: 'When there\'s a conflict...' },
+            options: [
+              { label: { id: 'Ngomongin baik-baik.', en: 'Talk it out calmly.' }, points: 1 },
+              { label: { id: 'Butuh waktu dulu.', en: 'Need some time first.' }, points: 5 },
+              { label: { id: 'Menghindar biar damai.', en: 'Avoid it for peace.' }, points: 8 },
+              { label: { id: 'Bilang "gapapa" terus nyimpen sendiri.', en: 'Say "it\'s fine" and keep it to myself.' }, points: 10 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 8, max: 20, emoji: '😌',
+            name: { id: 'Topengmu Tipis. Kamu Lumayan Asli.', en: 'Thin Mask. You\'re Pretty Authentic.' },
+            story: {
+              id: `<p>Kamu bukan tipe yang sibuk ngatur image setiap saat. Kalau lagi happy, keliatan happy. Kalau capek, ya capek.</p><p>Bukan berarti kamu spill semua isi hati ke semua orang. Tapi kamu nggak hidup buat mempertahankan karakter buatan.</p><p>Kamu ngerti bahwa ga semua orang harus suka. Dan jujur? Itu freedom yang ga semua orang punya.</p><p><em>Kadang kamu tetap menyesuaikan situasi. Tapi kamu ga kehilangan dirimu demi diterima.</em></p>`,
+              en: `<p>You're not the type who's always managing your image. When you're happy, it shows. When you're tired, it shows too.</p><p>That doesn't mean you spill everything to everyone. But you don't live to maintain a constructed character.</p><p>You understand that not everyone has to like you. And honestly? That's a freedom not everyone has.</p><p><em>You still adjust to situations sometimes. But you don't lose yourself just to be accepted.</em></p>`
+            },
+            strength: { id: 'Autentik dan nggak butuh validasi konstan', en: 'Authentic and doesn\'t need constant validation' },
+            weakness: { id: 'Bisa keliatan blunt atau kurang filter di situasi tertentu', en: 'Can come across as blunt or unfiltered in certain situations' }
+          },
+          {
+            min: 21, max: 38, emoji: '✂️',
+            name: { id: 'Socially Edited Version.', en: 'Socially Edited Version.' },
+            story: {
+              id: `<p>Kamu tetap diri sendiri... tapi versi yang udah diedit sedikit. Sedikit lebih ramah. Sedikit lebih santai. Sedikit lebih aman buat dikonsumsi publik.</p><p>Bukan fake. Lebih ke... curated.</p><p>Kamu ngerti cara baca ruangan. Tahu kapan harus ngomong. Tahu kapan harus jadi versi yang bikin semuanya nyaman.</p><p><em>Masalahnya? Kadang kamu terlalu sibuk maintain image sampai lupa, "sebenernya aku lagi ngerasa apa?"</em></p>`,
+              en: `<p>You're still yourself... but a slightly edited version. A bit friendlier. A bit more relaxed. A bit safer for public consumption.</p><p>Not fake. More like... curated.</p><p>You know how to read a room. Know when to speak. Know when to be the version that makes everyone comfortable.</p><p><em>The problem? Sometimes you're so busy maintaining the image that you forget, "what am I actually feeling right now?"</em></p>`
+            },
+            strength: { id: 'Bisa baca situasi dan adaptasi dengan tepat', en: 'Can read situations and adapt appropriately' },
+            weakness: { id: 'Kadang terlalu sibuk maintain image sampai kehilangan diri sendiri', en: 'Sometimes too busy maintaining image to stay in touch with self' }
+          },
+          {
+            min: 39, max: 56, emoji: '🪞',
+            name: { id: 'People-Friendly, Self-Confusing.', en: 'People-Friendly, Self-Confusing.' },
+            story: {
+              id: `<p>Kamu udah jago banget jadi orang yang nyaman buat orang lain. Friendly. Easygoing. Ga bikin ribet. Ga bikin drama. Semua keliatan bagus.</p><p>Tapi ada harga yang dibayar. Karena makin sering kamu jadi versi yang dibutuhkan orang... makin blur mana personality asli dan mana survival mode.</p><p>Kadang kamu bilang "terserah" padahal peduli. Kadang kamu bilang "gapapa" padahal kecewa. Kadang kamu ketawa cuma biar suasana ga aneh.</p><p><em>Orang suka versi kamu. Pertanyaannya... kamu sendiri suka?</em></p>`,
+              en: `<p>You've gotten really good at being comfortable for other people. Friendly. Easygoing. No fuss. No drama. Everything looks fine.</p><p>But there's a price. Because the more you become the version people need... the blurrier it gets between your real personality and survival mode.</p><p>Sometimes you say "whatever" when you care. Sometimes "I'm fine" when you're disappointed. Sometimes you laugh just so things don't get weird.</p><p><em>People love your version. The question is... do you?</em></p>`
+            },
+            strength: { id: 'Mudah disukai dan bikin orang nyaman', en: 'Likable and makes people feel comfortable' },
+            weakness: { id: 'Mulai blur antara personality asli dan mode perform', en: 'Starting to blur between real personality and performance mode' }
+          },
+          {
+            min: 57, max: 72, emoji: '🎭',
+            name: { id: 'Topengmu Udah Jadi Wajah Kedua.', en: 'Your Mask Has Become a Second Face.' },
+            story: {
+              id: `<p>Kamu udah terlalu terbiasa perform. Bukan karena manipulatif. Bukan karena fake. Tapi karena somewhere along the way... terlihat "baik-baik saja" terasa lebih aman daripada jujur.</p><p>Jadi kamu senyum. Jadi kamu bantu orang. Jadi kamu jadi versi yang stabil. Meski dalemnya chaos.</p><p>Yang berat dari ini bukan capek pura-pura. Yang berat adalah... lama-lama kamu lupa cara hadir tanpa acting.</p><p><em>Dan mungkin itu kenapa pertanyaan sederhana kayak "Kamu gapapa?" terasa aneh dijawab jujur.</em></p>`,
+              en: `<p>You've gotten too used to performing. Not because you're manipulative. Not because you're fake. But because somewhere along the way... looking "okay" felt safer than being honest.</p><p>So you smile. You help people. You become the stable version. Even when inside it's chaos.</p><p>The hard part isn't the exhaustion of pretending. The hard part is... over time you forget how to show up without acting.</p><p><em>And maybe that's why a simple question like "Are you okay?" feels strange to answer honestly.</em></p>`
+            },
+            strength: { id: 'Sangat bisa diandalkan dan stabil di mata orang lain', en: 'Very reliable and stable in the eyes of others' },
+            weakness: { id: 'Lupa cara hadir tanpa perform dan sulit jujur tentang diri sendiri', en: 'Forgot how to show up without performing and struggles to be honest about self' }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'hiddentraits',
+    icon: '🔥',
+    title: { id: 'Hidden Traits', en: 'Hidden Traits' },
+    desc: { id: 'Ada sisi dirimu yang orang lihat samar-samar... tapi kamu mungkin belum sadar.', en: 'There\'s a side of you people barely see... but you may not be aware of it either.' },
+    quizzes: [
+      {
+        id: 'hiddentrait', icon: '🔥', type: 'text',
+        title: { id: 'Sifat Tersembunyi Apa yang Diam-diam Ngontrol Kamu?', en: 'What Hidden Trait Is Quietly Controlling You?' },
+        desc: { id: 'Ada sisi dirimu yang orang lihat samar-samar... tapi kamu mungkin belum sadar.', en: 'There\'s a side of you people barely see... but you may not be aware of it either.' },
+        questions: [
+          {
+            text: { id: 'Kalau main game atau kompetisi...', en: 'When playing games or competing...' },
+            options: [
+              { label: { id: 'Santai, menang kalah biasa.', en: 'Chill, winning and losing is normal.' }, points: 2 },
+              { label: { id: 'Pengen menang tapi ga keliatan ambis.', en: 'Want to win but don\'t show the ambition.' }, points: 6 },
+              { label: { id: 'Competitive secretly.', en: 'Secretly competitive.' }, points: 9 },
+              { label: { id: 'Kalau kalah mood rusak 😭', en: 'If I lose my mood is ruined 😭' }, points: 8 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada orang yang lebih jago dari kamu...', en: 'When someone is better than you at something...' },
+            options: [
+              { label: { id: 'Kagum dan belajar.', en: 'Admire them and learn.' }, points: 1 },
+              { label: { id: 'Sedikit insecure tapi oke.', en: 'A bit insecure but okay.' }, points: 5 },
+              { label: { id: 'Langsung compare diri.', en: 'Immediately compare myself.' }, points: 8 },
+              { label: { id: 'Motivasi + iri campur jadi satu.', en: 'Motivation and envy mixed together.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada drama di circle...', en: 'When there\'s drama in your circle...' },
+            options: [
+              { label: { id: 'Stay out.', en: 'Stay out of it.' }, points: 3 },
+              { label: { id: 'Dengerin seperlunya.', en: 'Listen just enough.' }, points: 5 },
+              { label: { id: 'Lowkey curious 👀', en: 'Lowkey curious 👀' }, points: 7 },
+              { label: { id: 'Tau semua update somehow.', en: 'Somehow know every update.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kalau someone slow reply...', en: 'When someone slow replies...' },
+            options: [
+              { label: { id: 'Yaudah sibuk mungkin.', en: 'It\'s fine, probably busy.' }, points: 2 },
+              { label: { id: 'Kepikiran bentar.', en: 'Think about it briefly.' }, points: 5 },
+              { label: { id: 'Mulai bikin teori.', en: 'Start building theories.' }, points: 8 },
+              { label: { id: '"Oke what did I do wrong?"', en: '"Okay what did I do wrong?"' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kamu lebih sering...', en: 'You more often...' },
+            options: [
+              { label: { id: 'Ngikut flow.', en: 'Go with the flow.' }, points: 1 },
+              { label: { id: 'Diam tapi observant.', en: 'Quiet but observant.' }, points: 4 },
+              { label: { id: 'Pengen control dikit.', en: 'Want a little control.' }, points: 7 },
+              { label: { id: 'Kesel kalau hal ga sesuai ekspektasi.', en: 'Get frustrated when things don\'t match expectations.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kalau dipuji...', en: 'When you receive a compliment...' },
+            options: [
+              { label: { id: 'Bilang makasih.', en: 'Say thank you.' }, points: 2 },
+              { label: { id: 'Agak awkward.', en: 'A bit awkward.' }, points: 5 },
+              { label: { id: 'Merasa suspicious 😭', en: 'Feel suspicious 😭' }, points: 9 },
+              { label: { id: 'Deflect pake bercanda.', en: 'Deflect with a joke.' }, points: 7 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada orang toxic...', en: 'When there\'s a toxic person around...' },
+            options: [
+              { label: { id: 'Cut off.', en: 'Cut them off.' }, points: 1 },
+              { label: { id: 'Distance pelan-pelan.', en: 'Slowly create distance.' }, points: 4 },
+              { label: { id: 'Tetap kasih chance.', en: 'Still give them a chance.' }, points: 8 },
+              { label: { id: 'Somehow selalu ketarik lagi 🤡', en: 'Somehow always drawn back in 🤡' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kalau bikin keputusan...', en: 'When making a decision...' },
+            options: [
+              { label: { id: 'Cepat dan clear.', en: 'Fast and clear.' }, points: 2 },
+              { label: { id: 'Consider beberapa hal.', en: 'Consider several things.' }, points: 5 },
+              { label: { id: 'Overthink semua kemungkinan.', en: 'Overthink every possibility.' }, points: 8 },
+              { label: { id: 'Tunda sampe universe milihin.', en: 'Delay until the universe decides.' }, points: 10 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 8, max: 20, emoji: '🧘',
+            name: { id: 'The Quietly Grounded One', en: 'The Quietly Grounded One' },
+            story: {
+              id: `<p>Ada orang yang hidupnya selalu kebawa arus emosi sekitar. Kamu bukan salah satunya.</p><p>Kamu cukup stabil. Ga gampang kebakar comparison. Ga terlalu butuh validasi. Dan kalau ada chaos, kamu masih bisa mikir lurus.</p><p>Tapi yang menarik? Orang sering underestimate kamu. Karena sifat tersembunyimu bukan chaos... tapi inner control.</p><p><em>Kamu keliatan santai. Padahal kamu jauh lebih aware daripada yang orang kira.</em></p>`,
+              en: `<p>Some people are always swept up in the emotions around them. You're not one of them.</p><p>You're fairly stable. Not easily ignited by comparison. Don't need too much validation. And when there's chaos, you can still think straight.</p><p>But here's what's interesting? People often underestimate you. Because your hidden trait isn't chaos... it's inner control.</p><p><em>You look relaxed. But you're far more aware than people think.</em></p>`
+            },
+            strength: { id: 'Stabil, grounded, dan nggak gampang terbawa arus', en: 'Stable, grounded, and not easily swept up' },
+            weakness: { id: 'Sering diremehkan karena keliatan terlalu santai', en: 'Often underestimated for appearing too relaxed' }
+          },
+          {
+            min: 21, max: 38, emoji: '👁️',
+            name: { id: 'The Secret Observer', en: 'The Secret Observer' },
+            story: {
+              id: `<p>Kamu keliatan chill. Tapi sebenarnya? Kamu notice semuanya.</p><p>Nada suara orang berubah? Notice. Reply beda dari biasanya? Notice. Dynamic ruangan berubah? Notice.</p><p>Kamu bukan overreactive. Lebih ke... hyper-aware. Kadang ini bikin kamu terlihat tenang. Padahal isi kepala lagi running background analysis nonstop.</p><p><em>Hidden trait kamu? Observing too much.</em></p>`,
+              en: `<p>You look chill. But actually? You notice everything.</p><p>Someone's tone changes? Notice. Reply is different than usual? Notice. Room dynamic shifts? Notice.</p><p>You're not overreactive. More like... hyper-aware. Sometimes this makes you look calm. But your head is running background analysis nonstop.</p><p><em>Your hidden trait? Observing too much.</em></p>`
+            },
+            strength: { id: 'Sangat observant dan peka terhadap dinamika sekitar', en: 'Highly observant and sensitive to surrounding dynamics' },
+            weakness: { id: 'Kepala nggak pernah bener-bener istirahat dari analisis', en: 'Mind never truly rests from analysis' }
+          },
+          {
+            min: 39, max: 56, emoji: '🏆',
+            name: { id: 'The Hidden Competitor', en: 'The Hidden Competitor' },
+            story: {
+              id: `<p>Kamu mungkin ga selalu keliatan ambisius. Tapi somewhere inside... kamu benci kalah 😭🔥</p><p>Ga harus soal game. Bisa soal pencapaian. Attention. Validation. Siapa yang lebih maju.</p><p>Dan kadang yang bikin capek... kompetisinya bahkan ga diumumin. Cuma ada di kepalamu. Kamu compare diam-diam. Push diri diam-diam. Kesel diam-diam.</p><p><em>People might think you're easygoing. Meanwhile your inner self: "nah, I can do better."</em></p>`,
+              en: `<p>You might not always look ambitious. But somewhere inside... you hate losing 😭🔥</p><p>Doesn't have to be about games. Could be achievements. Attention. Validation. Who's progressing more.</p><p>And sometimes what's exhausting... is that the competition was never even announced. It only exists in your head. Comparing silently. Pushing yourself silently. Getting frustrated silently.</p><p><em>People might think you're easygoing. Meanwhile your inner self: "nah, I can do better."</em></p>`
+            },
+            strength: { id: 'Punya drive kuat yang tersembunyi di balik tampilan santai', en: 'Has strong drive hidden behind a relaxed exterior' },
+            weakness: { id: 'Kompetisi internal yang nggak pernah selesai bisa menguras energi', en: 'Endless internal competition can be draining' }
+          },
+          {
+            min: 57, max: 72, emoji: '🧩',
+            name: { id: 'The Emotional Strategist', en: 'The Emotional Strategist' },
+            story: {
+              id: `<p>Ini bukan insult 😭 Tapi kamu punya hidden trait yang bikin hidup... interesting.</p><p>Kamu banyak mikir. Banyak baca situasi. Banyak bikin kemungkinan. Kadang itu bikin kamu terlihat sharp. Kadang bikin kamu emotionally exhausted.</p><p>Kamu pengen ngerti semuanya. Pengen antisipasi semuanya. Pengen ga keliatan vulnerable.</p><p>Masalahnya? Ga semua hal bisa diprediksi. Ga semua orang bisa dibaca. Dan ga semua pain bisa dihindari dengan thinking harder.</p><p><em>Hidden trait kamu bukan kelemahan. Tapi kalau ga dijaga... itu bisa jadi self-sabotage.</em></p>`,
+              en: `<p>This isn't an insult 😭 But you have a hidden trait that makes life... interesting.</p><p>You think a lot. Read situations a lot. Build a lot of scenarios. Sometimes that makes you look sharp. Sometimes it leaves you emotionally exhausted.</p><p>You want to understand everything. Anticipate everything. Not look vulnerable.</p><p>The problem? Not everything can be predicted. Not everyone can be read. And not all pain can be avoided by thinking harder.</p><p><em>Your hidden trait isn't a weakness. But if unchecked... it can become self-sabotage.</em></p>`
+            },
+            strength: { id: 'Tajam, analytical, dan selalu satu langkah ke depan', en: 'Sharp, analytical, and always one step ahead' },
+            weakness: { id: 'Bisa jadi self-sabotage kalau terlalu dalam menganalisis', en: 'Can become self-sabotage when over-analyzing' }
+          }
+        ]
+      }
+    ]
   }
 ];
 
