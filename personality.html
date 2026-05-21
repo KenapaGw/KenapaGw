@@ -1383,6 +1383,127 @@ const categories = [
             weakness: { id: 'Deadline dan komitmen jangka panjang bisa jadi musuh', en: 'Deadlines and long-term commitments can be enemies' }
           }
         ]
+      },
+      {
+        id: 'chaoslife', icon: '💀', type: 'text',
+        title: { id: 'Seberapa Chaos Hidupmu Sebenarnya?', en: 'How Chaotic Is Your Life Really?' },
+        desc: { id: 'Kamu bilang "lagi sibuk". Tapi… chaotic atau cuma kebiasaan buruk?', en: 'You say you\'re "busy". But… chaotic or just bad habits?' },
+        questions: [
+          {
+            text: { id: 'Alarm kamu bunyi jam 6. Apa yang terjadi?', en: 'Your alarm goes off at 6am. What happens?' },
+            options: [
+              { label: { id: 'Bangun, liat notif bentar, terus lanjut hari.', en: 'Wake up, check notifs briefly, start the day.' }, points: 2 },
+              { label: { id: 'Snooze 3-4x, bangun setengah panik.', en: 'Snooze 3-4 times, wake up half-panicking.' }, points: 6 },
+              { label: { id: 'Langsung matiin alarm tanpa sadar, bangun karena takut telat.', en: 'Turn it off without realizing, wake up afraid of being late.' }, points: 9 },
+              { label: { id: 'Alarm itu cuma dekorasi.', en: 'The alarm is just decoration.' }, points: 4 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada tugas penting...', en: 'When there\'s an important task...' },
+            options: [
+              { label: { id: 'Langsung mulai walau dikit.', en: 'Start right away even if just a little.' }, points: 1 },
+              { label: { id: 'Buka task-nya, terus malah buka hal lain.', en: 'Open the task, then end up opening something else.' }, points: 5 },
+              { label: { id: 'Menunggu pressure cukup sakit baru mulai.', en: 'Wait until the pressure hurts enough to start.' }, points: 8 },
+              { label: { id: '"Besok aja, masih ada waktu."', en: '"Tomorrow, there\'s still time."' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kamar atau meja kamu sekarang?', en: 'Your room or desk right now?' },
+            options: [
+              { label: { id: 'Cukup rapi.', en: 'Pretty tidy.' }, points: 3 },
+              { label: { id: 'Ada chaos kecil yang cuma aku ngerti.', en: 'There\'s a small chaos only I understand.' }, points: 7 },
+              { label: { id: 'Berantakan tapi masih functional.', en: 'Messy but still functional.' }, points: 4 },
+              { label: { id: 'Kalau ada kamera masuk, malu.', en: 'If a camera came in, I\'d be embarrassed.' }, points: 9 }
+            ]
+          },
+          {
+            text: { id: 'Pas ada masalah hidup...', en: 'When life problems hit...' },
+            options: [
+              { label: { id: 'Dipikirin, dicari solusi.', en: 'Think it through, find a solution.' }, points: 2 },
+              { label: { id: 'Distraksi dulu biar ga kepikiran.', en: 'Distract myself first so I don\'t think about it.' }, points: 8 },
+              { label: { id: 'Overthinking sampe capek sendiri.', en: 'Overthink until I exhaust myself.' }, points: 6 },
+              { label: { id: 'Pura-pura ga ada.', en: 'Pretend it doesn\'t exist.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Hubungan kamu sama deadline?', en: 'Your relationship with deadlines?' },
+            options: [
+              { label: { id: 'Profesional.', en: 'Professional.' }, points: 1 },
+              { label: { id: 'Toxic but manageable.', en: 'Toxic but manageable.' }, points: 5 },
+              { label: { id: 'Musuhan.', en: 'We\'re enemies.' }, points: 9 },
+              { label: { id: 'Deadline yang takut sama aku.', en: 'The deadline is scared of me.' }, points: 7 }
+            ]
+          },
+          {
+            text: { id: 'Weekend ideal kamu?', en: 'Your ideal weekend?' },
+            options: [
+              { label: { id: 'Recharge + reset hidup.', en: 'Recharge + reset life.' }, points: 2 },
+              { label: { id: 'Santai tapi tetap ada progress.', en: 'Relaxed but still some progress.' }, points: 4 },
+              { label: { id: 'Scroll sampe lupa waktu.', en: 'Scroll until I forget time.' }, points: 8 },
+              { label: { id: 'Chaos random tanpa arah.', en: 'Random chaos with no direction.' }, points: 10 }
+            ]
+          },
+          {
+            text: { id: 'Kalau chat penting masuk...', en: 'When an important message comes in...' },
+            options: [
+              { label: { id: 'Dibales kalau bisa.', en: 'Reply when I can.' }, points: 3 },
+              { label: { id: 'Dibaca, nanti bales.', en: 'Read it, reply later.' }, points: 6 },
+              { label: { id: 'Kelupaan total.', en: 'Completely forgot.' }, points: 9 },
+              { label: { id: 'Anxiety liat notif.', en: 'Get anxiety just seeing the notification.' }, points: 7 }
+            ]
+          },
+          {
+            text: { id: 'Pikiran sebelum tidur?', en: 'Thoughts before sleeping?' },
+            options: [
+              { label: { id: '"Hari ini oke."', en: '"Today was okay."' }, points: 1 },
+              { label: { id: 'Replay awkward moments.', en: 'Replay awkward moments.' }, points: 5 },
+              { label: { id: 'Random existential crisis.', en: 'Random existential crisis.' }, points: 8 },
+              { label: { id: 'Brain tab kebuka 72.', en: '72 browser tabs open in my brain.' }, points: 10 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 8, max: 20, emoji: '✅',
+            name: { id: 'Kamu Masih Pegang Kendali', en: 'You\'re Still In Control' },
+            story: {
+              id: `<p>Dari luar hidupmu mungkin ga sempurna. Kadang ada baju numpuk, deadline mepet, atau alarm yang dikorbanin sekali dua kali.</p><p>Tapi bedanya, chaos buat kamu itu kejadian. Bukan identitas.</p><p>Kamu masih tahu kapan harus berhenti, kapan harus reset, dan kapan harus bilang "oke, enough." Masalah kecil belum sempat tumbuh jadi monster karena kamu masih punya rem.</p><p><em>Plot twist: orang kayak kamu justru sering ngerasa "aku berantakan banget," padahal compared to most people... kamu masih cukup waras.</em></p>`,
+              en: `<p>From the outside your life may not be perfect. Sometimes there are piled-up clothes, tight deadlines, or an alarm sacrificed once or twice.</p><p>But the difference is, chaos for you is an event. Not an identity.</p><p>You still know when to stop, when to reset, and when to say "okay, enough." Small problems haven't had a chance to grow into monsters because you still have brakes.</p><p><em>Plot twist: people like you often feel "I'm such a mess," but compared to most people... you're still pretty sane.</em></p>`
+            },
+            strength: { id: 'Masih punya kontrol dan tahu kapan harus reset', en: 'Still in control and knows when to reset' },
+            weakness: { id: 'Sering terlalu keras menilai diri sendiri', en: 'Often too hard on themselves' }
+          },
+          {
+            min: 21, max: 38, emoji: '😮‍💨',
+            name: { id: 'Kelihatannya Fine. Dalamnya Agak Berisik.', en: 'Looks Fine. Inside It\'s Kinda Loud.' },
+            story: {
+              id: `<p>Hidupmu masih jalan. Kamu masih muncul tepat waktu (kadang). Masih ngerjain tanggung jawab (meski mepet). Masih keliatan functional.</p><p>Tapi ada satu masalah kecil. Semua itu butuh effort yang jauh lebih besar daripada yang orang lihat.</p><p>Hal-hal sederhana terasa exhausting. To-do list kecil bisa terasa kayak beban hidup. Kamu sering bilang "nanti" bukan karena males... tapi karena mental energy-mu udah keburu habis.</p><p><em>Ini belum chaos total. Tapi ini titik di mana orang mulai normalize stress sebagai personality.</em></p>`,
+              en: `<p>Your life is still moving. You still show up on time (sometimes). Still handle responsibilities (even if barely). Still look functional.</p><p>But there's one small problem. All of that takes far more effort than people see.</p><p>Simple things feel exhausting. A small to-do list can feel like a life burden. You often say "later" not out of laziness... but because your mental energy is already gone.</p><p><em>This isn't total chaos yet. But this is the point where people start normalizing stress as a personality.</em></p>`
+            },
+            strength: { id: 'Masih functional dan bertanggung jawab', en: 'Still functional and responsible' },
+            weakness: { id: 'Terlalu sering jalan dengan mental energy yang kosong', en: 'Too often running on empty mental energy' }
+          },
+          {
+            min: 39, max: 56, emoji: '🫠',
+            name: { id: 'Kamu Udah Kebiasaan Hidup Dalam Kekacauan.', en: 'You\'ve Gotten Used to Living in Chaos.' },
+            story: {
+              id: `<p>Yang serem bukan chaos-nya. Yang serem adalah... kamu udah adaptasi.</p><p>Bangun telat? Biasa. Overthinking sampai jam 2 pagi? Normal. Nunda sesuatu sampai panik? Standard operating procedure.</p><p>Kamu udah jago survive dalam sistem yang bikin capek. Makanya dari luar keliatan "masih aman." Padahal dalam diam, tubuhmu terus nyimpen fatigue. Otakmu nggak pernah bener-bener istirahat. Dan versi dirimu yang tenang? Udah lama nggak muncul.</p><p><em>Kamu bukan gagal. Kamu cuma terlalu lama hidup di mode survival.</em></p>`,
+              en: `<p>The scary part isn't the chaos. The scary part is... you've already adapted.</p><p>Waking up late? Normal. Overthinking until 2am? Normal. Postponing things until panic sets in? Standard operating procedure.</p><p>You've gotten good at surviving in a system that wears you out. That's why you still look "safe" from the outside. But in silence, your body keeps storing fatigue. Your brain never truly rests. And the calm version of you? It's been a long time since it showed up.</p><p><em>You're not failing. You've just been living in survival mode for too long.</em></p>`
+            },
+            strength: { id: 'Tangguh dan bisa survive dalam kondisi apapun', en: 'Resilient and can survive in any condition' },
+            weakness: { id: 'Terlalu terbiasa dengan chaos sampai nggak sadar butuh berubah', en: 'Too used to chaos to realize change is needed' }
+          },
+          {
+            min: 57, max: 72, emoji: '🌪️',
+            name: { id: 'Jujur? Ini Bukan Sekadar Chaos.', en: 'Honestly? This Is More Than Just Chaos.' },
+            story: {
+              id: `<p>Kamu bilang sibuk. Tapi kalau dipikir-pikir... ini bukan sibuk. Ini overload.</p><p>Kepalamu nggak pernah benar-benar diam. Ada terlalu banyak hal kebuka sekaligus. Terlalu banyak unfinished thoughts. Terlalu banyak postponed decisions. Terlalu banyak "nanti."</p><p>Yang bikin berat bukan satu masalah besar. Tapi seribu hal kecil yang numpuk pelan-pelan sampai kamu bahkan lupa rasanya hidup tanpa pressure.</p><p>Dan bagian paling tricky? Karena ini udah jadi rutinitas... kamu mulai nganggep ini normal. Padahal enggak.</p><p><em>Kamu nggak harus hidup dengan jantung selalu mode darurat.</em></p>`,
+              en: `<p>You say you're busy. But when you think about it... this isn't busy. This is overload.</p><p>Your mind never truly quiets down. Too many things open at once. Too many unfinished thoughts. Too many postponed decisions. Too many "laters."</p><p>What makes it heavy isn't one big problem. It's a thousand small things piling up slowly until you've even forgotten what it feels like to live without pressure.</p><p>And the trickiest part? Because this has become routine... you've started to think this is normal. It's not.</p><p><em>You don't have to live with your heart always in emergency mode.</em></p>`
+            },
+            strength: { id: 'Udah survive hal-hal yang orang lain mungkin nggak kuat', en: 'Has survived things others might not handle' },
+            weakness: { id: 'Sudah terlalu lama di mode darurat dan butuh bantuan reset', en: 'Been in emergency mode too long and needs a reset' }
+          }
+        ]
       }
     ]
   }
