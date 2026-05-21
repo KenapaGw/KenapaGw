@@ -421,6 +421,10 @@ nav {
   border-radius: 12px; padding: 1rem 1.25rem; margin: 1.5rem 0;
 }
 .disclaimer-box p { font-size: 14px !important; color: var(--muted) !important; line-height: 1.6 !important; margin: 0 !important; }
+.fn { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; background: var(--accent-light); color: var(--accent); border-radius: 50%; font-size: 10px; font-weight: 700; cursor: pointer; position: relative; top: -2px; margin: 0 1px; border: 1px solid rgba(193,125,74,0.3); flex-shrink: 0; }
+.fn-popup { position: absolute; z-index: 999; background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 260px; width: max-content; box-shadow: 0 8px 24px rgba(0,0,0,0.4); bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); pointer-events: auto; }
+.fn-popup strong { color: var(--text); }
+.fn-wrap { position: relative; display: inline-block; }
 </style>
 </head>
 <body>
@@ -936,23 +940,6 @@ const categories = [
         },
         content: {
           id: `
-<style>
-.fn { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; background: var(--accent-light); color: var(--accent); border-radius: 50%; font-size: 10px; font-weight: 700; cursor: pointer; position: relative; top: -2px; margin: 0 1px; border: 1px solid rgba(193,125,74,0.3); flex-shrink: 0; }
-.fn-popup { position: absolute; z-index: 999; background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 260px; width: max-content; box-shadow: 0 8px 24px rgba(0,0,0,0.4); bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); pointer-events: auto; }
-.fn-popup strong { color: var(--text); }
-.fn-wrap { position: relative; display: inline-block; }
-</style>
-<script>
-function showFn(el) {
-  const popup = el.querySelector('.fn-popup');
-  if (popup) popup.style.display = 'block';
-}
-function hideFn(el) {
-  const popup = el.querySelector('.fn-popup');
-  if (popup) popup.style.display = 'none';
-}
-</script>
-
 <div class="article-body">
 
   <p class="article-lead">Bayangin kamu lagi kerja shift malam di UGD. Tiba-tiba masuk seorang pasien kritis. Sesak napas. Detak jantung kacau. Tubuhnya lemah. Dokter langsung panik melakukan tindakan penyelamatan. Normal. Tapi beberapa menit kemudian... perawat mulai pingsan satu per satu.</p>
@@ -1124,8 +1111,16 @@ function hideFn(el) {
   }
 ];
 
-function renderLayer1() {
-  const grid = document.getElementById('catGrid');
+function showFn(el) {
+  const popup = el.querySelector('.fn-popup');
+  if (popup) popup.style.display = 'block';
+}
+function hideFn(el) {
+  const popup = el.querySelector('.fn-popup');
+  if (popup) popup.style.display = 'none';
+}
+
+function renderLayer1() {  const grid = document.getElementById('catGrid');
   grid.innerHTML = '';
   document.getElementById('l1-label').textContent = t[lang].l1Label;
   document.getElementById('l1-title').textContent = t[lang].l1Title;
