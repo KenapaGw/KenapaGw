@@ -541,7 +541,7 @@ const categories = [
     quizzes: [
       {
         id: 'drives', icon: '🚀', type: 'text',
-        title: { id: 'What Secretly Drives You?', en: 'What Secretly Drives You?' },
+        title: { id: 'Apa yang Diam-diam Menggerakkanmu?', en: 'What Secretly Drives You?' },
         desc: { id: 'Motivasi tersembunyi kamu ngomong lebih banyak dari yang kamu sadari.', en: 'Your hidden motivation says more than you think.' },
         questions: [
           {
@@ -635,7 +635,7 @@ const categories = [
       },
       {
         id: 'selfaware', icon: '🧬', type: 'text',
-        title: { id: 'How Self-Aware Are You Really?', en: 'How Self-Aware Are You Really?' },
+        title: { id: 'Seberapa Sadar Diri Kamu Sebenarnya?', en: 'How Self-Aware Are You Really?' },
         desc: { id: 'Kamu pikir kamu kenal dirimu? Coba dulu.', en: 'You think you know yourself? Let\'s find out.' },
         questions: [
           {
@@ -726,6 +726,109 @@ const categories = [
             weakness: { id: 'Bisa kurang sabar dengan orang yang less self-aware', en: 'Can be impatient with less self-aware people' }
           }
         ]
+      },
+      {
+        id: 'decision', icon: '🎯', type: 'text',
+        title: { id: "Apa Gaya Pengambilan Keputusanmu?", en: "What's Your Decision-Making Style?" },
+        desc: { id: 'Cara kamu ambil keputusan bilang banyak soal kepribadianmu.', en: 'How you make decisions says a lot about who you are.' },
+        questions: [
+          {
+            text: { id: 'Saat harus ambil keputusan penting, kamu biasanya...', en: 'When facing an important decision, you usually...' },
+            options: [
+              { label: { id: 'Menimbang pro dan kontra dengan hati-hati.', en: 'Carefully weigh the pros and cons.' }, points: 2 },
+              { label: { id: 'Tanya banyak orang dulu sebelum memutuskan.', en: 'Ask many people before deciding.' }, points: 1 },
+              { label: { id: 'Menunda karena takut salah.', en: 'Delay because you\'re afraid of being wrong.' }, points: 4 },
+              { label: { id: 'Mengikuti feeling pertama yang muncul.', en: 'Follow the first feeling that comes up.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Kalau ada kesempatan besar tapi risikonya tinggi...', en: 'If a big opportunity comes with high risk...' },
+            options: [
+              { label: { id: 'Mundur, terlalu risky.', en: 'Back off, too risky.' }, points: 4 },
+              { label: { id: 'Langsung ambil, hidup cuma sekali! 😎', en: 'Go for it, you only live once! 😎' }, points: 1 },
+              { label: { id: 'Tanya pendapat orang yang kamu percaya.', en: 'Ask someone you trust for their opinion.' }, points: 3 },
+              { label: { id: 'Cari data sebanyak mungkin dulu.', en: 'Gather as much data as possible first.' }, points: 2 }
+            ]
+          },
+          {
+            text: { id: 'Dalam konflik dengan orang lain, kamu cenderung...', en: 'During conflict, you tend to...' },
+            options: [
+              { label: { id: 'Mengikuti apa yang hati kamu rasakan.', en: 'Follow what your heart feels.' }, points: 2 },
+              { label: { id: 'Menunggu orang lain ambil langkah pertama.', en: 'Wait for the other person to make the first move.' }, points: 4 },
+              { label: { id: 'Pakai logika untuk menyelesaikan masalah.', en: 'Use logic to resolve the issue.' }, points: 1 },
+              { label: { id: 'Menghindari konflik dulu.', en: 'Avoid the conflict for now.' }, points: 3 }
+            ]
+          },
+          {
+            text: { id: 'Kalau harus pilih cepat tanpa waktu mikir...', en: 'If you must choose quickly without much time...' },
+            options: [
+              { label: { id: 'Random pick lalu berharap yang terbaik.', en: 'Random pick and hope for the best.' }, points: 4 },
+              { label: { id: 'Pilih yang paling aman.', en: 'Choose the safest option.' }, points: 3 },
+              { label: { id: 'Percaya insting.', en: 'Trust your instincts.' }, points: 1 },
+              { label: { id: 'Panik dikit. 😭', en: 'Panic a little. 😭' }, points: 2 }
+            ]
+          },
+          {
+            text: { id: 'Saat keputusanmu ternyata salah...', en: 'When your decision turns out wrong...' },
+            options: [
+              { label: { id: 'Menyalahkan keadaan.', en: 'Blame the circumstances.' }, points: 3 },
+              { label: { id: 'Evaluasi dan belajar.', en: 'Evaluate and learn from it.' }, points: 1 },
+              { label: { id: 'Yaudah move on cepat.', en: 'Just move on quickly.' }, points: 4 },
+              { label: { id: 'Menyesal berlebihan.', en: 'Regret it excessively.' }, points: 2 }
+            ]
+          },
+          {
+            text: { id: 'Mana yang paling menggambarkan kamu?', en: 'Which describes you best?' },
+            options: [
+              { label: { id: '"Aku takut bikin keputusan salah."', en: '"I\'m afraid of making the wrong decision."' }, points: 4 },
+              { label: { id: '"Aku ngikut hati."', en: '"I follow my heart."' }, points: 3 },
+              { label: { id: '"Aku suka kontrol situasi."', en: '"I like to control the situation."' }, points: 1 },
+              { label: { id: '"Aku banyak mikir."', en: '"I overthink a lot."' }, points: 2 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 6, max: 10, emoji: '🧠',
+            name: { id: 'The Analyst', en: 'The Analyst' },
+            story: {
+              id: `<p>Kamu tipe yang suka berpikir sebelum bertindak. Buatmu, keputusan bukan soal feeling sesaat, tapi soal kalkulasi. Kamu cenderung hati-hati, strategis, dan nggak gampang kebawa emosi.</p><p>Tapi plot twist-nya 👀</p><p>Kadang kamu bisa terlalu lama di fase analisis sampai kesempatan keburu lewat. Ingat, keputusan terbaik nggak selalu yang sempurna. Kadang yang penting adalah bergerak.</p>`,
+              en: `<p>You're the kind of person who thinks before acting. For you, decisions aren't about temporary emotions — they're about calculation. Strategic, careful, and rarely impulsive.</p><p>But here's the plot twist 👀</p><p>Sometimes you stay in analysis mode so long that opportunities pass by. The best decision isn't always the perfect one. Sometimes, movement matters more.</p>`
+            },
+            strength: { id: 'Strategis dan jarang impulsif', en: 'Strategic and rarely impulsive' },
+            weakness: { id: 'Bisa terjebak analysis paralysis', en: 'Can get stuck in analysis paralysis' }
+          },
+          {
+            min: 11, max: 15, emoji: '⚖️',
+            name: { id: 'The Balancer', en: 'The Balancer' },
+            story: {
+              id: `<p>Kamu punya keseimbangan yang bagus antara logika dan perasaan. Nggak terlalu impulsif, tapi juga nggak overthinking terus-terusan.</p><p>Orang lain mungkin lihat kamu sebagai seseorang yang dewasa dalam mengambil keputusan ✨</p><p>Tapi hati-hati, karena kadang mencoba menyenangkan semua pihak bisa bikin kamu bingung sendiri. Keputusanmu tetap harus jadi milikmu.</p>`,
+              en: `<p>You balance logic and emotion surprisingly well. Not too impulsive, not trapped in endless overthinking.</p><p>People probably see you as mature and thoughtful ✨</p><p>But be careful — trying to keep everyone happy can sometimes make you lose your own direction. Your decisions still need to be yours.</p>`
+            },
+            strength: { id: 'Seimbang dan dilihat dewasa oleh orang lain', en: 'Balanced and seen as mature by others' },
+            weakness: { id: 'Bisa kehilangan arah sendiri saat coba menyenangkan semua', en: 'Can lose own direction when trying to please everyone' }
+          },
+          {
+            min: 16, max: 20, emoji: '🚀',
+            name: { id: 'The Instinctive Explorer', en: 'The Instinctive Explorer' },
+            story: {
+              id: `<p>Kamu bergerak cepat. Kadang bahkan sebelum orang lain selesai mikir 😆</p><p>Kamu percaya intuisi, keberanian, dan momentum. That's powerful — karena banyak orang stuck, sementara kamu jalan.</p><p>Tapi ya… kadang insting juga suka ngajak chaos 😭 Sedikit pause sebelum lompat bisa jadi superpower baru buatmu.</p>`,
+              en: `<p>You move fast. Sometimes before everyone else even finishes thinking 😆</p><p>You trust instinct, courage, and momentum. That's powerful — while others freeze, you move.</p><p>But yes… intuition occasionally invites chaos 😭 A small pause before jumping might become your new superpower.</p>`
+            },
+            strength: { id: 'Berani, cepat bertindak, dan nggak mudah stuck', en: 'Brave, quick to act, and rarely stuck' },
+            weakness: { id: 'Bisa terburu-buru dan kurang pertimbangan', en: 'Can be hasty and underthink things' }
+          },
+          {
+            min: 21, max: 24, emoji: '🌪️',
+            name: { id: 'The Overthinking Survivor', en: 'The Overthinking Survivor' },
+            story: {
+              id: `<p>Kamu nggak kekurangan otak atau intuisi. Kamu cuma terlalu sadar bahwa keputusan bisa mengubah banyak hal.</p><p>Makanya kamu sering freeze, ragu, atau berharap orang lain memilihkan.</p><p>Tapi here's the truth: nggak memilih pun tetap sebuah keputusan. Kamu sebenarnya jauh lebih capable daripada yang kamu kira 💙</p>`,
+              en: `<p>You're not lacking intelligence or intuition. You're just deeply aware that decisions can change everything.</p><p>That's why you freeze, hesitate, or secretly wish someone else would decide for you.</p><p>But here's the truth: not choosing is still a choice. You're far more capable than you think 💙</p>`
+            },
+            strength: { id: 'Penuh pertimbangan dan peduli dampak keputusan', en: 'Thoughtful and mindful of the impact of decisions' },
+            weakness: { id: 'Sering freeze dan sulit bergerak maju', en: 'Often freezes and struggles to move forward' }
+          }
+        ]
       }
     ]
   },
@@ -737,7 +840,7 @@ const categories = [
     quizzes: [
       {
         id: 'season', icon: '🍂', type: 'image',
-        title: { id: 'What Season Matches Your Soul?', en: 'What Season Matches Your Soul?' },
+        title: { id: 'Musim Apa yang Cocok dengan Jiwamu?', en: 'What Season Matches Your Soul?' },
         desc: { id: 'Pilih gambar yang paling kamu rasain. Bukan yang paling indah — yang paling <em>kamu</em>.', en: 'Pick the image you feel most. Not the prettiest — the most <em>you</em>.' },
         questions: [
           {
@@ -792,6 +895,86 @@ const categories = [
             weakness: { id: 'Bisa keliatan distant atau sulit dijangkau', en: 'Can appear distant or hard to reach' }
           }
         ]
+      },
+      {
+        id: 'energy', icon: '🌙', type: 'image',
+        title: { id: 'Energi Apa yang Kamu Pancarkan?', en: 'What Kind of Energy Do You Give Off?' },
+        desc: { id: 'Pilih vibe yang paling kamu rasain. Jangan pilih yang paling aesthetic — pilih yang paling <em>kamu</em> 👀', en: 'Pick the vibe you feel most. Not the most aesthetic — the most <em>you</em> 👀' },
+        questions: [
+          {
+            text: { id: 'Pilih gambar yang paling kamu rasain:', en: 'Pick the image you feel most:' },
+            images: [
+              { src: 'https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Cozy%20rainy%20room%20with%20tea%20and%20books%2C%20warm%20and%20inviting%20atmosphere%2C%20steaming%20cup%20of%20tea%2C%20stack%20of%20books%2C%20rain%20visible%20through%20window%2C%20comfortable%20reading%20nook.jpg', label: { id: 'Cozy Rainy Room ☕🌧️', en: 'Cozy Rainy Room ☕🌧️' }, points: 1 },
+              { src: 'https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Golden%20rooftop%20dinner%20with%20friends%20at%20sunset%2C%20warm%20golden%20hour%20lighting%2C%20elegant%20dinner%20table%20setup%2C%20group%20of%20friends%20enjoying%20meal%20together%2C%20city%20skyline%20in%20background%2C%20sunset%20sky%20with%20orange%20and%20pink%20hues%2C%20magica.jpg', label: { id: 'Golden Rooftop Dinner ✨🌇', en: 'Golden Rooftop Dinner ✨🌇' }, points: 2 },
+              { src: 'https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Night%20drive%20through%20neon%20city%20lights%2C%20vibrant%20neon%20signs%20reflecting%20on%20car%20windshield%2C%20glowing%20city%20streets%20at%20night%2C%20colorful%20neon%20lights%20in%20pink%20blue%20and%20purple%2C%20urban%20nighttime%20atmosphere%2C%20motion%20and%20energy%20of%20d.jpg', label: { id: 'Night Drive 🚗🌃', en: 'Night Drive 🚗🌃' }, points: 3 },
+              { src: 'https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Messy%20creative%20art%20room%20filled%20with%20colors%2C%20art%20supplies%20scattered%20everywhere%2C%20paint%20tubes%20and%20brushes%2C%20colorful%20paintings%20on%20walls%2C%20easel%20with%20artwork%2C%20vibrant%20and%20chaotic%20artistic%20workspace%2C%20inspiring%20creative%20at.jpg', label: { id: 'Creative Chaos 🎨', en: 'Creative Chaos 🎨' }, points: 4 },
+              { src: 'https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Candlelit%20dark%20moody%20room%20with%20vinyl%20records%2C%20warm%20candlelight%20glow%2C%20vintage%20record%20player%2C%20vinyl%20records%20scattered%20around%2C%20atmospheric%20shadows%2C%20intimate%20and%20cozy%20ambiance%2C%20dim%20lighting%20with%20flickering%20candles%2C%20nos.jpg', label: { id: 'Candlelit Dark Room 🕯️🌙', en: 'Candlelit Dark Room 🕯️🌙' }, points: 5 },
+              { src: 'https://raw.githubusercontent.com/KenapaGw/KenapaGw/main/Spontaneous%20blurry%20nightlife%20party%20vibe%2C%20motion%20blur%2C%20energetic%20party%20atmosphere%2C%20colorful%20lights%20streaking%2C%20dancing%20silhouettes%2C%20vibrant%20nightclub%20energy%2C%20dynamic%20movement%2C%20neon%20lights%20in%20motion%2C%20candid%20party%20mome.jpg', label: { id: 'Party Chaos ⚡', en: 'Party Chaos ⚡' }, points: 6 }
+            ]
+          }
+        ],
+        results: [
+          {
+            min: 1, max: 1, emoji: '☕',
+            name: { id: 'The Safe Harbor', en: 'The Safe Harbor' },
+            story: {
+              id: `<p>Kamu punya energi yang bikin orang ngerasa nyaman. Bukan tipe yang harus paling ramai di ruangan. Tapi entah kenapa, presence kamu bikin orang tenang.</p><p>Kamu kemungkinan thoughtful, emotionally aware, dan suka meaningful connection dibanding basa-basi kosong.</p><p>Kadang downside-nya? Kamu terlalu sering jadi tempat bersandar buat orang lain sampai lupa recharge diri sendiri.</p><p><em>Protect your peace. Nggak semua badai orang lain harus kamu teduhin ☁️</em></p>`,
+              en: `<p>You carry comforting energy. Not loud. Not attention-seeking. But somehow, people feel safe around you.</p><p>You likely value emotional depth and meaningful connection over small talk.</p><p>Your only danger? Becoming everyone's emotional support while forgetting yourself.</p><p><em>Protect your peace. Not every storm needs your shelter ☁️</em></p>`
+            },
+            strength: { id: 'Hangat, empatik, dan bikin orang merasa aman', en: 'Warm, empathetic, and makes people feel safe' },
+            weakness: { id: 'Sering jadi sandaran orang sampai lupa recharge sendiri', en: 'Often becomes everyone\'s support at the cost of their own energy' }
+          },
+          {
+            min: 2, max: 2, emoji: '✨',
+            name: { id: 'The Sunlight Energy', en: 'The Sunlight Energy' },
+            story: {
+              id: `<p>Kamu tipe yang gampang bikin ruangan terasa hidup. Warm. Social. Easy to be around.</p><p>Orang probably describe kamu sebagai positive energy.</p><p>Tapi jadi "matahari" juga capek. Kadang kamu tetap keliatan cerah walau sebenernya low battery.</p><p><em>Matahari juga boleh sunset 🌞</em></p>`,
+              en: `<p>You light up rooms. Warm, social, naturally magnetic.</p><p>People probably describe you as positive energy.</p><p>But being everyone's sunshine gets exhausting. Sometimes you still look bright even when you're running low.</p><p><em>Even the sun gets to set 🌞</em></p>`
+            },
+            strength: { id: 'Karismatik, hangat, dan bikin suasana hidup', en: 'Charismatic, warm, and brings life to any room' },
+            weakness: { id: 'Bisa kelelahan jadi "matahari" untuk semua orang', en: 'Can get exhausted being everyone\'s source of energy' }
+          },
+          {
+            min: 3, max: 3, emoji: '🚗',
+            name: { id: 'The Midnight Thinker', en: 'The Midnight Thinker' },
+            story: {
+              id: `<p>Kamu punya energi introspektif. Banyak mikir. Banyak ngerasa. Tapi nggak semua kamu tunjukin.</p><p>Orang bisa nganggep kamu mysterious, padahal kamu cuma nggak suka oversharing.</p><p><em>Nggak semua hal harus kamu proses sendirian 🌙</em></p>`,
+              en: `<p>You're introspective. Deep thinker. Quiet feeler.</p><p>People call it mystery. It's usually just emotional privacy.</p><p><em>Not everything has to be processed alone 🌙</em></p>`
+            },
+            strength: { id: 'Thoughtful, dalam, dan nggak gampang terbaca', en: 'Thoughtful, deep, and not easily readable' },
+            weakness: { id: 'Cenderung proses segalanya sendirian', en: 'Tends to process everything alone' }
+          },
+          {
+            min: 4, max: 4, emoji: '🎨',
+            name: { id: 'The Wild Creator', en: 'The Wild Creator' },
+            story: {
+              id: `<p>Otak kamu hidup banget. Ide random? Tiap hari. Energi kamu expressive, playful, unpredictable.</p><p>Kadang genius. Kadang chaos 😭</p><p><em>Sedikit struktur bisa bikin ide gilamu jadi masterpiece 🎨</em></p>`,
+              en: `<p>Your brain is loud in the best way. Creative. Expressive. Unpredictable.</p><p>Sometimes genius. Sometimes absolute chaos 😭</p><p><em>A little structure will make your chaos legendary 🎨</em></p>`
+            },
+            strength: { id: 'Kreatif, ekspresif, dan penuh ide', en: 'Creative, expressive, and full of ideas' },
+            weakness: { id: 'Bisa terlalu chaotic dan susah fokus', en: 'Can be too chaotic and struggle to focus' }
+          },
+          {
+            min: 5, max: 5, emoji: '🕯️',
+            name: { id: 'The Mysterious Depth', en: 'The Mysterious Depth' },
+            story: {
+              id: `<p>Kamu bukan susah dibaca. Kamu cuma nggak kasih semua orang akses. Depth kamu bikin orang penasaran.</p><p><em>Selective bagus. Tapi vulnerability juga strength 🖤</em></p>`,
+              en: `<p>You're not hard to read. You just believe access should be earned. Your depth makes people curious.</p><p><em>Boundaries are good. Vulnerability is strength too 🖤</em></p>`
+            },
+            strength: { id: 'Punya kedalaman dan bikin orang penasaran', en: 'Deeply complex and naturally intriguing' },
+            weakness: { id: 'Bisa terlalu selective sampai sulit terkoneksi', en: 'Can be too selective and hard to connect with' }
+          },
+          {
+            min: 6, max: 6, emoji: '⚡',
+            name: { id: 'The Electric Spark', en: 'The Electric Spark' },
+            story: {
+              id: `<p>Energi kamu? Movement. Spontan. Fun. Intens. Kamu bikin hidup nggak boring.</p><p>Kadang impulsif? Absolutely 😭🔥</p><p><em>Excitement bukan selalu keputusan yang tepat 😆</em></p>`,
+              en: `<p>Your energy is movement. Spontaneous. Fun. Electric. Life gets louder when you're around.</p><p>Sometimes impulsive? Absolutely 😭🔥</p><p><em>Excitement isn't always alignment 😆🔥</em></p>`
+            },
+            strength: { id: 'Spontan, fun, dan bikin hidup nggak membosankan', en: 'Spontaneous, fun, and makes life exciting' },
+            weakness: { id: 'Bisa terlalu impulsif dan kurang pertimbangan', en: 'Can be too impulsive and act without thinking' }
+          }
+        ]
       }
     ]
   },
@@ -803,7 +986,7 @@ const categories = [
     quizzes: [
       {
         id: 'socialenergy', icon: '⚡', type: 'text',
-        title: { id: "What's Your Social Energy?", en: "What's Your Social Energy?" },
+        title: { id: "Bagaimana Energi Sosialmu?", en: "What's Your Social Energy?" },
         desc: { id: 'Introvert? Extrovert? Atau sesuatu yang jauh lebih kompleks?', en: 'Introvert? Extrovert? Or something far more complex?' },
         questions: [
           {
@@ -905,7 +1088,7 @@ const categories = [
     quizzes: [
       {
         id: 'chaoslevel', icon: '🌀', type: 'text',
-        title: { id: 'Your Inner Chaos Level', en: 'Your Inner Chaos Level' },
+        title: { id: 'Seberapa Kaotis Dirimu?', en: 'Your Inner Chaos Level' },
         desc: { id: 'Dari luar mungkin keliatan oke. Tapi di dalem?', en: 'From the outside it might look fine. But inside?' },
         questions: [
           {
