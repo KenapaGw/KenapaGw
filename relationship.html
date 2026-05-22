@@ -25,6 +25,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .lang-toggle{display:flex;gap:4px;background:var(--surface);border-radius:100px;padding:4px;border:0.5px solid var(--border2);}
 .lang-btn{padding:4px 14px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all 0.2s;font-family:'DM Sans',sans-serif;}
 .lang-btn.active{background:var(--accent);color:white;}
+.nav-back{font-size:14px;color:var(--muted);text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;}
+.nav-back:hover{color:var(--accent);}
 .ticker-wrap{background:var(--accent);padding:10px 0;overflow:hidden;border-bottom:0.5px solid rgba(255,255,255,0.15);width:100%;}
 .ticker-track{display:flex;width:max-content;animation:ticker 20s linear infinite;}
 .ticker-track:hover{animation-play-state:paused;}
@@ -228,6 +230,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <nav>
   <a class="nav-logo" href="index.html">Kenapa<span>Gw</span></a>
   <div class="nav-right">
+    <button class="nav-back" onclick="navGoBack()" id="navBack">← Kembali</button>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('id')">ID</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -490,6 +493,7 @@ function setLang(l) {
   lang = l;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector('.lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+  document.getElementById('navBack').textContent = l === 'en' ? '← Back' : '← Kembali';
   renderLayer1();
   if (currentCat) showCategory(currentCat.id, false);
 }
